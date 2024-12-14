@@ -21,7 +21,9 @@ Payload de prueba:
 Intentamos subir nuestra `simple_shell.php` pero recibimos un mensaje `Extension not allowed`:
 ![image](https://github.com/user-attachments/assets/5ab1a8d7-8ab1-456c-8871-187787b109a9)
 
-Enviamos al `Inrtuder` para hacer fuzzing de extensiones `PHP`:
+Ya que sabemos que el servidor backend está validando extensiones a través de una blacklist, enviamos la request al `Inrtuder` para hacer fuzzing de extensiones `PHP`:
+![image](https://github.com/user-attachments/assets/978b6062-4a3f-474a-b69c-80752d5626dd)
+
 ![image](https://github.com/user-attachments/assets/9baf9d38-b358-405e-bce4-6b744e128aed)
 
 Luego, enviamos al intruder la request para visualizar los archivos cargados, hacemos fuzzing de extensiones también:
