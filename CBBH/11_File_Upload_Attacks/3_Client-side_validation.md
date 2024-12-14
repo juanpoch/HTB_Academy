@@ -15,6 +15,8 @@ When trying to upload our `basic_shell.php`, we received the message **"only ima
 ### Client-Side Validation  
 
 We noticed that the file extension validation is performed on the client side:  
+![image](https://github.com/user-attachments/assets/764a21f9-abd3-45d7-8559-2d3793e38af7)
+
 
 1. The `accept` attribute limits the types of files that can be selected through the file system.  
    - This can easily be bypassed by selecting "All Files."  
