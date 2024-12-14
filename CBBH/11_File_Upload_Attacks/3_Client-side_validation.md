@@ -70,7 +70,7 @@ In this script, we located the function responsible for validating file extensio
 
 ## Modifying the Frontend Code  
 
-1. Locate the `validate()` function in `script.js`:  
+1. Locate the `validate()` function in frontend:  
 
    ![image](https://github.com/user-attachments/assets/f63290c8-04d5-40f5-b0eb-26484888590e)  
 
