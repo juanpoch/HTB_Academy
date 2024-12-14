@@ -54,7 +54,7 @@ We performed a extension fuzzing using `Burp Suite Intruder`:
 Also we can create a custom wordlist with the following script:
 ```bash
 for char in '%20' '%0a' '%00' '%0d0a' '/' '.\\' '.' '…' ':' ';'; do
-    for ext in '.php' '.phps' '.php3' '.php4' '.php5' '.php7' '.php8' '.pht' '.phar' '.phpt' '.pgif' '.phtml' '.phtm'; do
+    for ext in '.php' '.phps' '.php2' '.php3' '.php4' '.php5' '.php6' '.php7' '.php8' '.pht' '.phar' '.phpt' '.pgif' '.phtml' '.phtm'; do
         echo "shell$char$ext.png" >> wordlist.txt
         echo "shell$ext$char.png" >> wordlist.txt
         echo "shell.png$char$ext" >> wordlist.txt
