@@ -22,7 +22,7 @@ We attempted to subbmit a simple php script with a test payload:
 ![image](https://github.com/user-attachments/assets/4b62872a-8a53-4aac-9036-b926dc29415f)
 ![image](https://github.com/user-attachments/assets/f7bb5a8e-dba6-40ea-a7fb-c57bbb2b6794)
 
-We notice we have differente message responses depending the payload.
+We notice we have differente message responses depending either the response is from the whitelist or blacklist.
 
 We attempted to subbmit a php script using `Double Extensions`:
 ![image](https://github.com/user-attachments/assets/8e7ab974-0a12-4f57-a81a-db475e750feb)
@@ -42,6 +42,9 @@ We tried to submit a php script with null bytes:
 We perform a common extension fuzzing with `Burp Suite Intruder` in order to know the extensions whitelisted:
 ![image](https://github.com/user-attachments/assets/05fb203f-bed3-498d-a3b9-4ae4ef6b6489)
 all of this extensios are not allowed.
+![image](https://github.com/user-attachments/assets/933acd67-c3b5-4b8d-9f50-77387ddfb498)
+We realized that we receive the response `Only images are allowed` when the server response using the whitelist and `Extension not allowed` if the server is using the blacklist.
+
 
 We performed a extension fuzzing using `Burp Suite Intruder`:
 ![image](https://github.com/user-attachments/assets/e3d26584-e313-4a44-870c-54af813e562e)
