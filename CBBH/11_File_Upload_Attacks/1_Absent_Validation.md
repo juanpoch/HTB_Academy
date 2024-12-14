@@ -36,7 +36,7 @@ To execute the `hostname` command using `PHP`, we used the following payload:
 ```
 ## Sending the Request via `Burp Suite`  
 
-We sent the request using `Burp Suite`:  
+We sent the request using `Burp Suite Repeater`:  
 
 ![image](https://github.com/user-attachments/assets/51c2a627-3429-4b4f-b113-c08fcb7af03b)  
 
