@@ -44,7 +44,7 @@ In this script, we located the function responsible for validating file extensio
 
 1. **Bypass the Frontend Filter Using `Burp Suite`**  
    - Upload a valid image (e.g., `.png`) and intercept the request using Burp Suite.  
-   - Modify the request payload to include a test PHP script.  
+   - Modify the request payload to include a PHP script.  
 
 2. **Modify the Frontend Code**  
    - Disable the `validate()` function client-side to bypass the extension check.  
