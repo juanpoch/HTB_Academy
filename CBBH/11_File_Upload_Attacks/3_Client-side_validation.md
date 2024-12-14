@@ -30,7 +30,7 @@ By inspecting the source code, we found the actual implementation of this functi
 ![image](https://github.com/user-attachments/assets/1de8e730-a295-4f7a-95a9-7e1a9cfdde6a)  
 
 The script uses `upload.php` to handle file uploads, but we cannot directly access this file. However, we found the upload directory `/profile_images/test.php`.  
-Additionally, it has a conditional with the `validate()` function, that verifies the file extension.  
+Additionally, it has a conditional within the `validate()` function, that verifies the file extension.  
 
 ### Examining `script.js`  
 
