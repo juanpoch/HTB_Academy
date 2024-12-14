@@ -29,7 +29,7 @@ Ya que sabemos que el servidor backend está validando extensiones a través de 
 Luego, enviamos al intruder la request para visualizar los archivos cargados, hacemos fuzzing de extensiones también:
 ![image](https://github.com/user-attachments/assets/289c24ab-7736-42b1-bc3b-a252bc01db98)
 
-Vemos que la extensión `.phar` no sólo pudo dubirse al servidor correctamente, sino que, es la única de las subidas, que tiene capacidad de ejecutar código.
+Vemos que la extensión `.phar` no sólo pudo subirse al servidor correctamente, sino que, es la única de las subidas, que tiene capacidad de ejecutar código.
 
 En el repeater, enviamos una web-shell básica con extensión `.phar`:
 ![image](https://github.com/user-attachments/assets/2df96831-5fef-44c9-ba63-c002d543ac9a)
