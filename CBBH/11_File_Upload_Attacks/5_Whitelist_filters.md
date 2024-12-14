@@ -67,7 +67,7 @@ Then we perform a fuzzing using this list created:
 
 ![image](https://github.com/user-attachments/assets/644c8c1c-408e-469c-980c-1ea8f0fdbc5c)
 
-We tried to get de file submitted by using `Intruder`:
+We tried to get the file submitted by using `Intruder`:
 ![image](https://github.com/user-attachments/assets/4c7cb8da-31a8-4972-9e68-b2d9770b37e3)
 ![image](https://github.com/user-attachments/assets/ce8a7da6-cd4b-4bfb-b36c-c2194bb5ca4f)
 
