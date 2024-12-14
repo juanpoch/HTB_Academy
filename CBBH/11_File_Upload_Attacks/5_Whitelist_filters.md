@@ -15,7 +15,7 @@ Try to bypass both to upload a PHP script and execute code to read "/flag.txt"
   <?php system($_REQUEST['cmd']); ?>
   ```
 - Fuzzing extension whitelist: https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/web-extensions.txt
-(It could be useful to add common image extensions).
+(Used to discover possible whitelisted extensions. It could be useful to add common image extensions).
 - Fuzzing extension list: https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Upload%20Insecure%20Files/Extension%20PHP/extensions.lst
 
 We attempted to subbmit a simple php script with a test payload:
