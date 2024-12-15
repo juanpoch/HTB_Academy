@@ -37,6 +37,8 @@ Tenemos que sólo son permitidos los siguientes tipos:
 - image/gif
 - image/jpeg
 - image/png
+
+
 De forma manual sabemos que también permite `image/jpg`.
 
 
