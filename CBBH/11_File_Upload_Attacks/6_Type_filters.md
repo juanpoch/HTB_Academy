@@ -24,7 +24,7 @@ Nota: `/image/jpg` no está en la lista.
   <br>
 
  ---
-
+<br>
 
 ## Ejercicio
 
