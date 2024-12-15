@@ -61,9 +61,10 @@ We tested the uploaded files' content by checking their **magic bytes** to deter
 
 ## Attempting to Upload a `.php` Web Shell
 
-We tried uploading a web shell with a `.php` extension. However, the server responded with the following error:  
+We tried uploading a simple `php` code with a `.php` extension. However, the server responded with the following error:  
 **`Extension not allowed`**:  
-![image](https://github.com/user-attachments/assets/290960dc-0829-456a-a84f-2c4ece59ded5)  
+![image](https://github.com/user-attachments/assets/dd4764de-2964-46f9-b94f-e9f0b34842d8)
+
 
 ---
 
