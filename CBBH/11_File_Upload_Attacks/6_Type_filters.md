@@ -7,6 +7,7 @@
  then utilize one of the whitelist filter bypasses to bypass both extension filters.
 
  ---
+- Common web extensions list: https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/web-extensions.txt
 - Test payload:
   ```php
   <?php echo "Hello HTB"; ?>
@@ -72,7 +73,8 @@ We tried uploading a simple `php` code with a `.php` extension. However, the ser
 
 To investigate whether any web extensions other than image extensions were allowed, we fuzzed the server with **common web extensions** from SecLists.  
 Unfortunately, no additional web extensions were accepted in the whitelist:  
-![image](https://github.com/user-attachments/assets/c1bb7c02-26fc-47f6-a32c-0a0d3bf25942)  
+![image](https://github.com/user-attachments/assets/62714133-dcd5-4cee-8ede-aed8c6e0128e)
+
 ![image](https://github.com/user-attachments/assets/05e266e9-ec3a-4658-a82a-47d273a079e2)  
 
 ---
