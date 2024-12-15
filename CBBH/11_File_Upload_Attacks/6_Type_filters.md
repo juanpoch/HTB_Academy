@@ -20,10 +20,12 @@ Nota: `/image/jpg` no está en la lista.
 - Common mime types:
   - `jpeg`: `FF D8 FF`
   - `gif`: `GIF8`
-.
- ---
-.
 
+  <br><br><br><br><br>
+
+ ---
+
+<br><br><br><br><br>
 Hacemos fuzzing de `Content-Type` header para ver qué tipos son permitidos:
 ![image](https://github.com/user-attachments/assets/b6376c4b-05d7-4821-80c6-04b0901559b9)
 
