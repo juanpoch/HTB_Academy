@@ -55,7 +55,7 @@ Manually testing also confirmed that `image/jpg` is allowed.
 
 We tested the uploaded files' content by checking their **magic bytes** to determine the permitted MIME types:  
 ![image](https://github.com/user-attachments/assets/b5d9d02b-5984-48b1-9473-bfd797379b27)  
-![image](https://github.com/user-attachments/assets/8acbe838-c50e-48ac-8322-5a2948e611ff)  
+
 
 ---
 
