@@ -19,7 +19,7 @@ Nota: `/image/jpg` no está en la lista.
 
 - Common mime types:
   - `jpeg`: `FF D8 FF`
-  - `gif`: `GIF8`
+  - `gif`: `GIF8` (GIF87a | GIF89a)
 
   <br>
 
@@ -38,4 +38,12 @@ Tenemos que sólo son permitidos los siguientes tipos:
 - image/jpeg
 - image/png
 De forma manual sabemos que también permite `image/jpg`.
+
+
+Ahora testeamos el `file content` utilizando `magic bytes` para conocer los `MIME Types` permitidos:
+![image](https://github.com/user-attachments/assets/b5d9d02b-5984-48b1-9473-bfd797379b27)
+![image](https://github.com/user-attachments/assets/8acbe838-c50e-48ac-8322-5a2948e611ff)
+
+
+
 
