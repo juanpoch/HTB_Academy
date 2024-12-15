@@ -77,17 +77,29 @@ for char in '%20' '%0a' '%00' '%0d0a' '/' '.\\' '.' '…' ':' ';'; do
 done
 ```
 
-![image](https://github.com/user-attachments/assets/8e44215b-30d8-4357-b1a7-6032ef7fda4b)
-![image](https://github.com/user-attachments/assets/f56a7c36-09fc-456c-967e-0102b80965c6)
+![image](https://github.com/user-attachments/assets/d38dc1fb-0145-46e3-995e-b62b0d0f235a)
+![image](https://github.com/user-attachments/assets/b5a30412-a7dc-4b71-ac59-7668dd551648)
+
+
 
 Vemos que varias extensiones pudieron ser subidas.
 Hacemos una petición para visualizar los archivos, y realizamos fuzzing con la misma wordlist, de modo tal que probará acceder también a los archivos subidos previamente:
-![image](https://github.com/user-attachments/assets/e0a031e2-14ba-46a1-a3e6-729d77720b9c)
+![image](https://github.com/user-attachments/assets/daa20c87-d26a-4232-88f7-1b2935ae3e55)
+
 
 Entre todas las que pudimos subir previamente y podemos acceder (status code 200), sólo algunas puede interpretar el código:
-![image](https://github.com/user-attachments/assets/700eeee8-35d4-41d2-bfc0-7e427867bf66)
+![image](https://github.com/user-attachments/assets/3b96a212-41bd-46c3-aa74-8b3c1cb721d4)
+
 
 Ahora enviamos la web shell:
+![image](https://github.com/user-attachments/assets/a3ea2241-07b1-4707-b1b1-3139e46985d5)
+
+Accedemos al archivo previamente cargado:
+![image](https://github.com/user-attachments/assets/efeea997-8b73-45b4-bbca-22ac059d925d)
+Obtenemos la flag y resolvemos el lab:
+![image](https://github.com/user-attachments/assets/9782e1f3-54f1-4c10-93b5-e96ea9ba8600)
+
+
 
 
 
