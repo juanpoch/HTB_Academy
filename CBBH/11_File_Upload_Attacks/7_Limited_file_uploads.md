@@ -54,5 +54,11 @@ We performed a `XSS` attack via `.svg` upload:
 ![image](https://github.com/user-attachments/assets/272a725a-ae20-4873-b278-32c3e253d3f1)
 ![image](https://github.com/user-attachments/assets/06358b9a-0a9e-48fa-b253-d6687a6899b7)
 
+Then we performed a `XXE` attack in order to get the content of the `/flag.txt` file:
+![image](https://github.com/user-attachments/assets/d9f1a541-f7fb-4ab3-97e7-dac94709eac5)
+![image](https://github.com/user-attachments/assets/fa0b467f-639f-4f5d-97f1-fe024e57d6fa)
+
+
+
 
 
