@@ -59,6 +59,15 @@ Then we performed a `XXE` attack in order to get the content of the `/flag.txt` 
 ![image](https://github.com/user-attachments/assets/fa0b467f-639f-4f5d-97f1-fe024e57d6fa)
 
 
+To read the source code of `upload.php` we perform a `XXE` attack via `PHP Wrapper`:
+![image](https://github.com/user-attachments/assets/ff931621-7fcc-4075-9c62-a9153bc23c57)
+![image](https://github.com/user-attachments/assets/7beb39b8-141b-46f0-8e7a-3404be459892)
+
+Then we get de raw source code and solve the lab:
+![image](https://github.com/user-attachments/assets/282bacad-57ed-49dd-aa1c-2c819661e353)
+
+
+
 
 
 
