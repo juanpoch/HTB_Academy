@@ -39,6 +39,7 @@ Note: `/image/jpg` is not in the list.
 
 We performed fuzzing on the `Content-Type` header to determine which types are allowed:  
 ![image](https://github.com/user-attachments/assets/b6376c4b-05d7-4821-80c6-04b0901559b9)  
+![image](https://github.com/user-attachments/assets/287f8443-d7fc-41c0-93af-7140125607ca)  
 
 The results revealed that the following types are permitted:  
 - `image/gif`  
@@ -47,7 +48,6 @@ The results revealed that the following types are permitted:
 
 Manually testing also confirmed that `image/jpg` is allowed.  
 
-![image](https://github.com/user-attachments/assets/287f8443-d7fc-41c0-93af-7140125607ca)  
 
 ---
 
