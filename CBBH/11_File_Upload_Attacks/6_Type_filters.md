@@ -26,7 +26,7 @@ Nota: `/image/jpg` no está en la lista.
  ---
 
 <br>
-## Ejercicio  
+## Ejercicio
 
 <br>
 Hacemos fuzzing de `Content-Type` header para ver qué tipos son permitidos:
