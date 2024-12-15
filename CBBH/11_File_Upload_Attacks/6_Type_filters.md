@@ -1,5 +1,5 @@
 # Type Filters
-
+<br>
  The above server employs Client-Side, Blacklist, Whitelist, Content-Type, and MIME-Type filters to ensure the uploaded file is an image. 
  Try to combine all of the attacks you learned so far to bypass these filters and upload a PHP file and read the flag at "/flag.txt"
 
@@ -24,6 +24,9 @@ Nota: `/image/jpg` no está en la lista.
   <br>
 
  ---
+
+<br>
+## Ejercicio  
 
 <br>
 Hacemos fuzzing de `Content-Type` header para ver qué tipos son permitidos:
