@@ -51,6 +51,8 @@ If the web applications displays an image's metadata after its upload, we can pe
   <!DOCTYPE svg [ <!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"> ]>
   <svg>&xxe;</svg>
   ```
+
+Another similar attack that is also achievable through these file types is an SSRF attack. We may utilize the XXE vulnerability to enumerate the internally available services or even call private APIs to perform private actions.
 ---
 
 ## Exercise
