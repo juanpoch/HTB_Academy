@@ -10,10 +10,14 @@
 ---
 ## Possible Attacks
 
+If the web applications displays an image's metadata after its upload, we can perform the following attack:
 - `XSS` via comment injection:
   ```bash
   exiftool -Comment=' "><img src=1 onerror=alert(window.origin)>' HTB.jpg
   ```
+  `Note`: It is possible to perform this attack using one of the Metadata parameters that accept raw text, like the `Comment` or 
+  `Artist` parameters. Furthermore, if we change the image's MIME-Type to text/html, some web applications may show it as an HTML 
+  document instead of an image, in which case the XSS payload would be triggered even if the metadata wasn't directly displayed.
 - `XSS` via HTB.svg:
   ```xml
   <?xml version="1.0" encoding="UTF-8"?>
