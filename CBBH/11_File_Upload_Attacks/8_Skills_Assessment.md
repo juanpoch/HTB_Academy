@@ -8,4 +8,10 @@ Try to utilize what you learned in this module to understand how the upload form
 
 Try to note down the main security issues found with the web application and the necessary security measures to mitigate these issues and prevent further exploitation.
 
+## Question
+
+Try to exploit the upload form to read the flag found at the root directory "/".
+
+`Hint`: Try to fuzz for non-blacklisted extensions, and for allowed content-type headers. If you are unable to locate the uploaded files, try to read the source code to find the uploads directory and the naming scheme.
+
 ---
