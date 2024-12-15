@@ -40,3 +40,11 @@
 
 We attempted to upload a simple `.png` image but we received the response with the message "Only SVG images are allowed":
 ![image](https://github.com/user-attachments/assets/36479000-2f72-4e4b-8893-99deeb070204)
+
+We performed a `XSS` attack via `.svg` upload:
+![image](https://github.com/user-attachments/assets/1d6ebcf9-91d4-4f2f-b4e9-fed9a43451ab)
+![image](https://github.com/user-attachments/assets/272a725a-ae20-4873-b278-32c3e253d3f1)
+![image](https://github.com/user-attachments/assets/06358b9a-0a9e-48fa-b253-d6687a6899b7)
+
+
+
