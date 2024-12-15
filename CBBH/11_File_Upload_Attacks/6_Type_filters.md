@@ -45,7 +45,8 @@ The results revealed that the following types are permitted:
 - `image/jpeg`  
 - `image/png`  
 
-Manually testing also confirmed that `image/jpg` is allowed:  
+Manually testing also confirmed that `image/jpg` is allowed.  
+
 ![image](https://github.com/user-attachments/assets/287f8443-d7fc-41c0-93af-7140125607ca)  
 
 ---
