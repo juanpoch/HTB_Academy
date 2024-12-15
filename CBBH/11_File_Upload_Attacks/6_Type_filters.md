@@ -77,4 +77,18 @@ for char in '%20' '%0a' '%00' '%0d0a' '/' '.\\' '.' '…' ':' ';'; do
 done
 ```
 
+![image](https://github.com/user-attachments/assets/8e44215b-30d8-4357-b1a7-6032ef7fda4b)
+![image](https://github.com/user-attachments/assets/f56a7c36-09fc-456c-967e-0102b80965c6)
+
+Vemos que varias extensiones pudieron ser subidas.
+Hacemos una petición para visualizar los archivos, y realizamos fuzzing con la misma wordlist, de modo tal que probará acceder también a los archivos subidos previamente:
+![image](https://github.com/user-attachments/assets/e0a031e2-14ba-46a1-a3e6-729d77720b9c)
+
+Entre todas las que pudimos subir previamente y podemos acceder (status code 200), sólo algunas puede interpretar el código:
+![image](https://github.com/user-attachments/assets/700eeee8-35d4-41d2-bfc0-7e427867bf66)
+
+Ahora enviamos la web shell:
+
+
+
 
