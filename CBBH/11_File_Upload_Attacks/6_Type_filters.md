@@ -15,7 +15,8 @@
 wget https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Discovery/Web-Content/web-all-content-types.txt
 cat web-all-content-types.txt | grep 'image/' > image-content-types.txt
 ```
-Nota: `/image/jpg` no está en la lista.
+Nota: `/image/jpg` no está en la lista.  
+
 Hacemos fuzzing de `Content-Type` header para ver qué tipos son permitidos:
 ![image](https://github.com/user-attachments/assets/b6376c4b-05d7-4821-80c6-04b0901559b9)
 
