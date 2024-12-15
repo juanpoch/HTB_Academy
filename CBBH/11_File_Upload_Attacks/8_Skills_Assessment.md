@@ -47,3 +47,8 @@ Realizamos un fuzzing de `Content-Type` header utilizando la lista `web-all-cont
 
 ![image](https://github.com/user-attachments/assets/3d07536c-0b40-45b4-b696-56c0d83b72fb)
 
+The results revealed that the following types are permitted:
+
+- image/jpeg
+- image/png
+
