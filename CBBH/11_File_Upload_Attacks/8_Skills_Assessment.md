@@ -51,4 +51,6 @@ The results revealed that the following types are permitted:
 
 - image/jpeg
 - image/png
+- image/pwg-raster
+- image/svg+xml
 
