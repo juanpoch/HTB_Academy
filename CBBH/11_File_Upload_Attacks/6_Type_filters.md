@@ -58,7 +58,7 @@ Ahora testeamos el `file content` utilizando `magic bytes` para conocer los `MIM
 Intentamos subir la web shell con la extensión `.php` y el servidor nos responde `Extension not allowed`:
 ![image](https://github.com/user-attachments/assets/290960dc-0829-456a-a84f-2c4ece59ded5)
 
-Sabemos que tenemos blacklists and whitelists. Hacemos fuzzing de whitelist con common web extensions de Seclists, para investigar si se permite alguna extensión además de las extensiones de imágenes:
+Sabemos que tenemos blacklist and whitelist. Hacemos fuzzing de whitelist con common web extensions de Seclists, para investigar si se permite alguna extensión además de las extensiones de imágenes:
 ![image](https://github.com/user-attachments/assets/c1bb7c02-26fc-47f6-a32c-0a0d3bf25942)
 ![image](https://github.com/user-attachments/assets/05e266e9-ec3a-4658-a82a-47d273a079e2)
 No hay ninguna extensión web adicional que esté incluida en la whitelist.
