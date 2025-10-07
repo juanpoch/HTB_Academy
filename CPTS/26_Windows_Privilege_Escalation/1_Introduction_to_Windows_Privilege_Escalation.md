@@ -73,10 +73,10 @@
 
 ## Buenas prácticas al usar herramientas
 
-1. **Antes**: entender qué hace la herramienta — leer el código o documentación mínima (evita false positives/noise).
-2. **Filtrar la salida**: las herramientas devuelven mucho; crear filtros/regex para destacar hallazgos relevantes (service path, weak ACL, credenciales en claro).
-3. **Manual primero**: intentar comprobaciones manuales básicas (wmic, schtasks, whoami) antes de lanzar scripts masivos.
-4. **Registro**: copiar salida relevante (no todo) a `loot/` con timestamp y contexto.
+1. **Antes**: entender qué hace la herramienta — leer el código o documentación mínima (falsos positivos).
+2. **Filtrar la salida**: las herramientas devuelven mucho; crear filtros/regex para destacar hallazgos relevantes.
+3. **Manual primero**: intentar comprobaciones manuales básicas antes de lanzar scripts masivos.
+4. **Registro**: copiar salida relevante a `loot/` con timestamp y contexto.
 5. **Seguridad legal**: en entornos cliente, confirmar autorización para ejecutar herramientas intrusivas (dump de LSASS, Mimikatz).
 
 ---
