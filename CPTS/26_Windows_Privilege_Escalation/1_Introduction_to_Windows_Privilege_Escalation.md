@@ -46,18 +46,19 @@
 
 ## Lista de herramientas
 
-| Herramienta                                 |             Tipo | Descripción rápida                                                                                                                               |
-| ------------------------------------------- | ---------------: | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Seatbelt**                                |        C# / .NET | Escanea el host realizando multitud de checks locales (perm, servicios, tareas, registro, credenciales). Útil para obtener "big picture" rápido. |
-| **winPEAS**                                 |  Script (EXE/PS) | Gran script que busca rutas potenciales para escalar privilegios en Windows. Devuelve mucha información (útil + ruido).                          |
-| **PowerUp**                                 |       PowerShell | Script para encontrar vectores comunes (permiso de servicios, tareas, ACLs) y explotar algunas fallas básicas.                                   |
-| **SharpUp**                                 |        C# / .NET | Versión compilada de PowerUp. Buena cuando no podés ejecutar scripts PowerShell o querés binario.                                                |
-| **JAWS**                                    |       PowerShell | Enumerador escrito compatible con PowerShell 2.0 — útil en entornos legacy.                                                                      |
-| **SessionGopher**                           |       PowerShell | Extrae/descifra sesiones guardadas de clientes RDP/Putty/WinSCP/FileZilla, etc. Muy valioso para credenciales residuales.                        |
-| **Watson**                                  |             .NET | Identifica KBs faltantes y sugiere exploits públicos para escalado local. Buen complemento a WES-NG.                                             |
-| **LaZagne**                                 | Python / binario | Recupera contraseñas guardadas localmente (browsers, apps, RDP, Wi‑Fi, herramientas sysadmin). Muy potente — detectado por AV.                   |
-| **WES‑NG (Windows Exploit Suggester - NG)** |           Python | Analiza `systeminfo` y sugiere CVEs/exploits aplicables para la versión de Windows.                                                              |
-| **Sysinternals Suite**                      |         Binaries | Herramientas oficiales (AccessChk, PsService, PipeList, ProcDump, Process Explorer, etc.) — imprescindibles para enumeración y análisis forense. |
+| Herramienta                                                                                             |             Tipo | Descripción rápida                                                                                                                               |
+| ------------------------------------------------------------------------------------------------------- | ---------------: | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [**Seatbelt**](https://github.com/GhostPack/Seatbelt)                                                   |        C# / .NET | Escanea el host realizando multitud de checks locales (perm, servicios, tareas, registro, credenciales). Útil para obtener "big picture" rápido. |
+| [**winPEAS**](https://github.com/peass-ng/PEASS-ng/tree/master/winPEAS)                                 |  Script (EXE/PS) | Gran script que busca rutas potenciales para escalar privilegios en Windows. Devuelve mucha información (útil + ruido).                          |
+| [**PowerUp**](https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Privesc/PowerUp.ps1) |       PowerShell | Script para encontrar vectores comunes (permiso de servicios, tareas, ACLs) y explotar algunas fallas básicas.                                   |
+| [**SharpUp**](https://github.com/GhostPack/SharpUp)                                                     |        C# / .NET | Versión compilada de PowerUp. Buena cuando no podés ejecutar scripts PowerShell o querés binario.                                                |
+| [**JAWS**](https://github.com/411Hall/JAWS)                                                             |       PowerShell | Enumerador escrito compatible con PowerShell 2.0 — útil en entornos legacy.                                                                      |
+| [**SessionGopher**](https://github.com/Arvanaghi/SessionGopher)                                         |       PowerShell | Extrae/descifra sesiones guardadas de clientes RDP/Putty/WinSCP/FileZilla, etc. Muy valioso para credenciales residuales.                        |
+| [**Watson**](https://github.com/rasta-mouse/Watson)                                                     |             .NET | Identifica KBs faltantes y sugiere exploits públicos para escalado local. Buen complemento a WES-NG.                                             |
+| [**LaZagne**](https://github.com/AlessandroZ/LaZagne)                                                   | Python / binario | Recupera contraseñas guardadas localmente (browsers, apps, RDP, Wi-Fi, herramientas sysadmin). Muy potente — detectado por AV.                   |
+| [**WES-NG (Windows Exploit Suggester - NG)**](https://github.com/bitsadmin/wesng)                       |           Python | Analiza `systeminfo` y sugiere CVEs/exploits aplicables para la versión de Windows.                                                              |
+| [**Sysinternals Suite**](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)   |         Binaries | Herramientas oficiales (AccessChk, PsService, PipeList, ProcDump, Process Explorer, etc.) — imprescindibles para enumeración y análisis forense. |
+
 
 ---
 
