@@ -97,6 +97,8 @@ Get-MpComputerStatus | fl AMServiceEnabled,AntivirusEnabled,RealTimeProtectionEn
 
 **Lectura rápida:** si `RealTimeProtectionEnabled`/`OnAccessProtectionEnabled` están `True`, espera bloqueos/alertas. Si están `False`, el lab puede estar relajado.
 
+[Wiki](https://learn.microsoft.com/en-us/powershell/module/defender/get-mpcomputerstatus?view=windowsserver2025-ps)
+
 ### AppLocker 
 
 ```powershell
