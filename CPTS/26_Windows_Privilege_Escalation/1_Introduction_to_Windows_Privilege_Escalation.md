@@ -62,10 +62,10 @@
 
 ---
 
-## 2) Dónde y cómo obtener/usar las herramientas
+## Dónde y cómo obtener/usar las herramientas
 
 * **Preferible compilar desde fuente** cuando se pueda (menos detección AV, más control).
-* Si usás binarios precompilados: verifica firma/archivo y ten en cuenta detecciones. Repositorios oficiales en GitHub (Seatbelt, SharpUp, LaZagne, winPEAS).
+* Si usás binarios precompilados: verifica firma/archivo y ten en cuenta detecciones. Repositorios oficiales en GitHub. [Seatbelt y SharpUp](https://github.com/r3motecontrol/Ghostpack-CompiledBinaries), [LaZagne](https://github.com/AlessandroZ/LaZagne/releases/)
 * En entornos con restricciones, `C:\Windows\Temp` suele ser writeable por BUILTIN\Users y funciona para subir binarios temporales.
 * Recomendación: mantener una carpeta `C:\Tools` en las máquinas laboratorio con binarios aprobados para las prácticas.
 
