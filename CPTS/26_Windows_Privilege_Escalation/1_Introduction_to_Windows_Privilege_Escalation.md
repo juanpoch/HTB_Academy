@@ -83,7 +83,9 @@
 
 ## Riesgos: detección AV/EDR y estabilidad del sistema
 
-* Muchas herramientas son **falsamente o verdaderamente detectadas** por AV/EDR. Ejemplo: LaZagne precompilado en VirusTotal: **47/70** detecciones (hash: `ed2f501408a7a6e1a854c29c4b0bc5648aaa8612432df829008931b3e34bf56`, upload: `2021-06-20`, tamaño: `6.33 MB`). Puedes ver el escaneo en la imagen adjunta.
+* Muchas herramientas son **falsamente o verdaderamente detectadas** por AV/EDR. Ejemplo: LaZagne precompilado en VirusTotal: **47/70** detecciones (hash: `ed2f501408a7a6e1a854c29c4b0bc5648aaa8612432df829008931b3e34bf56`, upload: `2021-06-20`, tamaño: `6.33 MB`).
+
+<img width="1227" height="623" alt="image" src="https://github.com/user-attachments/assets/6275e2c7-a8a0-4edb-afe3-8ad97bd62c41" />
 
   * Consecuencia: ejecutarlas en entornos con defender/EDR activo provocará alertas, bloqueos o respuestas (kernel quarantines, reinicios, bloqueo de proceso).
   * Solución en laboratorios: usar binarios aprobados por el instructor o compilar localmente. En ejercicios contra defensas reales — técnicas de evasión (obfuscation, recompile, signed loaders) caen en módulos posteriores.
