@@ -4,7 +4,7 @@
 ## Foothold
 
 * Contar con una sesión interactiva (cmd/powershell/remote shell, RDP local, shell remoto) como un usuario con privilegios limitados.
-* Objetivo típico: escalar a **Local Administrators** o **NT AUTHORITY\SYSTEM**.
+* Objetivo típico: escalar a un miembro del grupo **Local Administrators** o **NT AUTHORITY\SYSTEM**.
 
 ---
 
