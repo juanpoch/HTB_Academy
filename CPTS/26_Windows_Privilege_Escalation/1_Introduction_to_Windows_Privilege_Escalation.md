@@ -8,7 +8,7 @@
 
 ---
 
-##  Escalar privilegios
+##  Motivos para Escalar privilegios
 
 1. Revisar y extraer información que sólo está disponible con permisos elevados (credenciales, registros, backups).
 2. Habilitar persistencia (servicios, tareas programadas, cuentas locales).
