@@ -40,6 +40,8 @@ arp -a
 route print
 ```
 
+[Wiki](https://es.wikipedia.org/wiki/Tabla_de_enrutamiento)
+
 **Interpretación:** rutas por interfaz, métricas, gateways. Identificar subredes internas accesibles (p. ej. `192.168.20.0/24` además de `10.129.0.0/16`).
 
 ### Dominio / AD (si aplica)
