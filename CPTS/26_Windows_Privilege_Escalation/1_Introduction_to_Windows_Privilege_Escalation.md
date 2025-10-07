@@ -32,74 +32,6 @@
 
 ---
 
-## Herramientas útiles
-
-### A) En entornos con internet / posibilidad de subir binarios
-
-* WinPEAS, PowerUp, Seatbelt, Snaffler
-* Mimikatz (cuando es legal/permitido en lab)
-* Juicy Potato / RottenPotatoNG / SharpUp
-* Impacket (secretsdump.py, psexec.py)
-* Snaffler / Sysinternals (Autoruns, ProcExplorer)
-
-### B) En entornos *aislados* (sin internet, USB bloqueado)
-
-* Conocer y usar comandos nativos:
-
-  * `whoami /priv`, `whoami /groups`, `systeminfo`, `net user`
-  * `wmic service get name,displayname,pathname,startmode`
-  * `schtasks /query /fo LIST /v`
-  * PowerShell: `Get-Service`, `Get-ItemProperty HKLM:\SYSTEM\CurrentControlSet\Services\* -Name ImagePath -ErrorAction SilentlyContinue`
-* Capacidad para compilar o transferir fuentes ligeras si se permite mediante RDP o carpetas compartidas.
-
----
-
-## Comprobaciones manuales (PowerShell / CMD) — Checklist rápido
-
-> Ejecutar desde la cuenta comprometida y anotar resultados.
-
-### Información general
-
-```powershell
-whoami /all
-systeminfo
-net user
-net localgroup administrators
-```
-
-### Servicios
-
-```powershell
-wmic service get name,displayname,pathname,startmode
-# ó PowerShell:
-Get-WmiObject Win32_Service | select Name, DisplayName, PathName, StartMode
-```
-
-* Buscar `ImagePath` con espacios sin comillas.
-* Verificar permisos del binario (puede ser sobrescrito por la cuenta actual?).
-
-### Tareas programadas
-
-```cmd
-schtasks /query /fo LIST /v
-```
-
-* Buscar rutas a scripts o comandos editables, o tareas que ejecutan con cuentas de alto privilegio.
-
-### Archivos / Shares / Credenciales
-
-```powershell
-Get-ChildItem -Path C:\ -Include *.config,*.xml,*.ps1,*.rdp -Recurse -ErrorAction SilentlyContinue
-# Buscar palabras clave: password, pwd, pass, credential, token, connectionString
-```
-
-### Memoria y LSASS
-
-* Verificar privilegios necesarios (`SeDebugPrivilege`) antes de intentar dump.
-* Métodos: procdump, comsvcs, taskmgr (Dependiendo de permisos y reglas del laboratorio).
-
----
-
 ## Escenarios prácticos
 
 * **Escenario 1: Restricciones de red** — usar VLAN imprimidora con puertos 80/443/445 abiertos, volcar LSASS, exfiltrar a SMB montado.
@@ -112,13 +44,7 @@ Get-ChildItem -Path C:\ -Include *.config,*.xml,*.ps1,*.rdp -Recurse -ErrorActio
 ---
 
 
-# Lienzo: Herramientas útiles para Windows Privilege Escalation
-
-> **Propósito:** Resumir las herramientas más útiles para enumeración y escalado de privilegios en hosts Windows (laboratorios HTB / entornos controlados), explicar cuándo y cómo usarlas, y dejar buenas prácticas y advertencias (AV/EDR, compilación desde fuente, ambientes aislados).
-
----
-
-## 1) Lista de herramientas (breve descripción)
+## Lista de herramientas
 
 | Herramienta                                 |             Tipo | Descripción rápida                                                                                                                               |
 | ------------------------------------------- | ---------------: | ------------------------------------------------------------------------------------------------------------------------------------------------ |
