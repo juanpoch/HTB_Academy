@@ -32,6 +32,8 @@ arp -a
 
 **Interpretación:** hosts recientemente comunicados → candidatos a RDP/WinRM/SMB para lateral movement.
 
+[Microsoft doc](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/arp)
+
 ### Tabla de rutas (alcance real)
 
 ```cmd
