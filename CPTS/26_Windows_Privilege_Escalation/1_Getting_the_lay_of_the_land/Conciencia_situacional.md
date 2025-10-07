@@ -34,7 +34,7 @@ arp -a
 
 [Microsoft doc](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/arp)
 
-### Tabla de rutas (alcance real)
+### Tabla de enrutamiento
 
 ```cmd
 route print
