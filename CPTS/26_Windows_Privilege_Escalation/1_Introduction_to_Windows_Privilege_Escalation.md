@@ -71,7 +71,7 @@
 
 ---
 
-## 3) Buenas prácticas al usar herramientas
+## Buenas prácticas al usar herramientas
 
 1. **Antes**: entender qué hace la herramienta — leer el código o documentación mínima (evita false positives/noise).
 2. **Filtrar la salida**: las herramientas devuelven mucho; crear filtros/regex para destacar hallazgos relevantes (service path, weak ACL, credenciales en claro).
@@ -81,7 +81,7 @@
 
 ---
 
-## 4) Riesgos: detección AV/EDR y estabilidad del sistema
+## Riesgos: detección AV/EDR y estabilidad del sistema
 
 * Muchas herramientas son **falsamente o verdaderamente detectadas** por AV/EDR. Ejemplo: LaZagne precompilado en VirusTotal: **47/70** detecciones (hash: `ed2f501408a7a6e1a854c29c4b0bc5648aaa8612432df829008931b3e34bf56`, upload: `2021-06-20`, tamaño: `6.33 MB`). Puedes ver el escaneo en la imagen adjunta.
 
@@ -90,7 +90,7 @@
 
 ---
 
-## 5) Estrategias cuando no podés ejecutar herramientas
+## Estrategias cuando no podés ejecutar herramientas
 
 * **Comprobaciones nativas**: `whoami`, `systeminfo`, `wmic`, `schtasks`, `reg query`, `icacls`, `Get-Service` / `Get-WmiObject`.
 * **Extracción no binaria**: leer ficheros .rdp/.config, montar VHDX desde network share, exfiltrar hives (SYSTEM/SAM) si es posible.
@@ -98,7 +98,7 @@
 
 ---
 
-## 6) Recomendaciones de uso por herramienta
+## Recomendaciones de uso por herramienta
 
 * **Seatbelt**: ideal para un primer barrido. Revisa resultados y descarta líneas ignorables.
 * **winPEAS**: usar con parámetros para reducir ruido (`winPEAS.bat quiet` / filtrar secciones). Revisar manualmente resultados sensibles (creds, permisos).
@@ -109,7 +109,7 @@
 
 ---
 
-## 7) Lista corta de comandos nativos imprescindibles
+## Lista corta de comandos nativos imprescindibles
 
 ```powershell
 whoami /all
