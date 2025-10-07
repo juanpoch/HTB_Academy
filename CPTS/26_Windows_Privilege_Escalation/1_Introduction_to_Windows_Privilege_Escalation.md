@@ -57,7 +57,7 @@
 | [**Watson**](https://github.com/rasta-mouse/Watson)                                                     |             .NET | Identifica KBs faltantes y sugiere exploits públicos para escalado local. Buen complemento a WES-NG.                                             |
 | [**LaZagne**](https://github.com/AlessandroZ/LaZagne)                                                   | Python / binario | Recupera contraseñas guardadas localmente (browsers, apps, RDP, Wi-Fi, herramientas sysadmin). Muy potente — detectado por AV.                   |
 | [**WES-NG (Windows Exploit Suggester - NG)**](https://github.com/bitsadmin/wesng)                       |           Python | Analiza `systeminfo` y sugiere CVEs/exploits aplicables para la versión de Windows.                                                              |
-| [**Sysinternals Suite**](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)   |         Binaries | Herramientas oficiales (AccessChk, PsService, PipeList, ProcDump, Process Explorer, etc.) — imprescindibles para enumeración y análisis forense. |
+| [**Sysinternals Suite**](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite)   |         Binaries | Herramientas oficiales ([AccessChk](https://learn.microsoft.com/en-us/sysinternals/downloads/accesschk), [PsService](https://learn.microsoft.com/en-us/sysinternals/downloads/psservice), [PipeList](https://learn.microsoft.com/en-us/sysinternals/downloads/pipelist), ProcDump, Process Explorer, etc.) — imprescindibles para enumeración y análisis forense. |
 
 
 ---
