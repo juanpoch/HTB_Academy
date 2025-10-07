@@ -24,7 +24,7 @@ ipconfig /all
 
 **Interpretación:** detectar IPs, gateways, DNS, sufijos de búsqueda, si está unido a dominio y **múltiples NICs** (dual‑homed).
 
-### 2.2 ARP cache (vecinos recientes)
+### ARP cache (vecinos recientes)
 
 ```cmd
 arp -a
@@ -32,7 +32,7 @@ arp -a
 
 **Interpretación:** hosts recientemente comunicados → candidatos a RDP/WinRM/SMB para lateral movement.
 
-### 2.3 Tabla de rutas (alcance real)
+### Tabla de rutas (alcance real)
 
 ```cmd
 route print
@@ -40,7 +40,7 @@ route print
 
 **Interpretación:** rutas por interfaz, métricas, gateways. Identificar subredes internas accesibles (p. ej. `192.168.20.0/24` además de `10.129.0.0/16`).
 
-### 2.4 Dominio / AD (si aplica)
+### Dominio / AD (si aplica)
 
 ```powershell
 whoami /fqdn
@@ -50,7 +50,7 @@ ipconfig /displaydns | findstr /i "_ldap _kerberos"
 
 **Interpretación:** DCs, servicios Kerberos/LDAP, nombre de dominio.
 
-### 2.5 Resolución y reachability
+### Resolución y reachability
 
 ```cmd
 nslookup dc01.htb
