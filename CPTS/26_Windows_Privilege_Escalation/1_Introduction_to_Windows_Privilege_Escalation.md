@@ -1,7 +1,7 @@
 # Introducción a Windows Privilege Escalation
 
 
-## 2. Foothold
+## Foothold
 
 * Contar con una sesión interactiva (cmd/powershell/remote shell, RDP local, shell remoto) como un usuario con privilegios limitados.
 * Objetivo típico: escalar a **Local Administrators** o **NT AUTHORITY\SYSTEM**.
