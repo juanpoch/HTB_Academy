@@ -180,4 +180,14 @@ xfreerdp /v:10.129.43.36 /u:htb-student
 
 <img width="1905" height="971" alt="image" src="https://github.com/user-attachments/assets/9f00065e-c789-430d-a164-8eb56085238e" />
 
-Abrimos un `cmd.exe`
+Abrimos un `cmd.exe`.
+
+El laboratorio nos pregunta cuál es la dirección IP de la otra `NIC` conectada al host destino. Utilizamos el comando `ipconfig /all` para ver la configuración de red:
+<img width="1031" height="767" alt="image" src="https://github.com/user-attachments/assets/ad142bdc-3e12-400e-8b9d-64190fe94613" />
+
+Vemos las dos direcciones IP correspondientes a cada NIC. Notamos que la otra IP es `172.16.20.45`.
+
+
+La siguiente pregunta es qué otro ejecutable además de cmd.exe está bloqueado por AppLocker.
+
+
