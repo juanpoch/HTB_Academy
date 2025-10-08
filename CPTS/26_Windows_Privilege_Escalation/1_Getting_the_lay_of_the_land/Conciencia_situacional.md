@@ -168,3 +168,16 @@ Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\cmd.
 * Preparar **bypasses** si AppLocker/EDR bloquea binarios base.
 
 ---
+---
+
+# Laboratorio
+
+
+Nos conectamos al host con el comando:
+```
+xfreerdp /v:10.129.43.36 /u:htb-student
+```
+
+<img width="1905" height="971" alt="image" src="https://github.com/user-attachments/assets/9f00065e-c789-430d-a164-8eb56085238e" />
+
+Abrimos un `cmd.exe`
