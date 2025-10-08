@@ -132,7 +132,7 @@ Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\cmd.
 
 ---
 
-## Decisión táctica (árbol rápido)
+## Decisión táctica
 
 1. **¿Dual‑homed?** Sí → mapear subred secundaria (port scan desde el host, SMB shares, DCs) y considerar pivot.
 2. **¿AppLocker estricto?** Sí → usar LOLBAS/paths permitidos o compilar binarios firmados.
