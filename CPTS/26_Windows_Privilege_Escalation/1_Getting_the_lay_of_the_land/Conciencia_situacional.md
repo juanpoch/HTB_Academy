@@ -99,22 +99,26 @@ Get-MpComputerStatus | fl AMServiceEnabled,AntivirusEnabled,RealTimeProtectionEn
 
 [Wiki](https://learn.microsoft.com/en-us/powershell/module/defender/get-mpcomputerstatus?view=windowsserver2025-ps)
 
-### AppLocker 
+### AppLocker   
 
-[AppLocker doc](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview)
+[AppLocker doc](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview)  
 
+  
 ```powershell
 Get-AppLockerPolicy -Effective | Select -ExpandProperty RuleCollections
 ```
 
 * Revisa reglas por **Publisher/Path/Hash** en `Exe`, `Msi`, `Script`, `PackagedApps`.
 
-**Probar una ruta concreta:**
+**Probar una ruta concreta:**  
 
-[Obtener AppLocker policies doc](https://learn.microsoft.com/en-us/powershell/module/applocker/get-applockerpolicy?view=windowsserver2019-ps)
+
+[Obtener AppLocker policies doc](https://learn.microsoft.com/en-us/powershell/module/applocker/get-applockerpolicy?view=windowsserver2019-ps)  
+
 ```powershell
-Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\cmd.exe -User Everyone
+Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\*.exe -User Everyone
 ```
+`Nota`: Revisa las políticas locales, y utiliza el cmdlet `Test-AppLockerPolicy` que permite averiguar si el grupo `Everyone`es capaz de ejecutar los archivos `.exe` dentro de `System32`.
 
 * Devuelve `PolicyDecision: Allowed/Denied`. Útil para decidir **dónde** ubicar binarios/scripts (p. ej. `%WINDIR%` y `%PROGRAMFILES%` suelen estar permitidos por default rules para Everyone).
 
