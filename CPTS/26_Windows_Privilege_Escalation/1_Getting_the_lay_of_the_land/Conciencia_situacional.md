@@ -174,7 +174,7 @@ Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\cmd.
 
 
 Nos conectamos al host con el comando:
-```
+```bash
 xfreerdp /v:10.129.43.36 /u:htb-student
 ```
 
@@ -190,4 +190,12 @@ Vemos las dos direcciones IP correspondientes a cada NIC. Notamos que la otra IP
 
 La siguiente pregunta es qué otro ejecutable además de cmd.exe está bloqueado por AppLocker.
 
+Abrimos una powershell y utilizamos el siguiente comando:
+```powershell
+Get-AppLockerPolicy -Effective | Select -ExpandProperty RuleCollections
+```
+
+<img width="1029" height="770" alt="image" src="https://github.com/user-attachments/assets/d7b7168e-a76b-450d-b294-91ec8915b6ad" />
+
+Hasta ahora vemos que está bloqueado únicamente `cmd.exe`.
 
