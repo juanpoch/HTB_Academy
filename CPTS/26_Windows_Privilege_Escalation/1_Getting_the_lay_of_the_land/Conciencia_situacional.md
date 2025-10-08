@@ -101,6 +101,8 @@ Get-MpComputerStatus | fl AMServiceEnabled,AntivirusEnabled,RealTimeProtectionEn
 
 ### AppLocker 
 
+[AppLocker doc](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview)
+
 ```powershell
 Get-AppLockerPolicy -Effective | Select -ExpandProperty RuleCollections
 ```
@@ -109,6 +111,7 @@ Get-AppLockerPolicy -Effective | Select -ExpandProperty RuleCollections
 
 **Probar una ruta concreta:**
 
+[Obtener AppLocker policies doc](https://learn.microsoft.com/en-us/powershell/module/applocker/get-applockerpolicy?view=windowsserver2019-ps)
 ```powershell
 Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\cmd.exe -User Everyone
 ```
