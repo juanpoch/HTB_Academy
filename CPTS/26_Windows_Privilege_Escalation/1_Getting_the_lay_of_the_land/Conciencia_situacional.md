@@ -195,7 +195,11 @@ Abrimos una powershell y utilizamos el siguiente comando:
 Get-AppLockerPolicy -Effective | Select -ExpandProperty RuleCollections
 ```
 
-<img width="1029" height="770" alt="image" src="https://github.com/user-attachments/assets/d7b7168e-a76b-450d-b294-91ec8915b6ad" />
+<img width="1026" height="729" alt="image" src="https://github.com/user-attachments/assets/4c22c6c8-8238-4336-87af-7fcf3dce597a" />
 
-Hasta ahora vemos que está bloqueado únicamente `cmd.exe`.
+
+Vemos que está bloqueado `cmd.exe` y además `powershell_ise.exe`.
+
+
+
 
