@@ -141,8 +141,7 @@ Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\cmd.
 
 ---
 
-## Playbook: comandos mínimos a correr (copiar/pegar)
-
+## Playbook: comandos mínimos a correr
 ```powershell
 # RED
 ipconfig /all
