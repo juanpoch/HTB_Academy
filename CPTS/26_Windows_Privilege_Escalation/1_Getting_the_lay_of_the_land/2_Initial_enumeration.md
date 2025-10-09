@@ -2,7 +2,7 @@
 
 Durante una evaluación, podemos obtener una shell con privilegios reducidos en un host Windows (unido a dominio o no) y necesitaremos realizar escalada de privilegios para ampliar nuestro acceso. Comprometer totalmente el host puede permitirnos acceder a archivos compartidos sensibles, capturar tráfico para obtener más credenciales, u obtener credenciales que nos ayuden a avanzar o incluso escalar directamente a Domain Admin en un entorno Active Directory. Podemos escalar privilegios a uno de los siguientes, según la configuración del sistema y los datos que encontremos:
 
-* La cuenta altamente privilegiada **NT AUTHORITY\SYSTEM**, o **LocalSystem**, que tiene más privilegios que una cuenta de administrador local y se usa para ejecutar la mayoría de servicios de Windows.
+* La cuenta altamente privilegiada **NT AUTHORITY\SYSTEM**, o [**LocalSystem**](https://learn.microsoft.com/en-us/windows/win32/services/localsystem-account), que tiene más privilegios que una cuenta de administrador local y se usa para ejecutar la mayoría de servicios de Windows.
 * La **cuenta local Administrador** incorporada. Algunas organizaciones la deshabilitan, pero muchas no. No es raro ver la misma contraseña de administrador local reutilizada en varios sistemas.
 * Otra cuenta local que sea miembro del grupo **Administradores locales**. Cualquier cuenta en ese grupo tendrá los mismos privilegios que la cuenta Administrador incorporada.
 * Un usuario de dominio estándar (sin privilegios) que forma parte del **grupo Administradores locales**.
