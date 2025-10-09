@@ -1,4 +1,4 @@
-# Enumeración inicial (Initial Enumeration)
+# Enumeración inicial
 
 Durante una evaluación, podemos obtener una shell con privilegios reducidos en un host Windows (unido a dominio o no) y necesitaremos realizar escalada de privilegios para ampliar nuestro acceso. Comprometer totalmente el host puede permitirnos acceder a archivos compartidos sensibles, capturar tráfico para obtener más credenciales, u obtener credenciales que nos ayuden a avanzar o incluso escalar directamente a Domain Admin en un entorno Active Directory. Podemos escalar privilegios a uno de los siguientes, según la configuración del sistema y los datos que encontremos:
 
