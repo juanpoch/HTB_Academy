@@ -22,6 +22,8 @@ Esta [referencia de comandos](https://learn.microsoft.com/en-us/windows-server/a
 
 * **Servicios en ejecución (Running Services):** Importante especialmente aquellos que corren como **NT AUTHORITY\SYSTEM** o con cuenta admin. Un servicio mal configurado o vulnerable ejecutado en contexto privilegiado puede ser una escalada sencilla.
 
+[Versiones de Windows](https://en.wikipedia.org/wiki/Comparison_of_Microsoft_Windows_versions)
+
 ---
 
 ## Información del sistema
