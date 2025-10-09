@@ -52,6 +52,8 @@ Fijarse en procesos no estándar (por ejemplo, FileZilla Server) para investigar
 
 Identificar rápidamente los procesos o servicios estándar nos ayudará a agilizar la enumeración y nos permitirá identificar aquellos que no lo son.
 
+Otros servicios como el de Windows Defender `MsMpEng.exe` son interesantes porque nos permiten identificar protecciones implementadas en el host.
+
 ---
 
 ## Mostrar todas las variables de entorno
