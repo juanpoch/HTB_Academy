@@ -50,6 +50,8 @@ Fijarse en procesos no estándar (por ejemplo, FileZilla Server) para investigar
 - [Local Security Authority Subsystem Service `LSASS`](https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service)
 - [Service Host `svchost.exe`](https://en.wikipedia.org/wiki/Svchost.exe)
 
+Identificar rápidamente los procesos o servicios estándar nos ayudará a agilizar la enumeración y nos permitirá identificar aquellos que no lo son.
+
 ---
 
 ## Mostrar todas las variables de entorno
