@@ -36,6 +36,8 @@ C:\htb> tasklist /svc
 
 (Explicación: muestra procesos y servicios asociados a cada PID, útil para detectar qué ejecuta cada svchost.exe.)
 
+[tasklist doc](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist)
+
 Fijarse en procesos no estándar (por ejemplo, FileZilla Server) para investigar versión o configuraciones. También procesos como `MsMpEng.exe` (Windows Defender) nos indican protecciones presentes.
 
 ---
