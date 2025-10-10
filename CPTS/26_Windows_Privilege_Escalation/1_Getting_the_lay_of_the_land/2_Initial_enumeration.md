@@ -58,7 +58,8 @@ Otros servicios como el de Windows Defender `MsMpEng.exe` son interesantes porqu
 
 ## Mostrar todas las variables de entorno
 
-Las variables de entorno explican la configuración del host. `set` imprime todas. Una variable clave es `PATH`: Windows busca ejecutables primero en el directorio de trabajo actual (CWD) y luego en las rutas de `PATH` en orden. Si una carpeta colocada en `PATH` es escribible por el usuario y está antes de `C:\Windows\System32`, puede permitir “DLL Injection” o ejecución de un binario malicioso sin especificar ruta completa.
+Las variables de entorno explican la configuración del host. `set` imprime todas. Una variable clave es `PATH`: Windows busca ejecutables primero en el directorio de trabajo actual (CWD) y luego en las rutas de `PATH` en orden. Un ejemplo común es colocar Python o Java en el path, lo que permitiría la ejecución de Python o archivos `.JAR`.
+Si una carpeta colocada en `PATH` es escribible por el usuario y está antes de `C:\Windows\System32`, puede permitir “DLL Injection” o ejecución de un binario malicioso sin especificar ruta completa.
 
 `set` también da información como `HOMEDRIVE` (a menudo una share de red en empresas). Ficheros colocados en `USERPROFILE\AppData\Microsoft\Windows\Start Menu\Programs\Startup` se ejecutan cuando el usuario inicia sesión en otro equipo (si usan perfil móvil), lo que puede propagar payloads.
 
