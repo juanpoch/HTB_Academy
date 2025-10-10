@@ -31,11 +31,11 @@ Esta [referencia de comandos](https://learn.microsoft.com/es-es/windows-server/a
 
 ## Puntos de datos clave
 
-* **Nombre del SO (OS name):** Saber si es estación de trabajo o servidor y la versión (Windows 7, 10, Server 2008/2012/2016/2019...) nos da idea de las herramientas disponibles (p. ej. versión de PowerShell) y si existen exploits públicos aplicables.
+* **OS name:** Saber si es estación de trabajo o servidor y la versión (Windows 7, 10, Server 2008/2012/2016/2019...) nos da idea de las herramientas disponibles (p. ej. versión de PowerShell) y si existen exploits públicos aplicables.
 
 * **Versión:** Como con el nombre, puede haber exploits públicos para una versión concreta. Los exploits de sistema pueden inestabilizar o causar crash; precaución en entornos productivos.
 
-* **Servicios en ejecución (Running Services):** Importante especialmente aquellos que corren como **NT AUTHORITY\SYSTEM** o con cuenta admin. Un servicio mal configurado o vulnerable ejecutado en contexto privilegiado puede ser una escalada sencilla.
+* **Running Services:** Importante especialmente aquellos que corren como **NT AUTHORITY\SYSTEM** o con cuenta admin. Un servicio mal configurado o vulnerable ejecutado en contexto privilegiado puede ser una escalada sencilla.
 
 [Versiones de Windows](https://en.wikipedia.org/wiki/Comparison_of_Microsoft_Windows_versions)
 
