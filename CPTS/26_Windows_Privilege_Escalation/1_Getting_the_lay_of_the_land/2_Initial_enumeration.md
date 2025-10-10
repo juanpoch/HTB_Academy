@@ -215,6 +215,8 @@ wmic qfe
 
 `Nota`: `WMI`: Base de datos + interfaz + comandos que dejan consultar o controlar casi cualquier cosa del sistema
 
+`Nota`: `QFE`: registro interno del sistema de cada parche instalado.
+
 O con PowerShell usando el cmdlet [Get-HotFix](https://learn.microsoft.com/es-es/powershell/module/microsoft.powershell.management/get-hotfix?view=powershell-7.5&viewFallbackFrom=powershell-7.1):
 
 ```
