@@ -219,10 +219,14 @@ wmic qfe
 
 O con PowerShell usando el cmdlet [Get-HotFix](https://learn.microsoft.com/es-es/powershell/module/microsoft.powershell.management/get-hotfix?view=powershell-7.5&viewFallbackFrom=powershell-7.1):
 
+
 ```
 Get-HotFix
 ```
 <img width="1419" height="319" alt="image" src="https://github.com/user-attachments/assets/42d21ec7-c776-45bf-b539-c9e146e031d4" />
+
+<img width="1359" height="306" alt="image" src="https://github.com/user-attachments/assets/7b9cd484-273f-4c11-aed3-9da03bae71b6" />
+
 
 ---
 
