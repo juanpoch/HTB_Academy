@@ -51,6 +51,8 @@ Ver la información del sistema nos da la versión exacta del sistema operativo,
 C:\htb> tasklist /svc
 ```
 
+<img width="1288" height="778" alt="image" src="https://github.com/user-attachments/assets/b8a9f0d5-e807-4f2b-bd64-a1d526b7a0f8" />
+
 (Explicación: muestra procesos y servicios asociados a cada PID, útil para detectar qué ejecuta cada svchost.exe.)
 
 [tasklist doc](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist)
