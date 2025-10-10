@@ -62,7 +62,7 @@ Fijarse en procesos no estándar (por ejemplo, FileZilla Server) para investigar
 `Nota`: Es fundamental familiarizarse con los procesos estándar de Windows, como:
 
 - [Session Management Subsystem `smss.exe`](https://en.wikipedia.org/wiki/Session_Manager_Subsystem): es el proceso del sistema responsable de inicializar el entorno del sistema operativo y crear las sesiones de usuario y del kernel durante el arranque de Windows. 
-- [Client/Server Runtime Subsystem `csrss.exe`](https://en.wikipedia.org/wiki/Client/Server_Runtime_Subsystem)
+- [Client/Server Runtime Subsystem `csrss.exe`](https://en.wikipedia.org/wiki/Client/Server_Runtime_Subsystem): es un proceso del sistema que maneja las operaciones fundamentales del entorno de usuario de Windows, como la creación de hilos, la administración de consolas y parte de la interfaz gráfica.
 - [Winlogon `winlogon.exe`](https://en.wikipedia.org/wiki/Winlogon)
 - [Local Security Authority Subsystem Service `LSASS`](https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service)
 - [Service Host `svchost.exe`](https://en.wikipedia.org/wiki/Svchost.exe)
