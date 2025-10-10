@@ -25,7 +25,7 @@ Durante una evaluación, podemos obtener una shell con privilegios reducidos en 
 
 La enumeración es la clave para la escalada de privilegios. Cuando obtenemos acceso inicial a la máquina, es vital obtener conciencia situacional y descubrir detalles sobre versión del SO, nivel de parches, software instalado, privilegios actuales, membresías de grupos y más. A continuación vemos los puntos clave que deberíamos revisar después de obtener acceso inicial. Esto no es una lista exhaustiva; las herramientas y scripts cubren muchos más puntos. No obstante, es esencial saber realizar estas tareas manualmente, especialmente si estamos en un entorno donde no podemos cargar herramientas por restricciones de red, falta de internet o protecciones.
 
-Esta [referencia de comandos](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands) de Windows es útil para realizar tareas de enumeración manual.
+Esta [referencia de comandos](https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/windows-commands) de Windows es útil para realizar tareas de enumeración manual.
 
 ---
 
