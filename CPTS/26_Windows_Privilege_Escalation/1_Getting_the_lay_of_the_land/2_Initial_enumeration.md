@@ -252,7 +252,7 @@ Get-WmiObject -Class Win32_Product | select Name, Version
 
 ## Mostrar procesos en ejecución y conexiones
 
-`netstat` muestra conexiones TCP/UDP y puertos en escucha; útil para detectar servicios locales vulnerables sólo accesibles desde el host.
+[`netstat`](https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/netstat) muestra conexiones TCP/UDP y puertos en escucha; útil para detectar servicios locales vulnerables sólo accesibles desde el host.
 
 ```
 netstat -ano
