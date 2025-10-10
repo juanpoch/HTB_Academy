@@ -84,9 +84,61 @@ Fijarse en procesos no estándar (por ejemplo, FileZilla Server) para investigar
 | **Administración de sesiones**      | Existe una instancia por cada sesión activa (sistema o usuario).          |
 
 
-- [Winlogon `winlogon.exe`](https://en.wikipedia.org/wiki/Winlogon)
-- [Local Security Authority Subsystem Service `LSASS`](https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service)
-- [Service Host `svchost.exe`](https://en.wikipedia.org/wiki/Svchost.exe)
+- [Winlogon `winlogon.exe`](https://en.wikipedia.org/wiki/Winlogon): Es el proceso responsable de gestionar el inicio y cierre de sesión de los usuarios, controlar la pantalla de bloqueo y coordinar la autenticación junto con LSASS.
+
+| Función                                          | Descripción                                                                                                    |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| **Inicio de sesión interactivo**                 | Recibe las credenciales del usuario (a través de la interfaz de logon) y las envía a LSASS para autenticación. |
+| **Bloqueo y desbloqueo del sistema**             | Controla la pantalla de bloqueo y el ingreso de Ctrl+Alt+Del.                                                  |
+| **Carga del perfil de usuario**                  | Inicia la sesión del usuario tras la autenticación, cargando su entorno y variables.                           |
+| **Ejecución de `userinit.exe` y `explorer.exe`** | Lanza los procesos que construyen el entorno de escritorio.                                                    |
+| **Supervisión de la sesión**                     | Monitorea el estado del usuario; si falla, el sistema no puede iniciar sesión.                                 |
+| **Cierre de sesión y apagado**                   | Coordina el cierre seguro de la sesión del usuario o el sistema.                                               |
+
+- [Local Security Authority Subsystem Service `LSASS`](https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service): Es el proceso encargado de aplicar las políticas de seguridad del sistema operativo, autenticar usuarios y emitir tokens de acceso para controlar qué puede hacer cada proceso o cuenta.
+
+| Función                                  | Descripción                                                                                         |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Autenticación de usuarios**            | Valida las credenciales locales o de dominio (contraseña, hash, Kerberos, NTLM).                    |
+| **Generación de tokens de acceso**       | Crea los tokens que definen los permisos y privilegios de cada sesión o proceso.                    |
+| **Aplicación de políticas de seguridad** | Enforcea reglas de contraseñas, bloqueo de cuentas, privilegios y auditoría.                        |
+| **Comunicación con SAM y AD**            | Interactúa con la base de cuentas locales (SAM) o con Active Directory en equipos unidos a dominio. |
+| **Gestión de auditorías**                | Registra eventos de seguridad como inicios de sesión, errores o accesos no autorizados.             |
+| **Protección del sistema**               | Si se detiene, el sistema entra en error crítico (BSOD).                                            |
+
+- [Service Host `svchost.exe`](https://en.wikipedia.org/wiki/Svchost.exe): Es un proceso contenedor que ejecuta uno o varios servicios de Windows, agrupándolos para optimizar el uso de recursos y facilitar su administración.
+
+| Función                              | Descripción                                                                                                      |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| **Alojamiento de servicios**         | Carga y ejecuta servicios del sistema definidos en DLLs (no ejecutables directos).                               |
+| **Agrupación por funciones**         | Ejecuta múltiples servicios relacionados dentro de una misma instancia para ahorrar memoria.                     |
+| **Separación por seguridad**         | Crea instancias distintas (svchost) para servicios de diferente nivel de privilegio o contexto.                  |
+| **Gestión mediante SCM**             | Recibe instrucciones del *Service Control Manager* (`services.exe`) para iniciar, detener o reiniciar servicios. |
+| **Ejecución en distintos contextos** | Puede correr bajo cuentas como `LocalSystem`, `NetworkService` o `LocalService`, según el servicio.              |
+| **Supervisión de estabilidad**       | Si un servicio falla, puede reiniciarse sin afectar a todo el sistema.                                           |
+
+- [Service Control Manager `services.exe`](https://es.wikipedia.org/wiki/Service_Control_Manager): Es el proceso del sistema responsable de administrar todos los servicios de Windows, incluyendo su inicio, detención, configuración y supervisión.
+
+| Función                           | Descripción                                                                                                     |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Inicio de servicios**           | Carga y ejecuta todos los servicios configurados para iniciarse con el sistema.                                 |
+| **Gestión de `svchost.exe`**      | Lanza y controla los procesos `svchost.exe` que alojan servicios basados en DLL.                                |
+| **Monitoreo de estado**           | Supervisa los servicios en ejecución y reinicia los que fallen, según las políticas configuradas.               |
+| **Comunicación con aplicaciones** | Permite a otros programas iniciar, detener o consultar servicios mediante la API del *Service Control Manager*. |
+| **Control de dependencias**       | Asegura que los servicios se inicien o detengan en el orden correcto según sus dependencias.                    |
+| **Interfaz con el usuario**       | Se comunica con el panel *services.msc* y con `net start` / `net stop` para recibir órdenes.                    |
+
+- Windows Initialization Process `wininit.exe`: Es un proceso del sistema que se ejecuta durante el arranque de Windows y se encarga de inicializar los servicios esenciales en la sesión 0, incluyendo `services.exe`, `lsass.exe` y `lsaiso.exe`.
+
+| Función                            | Descripción                                                                                                                                 |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Creación de procesos críticos**  | Inicia `services.exe` (administrador de servicios), `lsass.exe` (subsistema de seguridad) y `lsaiso.exe` (LSA aislado, si está habilitado). |
+| **Inicialización de la sesión 0**  | Configura la sesión del sistema donde se ejecutan los servicios y controladores.                                                            |
+| **Manejo del registro de eventos** | Inicia el servicio de *Windows Event Log* (`eventlog.dll`) para registrar eventos del sistema.                                              |
+| **Comunicación con SMSS**          | Trabaja junto al *Session Manager Subsystem* (`smss.exe`) para completar la secuencia de arranque.                                          |
+| **Supervisión de procesos hijos**  | Si alguno de los procesos críticos que crea falla, el sistema genera un *BSOD*.                                                             |
+| **Ejecutado solo una vez**         | Se lanza una sola instancia durante el arranque y permanece activa en segundo plano.                                                        |
+
 
 Identificar rápidamente los procesos o servicios estándar nos ayudará a agilizar la enumeración y nos permitirá identificar aquellos que no lo son.
 
