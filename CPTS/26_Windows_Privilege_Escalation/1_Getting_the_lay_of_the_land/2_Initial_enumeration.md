@@ -258,6 +258,9 @@ Get-WmiObject -Class Win32_Product | select Name, Version
 netstat -ano
 ```
 
+<img width="1202" height="441" alt="image" src="https://github.com/user-attachments/assets/f14dacb1-7dcd-4366-8055-ed7f045d35f0" />
+
+
 ---
 
 ## Información de usuarios y grupos
