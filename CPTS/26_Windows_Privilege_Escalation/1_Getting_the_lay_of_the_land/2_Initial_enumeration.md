@@ -158,6 +158,17 @@ Ficheros colocados en `USERPROFILE\AppData\Microsoft\Windows\Start Menu\Programs
 
 [Perfil móvil doc](https://learn.microsoft.com/es-es/windows-server/storage/folder-redirection/folder-redirection-rup-overview)
 
+El perfil móvil es un tipo de perfil de usuario en Windows que se almacena en un servidor y se descarga localmente al iniciar sesión, permitiendo que el usuario mantenga su mismo entorno (escritorio, documentos, configuraciones) desde cualquier equipo del dominio.
+
+| Motivo                          | Descripción                                                                                                                      |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **Sincronización automática**   | Cualquier archivo malicioso en el perfil (por ejemplo, en *AppData* o *Startup*) se replica a otros equipos al iniciar sesión.   |
+| **Uso de recursos compartidos** | El perfil se guarda en un recurso SMB del servidor (`\\servidor\profiles\usuario`), lo que puede servir como punto de infección. |
+| **Permisos amplios**            | Los usuarios suelen tener permisos de escritura en su carpeta de perfil, facilitando la persistencia del payload.                |
+| **Ejecución transversal**       | Si el usuario inicia sesión en múltiples hosts, el malware se propaga automáticamente a todos ellos.                             |
+
+`Conclusión`: Un perfil móvil comprometido permite que un payload se propague entre varios equipos del dominio de forma silenciosa y legítima, aprovechando la sincronización automática del perfil del usuario.
+
 ---
 
 ## Mostrar información detallada de configuración
