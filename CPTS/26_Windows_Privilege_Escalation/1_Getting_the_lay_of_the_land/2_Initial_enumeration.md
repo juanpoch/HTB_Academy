@@ -177,7 +177,10 @@ El perfil móvil es un tipo de perfil de usuario en Windows que se almacena en u
 
 ## Mostrar información detallada de configuración
 
-`systeminfo` muestra si la máquina está parchada recientemente y si es una VM. Si no está parcheada, la escalada puede ser tan simple como ejecutar un exploit conocido. Revisar `HotFix(s)` listados nos da pistas sobre parches instalados. `System Boot Time` también indica si se reinicia con poca frecuencia (posible falta de parches).
+`systeminfo` muestra si la máquina está parchada recientemente y si es una VM. Si no está parcheada, la escalada puede ser tan simple como ejecutar un exploit conocido. Revisar `HotFix(s)` listados nos da pistas sobre parches instalados, utilizar el número `Knowledge Base` para buscarlo en  [Revisiones](https://www.catalog.update.microsoft.com/Search.aspx?q=hotfix). `System Boot Time` también indica si se reinicia con poca frecuencia (posible falta de parches).
+
+<img width="1434" height="855" alt="image" src="https://github.com/user-attachments/assets/f37b7ab1-5faf-452b-8642-8888f6cf0b7b" />
+
 
 ### Parches y actualizaciones
 
