@@ -206,17 +206,20 @@ A su vez, si buscamos en el catálogo por `Windows Server 2016 cumulative update
 `Nota`: También puede ser útil revisar los datos de red, por si se descubren conexiones a otras redes.
 ### Parches y actualizaciones
 
-Si `systeminfo` no muestra hotfixes, se pueden consultar con WMI/QFE:
+Si `systeminfo` no muestra hotfixes, se pueden consultar con [WMI](https://learn.microsoft.com/es-es/windows/win32/wmisdk/wmi-start-page)/[QFE](https://learn.microsoft.com/es-es/windows/win32/cimwin32prov/win32-quickfixengineering):
 
 ```
 wmic qfe
 ```
+<img width="1645" height="255" alt="image" src="https://github.com/user-attachments/assets/2fbfe1a0-cb5f-476f-8f0b-b327d393a9f9" />
 
-O con PowerShell:
+
+O con PowerShell usando el cmdlet [Get-HotFix](https://learn.microsoft.com/es-es/powershell/module/microsoft.powershell.management/get-hotfix?view=powershell-7.5&viewFallbackFrom=powershell-7.1):
 
 ```
 Get-HotFix
 ```
+<img width="1419" height="319" alt="image" src="https://github.com/user-attachments/assets/42d21ec7-c776-45bf-b539-c9e146e031d4" />
 
 ---
 
