@@ -181,7 +181,25 @@ El perfil móvil es un tipo de perfil de usuario en Windows que se almacena en u
 
 <img width="1434" height="855" alt="image" src="https://github.com/user-attachments/assets/f37b7ab1-5faf-452b-8642-8888f6cf0b7b" />
 
+<img width="1619" height="908" alt="image" src="https://github.com/user-attachments/assets/7547da93-ef0c-4bc5-b8b4-778224fb2806" />
 
+Nosotros tenemos:
+```
+OS Name:                   Microsoft Windows Server 2016 Standard
+OS Version:                10.0.14393 N/A Build 14393
+...
+Hotfix(s):                 3 Hotfix(s) Installed.
+                           [01]: KB3199986
+                           [02]: KB5001078
+                           [03]: KB4103723
+```
+
+Si buscamos `KB3199986` en el catálogo encontramos:
+<img width="1891" height="475" alt="image" src="https://github.com/user-attachments/assets/8bff0545-005b-4a4c-877c-d33c19bcebd5" />
+
+Descubrimos que el último parche instalado corresponde al año 2021, por lo que tendríamos varios años sin parchear.
+
+`Nota`: También puede ser útil revisar los datos de red, por si se descubren conexiones a otras redes.
 ### Parches y actualizaciones
 
 Si `systeminfo` no muestra hotfixes, se pueden consultar con WMI/QFE:
