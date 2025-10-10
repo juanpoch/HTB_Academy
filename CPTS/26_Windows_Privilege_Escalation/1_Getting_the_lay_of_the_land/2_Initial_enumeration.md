@@ -55,13 +55,15 @@ C:\htb> tasklist /svc
 
 (Explicación: muestra procesos y servicios asociados a cada PID, útil para detectar qué ejecuta cada svchost.exe.)
 
-[tasklist doc](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist)
+[tasklist doc](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist)  
+
 
 Fijarse en procesos no estándar (por ejemplo, FileZilla Server) para investigar versión o configuraciones. También procesos como `MsMpEng.exe` (Windows Defender) nos indican protecciones presentes.
 
 `Nota`: Es fundamental familiarizarse con los procesos estándar de Windows, como:
 
 - [Session Management Subsystem `smss.exe`](https://en.wikipedia.org/wiki/Session_Manager_Subsystem): Es el proceso del sistema encargado de crear y administrar las sesiones de Windows, inicializando los procesos base que permiten el arranque del sistema y las sesiones de usuario.
+
   | Función                                   | Descripción                                                                                         |
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | **Creación de Session 0**                 | Inicia la sesión del sistema donde se ejecutan los servicios y procesos del kernel.                 |
@@ -71,6 +73,7 @@ Fijarse en procesos no estándar (por ejemplo, FileZilla Server) para investigar
 | **Supervisión de procesos críticos**      | Si `csrss.exe` o `winlogon.exe` fallan, provoca un BSOD.                                            |
 
 - [Client/Server Runtime Subsystem `csrss.exe`](https://en.wikipedia.org/wiki/Client/Server_Runtime_Subsystem): Es el proceso del sistema que maneja funciones esenciales del entorno Win32, como la gestión de consolas, la creación de hilos y la comunicación entre procesos de usuario y el sistema.
+  
   | Función                             | Descripción                                                               |
 | ----------------------------------- | ------------------------------------------------------------------------- |
 | **Gestión de consolas**             | Controla la entrada/salida de texto de las ventanas de consola (cmd.exe). |
