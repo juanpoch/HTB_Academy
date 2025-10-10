@@ -199,6 +199,10 @@ Si buscamos `KB3199986` en el catálogo encontramos:
 
 Descubrimos que el último parche instalado corresponde al año 2021, por lo que tendríamos varios años sin parchear.
 
+A su vez, si buscamos en el catálogo por `Windows Server 2016 cumulative update` podremos identificar todos los KB acumulativos que no están instalados:
+<img width="1876" height="962" alt="image" src="https://github.com/user-attachments/assets/5f2c19df-22a1-4717-9192-b643bcaea988" />
+
+
 `Nota`: También puede ser útil revisar los datos de red, por si se descubren conexiones a otras redes.
 ### Parches y actualizaciones
 
