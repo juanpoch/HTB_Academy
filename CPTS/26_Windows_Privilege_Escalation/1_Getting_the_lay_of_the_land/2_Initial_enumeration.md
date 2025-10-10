@@ -232,17 +232,21 @@ Get-HotFix
 
 ## Programas instalados
 
-WMI puede listar el software instalado. Esto ayuda a encontrar exploits específicos (p. ej. FileZilla, PuTTY). En el texto se sugiere usar LaZagne para comprobar credenciales guardadas en aplicaciones.
+WMI puede listar el software instalado. Esto ayuda a encontrar exploits específicos (p. ej. FileZilla, PuTTY). Se sugiere usar `LaZagne` para comprobar credenciales guardadas en aplicaciones.
 
 ```
 wmic product get name
 ```
 
-O con PowerShell:
+<img width="1395" height="386" alt="image" src="https://github.com/user-attachments/assets/bff3461b-18f4-4dfd-8d90-8e09a798e8e1" />
+
+O con PowerShell utilizando el cmdlet [Get-WmiObject](https://learn.microsoft.com/es-es/powershell/module/microsoft.powershell.management/get-wmiobject?view=powershell-5.1):
 
 ```
 Get-WmiObject -Class Win32_Product | select Name, Version
 ```
+<img width="1387" height="792" alt="image" src="https://github.com/user-attachments/assets/87a52827-aa4c-4c72-8be9-6f0bcbfdee70" />
+
 
 ---
 
