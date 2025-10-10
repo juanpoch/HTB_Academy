@@ -61,8 +61,24 @@ Fijarse en procesos no estándar (por ejemplo, FileZilla Server) para investigar
 
 `Nota`: Es fundamental familiarizarse con los procesos estándar de Windows, como:
 
-- [Session Management Subsystem `smss.exe`](https://en.wikipedia.org/wiki/Session_Manager_Subsystem): es el proceso del sistema responsable de inicializar el entorno del sistema operativo y crear las sesiones de usuario y del kernel durante el arranque de Windows. 
-- [Client/Server Runtime Subsystem `csrss.exe`](https://en.wikipedia.org/wiki/Client/Server_Runtime_Subsystem): es un proceso del sistema que maneja las operaciones fundamentales del entorno de usuario de Windows, como la creación de hilos, la administración de consolas y parte de la interfaz gráfica.
+- [Session Management Subsystem `smss.exe`](https://en.wikipedia.org/wiki/Session_Manager_Subsystem): Es el proceso del sistema encargado de crear y administrar las sesiones de Windows, inicializando los procesos base que permiten el arranque del sistema y las sesiones de usuario.
+  | Función                                   | Descripción                                                                                         |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Creación de Session 0**                 | Inicia la sesión del sistema donde se ejecutan los servicios y procesos del kernel.                 |
+| **Lanzamiento de procesos críticos**      | Crea `csrss.exe` y `wininit.exe` (para la sesión 0).                                                |
+| **Inicialización de sesiones de usuario** | Genera una nueva sesión y ejecuta `csrss.exe` y `winlogon.exe` para cada usuario que inicia sesión. |
+| **Configuración del entorno**             | Carga variables de entorno, monta volúmenes y configura el sistema de archivos.                     |
+| **Supervisión de procesos críticos**      | Si `csrss.exe` o `winlogon.exe` fallan, provoca un BSOD.                                            |
+
+- [Client/Server Runtime Subsystem `csrss.exe`](https://en.wikipedia.org/wiki/Client/Server_Runtime_Subsystem): Es el proceso del sistema que maneja funciones esenciales del entorno Win32, como la gestión de consolas, la creación de hilos y la comunicación entre procesos de usuario y el sistema.
+  | Función                             | Descripción                                                               |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| **Gestión de consolas**             | Controla la entrada/salida de texto de las ventanas de consola (cmd.exe). |
+| **Creación y terminación de hilos** | Colabora con el kernel en la administración de procesos y threads.        |
+| **Soporte al entorno Win32**        | Implementa funciones básicas del subsistema Win32 en modo usuario.        |
+| **Supervisión del sistema**         | Si falla, provoca el bloqueo completo del sistema (BSOD).                 |
+| **Administración de sesiones**      | Existe una instancia por cada sesión activa (sistema o usuario).          |
+
 - [Winlogon `winlogon.exe`](https://en.wikipedia.org/wiki/Winlogon)
 - [Local Security Authority Subsystem Service `LSASS`](https://en.wikipedia.org/wiki/Local_Security_Authority_Subsystem_Service)
 - [Service Host `svchost.exe`](https://en.wikipedia.org/wiki/Svchost.exe)
