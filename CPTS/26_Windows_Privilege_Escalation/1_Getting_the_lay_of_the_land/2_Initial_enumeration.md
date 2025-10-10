@@ -152,6 +152,10 @@ Las variables de entorno explican la configuración del host.
 `set` imprime todas las variables de entorno. Una variable clave es `PATH`: Windows busca ejecutables primero en el directorio de trabajo actual y luego en las rutas de `PATH` en orden de izquierda a derecha, por lo que es más peligrosa una ruta custom a la izquierda del `path`. Un ejemplo común es colocar Python o Java en el path, lo que permitiría la ejecución de Python o archivos `.JAR`.
 Si una carpeta colocada en `PATH` es escribible por el usuario y está antes de `C:\Windows\System32`, puede permitir “DLL Injection” contra otras aplicaciones.
 
+`Nota`: Una `DLL` es una biblioteca de código usada por los programas.
+En una `DLL Injection`, se fuerza a un proceso legítimo a cargar una `DLL` maliciosa.
+La relación con el PATH está en que el orden de búsqueda de `DLLs` puede ser manipulado para que Windows cargue la versión maliciosa primero, lo que se conoce como `DLL Hijacking`.
+
 `set` también da información como `HOMEDRIVE` (a menudo una carpeta compartida de red en empresas). Acceder al recurso compartido puede revelar otros directorios accesibles con información potencialmente sensible.
 
 Ficheros colocados en `USERPROFILE\AppData\Microsoft\Windows\Start Menu\Programs\Startup` se ejecutan cuando el usuario inicia sesión en otro equipo (si usan perfil móvil), lo que puede propagar payloads.
