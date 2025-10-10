@@ -6,7 +6,16 @@ Durante una evaluación, podemos obtener una shell con privilegios reducidos en 
 
  `Nota 1`:`Service Control Manager`: El Administrador de control de servicios en Windows es un componente del sistema operativo responsable de gestionar los servicios del sistema (tanto de Windows como de aplicaciones de terceros). Su función principal es iniciar, detener, pausar, reanudar y configurar los servicios que se ejecutan en segundo plano. [SCM](https://learn.microsoft.com/es-es/windows/win32/services/service-control-manager)  
 
- `Nota 2`: El subsistema de seguridad de Windows es el componente del sistema operativo encargado de controlar la autenticación, autorización y auditoría de usuarios y procesos.  
+ `Nota 2`: El subsistema de seguridad de Windows es el componente del sistema operativo encargado de controlar la autenticación, autorización y auditoría de usuarios y procesos. Sus principales componentes son:
+ | Componente                  | Función principal                               |
+| --------------------------- | ----------------------------------------------- |
+| **LSASS**                   | Autenticación y gestión de seguridad            |
+| **SRM**                     | Control de acceso a recursos                    |
+| **SAM**                     | Base de datos de cuentas locales                |
+| **Winlogon**                | Manejo del inicio de sesión                     |
+| **Authentication Packages** | Métodos de autenticación (NTLM, Kerberos, etc.) |
+| **LSA Policy DB**           | Configuración y políticas de seguridad          |
+
  
  
 * La **cuenta local Administrador** incorporada. Algunas organizaciones la deshabilitan, pero muchas no. No es raro ver la misma contraseña de administrador local reutilizada en varios sistemas.
