@@ -213,6 +213,7 @@ wmic qfe
 ```
 <img width="1645" height="255" alt="image" src="https://github.com/user-attachments/assets/2fbfe1a0-cb5f-476f-8f0b-b327d393a9f9" />
 
+`Nota`: `WMI`: Base de datos + interfaz + comandos que dejan consultar o controlar casi cualquier cosa del sistema
 
 O con PowerShell usando el cmdlet [Get-HotFix](https://learn.microsoft.com/es-es/powershell/module/microsoft.powershell.management/get-hotfix?view=powershell-7.5&viewFallbackFrom=powershell-7.1):
 
