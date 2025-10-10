@@ -226,6 +226,8 @@ Get-HotFix
 <img width="1419" height="319" alt="image" src="https://github.com/user-attachments/assets/42d21ec7-c776-45bf-b539-c9e146e031d4" />
 
 
+`Nota`: `ft` es formato tabla y `autosize` ajusta automáticamente el ancho de las columnas según el contenido.
+
 ---
 
 ## Programas instalados
