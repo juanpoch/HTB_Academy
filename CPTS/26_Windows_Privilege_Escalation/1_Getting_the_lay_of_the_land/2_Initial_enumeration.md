@@ -362,4 +362,11 @@ xfreerdp /v:10.129.43.43  /u:htb-student
 
 ### ¿Qué privilegio no predeterminado tiene el usuario htb-student?
 
+Utilizamos el comando `query user` para determinar qué usuarios están conectados al sistema:
+<img width="815" height="209" alt="image" src="https://github.com/user-attachments/assets/6bb6438a-4c99-4a72-87bb-7869dab52587" />
 
+Vemos que nosotros estamos conectados mediante `rdp` bajo el usuario `htb_user` y también hay un usuario llamado `sccm_scv` que está conectado físicamente.
+
+Utilizamos el comando `echo %USERNAME%` para verificar que nosotros somos `htb_student`:
+
+<img width="404" height="122" alt="image" src="https://github.com/user-attachments/assets/69582125-35ed-4973-b70d-18053daf2f34" />
