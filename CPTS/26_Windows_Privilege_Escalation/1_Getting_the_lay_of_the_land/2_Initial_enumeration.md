@@ -397,3 +397,9 @@ Observamos que tenemos un nuevo privilegio llamado `SeTakeOwnershipPrivilege` el
 
 Utilizamos el comando `net localgroup` para listar todos los grupos actuales:
 <img width="574" height="580" alt="image" src="https://github.com/user-attachments/assets/2b5208ba-f71c-4fdd-a309-58cd34d5e9c4" />
+
+
+Utilizamos el comando `net localgroup "Backup Operators"` para obtener información extra del grupo:
+<img width="995" height="235" alt="image" src="https://github.com/user-attachments/assets/fdf6b8db-cea5-4756-9643-107ea34e2e02" />
+
+
