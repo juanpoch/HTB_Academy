@@ -370,3 +370,12 @@ Vemos que nosotros estamos conectados mediante `rdp` bajo el usuario `htb_user` 
 Utilizamos el comando `echo %USERNAME%` para verificar que nosotros somos `htb_student`:
 
 <img width="404" height="122" alt="image" src="https://github.com/user-attachments/assets/69582125-35ed-4973-b70d-18053daf2f34" />
+
+Usamos el comando `whoami /priv` para determinar los privilegios actuales del usuario:
+<img width="733" height="222" alt="image" src="https://github.com/user-attachments/assets/3af27149-e84e-40e3-b8a7-1562e2d45803" />
+
+Yenemos los siguientes privilegios:
+- SeChangeNotifyPrivilege
+- SeIncreaseWorkingSetPrivilege
+
+Ambos privilegios son estándar. El laboratorio nos sugiere en el `hint` que lancemos un prompt `cmd` administrativo, por lo que abrimos un `cmd.exe` como administrador y realizamos una vez más el comando `whoami /priv`:
