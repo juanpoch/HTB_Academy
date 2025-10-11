@@ -403,3 +403,12 @@ Utilizamos el comando `net localgroup "Backup Operators"` para obtener informaci
 <img width="995" height="235" alt="image" src="https://github.com/user-attachments/assets/fdf6b8db-cea5-4756-9643-107ea34e2e02" />
 
 
+Obtenemos el nombre del usuario `sarah` perteneciente al grupo. 
+
+
+### ¿Qué servicio está escuchando en el puerto 8080 (el nombre del servicio, no el ejecutable)?
+
+Realizamos el comando `netstat -ano` para listar los servicios:
+<img width="850" height="706" alt="image" src="https://github.com/user-attachments/assets/fbb9f993-8227-4b76-abaf-53ecd4bcf2bb" />
+
+Observamos que en el puerto 8080 hay un servicio a la escucha con el `PID` `2204`.
