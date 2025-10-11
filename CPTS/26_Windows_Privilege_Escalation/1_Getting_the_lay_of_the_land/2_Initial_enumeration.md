@@ -345,3 +345,6 @@ net accounts
 <img width="867" height="383" alt="image" src="https://github.com/user-attachments/assets/baf826b3-04a6-44a7-997f-4b71ef73cd50" />
 
 ---
+
+
+[Cheat sheet](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md)
