@@ -48,7 +48,7 @@ Ver la información del sistema nos da la versión exacta del sistema operativo,
 ### Tasklist
 
 ```
-C:\htb> tasklist /svc
+tasklist /svc
 ```
 
 <img width="1288" height="778" alt="image" src="https://github.com/user-attachments/assets/b8a9f0d5-e807-4f2b-bd64-a1d526b7a0f8" />
