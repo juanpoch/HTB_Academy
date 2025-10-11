@@ -280,9 +280,13 @@ query user
 
 ### Usuario actual
 
+Si accedemos como servicio, quizás podríamos tener privilegios como `SeImpersonatePrivilege`. A veces se puede abusar utilizando herramientas como [Juicy Potato](https://github.com/ohpe/juicy-potato)
+
 ```
 echo %USERNAME%
 ```
+<img width="1158" height="106" alt="image" src="https://github.com/user-attachments/assets/de7469dd-c15c-43f9-9c83-a0cb30ab916e" />
+
 
 ### Privilegios del usuario actual
 
