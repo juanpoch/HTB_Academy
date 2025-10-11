@@ -365,7 +365,7 @@ xfreerdp /v:10.129.43.43  /u:htb-student
 Utilizamos el comando `query user` para determinar qué usuarios están conectados al sistema:
 <img width="815" height="209" alt="image" src="https://github.com/user-attachments/assets/6bb6438a-4c99-4a72-87bb-7869dab52587" />
 
-Vemos que nosotros estamos conectados mediante `rdp` bajo el usuario `htb_user` y también hay un usuario llamado `sccm_scv` que está conectado físicamente.
+Vemos que nosotros estamos conectados mediante `rdp` bajo el usuario `htb_user` y también hay un usuario llamado `sccm_svc` que está conectado físicamente.
 
 Utilizamos el comando `echo %USERNAME%` para verificar que nosotros somos `htb_student`:
 
@@ -420,3 +420,5 @@ Observamos que bajo el `PID` `2204` está el servicio `Tomcat8`
 
 
 ### ¿Qué usuario ha iniciado sesión en el host de destino?
+
+Cuando hicimos el comando `query user` vimos que el otro usuario autenticado es `sccm_svc`.
