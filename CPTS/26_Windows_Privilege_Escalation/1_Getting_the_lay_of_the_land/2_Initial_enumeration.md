@@ -348,3 +348,18 @@ net accounts
 
 
 [Cheat sheet](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md)
+
+---
+
+## Laboratorio
+
+Nos conectamos al host mediante el comando `xfreerdp`:
+```bash
+xfreerdp /v:10.129.43.43  /u:htb-student
+```
+<img width="1007" height="769" alt="image" src="https://github.com/user-attachments/assets/f9bbd8ba-a230-48df-9325-bdb7a54a1e56" />
+
+
+### ¿Qué privilegio no predeterminado tiene el usuario htb-student?
+
+
