@@ -388,3 +388,12 @@ Yenemos los siguientes privilegios:
 Ambos privilegios son estándar. El laboratorio nos sugiere en el `hint` que lancemos un prompt `cmd` administrativo, por lo que abrimos un `cmd.exe` como administrador y realizamos una vez más el comando `whoami /priv`:
 
 <img width="686" height="240" alt="image" src="https://github.com/user-attachments/assets/00485423-d0cb-4799-bcc2-9f4e689588e7" />
+
+Observamos que tenemos un nuevo privilegio llamado `SeTakeOwnershipPrivilege` el cual permite tomar posesión de archivos u otros objetos del sistema. Este privilegio solo se carga en el token elevado.
+
+
+
+### ¿Quién es miembro del grupo Backup Operators?
+
+Utilizamos el comando `net localgroup` para listar todos los grupos actuales:
+<img width="574" height="580" alt="image" src="https://github.com/user-attachments/assets/2b5208ba-f71c-4fdd-a309-58cd34d5e9c4" />
