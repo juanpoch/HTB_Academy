@@ -269,9 +269,14 @@ Los usuarios suelen ser el eslabón más débil. Es crucial entender usuarios y 
 
 ### Usuarios conectados
 
+- A veces podemos atacar directamente a los usuarios para escalar privilegios.
+- Durante una intervención evasiva, debemos actuar con precaución en un host con otros usuarios trabajando activamente para evitar ser detectados.
+
 ```
 query user
 ```
+<img width="1136" height="148" alt="image" src="https://github.com/user-attachments/assets/2008cc68-d0d1-4dea-8eba-7d970834d8b4" />
+
 
 ### Usuario actual
 
