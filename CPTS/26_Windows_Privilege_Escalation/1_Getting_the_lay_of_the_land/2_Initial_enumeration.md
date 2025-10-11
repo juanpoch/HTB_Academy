@@ -378,4 +378,11 @@ Yenemos los siguientes privilegios:
 - SeChangeNotifyPrivilege
 - SeIncreaseWorkingSetPrivilege
 
+
+| Privilegio                        | Qué permite                                                                                                 | Estado         | Comentario                                                          |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------- |
+| **SeChangeNotifyPrivilege**       | Permite al usuario **atravesar directorios** sin tener permiso explícito en cada nivel (traverse checking). | ✅ **Enabled**  | Es **siempre presente** en casi todas las cuentas. No es peligroso. |
+| **SeIncreaseWorkingSetPrivilege** | Permite **aumentar la memoria asignada** a un proceso.                                                      | ❌ **Disabled** | Común en usuarios estándar, no otorga poder extra.                  |
+
+
 Ambos privilegios son estándar. El laboratorio nos sugiere en el `hint` que lancemos un prompt `cmd` administrativo, por lo que abrimos un `cmd.exe` como administrador y realizamos una vez más el comando `whoami /priv`:
