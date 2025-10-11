@@ -422,3 +422,15 @@ Observamos que bajo el `PID` `2204` está el servicio `Tomcat8`
 ### ¿Qué usuario ha iniciado sesión en el host de destino?
 
 Cuando hicimos el comando `query user` vimos que el otro usuario autenticado es `sccm_svc`.
+
+
+### ¿Qué tipo de sesión tiene este usuario?
+
+Al ejecutar el comando `query user` obtenemos el siguiente resultado:
+<img width="807" height="133" alt="image" src="https://github.com/user-attachments/assets/8f9ed02a-d2fa-4b5c-9783-d4bc20a99ce9" />
+
+Por lo que el tipo de sesión es `console`.
+
+---
+
+
