@@ -412,3 +412,11 @@ Realizamos el comando `netstat -ano` para listar los servicios:
 <img width="850" height="706" alt="image" src="https://github.com/user-attachments/assets/fbb9f993-8227-4b76-abaf-53ecd4bcf2bb" />
 
 Observamos que en el puerto 8080 hay un servicio a la escucha con el `PID` `2204`.
+
+Ahora realizamos el comando `tasklist /svc` para listar los procesos asociados con su `PID`:
+<img width="814" height="697" alt="image" src="https://github.com/user-attachments/assets/51848e9b-fe5e-4e80-868a-d829593ab0dc" />
+
+Observamos que bajo el `PID` `2204` está el servicio `Tomcat8`
+
+
+### ¿Qué usuario ha iniciado sesión en el host de destino?
