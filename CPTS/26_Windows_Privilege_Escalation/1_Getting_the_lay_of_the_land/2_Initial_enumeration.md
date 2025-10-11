@@ -299,9 +299,13 @@ whoami /priv
 
 ### Grupos del usuario actual
 
+Verificar si el usuario actual hereda privilegios de los grupos que forma parte.
+
 ```
 whoami /groups
 ```
+<img width="1227" height="582" alt="image" src="https://github.com/user-attachments/assets/f54cfc7d-4cb3-4799-b82f-03f2e0a57bb3" />
+
 
 ### Listar todos los usuarios
 
@@ -309,22 +313,35 @@ whoami /groups
 net user
 ```
 
+<img width="917" height="297" alt="image" src="https://github.com/user-attachments/assets/6b33caf9-aec4-4c81-bea0-f0c4853707b1" />
+
+
 ### Listar grupos locales
+
+Conocer qué grupos no estándar están presentes en el host puede ayudarnos a determinar para qué se utiliza el host
 
 ```
 net localgroup
 ```
 
+<img width="769" height="753" alt="image" src="https://github.com/user-attachments/assets/94cc1f8c-20b6-43fd-b0b3-8b4cf93ea1ea" />
+
 ### Detalles de un grupo
+Vale la pena revisar los detalles de cualquier grupo no estándar. Aunque es poco probable, podríamos encontrar una contraseña u otra información interesante almacenada en la descripción del grupo. 
 
 ```
 net localgroup administrators
 ```
 
+<img width="1241" height="421" alt="image" src="https://github.com/user-attachments/assets/1f38fb32-20f3-4d26-9869-a4a220e92ca3" />
+
 ### Política de contraseñas
+
 
 ```
 net accounts
 ```
+
+<img width="867" height="383" alt="image" src="https://github.com/user-attachments/assets/baf826b3-04a6-44a7-997f-4b71ef73cd50" />
 
 ---
