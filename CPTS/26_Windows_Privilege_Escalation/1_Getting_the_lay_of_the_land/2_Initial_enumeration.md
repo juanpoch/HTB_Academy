@@ -294,6 +294,9 @@ echo %USERNAME%
 whoami /priv
 ```
 
+<img width="955" height="296" alt="image" src="https://github.com/user-attachments/assets/7b257a53-2f6f-4a68-9dc3-8fe861d63bca" />
+
+
 ### Grupos del usuario actual
 
 ```
