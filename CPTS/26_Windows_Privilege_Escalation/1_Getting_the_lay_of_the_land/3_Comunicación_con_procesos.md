@@ -357,4 +357,4 @@ Hacemos la comprobación específica para la pipe buscada con el comando:
 ```
 <img width="651" height="332" alt="image" src="https://github.com/user-attachments/assets/d77e0725-d335-4565-8638-a27999d315ac" />
 
-
+Observamos que la cuenta `NT SERVICE\MSSQL$SQLEXPRESS01` tiene privilegios `WRITE_DAC`
