@@ -102,6 +102,7 @@ El Registro de Windows es una base de datos jerárquica que almacena la configur
 
 `Nota`: Cuando se usa un SID como identificador para un usuario o grupo, nunca se puede usar de nuevo para identificar a otro usuario o grupo.
 
+Cada vez que un usuario inicia sesión, el sistema crea un token de acceso para ese usuario. El token de acceso contiene el SID del usuario, los derechos de usuario y los SID de cualquier grupo al que pertenece el usuario.
 
 Cuando un usuario intenta acceder a un objeto securizable (por ejemplo, una carpeta en un recurso compartido), ocurre lo siguiente a alto nivel:
 
