@@ -15,6 +15,92 @@ Los **principales de seguridad** (security principals) son cualquier entidad que
 
 Cada security principal tiene un identificador único llamado [**SID**](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-identifiers) (Security Identifier). Cuando se crea un principal, se le asigna un SID que permanece con él durante toda su vida.
 
+El sistema operativo genera un `SID` que identifica una cuenta o grupo determinado en el momento en que se crea la cuenta o el grupo. Para una cuenta o grupo local, la `autoridad de seguridad local (LSA)` del equipo genera el `SID`. El SID se almacena con otra información de cuenta en un área segura del registro.
+
+
+
+[Subsistema de seguridad (concepto global)]
+   ├─> [Proceso: lsass.exe (Local Security Authority Subsystem Service) — corre como SYSTEM]
+   │       ├─> [LSA (Local Security Authority) — lógica central dentro de lsass.exe / lsasrv.dll]
+   │       │       ├─> Crea Access Tokens (User SID, Group SIDs, Privileges)
+   │       │       ├─> Carga Authentication Packages (NTLM → msv1_0.dll, Kerberos → kerberos.dll, etc.)
+   │       │       ├─> Gestiona LSA Secrets (HKLM\SECURITY\Policy\Secrets)
+   │       │       ├─> Consulta SAM (archivo hive) y/o Domain Controllers (DCs) vía RPC
+   │       │       ├─> Gestiona políticas locales de seguridad (audit, rights, restrictions)
+   │       │       └─> Interfaz RPC LSA para otros procesos (Winlogon, services, etc.)
+   │       │
+   │       ├─> [SAM Server — samsrv.dll]
+   │       │       ├─> Administra cuentas locales (usuarios, grupos)
+   │       │       ├─> Interfaz RPC para lectura/escritura de credenciales locales
+   │       │       └─> Interactúa con la hive HKLM\SAM
+   │       │
+   │       ├─> [Netlogon — netlogon.dll (parte en lsass.exe)]
+   │       │       ├─> Autenticación con DCs (secure channel)
+   │       │       ├─> Validación de cuentas de dominio
+   │       │       └─> Administración de trusts y replicación segura
+   │       │
+   │       ├─> [Authentication Packages cargados por LSA]
+   │       │       ├─> msv1_0.dll → NTLM
+   │       │       ├─> kerberos.dll → Kerberos
+   │       │       ├─> wdigest.dll → Digest Authentication (legacy)
+   │       │       ├─> tspkg.dll → Terminal Services
+   │       │       └─> livessp.dll / cloudap.dll → SSO / Azure AD
+   │       │
+   │       ├─> [SSPs — Security Support Providers / SSPI]
+   │       │       ├─> schannel.dll → TLS/SSL
+   │       │       ├─> credssp.dll → RDP / CredSSP
+   │       │       ├─> negoexts.dll → Negotiate (Kerberos/NTLM fallback)
+   │       │       └─> secur32.dll → Interfaz SSPI para aplicaciones
+   │       │
+   │       ├─> [Policy Engine — policyeng.dll]
+   │       │       ├─> Aplica políticas locales y de dominio (rights, audit)
+   │       │       └─> Integra configuraciones de secpol.msc / gpedit.msc
+   │       │
+   │       └─> [Protected Process Light (PPL)]
+   │               ├─> Aísla lsass.exe contra lectura de memoria por procesos no protegidos
+   │               └─> Gestionado por el kernel driver lsass.sys (Windows 8+)
+   │
+   ├─> [Winlogon / Logon Subsystem]
+   │       ├─> Interactúa con LSA vía RPC para iniciar sesión
+   │       ├─> Carga Credential Providers (UI / GINA / credenciales)
+   │       ├─> Crea la sesión del usuario (winlogon.exe + userinit.exe)
+   │       └─> Usa el token generado por LSA
+   │
+   ├─> [Otros componentes en espacio de usuario relacionados con seguridad]
+   │       ├─> Security Accounts Manager (herramientas administrativas)
+   │       ├─> secpol.msc / gpedit.msc (interfaz de políticas)
+   │       ├─> services.exe / svchost.exe (pueden usar SSPI)
+   │       └─> Aplicaciones que consumen SSPI (Outlook, IIS, etc.)
+   │
+   └─> [En kernel — parte del subsistema de seguridad]
+           ├─> [Security Reference Monitor (SRM)]
+           │       ├─> Evalúa Access Tokens vs DACL/SACL
+           │       ├─> Aplica las decisiones de acceso (permitir/denegar)
+           │       ├─> Implementa auditoría de seguridad
+           │       └─> Llamado desde Executive Object Manager, I/O Manager, etc.
+           │
+           └─> [Otros componentes kernel relacionados]
+                   ├─> SeMgr / SeAccessCheck / SeToken APIs
+                   ├─> Object Manager (OBJ) — integra seguridad a objetos del sistema
+                   ├─> Reference Monitor Hooks
+                   └─> Kernel-mode authentication drivers (krnlsec, lsass.sys)
+
+
+El Registro de Windows es una base de datos jerárquica que almacena la configuración y parámetros del sistema operativo, hardware, aplicaciones y cuentas de usuario, utilizada por Windows y sus servicios para cargar y mantener su estado y funcionamiento.
+
+[Registro]
+├─ HKLM\SAM\SAM\Domains\Account\Users\{RID}   → Cuentas y grupos locales (SID + hashes)
+│
+├─ HKLM\SAM\SAM\Domains\Account                → Domain SID local (base para todos los locales)
+│
+├─ HKLM\SECURITY\Cache                         → Caché de cuentas de dominio (SIDs + credenciales)
+│
+└─ Hardcoded en el sistema                     → Well-known SIDs (SYSTEM, Administrators, Everyone, etc.)
+
+
+
+
+
 Cuando un usuario intenta acceder a un objeto securizable (por ejemplo, una carpeta en un recurso compartido), ocurre lo siguiente a alto nivel:
 
 1. El usuario tiene un **token de acceso** que contiene: su User SID, los SIDs de los grupos a los que pertenece, la lista de privilegios y otra información adicional.
