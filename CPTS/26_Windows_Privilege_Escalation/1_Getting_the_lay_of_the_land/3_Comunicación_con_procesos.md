@@ -328,3 +328,14 @@ gci \\.\pipe\
 ```
 <img width="872" height="708" alt="image" src="https://github.com/user-attachments/assets/f65de239-3914-474a-8be8-3e8e36bc24b7" />
 
+
+
+Buscamos si el programa `accesschk` está instalado en el sistema mediante el comando:
+
+```powershell
+Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include accesschk.exe
+```
+
+<img width="878" height="163" alt="image" src="https://github.com/user-attachments/assets/69e9af7e-f545-40cb-9c8e-cfb16aa64650" />
+
+Confirmamos que el programa está en la ruta `C:\Tools\AccessChk\accesschk.exe`
