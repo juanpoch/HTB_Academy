@@ -21,7 +21,7 @@ Diferencia práctica:
 
 ---
 
-## Contexto de abuso (por qué es relevante)
+## Contexto de abuso
 
 * Servicios que atienden conexiones de cliente (IIS, SQL Server, servicios RPC/COM) a menudo necesitan impersonar al usuario que realiza la petición para acceder a recursos (shares, bases de datos, otros servicios). Por ello, las cuentas de estos servicios a veces tienen SeImpersonate habilitado.
 * Si obtenés ejecución en el contexto de uno de esos servicios (por ejemplo, nt service/mssql$..., IIS APPPOOL/defaultapppool), la presencia de SeImpersonate o SeAssignPrimaryToken puede permitir una escalada rápida a SYSTEM.
