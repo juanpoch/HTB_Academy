@@ -76,7 +76,7 @@ Lo principal a observar en las conexiones de red activas son las entradas que es
 
 ## Más ejemplos
 
-Un buen ejemplo de esta clase de escalada es `Splunk Universal Forwarder`, instalado en endpoints para enviar logs a Splunk. La configuración por defecto de Splunk no tenía autenticación y permitía a cualquiera desplegar aplicaciones, lo que podía conducir a ejecución de código. Además, Splunk por defecto solía ejecutarse como `SYSTEM` y no como un usuario con pocos privilegios. Para más información ver Splunk Universal Forwarder Hijacking o SplunkWhisperer2.
+Un buen ejemplo de esta clase de escalada es `Splunk Universal Forwarder`, instalado en endpoints para enviar logs a `Splunk`. La configuración por defecto de `Splunk` no tenía autenticación y permitía a cualquiera desplegar aplicaciones, lo que podía conducir a ejecución de código. Además, Splunk por defecto solía ejecutarse como `SYSTEM` y no como un usuario con pocos privilegios. Para más información ver Splunk Universal Forwarder Hijacking o SplunkWhisperer2.
 
 Otro vector común es el puerto Erlang (25672). Erlang (p. ej. RabbitMQ) usa un "cookie" para unirse al clúster; muchos productos usan cookies débiles (RabbitMQ usa `rabbit` por defecto) o almacenan la cookie en un fichero con permisos laxos. Aplicaciones ejemplo: SolarWinds, RabbitMQ, CouchDB. Para más información ver el blog de Mubix sobre Erlang-arce.
 
