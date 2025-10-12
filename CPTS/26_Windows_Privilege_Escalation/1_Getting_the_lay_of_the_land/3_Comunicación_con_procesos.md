@@ -192,7 +192,7 @@ Este comando nos mostrará qué usuarios o grupos poseen permisos sobre la pipe,
 
 ---
 
-## 🔍 Revisión de la Named Pipe del proceso LSASS
+## Revisión de la Named Pipe del proceso LSASS
 
 Como ejemplo, revisaremos los permisos de la Named Pipe **LSASS** (*Local Security Authority Subsystem Service*), un proceso crítico encargado de manejar autenticaciones, tokens y políticas de seguridad del sistema.
 
