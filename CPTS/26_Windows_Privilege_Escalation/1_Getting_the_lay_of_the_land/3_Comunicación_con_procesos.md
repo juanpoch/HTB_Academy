@@ -6,7 +6,7 @@ Uno de los mejores lugares para buscar escalada de privilegios son los procesos 
 
 ## Tokens de acceso
 
-En Windows, los [**tokens de acceso**](https://learn.microsoft.com/es-es/windows/win32/secauthz/access-tokens) se usan para describir el contexto de seguridad (atributos o reglas de seguridad) de un proceso o hilo. El token incluye información sobre la identidad de la cuenta de usuario y los privilegios relacionados con un proceso o hilo específico. Cuando un usuario se autentica en un sistema, su contraseña se verifica contra una base de datos de seguridad y, si la autenticación es correcta, se le asigna un token de acceso. Cada vez que un usuario interactúa con un proceso (ese proceso hereda el token del usuario que lo ejecuta), se presenta una copia de este token para determinar su nivel de privilegios.
+En Windows, los [**tokens de acceso**](https://learn.microsoft.com/es-es/windows/win32/secauthz/access-tokens) se usan para describir el contexto de seguridad (atributos o reglas de seguridad) de un proceso o hilo. El token incluye información sobre la identidad de la cuenta de usuario y los privilegios relacionados con un proceso o hilo específico. Cuando un usuario se autentica en un sistema, su contraseña se verifica contra una base de datos de seguridad y, si la autenticación es correcta, se le asigna un token de acceso. Cada vez que un usuario interactúa con un proceso, se presenta una copia de este token para determinar su nivel de privilegios (ese proceso hereda el token del usuario que lo ejecuta).
 
 ## Enumeración de servicios de red
 
