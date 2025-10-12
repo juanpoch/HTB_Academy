@@ -166,13 +166,9 @@ Estos conceptos de derechos elevados y [UAC](https://learn.microsoft.com/es-es/w
 
 Por ejemplo, el material muestra la salida para un administrador local bajo un cmd elevado: la lista completa de privilegios está presente, pero muchos aparecen en estado **Disabled**. Cuando un privilegio aparece como **Disabled**, significa que la cuenta **tiene** ese privilegio asignado pero **no está activo** en el token actual; debe habilitarse para poder usarlo dentro del proceso.
 
+A lo largo de este módulo, veremos maneras de abusar de diversos privilegios y de habilitar privilegios específicos en nuestro proceso actual.
+
 No existe un cmdlet nativo en Windows para "activar" un privilegio en el token; normalmente se recurre a scripts o utilidades que ajusten las capacidades del token. Un ejemplo es este [script](https://www.powershellgallery.com/packages/PoshPrivilege/0.3.0.0/Content/Scripts%5CEnable-Privilege.ps1) de PowerShell, que permite habilitar ciertos privilegios, o este [script](https://www.leeholmes.com/adjusting-token-privileges-in-powershell/), que permite ajustar los privilegios del token.
-
-### Resumen de la salida mostrada
-
-* `SeImpersonatePrivilege` — *Enabled* en algunos contextos; clave para técnicas de impersonation/relay.
-* `SeChangeNotifyPrivilege` — *Enabled* por defecto (bypass traverse checking).
-* Muchos privilegios (SeDebugPrivilege, SeBackupPrivilege...) aparecen como *Disabled* hasta que se habiliten en un token elevado.
 
 Un usuario estándar muestra un conjunto mucho más limitado de privilegios — por ejemplo, solo `SeChangeNotifyPrivilege` habilitado.
 
@@ -180,7 +176,9 @@ Un usuario estándar muestra un conjunto mucho más limitado de privilegios — 
 
 ## Derechos de Backup Operators
 
-Los miembros de **Backup Operators** pueden tener derechos como `SeShutdownPrivilege`. Aunque UAC puede restringir ciertos usos, históricamente los Backup Operators pueden leer datos sensibles en controladores de dominio y, por lo tanto, deben considerarse de alto riesgo si están en el dominio.
+Los miembros de **Backup Operators** pueden tener derechos como [`SeShutdownPrivilege`](https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shut-down-the-system). Aunque `UAC` puede restringir ciertos usos, históricamente los `Backup Operators` pueden leer datos sensibles en controladores de dominio y, por lo tanto, deben considerarse de alto riesgo si están en el dominio. Además pueden apagar un controlador de dominio, lo que podría causar una interrupción masiva del servicio si inician sesión localmente (no mediante RDP ni WinRM)
+
+<img width="1019" height="340" alt="image" src="https://github.com/user-attachments/assets/ea384952-7d41-45cd-8a84-cb9a59dfd379" />
 
 ---
 
