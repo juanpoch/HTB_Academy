@@ -1,5 +1,5 @@
 # Privilegios en Windows
-Los **privilegios** en Windows son derechos que se le pueden asignar a una cuenta para realizar operaciones sobre el sistema local: administrar servicios, cargar drivers, apagar el equipo, depurar aplicaciones y más. Los privilegios son distintos de los **derechos de acceso** (access rights) que el sistema utiliza para permitir o denegar acceso a objetos securizables (archivos, claves de registro, etc.).
+Los [**privilegios**](https://learn.microsoft.com/es-es/windows/win32/secauthz/privileges) en Windows son derechos que se le pueden asignar a una cuenta para realizar operaciones sobre el sistema local: administrar servicios, cargar drivers, apagar el equipo, depurar aplicaciones y más. Los privilegios son distintos de los **derechos de acceso** (access rights) que el sistema utiliza para permitir o denegar acceso a objetos securizables (archivos, claves de registro, etc.).
 
 Las cuentas (usuarios y grupos) y sus privilegios se almacenan en bases de datos del sistema y se entregan al usuario mediante un **token de acceso** (access token) cuando inicia sesión. Una cuenta puede tener privilegios locales en un equipo específico y distintos privilegios en otras máquinas, especialmente si forma parte de un dominio Active Directory.
 
