@@ -31,6 +31,8 @@ Windows permite, por diseño, que procesos reutilicen tokens de otros procesos p
 Ataque tipo potato:
 El atacante “engaña” a un componente que corre como SYSTEM para que inicie comunicación con el proceso del atacante; durante esa interacción se produce la oportunidad para que el atacante obtenga/usar el token SYSTEM.
 
+Más información sobre los [ataques de suplantación de tokens](https://github.com/hatRiot/token-priv/blob/master/abusing_token_eop_1.0.txt)
+
 ---
 
 ## Ejemplo de explotación (JuicyPotato / PrintSpoofer — flujo resumido)
