@@ -328,9 +328,10 @@ gci \\.\pipe\
 ```
 <img width="872" height="708" alt="image" src="https://github.com/user-attachments/assets/f65de239-3914-474a-8be8-3e8e36bc24b7" />
 
+Y confirmamos que existe el pipe `SQLEXPRESS01`
 
-
-Buscamos si el programa `accesschk` está instalado en el sistema mediante el comando:
+### Procedemos a utilizar `accesschk`:
+Como el programa no está agregado en el path, buscamos si el programa `accesschk` está instalado en el sistema mediante el comando:
 
 ```powershell
 Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include accesschk.exe
@@ -339,3 +340,21 @@ Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include accessch
 <img width="878" height="163" alt="image" src="https://github.com/user-attachments/assets/69e9af7e-f545-40cb-9c8e-cfb16aa64650" />
 
 Confirmamos que el programa está en la ruta `C:\Tools\AccessChk\accesschk.exe`
+
+Nos movemos a `C:\Tools\AccessChk\` y utilizamos el siguiente comando para ver su DACL:
+
+```powershell
+.\accesschk.exe -accepteula -w \pipe\* -v
+```
+
+`Nota`: Este comando no funciona con `\\pipe\*`, hay que usar `\pipe\*`
+
+<img width="626" height="699" alt="image" src="https://github.com/user-attachments/assets/4e5a7f1c-616e-47e7-bac3-2b6ee639c88a" />
+
+Hacemos la comprobación específica para la pipe buscada con el comando:
+```powershell
+.\accesschk.exe -accepteula -w \pipe\SQLLocal\SQLEXPRESS01 -v
+```
+<img width="651" height="332" alt="image" src="https://github.com/user-attachments/assets/d77e0725-d335-4565-8638-a27999d315ac" />
+
+
