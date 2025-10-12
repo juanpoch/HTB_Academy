@@ -309,6 +309,15 @@ netstat -ano
 
 Observamos el proceso con `PID`: `2104`.
 
+Vemos el listado de procesos mediante el comando:
+```powershell
+tasklist /svc
+```
+
+<img width="663" height="713" alt="image" src="https://github.com/user-attachments/assets/0ce806cc-9e4b-495c-8c52-abe66b1f2f91" />
+
+Vemos que el servicio asociado al `PID` `2104` se llama `FileZilla Server`.
+
 ---
 
 ### ¿Qué cuenta tiene privilegios WRITE_DAC sobre la tubería con nombre \pipe\SQLLocal\SQLEXPRESS01?
