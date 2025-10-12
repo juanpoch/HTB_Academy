@@ -253,7 +253,7 @@ accesschk.exe /accepteula \\.\Pipe\lsass -v
 
 Un caso interesante ocurre cuando una Named Pipe presenta **permisos demasiado amplios**, permitiendo que usuarios no privilegiados puedan escribir o ejecutar sobre ella. Este tipo de configuración puede abrir la puerta a una **escalada de privilegios**.
 
-Consideremos el ejemplo de la Named Pipe **WindscribeService**, perteneciente al servicio de la VPN Windscribe. Mediante AccessChk, podemos buscar pipes con permisos de escritura usando:
+Consideremos el ejemplo de la Named Pipe [**WindscribeService**](https://www.exploit-db.com/exploits/48021), perteneciente al servicio de la VPN Windscribe. Mediante AccessChk, podemos buscar pipes con permisos de escritura usando:
 
 ```bash
 accesschk.exe -accepteula -w \\pipe\* -v
