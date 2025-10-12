@@ -166,15 +166,15 @@ Estos conceptos de derechos elevados y [UAC](https://learn.microsoft.com/es-es/w
 
 Por ejemplo, el material muestra la salida para un administrador local bajo un cmd elevado: la lista completa de privilegios está presente, pero muchos aparecen en estado **Disabled**. Cuando un privilegio aparece como **Disabled**, significa que la cuenta **tiene** ese privilegio asignado pero **no está activo** en el token actual; debe habilitarse para poder usarlo dentro del proceso.
 
-No existe un cmdlet nativo en Windows para "activar" un privilegio en el token; normalmente se recurre a scripts o utilidades que ajusten las capacidades del token (ver ejemplos mencionados en el material).
+No existe un cmdlet nativo en Windows para "activar" un privilegio en el token; normalmente se recurre a scripts o utilidades que ajusten las capacidades del token. Un ejemplo es este [script](https://www.powershellgallery.com/packages/PoshPrivilege/0.3.0.0/Content/Scripts%5CEnable-Privilege.ps1) de PowerShell, que permite habilitar ciertos privilegios, o este [script](https://www.leeholmes.com/adjusting-token-privileges-in-powershell/), que permite ajustar los privilegios del token.
 
-### Ejemplo (resumen de la salida mostrada)
+### Resumen de la salida mostrada
 
 * `SeImpersonatePrivilege` — *Enabled* en algunos contextos; clave para técnicas de impersonation/relay.
 * `SeChangeNotifyPrivilege` — *Enabled* por defecto (bypass traverse checking).
 * Muchos privilegios (SeDebugPrivilege, SeBackupPrivilege...) aparecen como *Disabled* hasta que se habiliten en un token elevado.
 
-Un usuario estándar (no elevado) muestra un conjunto mucho más limitado de privilegios — por ejemplo, solo `SeChangeNotifyPrivilege` habilitado.
+Un usuario estándar muestra un conjunto mucho más limitado de privilegios — por ejemplo, solo `SeChangeNotifyPrivilege` habilitado.
 
 ---
 
