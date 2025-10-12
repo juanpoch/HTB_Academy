@@ -153,6 +153,9 @@ Además de la pertenencia a grupos, los usuarios pueden recibir derechos (user r
 | `SeRestorePrivilege`            | Restore files and directories                |                                          Administrators | Permite restaurar archivos con permisos ignorando ACLs.                                                                                                                            |
 | `SeTcbPrivilege`                | Act as part of the operating system          | Administrators, Local Service, Network Service, Service | Permite a un proceso asumir la identidad de cualquier usuario (impersonation) y acceder a recursos a nombre del usuario; se asigna a antivirus y herramientas de backup legítimas. |
 
+
+[Más información](https://4sysops.com/archives/user-rights-assignment-in-windows-server-2016/)
+
 ---
 
 ## Visualizar privilegios: `whoami /priv`
