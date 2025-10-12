@@ -94,7 +94,7 @@ Cobalt Strike hace esto para que si el comando es detectado o falla, no afecte a
 
 Las pipes se usan para comunicación entre dos aplicaciones o procesos que utilizan memoria compartida. Hay dos tipos: [`named pipes`](https://learn.microsoft.com/es-es/windows/win32/ipc/named-pipes) y `anonymous pipe`s. Un ejemplo de `named pipe` es `\\.\\PipeName\\ExampleNamedPipeServer`. Windows usa una implementación cliente‑servidor para la comunicación por pipes: el proceso que crea la pipe es el servidor y el proceso que se comunica es el cliente. Las pipes pueden ser `half‑duplex` (unidireccional, sólo el cliente puede enviar datos a través de) o `duplex` (bidireccional, también el servidor puede responder con datos a través de la pipe). Cada conexión activa a un servidor de pipes genera la creación de una nueva pipe; todas comparten el mismo nombre pero usan buffers de datos distintos.
 
-Podemos usar la herramienta [**PipeList**](https://learn.microsoft.com/es-es/sysinternals/downloads/pipelist) de `Sysinternals` para enumerar instancias de named pipes.
+Podemos usar la herramienta [**PipeList**](https://learn.microsoft.com/es-es/sysinternals/downloads/pipelist) de [`Sysinternals`](https://learn.microsoft.com/es-es/sysinternals/) para enumerar instancias de named pipes.
 
 ### Listar Named Pipes con Pipelist
 
