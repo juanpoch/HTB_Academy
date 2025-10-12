@@ -129,3 +129,38 @@ vmware-authdpipe                                  1                1
 
 <SNIP>
 ```
+
+Además, podemos usar `PowerShell` para enumerar las `named pipes` usando gci (Get-ChildItem):
+
+```
+PS C:\htb>  gci \\.\pipe\
+
+
+    Directory: \\.\pipe
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+------       12/31/1600   4:00 PM              3 InitShutdown
+------       12/31/1600   4:00 PM              4 lsass
+------       12/31/1600   4:00 PM              3 ntsvcs
+------       12/31/1600   4:00 PM              3 scerpc
+
+
+    Directory: \\.\pipe\Winsock2
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+------       12/31/1600   4:00 PM              1 Winsock2\CatalogChangeListener-34c-0
+
+
+    Directory: \\.\pipe
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+------       12/31/1600   4:00 PM              3 epmapper
+
+<SNIP>
+```
