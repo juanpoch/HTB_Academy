@@ -300,6 +300,14 @@ xfreerdp /v:10.129.43.43 /u:htb-student
 
 ### ¿Qué servicio está escuchando en 0.0.0.0:21? (dos palabras)
 
+Observamos los sockets mediante el comando:
+```bash
+netstat -ano
+```
+
+<img width="1020" height="729" alt="image" src="https://github.com/user-attachments/assets/60dc6de0-15e4-4841-ae46-70dafdc82af3" />
+
+Observamos el proceso con `PID`: `2104`.
 
 ---
 
