@@ -170,7 +170,7 @@ Mode                LastWriteTime         Length Name
 
 # Análisis de permisos en Named Pipes con AccessChk
 
-Después de obtener un listado de las **Named Pipes** activas en el sistema, el siguiente paso consiste en **analizar los permisos** que tiene cada una. Para ello utilizamos la herramienta **AccessChk**, parte de la suite Sysinternals creada por *Mark Russinovich*. Esta utilidad permite revisar la **Discretionary Access Control List (DACL)** de un objeto, es decir, la lista que define **quién puede leer, escribir, modificar o ejecutar** sobre un recurso.
+Después de obtener un listado de las **Named Pipes** activas en el sistema, el siguiente paso consiste en **analizar los permisos** que tiene cada una. Para ello utilizamos la herramienta [**AccessChk**](https://learn.microsoft.com/es-es/sysinternals/downloads/accesschk), parte de la suite Sysinternals creada por *Mark Russinovich*. Esta utilidad permite revisar la **Discretionary Access Control List (DACL)** de un objeto, es decir, la lista que define **quién puede leer, escribir, modificar o ejecutar** sobre un recurso.
 
 ---
 
