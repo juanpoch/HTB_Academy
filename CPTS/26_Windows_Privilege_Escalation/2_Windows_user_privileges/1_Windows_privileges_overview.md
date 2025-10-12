@@ -111,6 +111,9 @@ Cuando un usuario intenta acceder a un objeto securizable (por ejemplo, una carp
 3. El sistema compara la información del token del usuario contra las ACEs del descriptor de seguridad hasta encontrar coincidencias.
 4. En función de esa comparación, el sistema decide **permitir o denegar** el acceso.
 
+<img width="1221" height="870" alt="image" src="https://github.com/user-attachments/assets/b3bc3b36-1a5e-429d-8436-625490f9a387" />
+
+
 Este proceso de control de acceso ocurre de forma prácticamente instantánea cada vez que un usuario intenta acceder a un recurso. Como pentesters, buscamos formas de **insertarnos o abusar** de este proceso — por ejemplo, aprovechando ACEs mal configuradas, privilegios concedidos o tokens que permitan acciones sensibles.
 
 ---
