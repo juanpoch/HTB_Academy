@@ -1,10 +1,5 @@
-# Lienzo: SeImpersonate y SeAssignPrimaryToken
+# SeImpersonate y SeAssignPrimaryToken
 
-> **Objetivo:** entender, detectar y explotar (en entornos controlados) los privilegios **SeImpersonatePrivilege** y **SeAssignPrimaryTokenPrivilege** en Windows. Incluye definiciones, flujo de ataque (JuicyPotato / PrintSpoofer), comprobaciones, artefactos de detección y mitigaciones.
-
----
-
-## 1. Resumen ejecutivo
 
 * Windows maneja *tokens* de acceso (Access Tokens) que describen el contexto de seguridad de un proceso (SIDs, grupos, privilegios, etc.).
 * **SeImpersonatePrivilege** permite a un proceso **impersonar** (tomar el contexto de) otro usuario después de que ese usuario se haya autenticado.
@@ -14,7 +9,7 @@
 
 ---
 
-## 2. Conceptos clave
+## Conceptos clave
 
 * **Token de acceso (Access Token):** estructura en memoria que contiene identidad del usuario (SID), grupos, privilegios y lista de restricción.
 * **Impersonation vs Primary Token:**
@@ -27,7 +22,7 @@
 
 ---
 
-## 3. ¿Por qué son críticos en pentesting?
+## ¿Por qué son críticos en pentesting?
 
 * Muchos servicios (IIS, SQL Server, servicios Windows, spooler) corren con cuentas de servicio que tienen **SeImpersonate** o **SeAssignPrimaryToken** habilitado.
 * Si obtenés ejecución en el contexto de uno de esos servicios (ej. `nt service\mssql$sqlexpress01`, `iis apppool\defaultapppool`), podés comprobar inmediatamente si el servicio tiene dichas privilegios y, si es positivo, intentar escalada rápida a `SYSTEM`.
@@ -35,7 +30,7 @@
 
 ---
 
-## 4. Flujo típico de explotación (alto nivel)
+## Flujo típico de explotación (alto nivel)
 
 1. Obtención de RCE en contexto de servicio no-SYSTEM (ej. shell vía `xp_cmdshell`, web shell en IIS, Jenkins RCE).
 2. Ejecutar `whoami /priv` o PowerShell para listar privilegios.
@@ -46,7 +41,7 @@
 
 ---
 
-## 5. Ejemplo práctico (resumen de pasos usados en labs)
+## Ejemplo práctico (resumen de pasos usados en labs)
 
 * Comprobar privilegios:
 
@@ -66,7 +61,7 @@
 
 ---
 
-## 6. Artefactos y pistas de detección (logs/telemetría)
+## Artefactos y pistas de detección (logs/telemetría)
 
 * **Eventos de seguridad**:
 
@@ -82,7 +77,7 @@
 
 ---
 
-## 7. Comprobaciones y hunting (quick wins)
+## Comprobaciones y hunting (quick wins)
 
 * Desde una shell con permisos: `whoami /priv`.
 * Listar privilegios en objetos y servicios: `sc qc <servicename>`, revisar `Log On As`.
@@ -96,7 +91,7 @@
 
 ---
 
-## 8. Mitigaciones y hardening
+## Mitigaciones y hardening
 
 * **Eliminar SeImpersonate y SeAssignPrimaryToken** de cuentas que no lo necesitan (Local Security Policy -> User Rights Assignment) o mediante GPO.
 * **Principio de menor privilegio**: los servicios no deberían ejecutarse con cuentas que necesiten esos privilegios.
@@ -107,7 +102,7 @@
 
 ---
 
-## 9. Checklist para pentester (cuando encontrás RCE en servicio)
+## 9. Checklist cuando se encuentra RCE en servicio
 
 1. `whoami /priv` — ¿SeImpersonate o SeAssignPrimaryToken aparecen?
 2. Subir JuicyPotato/PrintSpoofer (o usar versiones publicadas) a ruta temporal.
@@ -118,7 +113,7 @@
 
 ---
 
-## 10. Recursos recomendados
+## Recursos recomendados
 
 * Artículos técnicas sobre JuicyPotato, PrintSpoofer, RoguePotato y token impersonation.
 * Documentación Microsoft sobre tokens y privilegios (Token, CreateProcessWithTokenW, CreateProcessAsUser).
