@@ -15,7 +15,7 @@ La forma más común en que la gente interactúa con procesos es a través de un
 ### Mostrar conexiones de red activas
 
 ```
-C:\htb> netstat -ano
+netstat -ano
 
 Active Connections
 
@@ -99,7 +99,7 @@ Podemos usar la herramienta [**PipeList**](https://learn.microsoft.com/es-es/sys
 ### Listar Named Pipes con Pipelist
 
 ```
-C:\htb> pipelist.exe /accepteula
+pipelist.exe /accepteula
 
 PipeList v1.02 - Lists open named pipes
 Copyright (C) 2005-2016 Mark Russinovich
@@ -133,7 +133,7 @@ vmware-authdpipe                                  1                1
 Además, podemos usar `PowerShell` para enumerar las `named pipes` usando gci (Get-ChildItem):
 
 ```
-PS C:\htb>  gci \\.\pipe\
+gci \\.\pipe\
 
 
     Directory: \\.\pipe
@@ -280,7 +280,27 @@ accesschk.exe -accepteula -w \\pipe\WindscribeService -v
 
 * La DACL indica que el grupo **Everyone** tiene `FILE_ALL_ACCESS`, lo que significa **todos los permisos posibles** sobre la pipe: leer, escribir, modificar e incluso ejecutar.
 * Dado que el servicio asociado a esta pipe corre con privilegios **SYSTEM**, un atacante podría **inyectar comandos o datos maliciosos** a través de la pipe y obtener **ejecución de código con privilegios de sistema**.
+* Desde aquí, podríamos aprovechar estos permisos laxos para escalar privilegios en el host a SYSTEM.
 
 
 ---
 ---
+
+
+# Laboratorio
+
+Nos conectamos al host por protocolo `RDP` mediante el comando:
+```bash
+xfreerdp /v:10.129.43.43 /u:htb-student
+```
+
+<img width="1011" height="790" alt="image" src="https://github.com/user-attachments/assets/779ded70-d665-4e21-8669-89fbf33fcab5" />
+
+---
+
+### ¿Qué servicio está escuchando en 0.0.0.0:21? (dos palabras)
+
+
+---
+
+### ¿Qué cuenta tiene privilegios WRITE_DAC sobre la tubería con nombre \pipe\SQLLocal\SQLEXPRESS01?
