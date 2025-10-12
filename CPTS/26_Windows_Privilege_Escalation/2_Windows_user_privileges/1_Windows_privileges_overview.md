@@ -132,7 +132,7 @@ Windows incluye muchos grupos cuyos miembros obtienen derechos y privilegios pot
 * **Remote Management Users**: Pueden iniciar sesión en DCs con PSRemoting (a veces añadidos al grupo local de remote management).
 * **Group Policy Creator Owners**: Pueden crear GPOs; necesitarían permisos delegados para enlazarlos a contenedores (domain/OU).
 * **Schema Admins**: Pueden modificar el esquema de AD y backdoorear objetos o GPOs futuros mediante ACLs por defecto.
-* **DNS Admins**: Pueden cargar una DLL en un DC (aunque no siempre reiniciarla); pueden crear registros WPAD como vía de persistencia.
+* **DNS Admins**: Pueden cargar una DLL en un DC (aunque no siempre reiniciarla); pueden crear registros [WPAD](https://web.archive.org/web/20231115070425/https://cube0x0.github.io/Pocing-Beyond-DA/) como vía de persistencia.
 
 ---
 
