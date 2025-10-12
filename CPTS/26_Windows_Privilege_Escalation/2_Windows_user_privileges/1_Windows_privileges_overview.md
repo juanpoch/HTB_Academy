@@ -17,8 +17,6 @@ Cada security principal tiene un identificador único llamado [**SID**](https://
 
 El sistema operativo genera un `SID` que identifica una cuenta o grupo determinado en el momento en que se crea la cuenta o el grupo. Para una cuenta o grupo local, la `autoridad de seguridad local (LSA)` del equipo genera el `SID`. El SID se almacena con otra información de cuenta en un área segura del registro.
 
-
-
 [Subsistema de seguridad (concepto global)]
    ├─> [Proceso: lsass.exe (Local Security Authority Subsystem Service) — corre como SYSTEM]
    │       ├─> [LSA (Local Security Authority) — lógica central dentro de lsass.exe / lsasrv.dll]
