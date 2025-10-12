@@ -184,7 +184,7 @@ Los miembros de **Backup Operators** pueden tener derechos como [`SeShutdownPriv
 
 ## Detección y monitorización
 
-Para detectar abuso de privilegios, Windows genera eventos (por ejemplo, el evento **4672** — "Special privileges assigned to new logon") cuando ciertos privilegios especiales se asignan a una sesión de logon. Monitorizar estos eventos y revisar privilegios que no deberían asignarse con frecuencia ayuda a prevenir y detectar abusos.
+Vale la pena leer este [artículo](https://blog.palantir.com/windows-privilege-abuse-auditing-detection-and-defense-3078a403d74e) para más información. Para detectar abuso de privilegios, Windows genera eventos (por ejemplo, el evento [**4672** — "Special privileges assigned to new logon"](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4672)) cuando ciertos privilegios especiales se asignan a una sesión de logon. Monitorizar estos eventos y revisar privilegios que no deberían asignarse con frecuencia ayuda a prevenir y detectar abusos.
 
 ---
 
