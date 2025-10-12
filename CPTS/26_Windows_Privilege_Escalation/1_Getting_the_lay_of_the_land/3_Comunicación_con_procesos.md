@@ -321,3 +321,10 @@ Vemos que el servicio asociado al `PID` `2104` se llama `FileZilla Server`.
 ---
 
 ### ¿Qué cuenta tiene privilegios WRITE_DAC sobre la tubería con nombre \pipe\SQLLocal\SQLEXPRESS01?
+
+Listamos todas las `named pipes` mediante el comando:
+```powershell
+gci \\.\pipe\
+```
+<img width="872" height="708" alt="image" src="https://github.com/user-attachments/assets/f65de239-3914-474a-8be8-3e8e36bc24b7" />
+
