@@ -11,7 +11,7 @@ El objetivo típico de una evaluación (pentest) suele ser obtener acceso admini
 
 ## Proceso de autorización en Windows
 
-Los **principales de seguridad** (security principals) son cualquier entidad que Windows pueda autenticar: cuentas de usuario, cuentas de equipo, procesos que se ejecutan bajo la identidad de una cuenta, o grupos de seguridad. Los security principals son la forma principal de controlar acceso a recursos en hosts Windows.
+Los **principales de seguridad** [(security principals)](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-principals) son cualquier entidad que Windows pueda autenticar: cuentas de usuario, cuentas de equipo, procesos que se ejecutan bajo la identidad de una cuenta, o grupos de seguridad. Los security principals son la forma principal de controlar acceso a recursos en hosts Windows.
 
 Cada security principal tiene un identificador único llamado [**SID**](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-identifiers) (Security Identifier). Cuando se crea un principal, se le asigna un SID que permanece con él durante toda su vida.
 
