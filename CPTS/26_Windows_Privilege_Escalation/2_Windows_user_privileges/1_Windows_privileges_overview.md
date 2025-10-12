@@ -164,7 +164,7 @@ El comando `whoami /priv` devuelve la lista de privilegios asignados al usuario 
 
 Estos conceptos de derechos elevados y [UAC](https://learn.microsoft.com/es-es/windows/security/application-security/application-control/user-account-control/how-it-works) son funciones de seguridad introducidas con Windows Vista para restringir la ejecución de aplicaciones con permisos completos a menos que sea necesario.
 
-Por ejemplo, el material muestra la salida para un administrador local (elevado): la lista completa de privilegios está presente, pero muchos aparecen en estado **Disabled**. Cuando un privilegio aparece como **Disabled**, significa que la cuenta **tiene** ese privilegio asignado pero **no está activo** en el token actual; debe habilitarse para poder usarlo dentro del proceso.
+Por ejemplo, el material muestra la salida para un administrador local bajo un cmd elevado: la lista completa de privilegios está presente, pero muchos aparecen en estado **Disabled**. Cuando un privilegio aparece como **Disabled**, significa que la cuenta **tiene** ese privilegio asignado pero **no está activo** en el token actual; debe habilitarse para poder usarlo dentro del proceso.
 
 No existe un cmdlet nativo en Windows para "activar" un privilegio en el token; normalmente se recurre a scripts o utilidades que ajusten las capacidades del token (ver ejemplos mencionados en el material).
 
