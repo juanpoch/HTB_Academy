@@ -83,7 +83,8 @@ El sistema operativo genera un `SID` que identifica una cuenta o grupo determina
                    ├─> SeMgr / SeAccessCheck / SeToken APIs
                    ├─> Object Manager (OBJ) — integra seguridad a objetos del sistema
                    ├─> Reference Monitor Hooks
-                   └─> Kernel-mode authentication drivers (krnlsec, lsass.sys)
+                   └─> Kernel-mode authentication drivers (krnlsec, lsass.sys)  
+                   
 
 
 El Registro de Windows es una base de datos jerárquica que almacena la configuración y parámetros del sistema operativo, hardware, aplicaciones y cuentas de usuario, utilizada por Windows y sus servicios para cargar y mantener su estado y funcionamiento.
@@ -95,7 +96,8 @@ El Registro de Windows es una base de datos jerárquica que almacena la configur
 │
 ├─ HKLM\SECURITY\Cache                         → Caché de cuentas de dominio (SIDs + credenciales)
 │
-└─ Hardcoded en el sistema                     → Well-known SIDs (SYSTEM, Administrators, Everyone, etc.)
+└─ Hardcoded en el sistema                     → Well-known SIDs (SYSTEM, Administrators, Everyone, etc.)  
+
 
 
 
