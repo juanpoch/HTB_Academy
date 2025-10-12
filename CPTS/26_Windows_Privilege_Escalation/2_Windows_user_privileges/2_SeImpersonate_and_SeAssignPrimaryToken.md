@@ -35,6 +35,73 @@ Más información sobre los [ataques de suplantación de tokens](https://github.
 
 ---
 
+# JuicyPotato 
+
+
+JuicyPotato es una técnica/herramienta que representa un patrón de abuso de tokens en Windows: aprovecha que ciertos procesos o servicios que corren como **NT AUTHORITY\SYSTEM** aceptan conexiones o callbacks (COM, RPC, etc.), y provoca que ese componente SYSTEM establezca comunicación con un proceso controlado por el atacante para obtener o reutilizar su token. Con ese token se puede ejecutar código con identidad SYSTEM y escalar privilegios localmente.
+
+---
+
+## Definición 
+
+* **Familia "Potato"**: conjunto de técnicas (JuicyPotato, RottenPotato, RoguePotato, PrintSpoofer, etc.) que inducen a un proceso SYSTEM a autenticarse contra un endpoint controlado por el atacante y permiten el uso del token SYSTEM mediante impersonation/duplicación.
+* **Esencia técnica:** forzar una autenticación/connection desde un proceso con alto privilegio hacia el agente atacante, y aprovechar la respuesta para conseguir o usar el token de SYSTEM.
+
+---
+
+## Precondiciones 
+
+1. **Ejecutar código con contexto de cuenta de servicio** (no necesariamente SYSTEM); ejemplo típico: cuenta de servicio de SQL, IIS AppPool, o cualquier servicio accesible desde la superficie de ataque.
+2. **Privilegio SeImpersonate (o SeAssignPrimaryToken)** habilitado para la cuenta bajo la que corre el proceso comprometido.
+3. **Presencia de un componente local con contexto SYSTEM** que pueda iniciar la interacción (COM/DCOM, Spooler, servicios que hacen callbacks, etc.).
+4. **Configuración del sistema/versión de Windows** que no mitigue la técnica específica (algunas variantes fallan en builds recientes o con mitigaciones aplicadas).
+
+> Nota: en entornos modernos, protecciones como PPL/LSASS hardening, Credential Guard y parches del sistema reducen la probabilidad de éxito.
+
+---
+
+## Descripción técnica
+
+1. El atacante ejecuta código en la máquina con un token de servicio que tiene `SeImpersonate`.
+2. El atacante provoca que un componente que corre como SYSTEM realice una llamada (por ejemplo, que el servicio SYSTEM inicie una conexión RPC/COM hacia la máquina del atacante o hacia un endpoint local controlado).
+3. Al establecerse la comunicación, existe una ventana donde el token del proceso SYSTEM puede ser utilizado por el atacante (impersonación o duplicado) para crear un proceso con la identidad SYSTEM o para ejecutar código con esos privilegios.
+4. Herramientas tipo JuicyPotato encapsulan la lógica para seleccionar servidores COM/CLSID vulnerables, forzar la autenticación y usar APIs de Windows para convertir el resultado en un proceso SYSTEM.
+
+---
+
+## Flujo conceptual
+
+* **Entrada:** RCE o ejecución restringida como cuenta de servicio.
+* **Chequeo:** ¿la cuenta tiene SeImpersonate / SeAssignPrimaryToken?
+* **Vector:** existe servicio/componente SYSTEM que pueda ser inducido a comunicarse.
+* **Resultado posible:** proceso o shell con identidad NT AUTHORITY\SYSTEM (si la explotación tiene éxito).
+
+---
+
+## eñales y artefactos de detección
+
+**Registros y eventos a revisar:**
+
+* *Windows Security Log*: procesos creados o inicios de sesión inusuales tras actividad de servicios.
+* *Event IDs relevantes*: creación de procesos (4688), logons (4624), uso de credenciales y eventos específicos de servicios.
+* *Sysmon* (recomendado):
+
+  * EventID 1 (ProcessCreate): procesos hijos inusuales creados por servicios (ej. procesos de consola lanzados desde s
+
+
+
+
+
+
+
+
+---
+
+
+---
+
+---
+
 ## Ejemplo de explotación (JuicyPotato / PrintSpoofer — flujo resumido)
 
 1. Obtener RCE en contexto de un servicio (ej.: xp_cmdshell en SQL, web shell en IIS, Jenkins RCE).
@@ -121,5 +188,3 @@ Más información sobre los [ataques de suplantación de tokens](https://github.
 * Siempre trabajar en entornos controlados y con autorización.
 
 ---
-
-*Fin.*
