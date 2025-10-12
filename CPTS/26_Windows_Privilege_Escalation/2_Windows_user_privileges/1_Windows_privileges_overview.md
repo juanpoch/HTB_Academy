@@ -13,8 +13,7 @@ El objetivo típico de una evaluación (pentest) suele ser obtener acceso admini
 
 Los **principales de seguridad** (security principals) son cualquier entidad que Windows pueda autenticar: cuentas de usuario, cuentas de equipo, procesos que se ejecutan bajo la identidad de una cuenta, o grupos de seguridad. Los security principals son la forma principal de controlar acceso a recursos en hosts Windows.
 
-Cada security principal tiene un identificador único llamado [**SID**](<img width="1568" height="870" alt="image" src="https://github.com/user-attachments/assets/3e8dd130-2485-48e4-9b1d-e8e8ea4d600d" />
-) (Security Identifier). Cuando se crea un principal, se le asigna un SID que permanece con él durante toda su vida.
+Cada security principal tiene un identificador único llamado [**SID**](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-identifiers) (Security Identifier). Cuando se crea un principal, se le asigna un SID que permanece con él durante toda su vida.
 
 Cuando un usuario intenta acceder a un objeto securizable (por ejemplo, una carpeta en un recurso compartido), ocurre lo siguiente a alto nivel:
 
