@@ -1,6 +1,8 @@
 # Comunicación con procesos
 
-Uno de los mejores lugares para buscar escalada de privilegios son los procesos que se están ejecutando en el sistema. Incluso si un proceso no se está ejecutando como administrador, puede conducir a privilegios adicionales. El ejemplo más común es descubrir un servidor web como IIS o XAMPP ejecutándose en la máquina, colocar un shell aspx/php en el equipo y conseguir una shell como el usuario que ejecuta el servidor web. Generalmente este usuario no es administrador pero a menudo tendrá el token **SeImpersonate**, lo que permite que técnicas como Rogue/Juicy/Lonely Potato proporcionen permisos de SYSTEM.
+Uno de los mejores lugares para buscar escalada de privilegios son los procesos que se están ejecutando en el sistema. Incluso si un proceso no se está ejecutando como administrador, puede conducir a privilegios adicionales. El ejemplo más común es descubrir un servidor web como `IIS` o `XAMPP` ejecutándose en la máquina, colocar un shell `aspx`/`php` en el equipo y conseguir una shell como el usuario que ejecuta el servidor web. Aunque este usuario normalmente no tiene privilegios de administrador, suele disponer del privilegio `SeImpersonate`, lo que permite aprovechar técnicas como `RoguePotato`, `JuicyPotato` o `LonelyPotato` para escalar privilegios y obtener una sesión con permisos de `SYSTEM`.
+
+`SeImpersonate`: Permite actuar como otro usuario. Estos privilegios están en los tokens de acceso que Windows asigna a cada proceso.
 
 ## Tokens de acceso
 
