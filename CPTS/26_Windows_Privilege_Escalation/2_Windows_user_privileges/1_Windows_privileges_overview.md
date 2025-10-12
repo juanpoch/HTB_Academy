@@ -160,7 +160,9 @@ Además de la pertenencia a grupos, los usuarios pueden recibir derechos (user r
 
 ## Visualizar privilegios: `whoami /priv`
 
-El comando `whoami /priv` devuelve la lista de privilegios asignados al usuario actual y su estado (Enabled/Disabled). Algunos privilegios solo pueden listarse o aprovecharse desde una consola elevada.
+El comando `whoami /priv` devuelve la lista de privilegios asignados al usuario actual y su estado (Enabled/Disabled). Algunos privilegios solo pueden listarse o aprovecharse siendo usuario administrativo y desde una consola elevada.
+
+Estos conceptos de derechos elevados y [UAC](https://learn.microsoft.com/es-es/windows/security/application-security/application-control/user-account-control/how-it-works) son funciones de seguridad introducidas con Windows Vista para restringir la ejecución de aplicaciones con permisos completos a menos que sea necesario.
 
 Por ejemplo, el material muestra la salida para un administrador local (elevado): la lista completa de privilegios está presente, pero muchos aparecen en estado **Disabled**. Cuando un privilegio aparece como **Disabled**, significa que la cuenta **tiene** ese privilegio asignado pero **no está activo** en el token actual; debe habilitarse para poder usarlo dentro del proceso.
 
