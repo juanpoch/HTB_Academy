@@ -136,7 +136,7 @@ Windows incluye muchos grupos cuyos miembros obtienen derechos y privilegios pot
 
 ---
 
-## User Rights Assignment (Asignación de derechos de usuario)
+## Asignación de derechos de usuario
 
 Además de la pertenencia a grupos, los usuarios pueden recibir derechos (user rights) configurados por políticas locales o de dominio (GPO). Estos derechos controlan operaciones del sistema como iniciar sesión localmente, acceder desde la red, apagar el equipo, etc. La documentación de Microsoft sobre *User Rights Assignment* describe cada derecho en detalle; aquí se resumen algunos derechos clave mencionados en el material:
 
