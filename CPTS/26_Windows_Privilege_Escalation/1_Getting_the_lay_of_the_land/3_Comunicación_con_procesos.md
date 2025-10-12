@@ -82,7 +82,7 @@ Otro vector común es el puerto Erlang (25672). Erlang (p. ej. RabbitMQ) usa un 
 
 ## Named Pipes
 
-La otra forma en que los procesos se comunican con cada uno es mediante **Named Pipes**. Las pipes son esencialmente ficheros almacenados en memoria que se borran tras su lectura. Cobalt Strike usa Named Pipes para cada comando (excluyendo BOF). El flujo básico es:
+La otra forma en que los procesos se comunican con cada uno es mediante **Named Pipes**. Las pipes son esencialmente ficheros almacenados en memoria que se borran tras su lectura. Cobalt Strike usa Named Pipes para cada comando (excluyendo [BOF](https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/beacon-object-files_main.htm)). El flujo básico es:
 
 * Beacon crea una named pipe `\\.\\pipe\\msagent_12`
 * Beacon inicia un nuevo proceso e inyecta el comando en ese proceso direccionando la salida a `\\.\\pipe\\msagent_12`
