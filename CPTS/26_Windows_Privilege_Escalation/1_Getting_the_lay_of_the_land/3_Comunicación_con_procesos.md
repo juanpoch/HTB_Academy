@@ -72,7 +72,7 @@ Active Connections
 <SNIP>
 ```
 
-Lo principal a observar en las conexiones de red activas son las entradas que escuchan en direcciones `loopback` (`127.0.0.1` y `::1`) y que **no** están escuchando en la IP pública del host (por ejemplo `10.129.43.8`) ni en broadcast (`0.0.0.0`, `::/0`, todas las interfaces). El motivo es que los `sockets` en `localhost` a menudo se consideran inseguros por la suposición de que “no son accesibles desde la red”. El que destaca inmediatamente aquí es el puerto **14147**, que se usa para la interfaz administrativa de FileZilla. Conectándose a este puerto puede ser posible extraer contraseñas FTP y también crear un share FTP en `C:\` como el usuario del servicio FileZilla (potencialmente Administrator).
+Lo principal a observar en las conexiones de red activas son las entradas que escuchan en direcciones `loopback` (`127.0.0.1` y `::1`) y que **no** están escuchando en la IP pública del host (por ejemplo `10.129.43.8`) ni en broadcast (`0.0.0.0`, `::/0`, todas las interfaces). El motivo es que los `sockets` en `localhost` a menudo se consideran incorrectamente seguros por la suposición de que “no son accesibles desde la red”. El que destaca inmediatamente aquí es el puerto **14147**, que se usa para la interfaz administrativa de FileZilla. Conectándose a este puerto puede ser posible extraer contraseñas FTP y también crear un share FTP en `C:\` como el usuario del servicio FileZilla (potencialmente Administrator).
 
 ## Más ejemplos
 
