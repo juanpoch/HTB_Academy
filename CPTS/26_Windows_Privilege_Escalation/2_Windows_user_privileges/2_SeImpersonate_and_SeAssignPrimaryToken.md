@@ -8,7 +8,8 @@ El sistema Windows representa la identidad de cuentas y procesos mediante **toke
 
 ## Definición / Concepto
 
-* **SeImpersonatePrivilege**: "Impersonate a client after authentication" — permite a un proceso (o hilo) **impersonar** a un cliente autenticado (usar su token de impersonación) para acceder a recursos en nombre de ese cliente.
+* **SeImpersonatePrivilege**: "Impersonate a client after authentication" — permite a un proceso (o hilo) **impersonar** a un cliente autenticado (usar su token de impersonación) para acceder a recursos en nombre de ese cliente. Un ejemplo del uso de este token es mediante la función [`CreateProcessWithTokenW`](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createprocesswithtokenw).
+`Nota`: `CreateProcessWithTokenW` permite lanzar un proceso con la identidad de un token dado. Requiere que el llamador tenga SeImpersonatePrivilege.
 * **SeAssignPrimaryTokenPrivilege**: "Replace a process level token" — permite crear o asignar **tokens primarios** a procesos (por ejemplo, usar CreateProcessAsUser) y es más restrictivo.
 
 Diferencia práctica:
