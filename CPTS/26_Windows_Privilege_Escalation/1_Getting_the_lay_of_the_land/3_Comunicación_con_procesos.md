@@ -199,8 +199,10 @@ Como ejemplo, revisaremos los permisos de la Named Pipe **LSASS** (*Local Securi
 ### Comando ejecutado:
 
 ```bash
-C:\htb> accesschk.exe /accepteula \\.\Pipe\lsass -v
+accesschk.exe /accepteula \\.\Pipe\lsass -v
 ```
+
+`Nota`: `accepteula` significa "aceptar el acuerdo de licencia de usuario final".
 
 **Salida parcial:**
 
@@ -243,7 +245,7 @@ C:\htb> accesschk.exe /accepteula \\.\Pipe\lsass -v
 * Los grupos **Everyone**, **Anonymous Logon** y **Application Package Authority** tienen permisos de lectura y escritura básicos, pero no control total.
 * Solo el grupo **Administrators** posee `FILE_ALL_ACCESS`, lo que significa **acceso completo** a la Named Pipe.
 
-📘 **Conclusión:** los permisos del proceso LSASS están correctamente configurados; solo los administradores pueden manipular o modificar este canal de comunicación.
+**Conclusión:** los permisos del proceso LSASS están correctamente configurados; solo los administradores pueden manipular o modificar este canal de comunicación.
 
 ---
 
@@ -262,7 +264,7 @@ En la salida, observamos que la pipe `WindscribeService` permite acceso de **lec
 ### Comprobación específica:
 
 ```bash
-C:\htb> accesschk.exe -accepteula -w \\pipe\WindscribeService -v
+accesschk.exe -accepteula -w \\pipe\WindscribeService -v
 ```
 
 **Salida parcial:**
