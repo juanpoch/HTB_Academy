@@ -15,7 +15,8 @@ Los **principales de seguridad** (security principals) son cualquier entidad que
 
 Cada security principal tiene un identificador único llamado [**SID**](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-identifiers) (Security Identifier). Cuando se crea un principal, se le asigna un SID que permanece con él durante toda su vida.
 
-El sistema operativo genera un `SID` que identifica una cuenta o grupo determinado en el momento en que se crea la cuenta o el grupo. Para una cuenta o grupo local, la `autoridad de seguridad local (LSA)` del equipo genera el `SID`. El SID se almacena con otra información de cuenta en un área segura del registro.
+El sistema operativo genera un `SID` que identifica una cuenta o grupo determinado en el momento en que se crea la cuenta o el grupo. Para una cuenta o grupo local, la `autoridad de seguridad local (LSA)` del equipo genera el `SID`. El SID se almacena con otra información de cuenta en un área segura del registro.  
+
 
 [Subsistema de seguridad (concepto global)]
    ├─> [Proceso: lsass.exe (Local Security Authority Subsystem Service) — corre como SYSTEM]
