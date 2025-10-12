@@ -107,7 +107,7 @@ Cada vez que un usuario inicia sesión, el sistema crea un token de acceso para 
 Cuando un usuario intenta acceder a un objeto securizable (por ejemplo, una carpeta en un recurso compartido), ocurre lo siguiente a alto nivel:
 
 1. El usuario tiene un **token de acceso** que contiene: su User SID, los SIDs de los grupos a los que pertenece, la lista de privilegios y otra información adicional.
-2. El objeto (por ejemplo, una carpeta) tiene un **security descriptor** que incluye listas de control de acceso (DACL/SACL) con entradas de control de acceso (ACEs).
+2. El objeto (por ejemplo, una carpeta) tiene un [**security descriptor**](https://learn.microsoft.com/es-es/windows/win32/secauthz/security-descriptors) que incluye listas de control de acceso (DACL/SACL) con entradas de control de acceso [(ACEs)](https://learn.microsoft.com/es-es/windows/win32/secauthz/access-control-entries).
 3. El sistema compara la información del token del usuario contra las ACEs del descriptor de seguridad hasta encontrar coincidencias.
 4. En función de esa comparación, el sistema decide **permitir o denegar** el acceso.
 
