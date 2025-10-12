@@ -1,7 +1,7 @@
 # SeImpersonate y SeAssignPrimaryToken
 
 
-* Windows maneja *tokens* de acceso (Access Tokens) que describen el contexto de seguridad de un proceso (SIDs, grupos, privilegios, etc.).
+* Windows maneja *tokens* de acceso que describen el contexto de seguridad de un proceso (SIDs, grupos, privilegios, etc.).
 * **SeImpersonatePrivilege** permite a un proceso **impersonar** (tomar el contexto de) otro usuario después de que ese usuario se haya autenticado.
 * **SeAssignPrimaryTokenPrivilege** permite **asignar o crear un token primario** para un proceso (CreateProcessAsUser-like), y es más poderoso y restringido.
 * Ambos privilegios son potentes porque permiten escalar privilegios localmente: e.g., transformar un proceso con privilegios de servicio en uno con contexto `NT AUTHORITY\SYSTEM`.
