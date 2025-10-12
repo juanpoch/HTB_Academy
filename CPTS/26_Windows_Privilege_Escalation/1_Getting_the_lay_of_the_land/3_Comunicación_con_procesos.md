@@ -10,7 +10,7 @@ En Windows, los [**tokens de acceso**](https://learn.microsoft.com/es-es/windows
 
 ## Enumeración de servicios de red
 
-La forma más común en que la gente interactúa con procesos es a través de un socket de red (DNS, HTTP, SMB, etc.). El comando `netstat` mostrará conexiones TCP y UDP activas y nos dará una mejor idea de qué servicios están escuchando en qué puertos, tanto localmente como accesibles desde el exterior. Podemos encontrar un servicio vulnerable accesible sólo desde localhost (cuando estamos conectados al host) que podamos explotar para escalar privilegios.
+La forma más común en que la gente interactúa con procesos es a través de un socket de red (DNS, HTTP, SMB, etc.). El comando [`netstat`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netstat) mostrará conexiones TCP y UDP activas y nos dará una mejor idea de qué servicios están escuchando en qué puertos, tanto localmente como accesibles desde el exterior. Podemos encontrar un servicio vulnerable accesible sólo desde localhost (cuando estamos conectados al host) que podamos explotar para escalar privilegios.
 
 ### Mostrar conexiones de red activas
 
