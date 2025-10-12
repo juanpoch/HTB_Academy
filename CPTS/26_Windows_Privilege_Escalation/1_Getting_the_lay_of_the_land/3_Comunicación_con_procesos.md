@@ -164,3 +164,121 @@ Mode                LastWriteTime         Length Name
 
 <SNIP>
 ```
+
+---
+---
+
+# Análisis de permisos en Named Pipes con AccessChk
+
+Después de obtener un listado de las **Named Pipes** activas en el sistema, el siguiente paso consiste en **analizar los permisos** que tiene cada una. Para ello utilizamos la herramienta **AccessChk**, parte de la suite Sysinternals creada por *Mark Russinovich*. Esta utilidad permite revisar la **Discretionary Access Control List (DACL)** de un objeto, es decir, la lista que define **quién puede leer, escribir, modificar o ejecutar** sobre un recurso.
+
+---
+
+## Revisión de permisos con AccessChk
+
+Podemos usar el siguiente comando para revisar las DACLs de todas las Named Pipes del sistema:
+
+```bash
+accesschk.exe /accepteula \\pipe\* -v
+```
+
+Y si deseamos examinar una pipe en particular, basta con especificar su nombre:
+
+```bash
+accesschk.exe /accepteula \\.\Pipe\<nombre_de_la_pipe> -v
+```
+
+Este comando nos mostrará qué usuarios o grupos poseen permisos sobre la pipe, así como el nivel de acceso (lectura, escritura, control total, etc.).
+
+---
+
+## 🔍 Revisión de la Named Pipe del proceso LSASS
+
+Como ejemplo, revisaremos los permisos de la Named Pipe **LSASS** (*Local Security Authority Subsystem Service*), un proceso crítico encargado de manejar autenticaciones, tokens y políticas de seguridad del sistema.
+
+### Comando ejecutado:
+
+```bash
+C:\htb> accesschk.exe /accepteula \\.\Pipe\lsass -v
+```
+
+**Salida parcial:**
+
+```
+\\.\Pipe\lsass
+  Untrusted Mandatory Level [No-Write-Up]
+  RW Everyone
+        FILE_READ_ATTRIBUTES
+        FILE_READ_DATA
+        FILE_READ_EA
+        FILE_WRITE_ATTRIBUTES
+        FILE_WRITE_DATA
+        FILE_WRITE_EA
+        SYNCHRONIZE
+        READ_CONTROL
+  RW NT AUTHORITY\ANONYMOUS LOGON
+        FILE_READ_ATTRIBUTES
+        FILE_READ_DATA
+        FILE_READ_EA
+        FILE_WRITE_ATTRIBUTES
+        FILE_WRITE_DATA
+        FILE_WRITE_EA
+        SYNCHRONIZE
+        READ_CONTROL
+  RW APPLICATION PACKAGE AUTHORITY\Your Windows credentials
+        FILE_READ_ATTRIBUTES
+        FILE_READ_DATA
+        FILE_READ_EA
+        FILE_WRITE_ATTRIBUTES
+        FILE_WRITE_DATA
+        FILE_WRITE_EA
+        SYNCHRONIZE
+        READ_CONTROL
+  RW BUILTIN\Administrators
+        FILE_ALL_ACCESS
+```
+
+### Interpretación:
+
+* Los grupos **Everyone**, **Anonymous Logon** y **Application Package Authority** tienen permisos de lectura y escritura básicos, pero no control total.
+* Solo el grupo **Administrators** posee `FILE_ALL_ACCESS`, lo que significa **acceso completo** a la Named Pipe.
+
+📘 **Conclusión:** los permisos del proceso LSASS están correctamente configurados; solo los administradores pueden manipular o modificar este canal de comunicación.
+
+---
+
+## Ejemplo de ataque: Named Pipe expuesta
+
+Un caso interesante ocurre cuando una Named Pipe presenta **permisos demasiado amplios**, permitiendo que usuarios no privilegiados puedan escribir o ejecutar sobre ella. Este tipo de configuración puede abrir la puerta a una **escalada de privilegios**.
+
+Consideremos el ejemplo de la Named Pipe **WindscribeService**, perteneciente al servicio de la VPN Windscribe. Mediante AccessChk, podemos buscar pipes con permisos de escritura usando:
+
+```bash
+accesschk.exe -accepteula -w \\pipe\* -v
+```
+
+En la salida, observamos que la pipe `WindscribeService` permite acceso de **lectura y escritura al grupo Everyone**, es decir, a todos los usuarios autenticados del sistema.
+
+### Comprobación específica:
+
+```bash
+C:\htb> accesschk.exe -accepteula -w \\pipe\WindscribeService -v
+```
+
+**Salida parcial:**
+
+```
+\\.\Pipe\WindscribeService
+  Medium Mandatory Level (Default) [No-Write-Up]
+  RW Everyone
+        FILE_ALL_ACCESS
+```
+
+### Análisis:
+
+* La DACL indica que el grupo **Everyone** tiene `FILE_ALL_ACCESS`, lo que significa **todos los permisos posibles** sobre la pipe: leer, escribir, modificar e incluso ejecutar.
+* Dado que el servicio asociado a esta pipe corre con privilegios **SYSTEM**, un atacante podría **inyectar comandos o datos maliciosos** a través de la pipe y obtener **ejecución de código con privilegios de sistema**.
+
+
+---
+---
