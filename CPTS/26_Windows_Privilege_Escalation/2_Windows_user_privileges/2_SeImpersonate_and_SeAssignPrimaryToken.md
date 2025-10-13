@@ -61,13 +61,9 @@ Escenario de ejemplo
   
   Este procedimiento almacenado de SQL permite ejecutar comandos del sistema desde SQL Server (por ejemplo, `whoami`, `dir`, etc.), lo cual representa un punto de ejecución remota de comandos (RCE).
 
-* Supongamos además que hemos obtenido un conjunto de credenciales dentro de un archivo llamado:
-  `logins.sql`
-  encontrado en un recurso compartido de red (file share).
+* Supongamos además que hemos obtenido un conjunto de credenciales dentro de un archivo llamado `logins.sql` encontrado en un recurso compartido de red.
 
-* Dicho archivo fue descubierto utilizando una herramienta como:
-  `Snaffler`
-  que busca archivos y datos sensibles en redes Windows, como contraseñas, llaves o configuraciones con permisos inseguros.
+* Dicho archivo fue descubierto utilizando una herramienta como `Snaffler` que busca archivos y datos sensibles en redes Windows, como contraseñas, llaves o configuraciones con permisos inseguros.
 
 ---
 
