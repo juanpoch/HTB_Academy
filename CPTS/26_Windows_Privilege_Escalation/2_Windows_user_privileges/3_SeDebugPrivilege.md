@@ -141,9 +141,5 @@ SID               : S-1-5-21-3769161915-3336846931-3985975925-1000
 
 
 
-* El hash **NTLM** (`NTLM`) mostrado es la representación del secreto de la cuenta; puede intentarse crackear offline o utilizarse en ataques *pass-the-hash* si se reutiliza la contraseña en otros equipos.
-* El comando `log` en Mimikatz crea un fichero (`mimikatz.log`) con toda la salida, muy útil como evidencia y para evitar perder información.
-
-
 
 
