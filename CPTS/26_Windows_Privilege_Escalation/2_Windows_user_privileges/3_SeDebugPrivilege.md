@@ -250,7 +250,7 @@ Tener en cuenta estos ejemplos para los casos en que volcar LSASS no produzca cr
 
 **Flujo típico:** obtener volcado (ProcDump o Create dump file en Task Manager) → cargarlo en mimikatz (sekurlsa::minidump + sekurlsa::logonpasswords) → extraer NTLM / cleartext / tickets.
 
-**Resultado posible:** contraseña en claro (mejor), o solamente el hash NTLM (aún valioso). Si solo hay hash, puedes intentar crackearlo offline o usarlo en un pass-the-hash (siempre dentro del alcance del engagement).
+**Resultado posible:** contraseña en claro, o solamente el hash NTLM. Si solo hay hash, puedes intentar crackearlo offline o usarlo en un pass-the-hash.
 
 ---
 
