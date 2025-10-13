@@ -488,3 +488,14 @@ System Type:    x64-based PC
 
 `JuicyPotato` es compatible hasta Windows Server 2019, por lo que podemos utilizarlo para el ataque.
 
+
+
+Antes de realizar el ataque, nos movemos al directorio `c:\Users\Administrator\Desktop\SeImpersonate\` mediante el siguiente comando:
+```powershell
+cd c:\Users\Administrator\Desktop\SeImpersonate\
+```
+
+<img width="1602" height="260" alt="image" src="https://github.com/user-attachments/assets/c99210c3-32a7-4c96-93f7-04f83a05a921" />
+
+Cómo era de esperarse, no tenemos permisos suficientes para ingresar al directorio.
+
