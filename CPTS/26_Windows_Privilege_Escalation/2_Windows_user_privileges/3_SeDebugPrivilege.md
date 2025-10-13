@@ -68,7 +68,6 @@ Esto funciona correctamente; podemos cargar el volcado en Mimikatz usando el com
 **Nota:** siempre es buena idea teclear `log` antes de ejecutar comandos en Mimikatz; así toda la salida de comandos se guardará en un archivo `.txt`. Esto resulta especialmente útil al volcar credenciales de un servidor que puede tener muchos conjuntos de credenciales en memoria.
 
 ```
-SeDebugPrivilege
 C:\htb> mimikatz.exe
 
   .#####.   mimikatz 2.2.0 (x64) #19041 Sep 18 2020 19:18:29
