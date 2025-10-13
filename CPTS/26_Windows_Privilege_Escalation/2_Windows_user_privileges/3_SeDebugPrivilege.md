@@ -188,15 +188,14 @@ Si apuntamos a un proceso padre que se ejecuta como **SYSTEM** (especificando su
 
 ---
 
-## Ejemplo de preparación
+## Preparación
 
 * Abrir una consola de PowerShell elevada (clic derecho → Ejecutar como administrador) e iniciar sesión con las credenciales del usuario `jordan`.
 * Obtener la lista de procesos y sus PIDs con `tasklist`.
 
-Ejemplo de salida (parcial):
+Salida parcial:
 
 ```
-SeDebugPrivilege
 PS C:\htb> tasklist
 
 Image Name                     PID Session Name        Session#    Mem Usage
