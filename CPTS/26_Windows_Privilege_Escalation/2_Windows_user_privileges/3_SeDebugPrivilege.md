@@ -84,6 +84,8 @@ Extrae las credenciales (NTLM, cleartext cuando están disponibles, tickets, etc
 
 Podemos usarlo para realizar un ataque *pass-the-hash* y moverse lateralmente si la misma contraseña de administrador local se utiliza en uno o varios sistemas adicionales (común en organizaciones grandes).
 
+`Pass-the-hash`: Es una técnica en la que un atacante usa directamente el hash de la contraseña como credencial para autenticarse en otros sistemas, sin necesitar conocer la contraseña en texto plano. Muchos protocolos de autenticación Windows aceptan el hash para probar identidad; por eso si se tiene el hash válido se podría utilizar para autenticarse bajo este método.
+
 ```
 C:\htb> mimikatz.exe
 
