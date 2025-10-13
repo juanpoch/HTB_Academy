@@ -227,8 +227,8 @@ El procedimiento consiste en ejecutar JuicyPotato desde el contexto de la cuenta
    * **-a** → Argumento pasado al programa (en este caso, la conexión reversa con Netcat).
    * **-t** → Indica los métodos de creación de proceso a probar:
 
-     * `CreateProcessWithTokenW` (requiere `SeImpersonatePrivilege`)
-     * `CreateProcessAsUser` (requiere `SeAssignPrimaryTokenPrivilege`)
+     * [`CreateProcessWithTokenW`](https://learn.microsoft.com/es-es/windows/win32/api/winbase/nf-winbase-createprocesswithtokenw) (requiere `SeImpersonatePrivilege`)
+     * [`CreateProcessAsUser`](https://learn.microsoft.com/es-es/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessasusera) (requiere `SeAssignPrimaryTokenPrivilege`)
    * **-e** → Ejecutar `cmd.exe` en la nueva conexión.
 
 ---
