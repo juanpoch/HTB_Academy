@@ -499,3 +499,18 @@ cd c:\Users\Administrator\Desktop\SeImpersonate\
 
 Cómo era de esperarse, no tenemos permisos suficientes para ingresar al directorio.
 
+
+Buscamos el programa `JuicyPotato.exe` con el siguiente comando:
+```cmd
+xp_cmdshell dir C:\*juicy*.exe /s /b
+```
+
+<img width="1291" height="252" alt="image" src="https://github.com/user-attachments/assets/e8ac0703-874e-4118-9160-e4c4df43a253" />
+
+También podríamos haber utilizado el comando:
+```powershell
+xp_cmdshell powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *juicy*.exe | Select-Object FullName"
+```
+
+<img width="1891" height="405" alt="image" src="https://github.com/user-attachments/assets/4fd9f380-0b5a-43e4-a453-0528cf717413" />
+
