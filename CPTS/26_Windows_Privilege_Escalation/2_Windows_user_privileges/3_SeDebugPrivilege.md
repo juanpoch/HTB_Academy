@@ -158,6 +158,9 @@ SID               : S-1-5-21-3769161915-3336846931-3985975925-1000
 ---
 
 
+Supongamos que no podemos cargar herramientas en el objetivo por cualquier motivo pero tenemos acceso por RDP. En ese caso, podemos realizar un volcado manual de memoria del proceso **LSASS** mediante el **Administrador de tareas (Task Manager)**: ir a la pestaña **Details**, elegir el proceso **lsass.exe** y seleccionar **Create dump file**. Después de descargar ese archivo a nuestro sistema de ataque, podemos procesarlo con **Mimikatz** de la misma forma que en el ejemplo anterior.
+
+<img width="1574" height="657" alt="image" src="https://github.com/user-attachments/assets/7b7f2ede-258f-4867-acbc-41e911fbfbff" />
 
 
-
+---
