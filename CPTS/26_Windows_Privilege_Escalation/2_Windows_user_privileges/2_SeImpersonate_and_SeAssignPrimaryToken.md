@@ -182,7 +182,7 @@ SeIncreaseWorkingSetPrivilege Increase a process working set            Disabled
 
 El comando `whoami /priv` confirma que el privilegio **SeImpersonatePrivilege** se encuentra habilitado. Este privilegio permite **suplantar el contexto de un usuario autenticado** y ejecutar procesos en su nombre.
 
-Este es un indicador claro de una posible escalada de privilegios, ya que **JuicyPotato** o herramientas similares pueden aprovechar **SeImpersonatePrivilege** o **SeAssignPrimaryTokenPrivilege** para obtener ejecución con el contexto de **NT AUTHORITY\SYSTEM** mediante técnicas de **DCOM/NTLM reflection abuse**.
+Este es un indicador claro de una posible escalada de privilegios, ya que [**JuicyPotato**](https://github.com/ohpe/juicy-potato) o herramientas similares pueden aprovechar **SeImpersonatePrivilege** o **SeAssignPrimaryTokenPrivilege** para obtener ejecución con el contexto de **NT AUTHORITY\SYSTEM** mediante técnicas de **DCOM/NTLM reflection abuse**.
 
 
 
