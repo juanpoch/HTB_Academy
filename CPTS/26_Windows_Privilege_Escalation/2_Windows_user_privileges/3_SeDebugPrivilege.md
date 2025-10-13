@@ -21,6 +21,10 @@ Por ejemplo:
 * Si se obtienen múltiples **hashes NTLMv2** con herramientas como **Responder** o **Inveigh**, conviene priorizar el cracking de cuentas que podrían tener este privilegio (p. ej., cuentas de desarrolladores).
 * Un usuario puede **no ser administrador local**, pero tener este derecho asignado, lo cual **no siempre es visible remotamente** (por ejemplo, mediante `BloodHound`). Por eso es útil comprobarlo manualmente al tener acceso RDP o sesión local.
 
+
+<img width="1640" height="351" alt="image" src="https://github.com/user-attachments/assets/1219102e-0686-4112-b398-807edda96d78" />
+
+
 ---
 
 ## Enumeración
