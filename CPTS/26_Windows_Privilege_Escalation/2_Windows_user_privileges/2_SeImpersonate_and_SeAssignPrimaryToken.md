@@ -229,6 +229,7 @@ El procedimiento consiste en ejecutar JuicyPotato desde el contexto de la cuenta
 
      * `CreateProcessWithTokenW` (requiere `SeImpersonatePrivilege`)
      * `CreateProcessAsUser` (requiere `SeAssignPrimaryTokenPrivilege`)
+   * **-e** → Ejecutar `cmd.exe` en la nueva conexión.
 
 ---
 
