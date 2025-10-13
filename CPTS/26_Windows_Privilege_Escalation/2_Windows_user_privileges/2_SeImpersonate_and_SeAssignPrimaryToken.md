@@ -150,7 +150,7 @@ Esto confirma que los comandos se están ejecutando con los privilegios del serv
 
 ---
 
-🔍 Verificación de privilegios de la cuenta
+### Verificación de privilegios de la cuenta
 
 **Descripción**
 
@@ -178,17 +178,11 @@ SeCreateGlobalPrivilege       Create global objects                     Enabled
 SeIncreaseWorkingSetPrivilege Increase a process working set            Disabled
 ```
 
-**Análisis de resultados**
+
 
 El comando `whoami /priv` confirma que el privilegio **SeImpersonatePrivilege** se encuentra habilitado. Este privilegio permite **suplantar el contexto de un usuario autenticado** y ejecutar procesos en su nombre.
 
 Este es un indicador claro de una posible escalada de privilegios, ya que **JuicyPotato** o herramientas similares pueden aprovechar **SeImpersonatePrivilege** o **SeAssignPrimaryTokenPrivilege** para obtener ejecución con el contexto de **NT AUTHORITY\SYSTEM** mediante técnicas de **DCOM/NTLM reflection abuse**.
-
-**Conclusión**
-
-* La cuenta de servicio posee el privilegio crítico `SeImpersonatePrivilege`, habilitado.
-* Este privilegio puede explotarse para obtener privilegios de sistema.
-* La siguiente fase consistirá en aprovechar esta condición utilizando JuicyPotato u otra variante moderna como RoguePotato o PrintSpoofer.
 
 
 
