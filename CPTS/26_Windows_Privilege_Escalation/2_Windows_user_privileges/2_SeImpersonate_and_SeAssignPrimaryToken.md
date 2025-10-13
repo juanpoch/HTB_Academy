@@ -35,7 +35,7 @@ Más información sobre los [ataques de suplantación de tokens](https://github.
 
 ---
 
-SeImpersonate Example - JuicyPotato
+## SeImpersonate Example - JuicyPotato
 
 Contexto
 
