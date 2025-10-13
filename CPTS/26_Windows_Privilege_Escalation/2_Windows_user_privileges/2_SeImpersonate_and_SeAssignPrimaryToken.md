@@ -281,24 +281,6 @@ El procedimiento consiste en ejecutar JuicyPotato desde el contexto de la cuenta
 
 ---
 
-**Resumen técnico**
-
-| Etapa | Acción                             | Resultado                                 |
-| ----- | ---------------------------------- | ----------------------------------------- |
-| 1     | Servidor COM falso                 | Escucha autenticaciones entrantes         |
-| 2     | Llamada a objeto DCOM privilegiado | Provoca conexión desde SYSTEM             |
-| 3     | Autenticación NTLM                 | SYSTEM envía su token NTLM                |
-| 4     | Reflexión NTLM                     | Se reutiliza la autenticación localmente  |
-| 5     | Impersonación                      | JuicyPotato asume el token SYSTEM         |
-| 6     | Ejecución                          | Se crea proceso SYSTEM (cmd.exe o nc.exe) |
-
----
-
-
-
-
-
-
 
 **Salida esperada**
 
