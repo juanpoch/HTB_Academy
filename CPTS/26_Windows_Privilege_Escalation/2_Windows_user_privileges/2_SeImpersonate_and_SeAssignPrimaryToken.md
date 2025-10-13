@@ -240,12 +240,12 @@ El procedimiento consiste en ejecutar JuicyPotato desde el contexto de la cuenta
    JuicyPotato crea localmente un servidor DCOM (Distributed Component Object Model) que simula ser un servicio legítimo. Este servidor queda a la espera de conexiones entrantes, normalmente en un puerto definido por el parámetro `-l`.
 
 2. **Invocación de un objeto COM privilegiado**
-   JuicyPotato utiliza un objeto COM registrado en el sistema (por ejemplo, `{4991d34b-80a1-4291-83b6-3328366b9097}`) que normalmente se ejecuta con el contexto de `NT AUTHORITY\\SYSTEM`. Al activar este objeto, Windows intenta establecer una conexión DCOM desde el servicio SYSTEM hacia el servidor COM que controlamos.
+   JuicyPotato utiliza un objeto COM registrado en el sistema (por ejemplo, `{4991d34b-80a1-4291-83b6-3328366b9097}`) que normalmente se ejecuta con el contexto de `NT AUTHORITY\\SYSTEM`. Al activar este objeto, Windows intenta establecer una conexión DCOM desde el servicio con contexto SYSTEM asociado a ese objeto hacia el servidor COM que controlamos.
 
 3. **Autenticación NTLM del servicio SYSTEM**
-   Durante esta conexión DCOM, el servicio SYSTEM se autentica mediante el protocolo NTLM, enviando un desafío/respuesta NTLM que demuestra su identidad privilegiada.
+   Durante esta conexión DCOM, el servicio bajo contexto SYSTEM se autentica mediante el protocolo `NTLM`, enviando un `desafío/respuesta` NTLM que demuestra su identidad privilegiada.
 
-4. **Reflexión del desafío NTLM (NTLM Reflection)**
+4. **Reflexión del desafío NTLM**
    JuicyPotato intercepta esta autenticación y la refleja (reenvía) de vuelta al mismo sistema local. En otras palabras, hace que Windows se autentique contra sí mismo.
 
    Al hacerlo, JuicyPotato obtiene un **token de seguridad** que representa la identidad de SYSTEM.
