@@ -211,11 +211,25 @@ winlogon.exe                   612 Console                    1     10,408 K
 
 En este ejemplo podemos **apuntar a `winlogon.exe` con PID 612**, ya que sabemos que normalmente se ejecuta como **SYSTEM** en hosts Windows.
 
+<img width="1637" height="715" alt="image" src="https://github.com/user-attachments/assets/61dd5735-445f-4d7b-95ad-2bc7517b87e5" />
+
+También podríamos usar el cmdlet [Get-Process](https://learn.microsoft.com/es-es/powershell/module/microsoft.powershell.management/get-process?view=powershell-7.5&viewFallbackFrom=powershell-7.2) para obtener el PID de un proceso conocido que se ejecuta como SYSTEM (como LSASS) y pasar el PID directamente al script, reduciendo la cantidad de pasos necesarios:
+
+<img width="1628" height="575" alt="image" src="https://github.com/user-attachments/assets/945cd9c1-7017-46ad-bedf-35e6312f0376" />
+
+
 ---
 
-## Advertencias
 
-* Requiere permisos elevados y que la cuenta posea **SeDebugPrivilege**.
-* Estas técnicas deben emplearse únicamente en entornos de laboratorio o con autorización explícita.
-* Revisar el repositorio del PoC para actualizaciones y uso seguro: [https://github.com/decoder-it/psgetsystem](https://github.com/decoder-it/psgetsystem)
+Existen otras [herramientas](https://github.com/daem0nc0re/PrivFu/tree/main/PrivilegedOperations/SeDebugPrivilegePoC) para obtener una shell como **SYSTEM** cuando disponemos de **SeDebugPrivilege**. A menudo no tendremos acceso RDP al host, por lo que tendremos que modificar nuestros PoC para que, por ejemplo, devuelvan una **reverse shell** a nuestro equipo de ataque con privilegios SYSTEM o ejecuten otro comando (por ejemplo, crear un usuario administrador).
+
+Probá estos PoC y explora otras vías para lograr acceso SYSTEM, especialmente en escenarios donde no disponés de una sesión totalmente interactiva (por ejemplo, cuando conseguís inyección de comandos, un web shell o una reverse shell con el usuario que tiene SeDebugPrivilege).
+
+Tener en cuenta estos ejemplos para los casos en que volcar LSASS no produzca credenciales útiles (aunque también es posible obtener SYSTEM con el hash NTLM de la máquina, eso está fuera del alcance de este módulo) y una shell o RCE como SYSTEM sería beneficioso.
+
+
+
+
+---
+
 
