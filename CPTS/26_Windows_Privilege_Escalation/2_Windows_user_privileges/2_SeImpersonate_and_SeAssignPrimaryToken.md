@@ -46,7 +46,7 @@ Cuando un servidor necesita acceder a otros recursos —por ejemplo, compartidos
 
 `Privilegio implicado`
 
-Para poder realizar esta suplantación, la cuenta del servicio necesita tener asignado el privilegio [“Impersonate a client after authentication”]([https://academy.hackthebox.com/module/67/section/607](https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/impersonate-a-client-after-authentication)) (también conocido como `SeImpersonatePrivilege`).
+Para poder realizar esta suplantación, la cuenta del servicio necesita tener asignado el privilegio [“Impersonate a client after authentication”](https://academy.hackthebox.com/module/67/section/607](https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/impersonate-a-client-after-authentication)) (también conocido como `SeImpersonatePrivilege`).
 
 Este privilegio le permite al servicio asumir el token de seguridad de otro usuario autenticado y ejecutar acciones en su contexto, lo que es crucial para ataques como JuicyPotato, RoguePotato o PrintSpoofer, que explotan este permiso para obtener privilegios más altos (por ejemplo, NT AUTHORITY\SYSTEM).
 
