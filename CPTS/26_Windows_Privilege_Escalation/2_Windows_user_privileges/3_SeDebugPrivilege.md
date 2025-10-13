@@ -164,3 +164,59 @@ Supongamos que no podemos cargar herramientas en el objetivo por cualquier motiv
 
 
 ---
+
+# RCE como SYSTEM (SeDebugPrivilege)
+
+Podemos aprovechar **SeDebugPrivilege** para lograr ejecución remota de código (RCE) elevando privilegios a **SYSTEM**. La técnica consiste en lanzar un proceso hijo y usar los derechos elevados concedidos a nuestra cuenta (SeDebugPrivilege) para alterar el comportamiento normal del sistema y hacer que el proceso hijo herede el token de un proceso padre que corre como SYSTEM, permitiéndonos suplantarlo.
+
+Si apuntamos a un proceso padre que se ejecuta como **SYSTEM** (especificando su PID), podemos elevar nuestros privilegios rápidamente.
+
+---
+
+## Pasos generales
+
+1. Transferir el script PoC al sistema objetivo (por ejemplo, desde el repositorio actualizado en GitHub: [https://github.com/decoder-it/psgetsystem](https://github.com/decoder-it/psgetsystem)) y revisar su uso.
+2. Cargar el script en el objetivo y ejecutar con la sintaxis:
+
+```
+[MyProcess]::CreateProcessFromParent(<system_pid>,<command_to_execute>,"")
+```
+
+> Nota importante: es necesario añadir un tercer argumento vacío `""` al final para que el PoC funcione correctamente.
+
+3. Ejecutar el comando apuntando al PID del proceso que corre como SYSTEM.
+
+---
+
+## Ejemplo de preparación
+
+* Abrir una consola de PowerShell elevada (clic derecho → Ejecutar como administrador) e iniciar sesión con las credenciales del usuario `jordan`.
+* Obtener la lista de procesos y sus PIDs con `tasklist`.
+
+Ejemplo de salida (parcial):
+
+```
+SeDebugPrivilege
+PS C:\htb> tasklist
+
+Image Name                     PID Session Name        Session#    Mem Usage
+========================= ======== ================ =========== ============
+System Idle Process              0 Services                   0          4 K
+System                           4 Services                   0        116 K
+smss.exe                       340 Services                   0      1,212 K
+csrss.exe                      444 Services                   0      4,696 K
+wininit.exe                    548 Services                   0      5,240 K
+csrss.exe                      556 Console                    1      5,972 K
+winlogon.exe                   612 Console                    1     10,408 K
+```
+
+En este ejemplo podemos **apuntar a `winlogon.exe` con PID 612**, ya que sabemos que normalmente se ejecuta como **SYSTEM** en hosts Windows.
+
+---
+
+## Advertencias
+
+* Requiere permisos elevados y que la cuenta posea **SeDebugPrivilege**.
+* Estas técnicas deben emplearse únicamente en entornos de laboratorio o con autorización explícita.
+* Revisar el repositorio del PoC para actualizaciones y uso seguro: [https://github.com/decoder-it/psgetsystem](https://github.com/decoder-it/psgetsystem)
+
