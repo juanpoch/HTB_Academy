@@ -416,3 +416,23 @@ Privilegios: SeImpersonatePrivilege / SeAssignPrimaryTokenPrivilege
 Vector: DCOM (JuicyPotato), RPC/Spooler (PrintSpoofer), SMB/HTTP (RoguePotato)
 Resultado: NT AUTHORITY\SYSTEM
 ```
+
+
+---
+
+
+## Laboratorio
+
+### Escale privilegios mediante uno de los métodos que se muestran en esta sección. Envíe el contenido del archivo de indicadores ubicado en c:\Users\Administrator\Desktop\SeImpersonate\flag.txt
+
+Verificamos que tenemos conexión con la máquina víctima:
+<img width="1017" height="238" alt="image" src="https://github.com/user-attachments/assets/b92a190d-e8d2-49e1-871b-da9108d795a7" />
+
+Nosotros sabemos que tenemos que autenticarnos a `10.129.43.43 ` con las credenciales `sql_dev`:`Str0ng_P@ssw0rd!`.
+
+Nos conectamos al servidor sql mediante el comando:
+```
+mssqlclient.py sql_dev@10.129.43.43 -windows-auth
+```
+
+<img width="1574" height="470" alt="image" src="https://github.com/user-attachments/assets/1f8dc898-b70d-4228-9d76-d413db9a6e9e" />
