@@ -514,3 +514,14 @@ xp_cmdshell powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction S
 
 <img width="1891" height="405" alt="image" src="https://github.com/user-attachments/assets/4fd9f380-0b5a-43e4-a453-0528cf717413" />
 
+
+También 
+
+<img width="1192" height="229" alt="image" src="https://github.com/user-attachments/assets/7d101ef5-37db-40b4-aabe-799d3ac6434c" />
+
+
+Por lo que tenemos las direcciones de los ejecutables que necesitamos:
+```
+C:\Tools\JuicyPotato.exe
+C:\Tools\nc.exe 
+```
