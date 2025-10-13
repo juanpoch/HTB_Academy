@@ -334,9 +334,8 @@ El comando `whoami` confirma la obtención de una shell con **privilegios de SYS
 ---
 
 
-🚀 Escalada de privilegios usando PrintSpoofer y RoguePotato
+### Escalada de privilegios usando PrintSpoofer y RoguePotato
 
-**Descripción general**
 
 En versiones modernas de Windows (Windows Server 2019 y Windows 10 build 1809 en adelante), el método clásico de **JuicyPotato** ya no funciona debido a los parches aplicados por Microsoft que bloquean la reflexión NTLM local.
 
