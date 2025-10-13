@@ -165,9 +165,9 @@ Supongamos que no podemos cargar herramientas en el objetivo por cualquier motiv
 
 ---
 
-# RCE como SYSTEM (SeDebugPrivilege)
+# RCE como SYSTEM 
 
-Podemos aprovechar **SeDebugPrivilege** para lograr ejecución remota de código (RCE) elevando privilegios a **SYSTEM**. La técnica consiste en lanzar un proceso hijo y usar los derechos elevados concedidos a nuestra cuenta (SeDebugPrivilege) para alterar el comportamiento normal del sistema y hacer que el proceso hijo herede el token de un proceso padre que corre como SYSTEM, permitiéndonos suplantarlo.
+Podemos aprovechar **SeDebugPrivilege** para lograr ejecución remota de código elevando privilegios a **SYSTEM**. La técnica consiste en lanzar un [proceso hijo](https://learn.microsoft.com/es-es/windows/win32/procthread/child-processes) y usar los derechos elevados concedidos a nuestra cuenta (SeDebugPrivilege) para alterar el comportamiento normal del sistema y hacer que el proceso hijo herede el token de un [proceso padre](https://learn.microsoft.com/es-es/windows/win32/procthread/processes-and-threads) que corre como SYSTEM, permitiéndonos suplantarlo.
 
 Si apuntamos a un proceso padre que se ejecuta como **SYSTEM** (especificando su PID), podemos elevar nuestros privilegios rápidamente.
 
@@ -175,7 +175,7 @@ Si apuntamos a un proceso padre que se ejecuta como **SYSTEM** (especificando su
 
 ## Pasos generales
 
-1. Transferir el script PoC al sistema objetivo (por ejemplo, desde el repositorio actualizado en GitHub: [https://github.com/decoder-it/psgetsystem](https://github.com/decoder-it/psgetsystem)) y revisar su uso.
+1. Transferir el [script PoC](https://raw.githubusercontent.com/decoder-it/psgetsystem/master/psgetsys.ps1) al sistema objetivo (por ejemplo, desde el repositorio actualizado en GitHub: [https://github.com/decoder-it/psgetsystem](https://github.com/decoder-it/psgetsystem)) y revisar su uso.
 2. Cargar el script en el objetivo y ejecutar con la sintaxis:
 
 ```
