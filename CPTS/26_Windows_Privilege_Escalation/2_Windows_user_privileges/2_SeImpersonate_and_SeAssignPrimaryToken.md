@@ -339,7 +339,9 @@ El comando `whoami` confirma la obtención de una shell con **privilegios de SYS
 
 En versiones modernas de Windows (Windows Server 2019 y Windows 10 build 1809 en adelante), el método clásico de **JuicyPotato** ya no funciona debido a los parches aplicados por Microsoft que bloquean la reflexión NTLM local.
 
-Sin embargo, herramientas más recientes como **PrintSpoofer** y **RoguePotato** permiten aprovechar los mismos privilegios (`SeImpersonatePrivilege` o `SeAssignPrimaryTokenPrivilege`) para obtener acceso con nivel **NT AUTHORITY\SYSTEM** mediante vectores distintos.
+Sin embargo, herramientas más recientes como [**PrintSpoofer**](https://github.com/itm4n/PrintSpoofer) y [**RoguePotato**](https://github.com/antonioCoco/RoguePotato) permiten aprovechar los mismos privilegios (`SeImpersonatePrivilege` o `SeAssignPrimaryTokenPrivilege`) para obtener acceso con nivel **NT AUTHORITY\SYSTEM** mediante vectores distintos.
+
+Este [blog](https://itm4n.github.io/printspoofer-abusing-impersonate-privileges/) profundiza en la herramienta `PrintSpoofer`.
 
 * **RoguePotato** utiliza un enfoque similar a JuicyPotato, pero emplea puertos HTTP/SMB y canales alternativos para evadir las restricciones locales.
 * **PrintSpoofer**, en cambio, abusa del servicio de impresión de Windows (Spooler Service), que también se ejecuta como SYSTEM, para crear un token privilegiado y suplantarlo.
