@@ -37,16 +37,16 @@ Más información sobre los [ataques de suplantación de tokens](https://github.
 
 ## SeImpersonate Example - JuicyPotato
 
-Contexto
+### Contexto
 
 En este ejemplo, hemos obtenido acceso inicial (foothold) en un servidor SQL (SQL Server) utilizando un usuario SQL privilegiado.
-Tanto IIS (Internet Information Services) como SQL Server pueden estar configurados para usar Windows Authentication, lo que significa que las conexiones de los clientes se realizan bajo el contexto de sus credenciales de Windows.
+Tanto IIS como SQL Server pueden estar configurados para usar Windows Authentication, lo que significa que las conexiones de los clientes se realizan bajo el contexto de sus credenciales de Windows.
 
-Cuando un servidor (como SQL Server) necesita acceder a otros recursos —por ejemplo, compartidos de red o archivos— en nombre del cliente que se conecta, puede hacerlo suplantando (impersonating) al usuario bajo cuyo contexto se estableció dicha conexión.
+Cuando un servidor necesita acceder a otros recursos —por ejemplo, compartidos de red o archivos— en nombre del cliente que se conecta, puede hacerlo suplantando (impersonating) al usuario bajo cuyo contexto se estableció dicha conexión.
 
-Privilegio implicado
+`Privilegio implicado`
 
-Para poder realizar esta suplantación, la cuenta del servicio necesita tener asignado el privilegio “Impersonate a client after authentication” (también conocido como SeImpersonatePrivilege).
+Para poder realizar esta suplantación, la cuenta del servicio necesita tener asignado el privilegio [“Impersonate a client after authentication”]([https://academy.hackthebox.com/module/67/section/607](https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/impersonate-a-client-after-authentication)) (también conocido como `SeImpersonatePrivilege`).
 
 Este privilegio le permite al servicio asumir el token de seguridad de otro usuario autenticado y ejecutar acciones en su contexto, lo que es crucial para ataques como JuicyPotato, RoguePotato o PrintSpoofer, que explotan este permiso para obtener privilegios más altos (por ejemplo, NT AUTHORITY\SYSTEM).
 
