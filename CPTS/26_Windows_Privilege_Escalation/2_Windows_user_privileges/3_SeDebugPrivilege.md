@@ -240,5 +240,26 @@ Tener en cuenta estos ejemplos para los casos en que volcar LSASS no produzca cr
 
 
 ---
+---
+
+# Resumen y flujo de técnicas
+
+## Extracción de credenciales (Mimikatz / volcado de LSASS)
+
+**Objetivo:** obtener credenciales en claro o hashes desde la memoria del sistema.
+
+**Flujo típico:** obtener volcado (ProcDump o Create dump file en Task Manager) → cargarlo en mimikatz (sekurlsa::minidump + sekurlsa::logonpasswords) → extraer NTLM / cleartext / tickets.
+
+**Resultado posible:** contraseña en claro (mejor), o solamente el hash NTLM (aún valioso). Si solo hay hash, puedes intentar crackearlo offline o usarlo en un pass-the-hash (siempre dentro del alcance del engagement).
+
+---
+
+## Escalada a SYSTEM usando SeDebugPrivilege (PoC / CreateProcessFromParent, psgetsys, PrivFu, etc.)
+
+**Objetivo:** lograr ejecución con token SYSTEM sin necesidad de conocer contraseñas, aprovechando que tu cuenta tiene SeDebugPrivilege.
+
+**Flujo típico:** transferir PoC al host → cargarlo en PowerShell elevado → crear un proceso hijo que herede el token del proceso padre (p. ej. winlogon o lsass) → obtener shell/ejecución como SYSTEM.
+
+**Variantes:** crear reverse shell como SYSTEM, añadir usuario administrador, ejecutar comandos remotos cuando no hay sesión interactiva (webshell, reverse shell limitada, command injection).
 
 
