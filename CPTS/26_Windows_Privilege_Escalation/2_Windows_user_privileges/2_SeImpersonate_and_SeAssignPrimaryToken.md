@@ -69,35 +69,65 @@ Escenario de ejemplo
   `Snaffler`
   que busca archivos y datos sensibles en redes Windows, como contraseñas, llaves o configuraciones con permisos inseguros.
 
-### Conclusión
-
-Este escenario demuestra cómo un atacante con acceso a una cuenta de servicio con privilegio SeImpersonatePrivilege puede:
-
-1. Ejecutar comandos en el servidor SQL.
-2. Identificar credenciales almacenadas en recursos de red.
-3. Potencialmente elevar privilegios a SYSTEM utilizando herramientas como JuicyPotato, aprovechando la suplantación de tokens (token impersonation).
-
-Conceptos clave
-
-SeImpersonatePrivilege → Permite ejecutar procesos bajo el contexto de otro usuario autenticado.
-xp_cmdshell → Procedimiento de SQL Server que ejecuta comandos del sistema operativo.
-mssqlserver → Cuenta por defecto bajo la cual se ejecuta el servicio de SQL Server.
-JuicyPotato → Explotación de DCOM/SeImpersonatePrivilege para elevar privilegios a SYSTEM.
-Snaffler → Herramienta para localizar archivos sensibles en redes Windows.
-
-Lección práctica
-
-Cuando un servicio tiene el privilegio SeImpersonatePrivilege, no es necesario que sea administrador local para escalar privilegios.
-La explotación mediante JuicyPotato o similares aprovecha la delegación insegura de tokens para ejecutar código con privilegios de SYSTEM.
-
-Flujo simplificado:
-
-Service Account (con SeImpersonatePrivilege)
-↓
-Explotación (JuicyPotato)
-↓
-NT AUTHORITY\SYSTEM
+---
 
 
+Conectando con MSSQLClient.py
 
+**Contexto**
+
+Con las credenciales `sql_dev:Str0ng_P@ssw0rd!`, primero nos conectamos a la instancia de SQL Server y verificamos los privilegios asociados a dicha cuenta. Esta fase nos permite determinar el nivel de acceso disponible dentro del servicio SQL, lo cual es crucial antes de intentar cualquier tipo de explotación o escalada.
+
+Para realizar esta conexión, utilizamos la herramienta **`mssqlclient.py`** incluida en el paquete **Impacket**, una colección de utilidades para interactuar con diversos protocolos de red y servicios de Windows (como SMB, RDP, MSSQL, LDAP, etc.).
+
+---
+
+**Ejemplo de conexión**
+
+```
+mssqlclient.py sql_dev@10.129.43.30 -windows-auth
+```
+
+Al ejecutar este comando, el cliente intenta autenticarse contra el servicio MSSQL en la dirección IP del servidor utilizando autenticación de Windows (`-windows-auth`).
+
+Una vez ingresada la contraseña, el cliente establece la conexión TLS y muestra información relevante del entorno:
+
+* Cambio de base de datos al contexto `master`.
+* Cambio de idioma a `us_english`.
+* Ajuste del tamaño de paquete (`PACKETSIZE`).
+* Confirmación de conexión exitosa al servidor (`Microsoft SQL Server`).
+
+El mensaje final:
+
+```
+[!] Press help for extra shell commands
+SQL>
+```
+
+indica que la conexión ha sido establecida correctamente y que ahora contamos con un **prompt interactivo de SQL**, desde el cual es posible ejecutar consultas y comandos.
+
+---
+
+**Objetivo de esta etapa**
+
+1. Validar que las credenciales proporcionadas son válidas.
+2. Confirmar el tipo de autenticación utilizada (en este caso, autenticación integrada de Windows).
+3. Verificar si el usuario tiene permisos elevados dentro de SQL Server (por ejemplo, acceso a `xp_cmdshell` o pertenencia al rol `sysadmin`).
+4. Preparar el entorno para posibles técnicas de escalada de privilegios aprovechando configuraciones o permisos indebidos.
+
+---
+
+**Herramientas clave**
+
+| Herramienta      | Descripción                                                                                                        |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `mssqlclient.py` | Cliente de Impacket que permite autenticarse y ejecutar comandos en servidores MSSQL.                              |
+| `Impacket`       | Framework en Python para interactuar con servicios y protocolos de red de Windows.                                 |
+| `SQL Server`     | Servicio de base de datos que puede ser explotado para ejecutar código o moverse lateralmente en entornos Windows. |
+
+---
+
+**Importancia práctica**
+
+Este paso inicial es fundamental en una auditoría o laboratorio de escalada en Windows, ya que una conexión válida a SQL Server puede abrir múltiples caminos de explotación: desde la ejecución de comandos en el sistema operativo con `xp_cmdshell`, hasta la extracción de credenciales o la suplantación de tokens mediante privilegios como `SeImpersonatePrivilege`.
 
