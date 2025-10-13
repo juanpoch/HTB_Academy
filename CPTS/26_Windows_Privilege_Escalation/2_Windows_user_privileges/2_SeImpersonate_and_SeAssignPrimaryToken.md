@@ -130,7 +130,7 @@ La salida confirmará el cambio de configuración:
 
 ---
 
-Confirmando acceso
+### Confirmando acceso
 
 Una vez habilitado `xp_cmdshell`, podemos verificar que efectivamente se están ejecutando comandos del sistema operativo en el contexto de la cuenta de servicio bajo la cual corre SQL Server.
 
