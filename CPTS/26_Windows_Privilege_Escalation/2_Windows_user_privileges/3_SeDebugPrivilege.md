@@ -27,7 +27,7 @@ Por ejemplo:
 
 ---
 
-# Volcado de LSASS con ProcDump (SeDebugPrivilege)
+# Volcado de LSASS con ProcDump
 
 Tras iniciar sesión como un usuario al que se le asignó el derecho **Debug programs** y abrir una shell elevada, comprobamos que **SeDebugPrivilege** aparece listado.
 
@@ -44,7 +44,7 @@ SeChangeNotifyPrivilege                   Bypass traverse checking              
 SeIncreaseWorkingSetPrivilege             Increase a process working set                                     Disabled
 ```
 
-Podemos usar **ProcDump** del paquete Sysinternals para aprovechar este privilegio y volcar la memoria de un proceso. Un buen candidato es el proceso **Local Security Authority Subsystem Service (LSASS)**, que almacena credenciales de usuario tras el inicio de sesión.
+Podemos usar [**ProcDump**](https://learn.microsoft.com/es-es/sysinternals/downloads/procdump) del paquete `Sysinternals` para aprovechar este privilegio y volcar la memoria de un proceso. Un buen candidato es el proceso **Local Security Authority Subsystem Service (LSASS)**, que almacena credenciales de usuario tras el inicio de sesión.
 
 ```cmd
 C:\htb> procdump.exe -accepteula -ma lsass.exe lsass.dmp
