@@ -467,3 +467,24 @@ xp_cmdshell whoami /priv
 ```
 <img width="1391" height="859" alt="image" src="https://github.com/user-attachments/assets/e6329a04-d7e9-4ddb-a1f5-8c70b087e277" />
 
+Esto muestra los privilegios activos del contexto bajo el cual se ejecuta SQL Server (`NT SERVICE\MSSQL$SQLEXPRESS01`). Confirmamos el vector de escalada de privilegios:
+```
+- SeAssignPrimaryTokenPrivilege   Disabled  
+- SeImpersonatePrivilege          Enabled
+```
+
+
+
+<img width="1389" height="965" alt="image" src="https://github.com/user-attachments/assets/ccbaaf67-3b6a-48a7-8737-91a6dd865b82" />
+
+
+Obtenemos la siguiente información:
+```bash
+OS Name:        Microsoft Windows Server 2016 Standard  
+OS Version:     10.0.14393  
+OS Build:       14393  
+System Type:    x64-based PC
+```
+
+`JuicyPotato` es compatible hasta Windows Server 2019, por lo que podemos utilizarlo para el ataque.
+
