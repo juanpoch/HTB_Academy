@@ -430,9 +430,30 @@ Verificamos que tenemos conexión con la máquina víctima:
 
 Nosotros sabemos que tenemos que autenticarnos a `10.129.43.43 ` con las credenciales `sql_dev`:`Str0ng_P@ssw0rd!`.
 
-Nos conectamos al servidor sql mediante el comando:
-```
+Nos conectamos al servidor `mssql` mediante el comando:
+```bash
 mssqlclient.py sql_dev@10.129.43.43 -windows-auth
 ```
 
 <img width="1574" height="470" alt="image" src="https://github.com/user-attachments/assets/1f8dc898-b70d-4228-9d76-d413db9a6e9e" />
+
+Habilitamos el procedimiento almacenado `xp_cmdshell` mediante el siguiente comando:
+```sql
+enable_xp_cmdshell
+```
+
+<img width="1907" height="204" alt="image" src="https://github.com/user-attachments/assets/e55a8975-329d-492f-a364-a427ff2847f7" />
+
+Ejecutamos el siguiente comando para averiguar el contexto de ejecución del proceso `xp_cmdshell`:
+```sql
+xp_cmdshell whoami
+```
+
+<img width="1129" height="274" alt="image" src="https://github.com/user-attachments/assets/a7ea0726-48eb-4590-9b38-4389a7e30cd0" />
+
+Esto nos dice con qué cuenta de Windows se están ejecutando los comandos que lanzamos desde SQL Server.
+La cuenta es: `nt service\mssql$sqlexpress01`
+
+- `NT SERVICE\...` → indica que el proceso se está ejecutando bajo una cuenta de servicio virtual del propio sistema operativo.
+
+- `mssql$sqlexpress01` → es la cuenta de servicio local que utiliza la instancia de `SQL Server` llamada `SQLEXPRESS01`.
