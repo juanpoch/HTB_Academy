@@ -72,17 +72,21 @@ Escenario de ejemplo
 ---
 
 
-Conectando con MSSQLClient.py
+### Conectando con MSSQLClient.py
 
 **Contexto**
 
-Con las credenciales `sql_dev:Str0ng_P@ssw0rd!`, primero nos conectamos a la instancia de SQL Server y verificamos los privilegios asociados a dicha cuenta. Esta fase nos permite determinar el nivel de acceso disponible dentro del servicio SQL, lo cual es crucial antes de intentar cualquier tipo de explotación o escalada.
+**Objetivo de esta etapa**
 
-Para realizar esta conexión, utilizamos la herramienta **`mssqlclient.py`** incluida en el paquete **Impacket**, una colección de utilidades para interactuar con diversos protocolos de red y servicios de Windows (como SMB, RDP, MSSQL, LDAP, etc.).
+1. Validar que las credenciales proporcionadas son válidas.
+2. Confirmar el tipo de autenticación utilizada (en este caso, autenticación integrada de Windows).
+3. Verificar si el usuario tiene permisos elevados dentro de SQL Server (por ejemplo, acceso a `xp_cmdshell`).
+4. Preparar el entorno para posibles técnicas de escalada de privilegios aprovechando configuraciones o permisos indebidos.
 
----
+Con las credenciales `sql_dev:Str0ng_P@ssw0rd!`, primero nos conectamos a la instancia de `SQL Server` y verificamos los privilegios asociados a dicha cuenta. Esta fase nos permite determinar el nivel de acceso disponible dentro del servicio SQL, lo cual es crucial antes de intentar cualquier tipo de explotación o escalada.
 
-**Ejemplo de conexión**
+Para realizar esta conexión, utilizamos la herramienta [**`mssqlclient.py`**](https://github.com/fortra/impacket/blob/master/examples/mssqlclient.py) incluida en el paquete **Impacket**, una colección de utilidades para interactuar con diversos protocolos de red y servicios de Windows:
+
 
 ```
 mssqlclient.py sql_dev@10.129.43.30 -windows-auth
@@ -90,44 +94,71 @@ mssqlclient.py sql_dev@10.129.43.30 -windows-auth
 
 Al ejecutar este comando, el cliente intenta autenticarse contra el servicio MSSQL en la dirección IP del servidor utilizando autenticación de Windows (`-windows-auth`).
 
-Una vez ingresada la contraseña, el cliente establece la conexión TLS y muestra información relevante del entorno:
 
-* Cambio de base de datos al contexto `master`.
-* Cambio de idioma a `us_english`.
-* Ajuste del tamaño de paquete (`PACKETSIZE`).
-* Confirmación de conexión exitosa al servidor (`Microsoft SQL Server`).
 
-El mensaje final:
+<img width="1355" height="515" alt="image" src="https://github.com/user-attachments/assets/523b730a-0a0e-48af-a0fd-2bd7a647cbe0" />
+
+
+Esto indica que la conexión ha sido establecida correctamente y que ahora contamos con un **prompt interactivo de SQL**, desde el cual es posible ejecutar consultas y comandos.
+
+---
+
+
+### Habilitación de xp_cmdshell
+
+
+Habilitamos el procedimiento almacenado `xp_cmdshell`, el cual permite ejecutar comandos del sistema operativo directamente desde el contexto de SQL Server. Esta capacidad es muy útil tanto para administradores legítimos como para un atacante que haya comprometido el servidor SQL.
+
+Por defecto, esta funcionalidad suele estar deshabilitada por razones de seguridad, ya que representa un riesgo importante de ejecución remota de código (RCE) si la cuenta del servicio SQL tiene privilegios elevados.
+
+Para habilitarla, utilizamos el shell de MSSQL proporcionado por **Impacket**, escribiendo el comando:
 
 ```
-[!] Press help for extra shell commands
-SQL>
+enable_xp_cmdshell
 ```
 
-indica que la conexión ha sido establecida correctamente y que ahora contamos con un **prompt interactivo de SQL**, desde el cual es posible ejecutar consultas y comandos.
+El script automáticamente ejecuta los siguientes pasos internamente:
+
+* Habilita la opción de configuración avanzada de SQL (`show advanced options`).
+* Activa `xp_cmdshell` dentro del servidor SQL.
+* Ejecuta el comando `RECONFIGURE` de manera automática (no es necesario hacerlo manualmente).
+
+La salida confirmará el cambio de configuración:
+
+```
+[*] INFO(WINLPE-SRV01\SQLEXPRESS01): Line 185: Configuration option 'show advanced options' changed from 0 to 1.
+[*] INFO(WINLPE-SRV01\SQLEXPRESS01): Line 185: Configuration option 'xp_cmdshell' changed from 0 to 1.
+```
+
+**Nota:** Impacket automatiza el proceso completo, por lo que no es necesario ejecutar manualmente los comandos `sp_configure` o `RECONFIGURE`.
 
 ---
 
-**Objetivo de esta etapa**
+Confirmando acceso
 
-1. Validar que las credenciales proporcionadas son válidas.
-2. Confirmar el tipo de autenticación utilizada (en este caso, autenticación integrada de Windows).
-3. Verificar si el usuario tiene permisos elevados dentro de SQL Server (por ejemplo, acceso a `xp_cmdshell` o pertenencia al rol `sysadmin`).
-4. Preparar el entorno para posibles técnicas de escalada de privilegios aprovechando configuraciones o permisos indebidos.
+Una vez habilitado `xp_cmdshell`, podemos verificar que efectivamente se están ejecutando comandos del sistema operativo en el contexto de la cuenta de servicio bajo la cual corre SQL Server.
+
+Para ello, desde la consola SQL del cliente Impacket ejecutamos:
+
+```
+SQL> xp_cmdshell whoami
+```
+
+La salida será algo similar a:
+
+```
+nt service\mssql$sqlxpress01
+```
+
+Esto confirma que los comandos se están ejecutando con los privilegios del servicio **MSSQLSERVER**, lo cual es clave para los siguientes pasos de escalada de privilegios. Si dicha cuenta posee el privilegio **SeImpersonatePrivilege**, podremos aprovecharlo posteriormente para obtener un contexto de ejecución más elevado (por ejemplo, **NT AUTHORITY\SYSTEM**).
 
 ---
 
-**Herramientas clave**
+**Conclusión**
 
-| Herramienta      | Descripción                                                                                                        |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `mssqlclient.py` | Cliente de Impacket que permite autenticarse y ejecutar comandos en servidores MSSQL.                              |
-| `Impacket`       | Framework en Python para interactuar con servicios y protocolos de red de Windows.                                 |
-| `SQL Server`     | Servicio de base de datos que puede ser explotado para ejecutar código o moverse lateralmente en entornos Windows. |
+* `xp_cmdshell` brinda la capacidad de ejecutar comandos del sistema directamente desde SQL Server.
+* Su habilitación implica una superficie de ataque crítica en entornos mal configurados.
+* Verificar el contexto de ejecución (`whoami`) es esencial para comprender los privilegios disponibles antes de intentar la escalada mediante técnicas como JuicyPotato o PrintSpoofer.
 
----
 
-**Importancia práctica**
-
-Este paso inicial es fundamental en una auditoría o laboratorio de escalada en Windows, ya que una conexión válida a SQL Server puede abrir múltiples caminos de explotación: desde la ejecución de comandos en el sistema operativo con `xp_cmdshell`, hasta la extracción de credenciales o la suplantación de tokens mediante privilegios como `SeImpersonatePrivilege`.
 
