@@ -52,12 +52,12 @@ Este privilegio le permite al servicio asumir el token de seguridad de otro usua
 
 Escenario de ejemplo
 
-* El servicio de SQL Server está corriendo bajo el contexto de la cuenta por defecto:
-  mssqlserver
+* El servicio de `SQL Server` está corriendo bajo el contexto de la cuenta por defecto:
+  `mssqlserver`
 
 * Imaginemos que logramos ejecutar comandos como este usuario utilizando:
-  xp_cmdshell
-  Este procedimiento almacenado de SQL permite ejecutar comandos del sistema desde SQL Server (por ejemplo, whoami, dir, etc.), lo cual representa un punto de ejecución remota de comandos (RCE).
+  `xp_cmdshell`
+  Este procedimiento almacenado de SQL permite ejecutar comandos del sistema desde SQL Server (por ejemplo, `whoami`, `dir`, etc.), lo cual representa un punto de ejecución remota de comandos (RCE).
 
 * Supongamos además que hemos obtenido un conjunto de credenciales dentro de un archivo llamado:
   logins.sql
