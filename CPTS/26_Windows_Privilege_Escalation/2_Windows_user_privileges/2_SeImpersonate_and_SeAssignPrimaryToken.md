@@ -457,3 +457,13 @@ La cuenta es: `nt service\mssql$sqlexpress01`
 - `NT SERVICE\...` → indica que el proceso se está ejecutando bajo una cuenta de servicio virtual del propio sistema operativo.
 
 - `mssql$sqlexpress01` → es la cuenta de servicio local que utiliza la instancia de `SQL Server` llamada `SQLEXPRESS01`.
+ 
+
+Hasta aquí obtuvimos el `foothold`.
+
+Procedemos a verificar los privilegios de la cuenta de servicio que estamos manipulando mediante el siguiente comando:
+```sql
+xp_cmdshell whoami /priv
+```
+<img width="1391" height="859" alt="image" src="https://github.com/user-attachments/assets/e6329a04-d7e9-4ddb-a1f5-8c70b087e277" />
+
