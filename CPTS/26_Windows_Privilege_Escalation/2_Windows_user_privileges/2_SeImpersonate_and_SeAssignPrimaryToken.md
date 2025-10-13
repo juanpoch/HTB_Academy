@@ -184,5 +184,6 @@ El comando `whoami /priv` confirma que el privilegio **SeImpersonatePrivilege** 
 
 Este es un indicador claro de una posible escalada de privilegios, ya que [**JuicyPotato**](https://github.com/ohpe/juicy-potato) o herramientas similares pueden aprovechar **SeImpersonatePrivilege** o **SeAssignPrimaryTokenPrivilege** para obtener ejecución con el contexto de **NT AUTHORITY\SYSTEM** mediante técnicas de **DCOM/NTLM reflection abuse**.
 
+`Nota`: `**DCOM/NTLM reflection abuse**`: El atacante “engaña” al sistema para que se autentique contra sí mismo y reutiliza (refleja) esa autenticación NTLM para obtener un token con privilegios más altos.
 
-
+---
