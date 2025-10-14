@@ -97,8 +97,7 @@ SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
 
 ## Elegir un fichero objetivo y recopilar información
 
-## Estructura típica de un file share
-
+## Estructura típica de una carpeta compartida
 En entornos corporativos es común encontrar una estructura de recursos compartidos con carpetas del tipo **Public** y **Private**, y subdirectorios organizados por departamentos (IT, HR, Finance, etc.).
 
 * **Public**: accesible por muchos usuarios; normalmente contiene documentación pública, plantillas y recursos compartidos genéricos.
@@ -108,7 +107,7 @@ Aunque la estructura parece lógica, la configuración de permisos puede estar i
 
 ---
 
-## Utilidad los file shares 
+## Importancia de las carpetas compartidas
 
 1. **Amplio volumen de datos**: los shares suelen concentrar documentos, scripts, backups y claves que no se encuentran en perfiles individuales.
 2. **Errores de configuración**: administradores pueden haber aplicado permisos de forma inconsistente (herencia mal configurada, grupos mal aplicados), lo que deja vectores para escalada o acceso a secretos.
