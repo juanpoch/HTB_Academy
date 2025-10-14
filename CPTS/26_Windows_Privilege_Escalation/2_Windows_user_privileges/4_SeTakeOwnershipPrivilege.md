@@ -322,3 +322,30 @@ xfreerdp /v:10.129.43.43 /u:htb-student
 ```
 
 <img width="1512" height="950" alt="image" src="https://github.com/user-attachments/assets/c4f5cc7e-7e79-47f7-81ab-62f6a6b9d695" />
+
+
+Abrimos una powershell como administradores y visualizamos nuestros privilegios:
+
+```powershell
+whoami /priv
+```
+
+<img width="995" height="223" alt="image" src="https://github.com/user-attachments/assets/3dd5c46b-f61f-4005-874a-50e63ffc5f87" />
+
+Notamos que el `SeTakeOwnershipPrivilege` está `disabled`.
+
+### Habilitamos `SeTakeOwnershipPrivilege` en nuestro token
+
+Buscamos en el sistema el archivo `EnableAllTokenPrivs.ps1` mediante el siguiente comando:
+
+```powershell
+Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include EnableAllTokenPrivs.ps1 | Select-Object FullName
+```
+
+
+<img width="1019" height="211" alt="image" src="https://github.com/user-attachments/assets/bd15522e-4de1-4b9f-8395-3290568e5d4c" />
+
+Ejecutamos el archivo `EnableAllTokenPrivs.ps1` para habilitar `SeTakeOwnershipPrivilege` en el token:
+```powershell
+C:\Tools\EnableAllTokenPrivs.ps1
+```
