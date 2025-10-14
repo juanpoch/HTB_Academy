@@ -301,7 +301,6 @@ Los siguientes ficheros/rutas suelen ser valiosos durante una evaluación intern
 
   * Archivos VHD/VHDX (virtual hard drives) que pueden contener copias de sistemas o datos sensibles.
 
-> **Nota:** la presencia de alguno de estos ficheros no implica que contengan secretos válidos; su valor depende del contexto. Siempre operar bajo el alcance del engagement.
 
 ---
 ---
