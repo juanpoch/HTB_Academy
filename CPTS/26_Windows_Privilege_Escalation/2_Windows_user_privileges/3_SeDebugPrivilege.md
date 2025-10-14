@@ -19,8 +19,24 @@ Durante un **pentest interno**, `SeDebugPrivilege` es un objetivo interesante po
 Por ejemplo:
 
 * Si se obtienen múltiples **hashes NTLMv2** con herramientas como **Responder** o **Inveigh**, conviene priorizar el cracking de cuentas que podrían tener este privilegio (p. ej., cuentas de desarrolladores).
+
+**Responder**: herramienta escrita en Python, usada en pruebas de pentesting en redes Windows. Se aprovecha de protocolos de resolución de nombres en redes locales (como **LLMNR**, **NBT-NS** y **mDNS**) para responder de forma fraudulenta a consultas y así capturar credenciales de autenticación (por ejemplo, hashes NTLMv2) o inducir a equipos a autenticarse contra el atacante.
+
+**Inveigh**: script en **PowerShell** diseñado para ambientes Windows que realiza funciones similares a Responder (LLMNR/NBNS poisoning, captura de hashes, análisis de tráfico), ideal cuando el pentester ya dispone de acceso a una máquina Windows en la red objetivo.
+
+**Diferencias clave**
+
+* Plataforma: Responder suele ejecutarse en Linux; Inveigh está pensado para ejecución en Windows/PowerShell.
+* Integración: Inveigh facilita pruebas desde un host Windows sin depender de herramientas externas; Responder tiene más módulos y largo recorrido en la comunidad pentest.
+
+**Qué capturan**
+
+* Ambas pueden capturar **hashes NTLMv2** u otras credenciales parciales que luego pueden **crackearse offline** o usarse en ataques *relay* / *pass-the-hash* según el contexto del engagement.
+* Son especialmente útiles en entornos donde LLMNR/NBNS están habilitados y no hay protección como SMB signing o autenticación fuerte.
+
 * Un usuario puede **no ser administrador local**, pero tener este derecho asignado, lo cual **no siempre es visible remotamente** (por ejemplo, mediante `BloodHound`). Por eso es útil comprobarlo manualmente al tener acceso RDP o sesión local.
 
+`BloodHound` es una herramienta de post-explotación / red-team que modela `Active Directory` como un grafo para identificar rutas de ataque para escalar privilegios o moverse lateralmente en un dominio.
 
 <img width="1640" height="351" alt="image" src="https://github.com/user-attachments/assets/1219102e-0686-4112-b398-807edda96d78" />
 
