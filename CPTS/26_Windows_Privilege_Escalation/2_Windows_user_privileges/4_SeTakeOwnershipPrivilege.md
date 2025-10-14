@@ -145,6 +145,7 @@ Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | \
 <img width="1453" height="160" alt="image" src="https://github.com/user-attachments/assets/97fb469b-4965-4e2c-9513-31b41d98d065" />
 
 
+`Nota`: [Get-Acl doc](https://learn.microsoft.com/es-es/powershell/module/microsoft.powershell.security/get-acl?view=powershell-7.5)
 
 Si no aparece el `Owner` (o la consulta falla por permisos), retrocede y mira el propietario del directorio:
 
