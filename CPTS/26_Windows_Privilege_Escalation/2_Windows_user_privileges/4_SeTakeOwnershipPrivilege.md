@@ -153,7 +153,7 @@ Si no aparece el `Owner` (o la consulta falla por permisos), retrocede y mira el
 cmd /c dir /q 'C:\Department Shares\Private\IT'
 ```
 
-`Nota`: Podríamos haber utilizado `cgi` pero al haber fallado el comando `Get-Acl` por no tener permisos para leer la ACL del archivo, se recurre a `dir /q`, porque en la práctica permite ver el owner que aparece en la lista del directorio si se tiene permiso para listar la carpeta aunque no para leer la ACL del archivo.
+`Nota`: Podríamos haber utilizado `gci` pero al haber fallado el comando `Get-Acl` por no tener permisos para leer la ACL del archivo, se recurre a `dir /q`, porque en la práctica permite ver el owner que aparece en la lista del directorio si se tiene permiso para listar la carpeta aunque no para leer la ACL del archivo.
 
 - `cmd \c`: Ejecuta un comando bajo el `cmd.exe` tradicional y sale.
 - `\q`: Muestra el owner de cada archivo/carpeta en la salida de `dir`.
