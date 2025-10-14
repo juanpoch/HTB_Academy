@@ -302,6 +302,8 @@ Los siguientes ficheros/rutas suelen ser valiosos durante una evaluación intern
   * Archivos VHD/VHDX (virtual hard drives) que pueden contener copias de sistemas o datos sensibles.
 
 
+Tras realizar estos cambios, nos esforzaremos al máximo para revertir los permisos y la propiedad de los archivos. Si por alguna razón no podemos hacerlo, debemos avisar a nuestro cliente y documentar cuidadosamente las modificaciones en un apéndice de nuestro informe.
+
 ---
 ---
 
