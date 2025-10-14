@@ -81,6 +81,8 @@ Sysinternals - www.sysinternals.com
 
 Este procedimiento genera un volcado de memoria (`lsass.dmp`) que puede analizarse posteriormente en un entorno controlado para extraer credenciales o validar el impacto del privilegio **SeDebugPrivilege** en la seguridad del sistema.
 
+`Nota`: el volcado de `LSASS` contiene credenciales de múltiples sesiones y procesos, no sólo del usuario que ejecuta el volcado.
+
 ---
 
 # Extracción de credenciales con Mimikatz
