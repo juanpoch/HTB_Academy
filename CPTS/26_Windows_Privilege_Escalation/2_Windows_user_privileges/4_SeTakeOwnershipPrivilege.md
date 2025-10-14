@@ -349,3 +349,13 @@ Ejecutamos el archivo `EnableAllTokenPrivs.ps1` para habilitar `SeTakeOwnershipP
 ```powershell
 C:\Tools\EnableAllTokenPrivs.ps1
 ```
+Luego volvemos a listar nuestros privilegios:
+<img width="636" height="221" alt="image" src="https://github.com/user-attachments/assets/391580eb-36c8-4cfd-b31d-e22efe85630f" />
+
+Logramos habilitar el privilegio.
+
+Comprobamos detalles del fichero que nos interesa:
+```powershell
+Get-ChildItem -Path 'C:\TakeOwn\flag.txt' | \
+  Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
+```
