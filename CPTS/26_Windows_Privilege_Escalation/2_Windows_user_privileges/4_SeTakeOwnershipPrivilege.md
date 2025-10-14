@@ -356,6 +356,5 @@ Logramos habilitar el privilegio.
 
 Comprobamos detalles del fichero que nos interesa:
 ```powershell
-Get-ChildItem -Path 'C:\TakeOwn\flag.txt' | \
-  Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
+Get-ChildItem -Path 'C:\TakeOwn\flag.txt' | Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
 ```
