@@ -332,11 +332,8 @@ Necesitamos volcar la memoria de un proceso SYSTEM con `ProcDump` pero para eso,
 <img width="993" height="281" alt="image" src="https://github.com/user-attachments/assets/beddb8fa-2b25-4326-ace2-a391137464b7" />
 
 Buscamos el ejecutable ProcDump mediante el siguiente comando de powershell:
-```cmd
+```
 powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *ProcDump*.exe | Select-Object FullName"
 ```
-
-
-
 
 ---
