@@ -284,4 +284,32 @@ Tener en cuenta estos ejemplos para los casos en que volcar LSASS no produzca cr
 
 **Variantes:** crear reverse shell como SYSTEM, añadir usuario administrador, ejecutar comandos remotos cuando no hay sesión interactiva (webshell, reverse shell limitada, command injection).
 
+---
 
+# Elevación a SYSTEM usando el token de un proceso SYSTEM
+
+**Resumen:** con `SeDebugPrivilege` podemos obtener el token de un proceso que corre como `SYSTEM` (p. ej. `winlogon.exe` o `lsass.exe`), duplicarlo como *primary token* y crear un proceso hijo que se ejecute con ese token, logrando así una shell/ejecución como `NT AUTHORITY\SYSTEM`.
+
+## Pasos
+
+1. **Abrir handle al proceso SYSTEM**  
+   Usar `OpenProcess()` para obtener un handle al proceso objetivo (p. ej. `winlogon` o `lsass`).  
+   (Requiere `SeDebugPrivilege` / permisos suficientes.)
+
+2. **Abrir el token del proceso**  
+   Usar `OpenProcessToken()` sobre el handle obtenido para acceder al token del proceso SYSTEM.
+
+3. **Duplicar el token**  
+   Usar `DuplicateTokenEx()` para crear un *primary token* duplicado, manipulable y apto para crear procesos.
+
+4. **Crear el proceso con el token de SYSTEM**  
+   Crear el nuevo proceso usando el token duplicado, por ejemplo con `CreateProcessWithTokenW()` o `CreateProcessAsUser()`.  
+   Alternativamente, algunos PoC usan atributos de `STARTUPINFOEX` (parent process spoofing con `PROC_THREAD_ATTRIBUTE_PARENT_PROCESS`) combinado con duplicación de token para técnicas específicas.
+
+
+---
+---
+
+# Laboratorio
+
+---
