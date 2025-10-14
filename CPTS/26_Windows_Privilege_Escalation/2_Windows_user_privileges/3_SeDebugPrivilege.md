@@ -420,5 +420,5 @@ Eso es el NT hash (NTLM hash). Es el resultado del algoritmo MD4 aplicado al pas
 
 ---
 
-Si quisiesemos acceder al archivo `.log` creado por `mimikatz`
+
 
