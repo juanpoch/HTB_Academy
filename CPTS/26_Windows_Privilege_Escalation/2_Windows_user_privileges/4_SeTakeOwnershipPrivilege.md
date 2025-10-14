@@ -48,11 +48,10 @@ Si detectamos un usuario que posee este privilegio —o si logramos asignárselo
 Primero comprobamos los privilegios del token de la sesión actual:
 
 ```powershell
-# Mostrar privilegios del token
 whoami /priv
 ```
 
-**Salida de ejemplo (parcial):**
+**Salida:**
 
 ```
 PRIVILEGES INFORMATION
