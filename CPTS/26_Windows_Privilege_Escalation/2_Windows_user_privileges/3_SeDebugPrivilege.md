@@ -373,11 +373,19 @@ Podríamos buscarlo de forma recursiva mediante el siguiente comando:
 ```cmd
 powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *lsass*.dmp | Select-Object FullName"
 ```
+<img width="1032" height="144" alt="imagen" src="https://github.com/user-attachments/assets/5356a1e6-0dbb-41be-8d94-c821c58df6fe" />
+
 
 `Nota`: También podríamos haber realizado el volcado de forma manual obteniendo la dirección `C:\Users\jordan\AppData\Local\Temp\lsass (2).DMP`:
 <img width="1017" height="769" alt="imagen" src="https://github.com/user-attachments/assets/960a869f-c06a-4727-b65d-dfb406f82e93" />
 
 
+El último paso es extraer el hash del usuario `sccm_svc` mediante `mimikatz`.
+
+Primero averiguamos si existe el programa:
+```cmd
+powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *mimikatz*.exe | Select-Object FullName"
+```
 
 
 
