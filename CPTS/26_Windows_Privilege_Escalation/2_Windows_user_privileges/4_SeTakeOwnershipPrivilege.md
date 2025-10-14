@@ -9,6 +9,7 @@ Estas capacidades por sí solas **pueden** facilitar una escalada de privilegios
 
 <img width="1239" height="838" alt="image" src="https://github.com/user-attachments/assets/965d3167-5897-4713-8571-a4e4042fbd22" />
 
+
 # Configuración del User Rights Assignment 
 
 La configuración del privilegio de usuario se puede establecer desde la Política de Grupo en la siguiente ruta:
