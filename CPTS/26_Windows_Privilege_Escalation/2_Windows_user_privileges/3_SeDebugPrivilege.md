@@ -325,4 +325,9 @@ xfreerdp /v:10.129.159.5 /u:jordan
 
 <img width="1516" height="922" alt="image" src="https://github.com/user-attachments/assets/d472a2f6-e0ae-413b-b3ef-caa439b193ad" />
 
+Abrimos una `cmd.exe` como administrador:
+<img width="1018" height="313" alt="image" src="https://github.com/user-attachments/assets/0a7ea93d-e11d-4cfa-9458-510bfe35c37d" />
+
+
+
 ---
