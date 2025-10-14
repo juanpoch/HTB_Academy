@@ -304,7 +304,7 @@ Tener en cuenta estos ejemplos para los casos en que volcar LSASS no produzca cr
 
 4. **Crear el proceso con el token de SYSTEM**  
    Crear el nuevo proceso usando el token duplicado, por ejemplo con `CreateProcessWithTokenW()` o `CreateProcessAsUser()`.  
-   Alternativamente, algunos PoC usan atributos de `STARTUPINFOEX` (parent process spoofing con `PROC_THREAD_ATTRIBUTE_PARENT_PROCESS`) combinado con duplicación de token para técnicas específicas.
+   Alternativamente, algunos PoC usan atributos de `STARTUPINFOEX` (parent process spoofing con `PROC_THREAD_ATTRIBUTE_PARENT_PROCESS`) combinado con duplicación de token para técnicas específicas (caso del PoC utilizado).
 
 
 ---
