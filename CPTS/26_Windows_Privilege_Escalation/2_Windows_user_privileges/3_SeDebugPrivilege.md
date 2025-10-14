@@ -420,7 +420,5 @@ Eso es el NT hash (NTLM hash). Es el resultado del algoritmo MD4 aplicado al pas
 
 ---
 
-Si quisiesemos acceder al archivo `.log` creado por `mimikatz` podemos buscarlo con el siguiente comando:
-```cmd
-powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *mimikatz*.log | Select-Object FullName"
-```
+Si quisiesemos acceder al archivo `.log` creado por `mimikatz`
+
