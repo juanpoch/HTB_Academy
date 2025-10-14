@@ -43,7 +43,7 @@ Si detectamos un usuario que posee este privilegio —o si logramos asignárselo
 
 ---
 
-# Uso de SeTakeOwnershipPrivilege — Flujo detallado
+# Uso de SeTakeOwnershipPrivilege
 
 Este lienzo explica paso a paso cómo revisar y aprovechar el privilegio **SeTakeOwnershipPrivilege** para tomar la propiedad de un fichero y leerlo (solo en entornos autorizados / laboratorio). Incluye comandos, salidas de ejemplo y recomendaciones de cuidado y remediación.
 
