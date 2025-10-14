@@ -9,7 +9,20 @@ Estas capacidades por sí solas **pueden** facilitar una escalada de privilegios
 
 <img width="1239" height="838" alt="image" src="https://github.com/user-attachments/assets/965d3167-5897-4713-8571-a4e4042fbd22" />
 
+# Configuración del User Rights Assignment 
 
+La configuración del privilegio de usuario se puede establecer desde la Política de Grupo en la siguiente ruta:
+
+```
+Computer Configuration ⇾ Windows Settings ⇾ Security Settings ⇾ Local Policies ⇾ User Rights Assignment
+```
+
+En ese contenedor es donde se asignan derechos sensibles como **SeDebugPrivilege**, **SeTakeOwnershipPrivilege**, **SeBackupPrivilege**, entre otros. Modificar estos derechos debe hacerse con cuidado y siguiendo el principio de menor privilegio.
+
+
+
+
+<img width="1642" height="854" alt="image" src="https://github.com/user-attachments/assets/7c9422c4-d152-4ea2-b9b2-cb19eedd4cbd" />
 
 
 ---
