@@ -238,6 +238,9 @@ Ser propietario no siempre implica tener permisos efectivos de lectura. Tras tom
 icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F
 ```
 
+`Nota`: `htb-student:F` proporciona `Full control`.
+
+
 **Salida:**
 
 ```
@@ -266,5 +269,55 @@ root:n1X_p0wer_us3er!
 
 ---
 
+## Ficheros locales de interés 
+
+Los siguientes ficheros/rutas suelen ser valiosos durante una evaluación interna — si lográs acceso legítimo o mediante la técnica documentada, conviene revisarlos según alcance y normativa del cliente:
+
+* Archivos de configuración web / aplicaciones:
+
+  * `C:\inetpub\wwwroot\web.config` (contiene cadenas de conexión, secretos de apps ASP.NET)
+
+* Rutas de recuperación y configuración del sistema:
+
+  * `%WINDIR%\repair\sam`
+  * `%WINDIR%\repair\system`
+  * `%WINDIR%\repair\software`
+  * `%WINDIR%\repair\security`
+
+* Hives y eventos del sistema:
+
+  * `%WINDIR%\system32\config\SecEvent.Evt`
+  * `%WINDIR%\system32\config\default.sav`
+  * `%WINDIR%\system32\config\security.sav`
+  * `%WINDIR%\system32\config\software.sav`
+  * `%WINDIR%\system32\config\system.sav`
+
+* Bases de datos de contraseñas y ficheros de credenciales:
+
+  * Archivos KeePass (`*.kdbx`) y otros almacenes locales.
+  * OneNote notebooks, ficheros `passwords.*`, `pass.*`, `creds.*` u otros scripts de configuración que puedan contener secretos.
+
+* Imágenes y discos virtuales:
+
+  * Archivos VHD/VHDX (virtual hard drives) que pueden contener copias de sistemas o datos sensibles.
+
+> **Nota:** la presencia de alguno de estos ficheros no implica que contengan secretos válidos; su valor depende del contexto. Siempre operar bajo el alcance del engagement.
+
+---
+---
+
+# Laboratorio
+
+### Aproveche los derechos `SeTakeOwnershipPrivilege` sobre el archivo ubicado en `C:\TakeOwn\flag.txt` y envíe el contenido.
 
 
+- `IP`: `10.129.43.43`
+- `Usuario`: `htb-student`
+- `Contraseña`: `HTB_@cademy_stdnt!`
+
+Nos conectamos mediante `rdp` con el comando:
+```bash
+xfreerdp /v:10.129.43.43 /u:htb-student
+```
+
+<img width="1512" height="950" alt="image" src="https://github.com/user-attachments/assets/c4f5cc7e-7e79-47f7-81ab-62f6a6b9d695" />
