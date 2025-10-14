@@ -142,9 +142,8 @@ Comprobamos detalles del fichero (nombre completo, fechas, atributos y owner):
 Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | \
   Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
 ```
-| FullName                                      | LastWriteTime             | Attributes | Owner |
-|----------------------------------------------:|--------------------------:|-----------:|:-----:|
-| C:\Department Shares\Private\IT\cred.txt      | 6/18/2021 12:23:28 PM     | Archive    |       |
+<img width="1453" height="160" alt="image" src="https://github.com/user-attachments/assets/97fb469b-4965-4e2c-9513-31b41d98d065" />
+
 
 
 Si no aparece el `Owner` (o la consulta falla por permisos), retrocede y mira el propietario del directorio:
