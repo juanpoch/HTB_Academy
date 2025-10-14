@@ -366,6 +366,8 @@ Procedemos a realizar el volcado de forma manual:
 Nos damos cuenta que el volcado había funcionado porque figura como el segundo archivo con el mismo nombre `(2)`.
 
 Obtenemos la dirección `C:\Users\jordan\AppData\Local\Temp\lsass (2).DMP`
+
+
 Podríamos haberlo buscado de forma recursiva mediante el siguiente comando:
 ```cmd
 powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *lsass*.dmp | Select-Object FullName"
