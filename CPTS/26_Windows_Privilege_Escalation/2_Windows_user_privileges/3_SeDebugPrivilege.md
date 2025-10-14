@@ -34,6 +34,10 @@ Por ejemplo:
 * Ambas pueden capturar **hashes NTLMv2** u otras credenciales parciales que luego pueden **crackearse offline** o usarse en ataques *relay* / *pass-the-hash* según el contexto del engagement.
 * Son especialmente útiles en entornos donde LLMNR/NBNS están habilitados y no hay protección como SMB signing o autenticación fuerte.
 
+
+---
+
+
 * Un usuario puede **no ser administrador local**, pero tener este derecho asignado, lo cual **no siempre es visible remotamente** (por ejemplo, mediante `BloodHound`). Por eso es útil comprobarlo manualmente al tener acceso RDP o sesión local.
 
 `BloodHound` es una herramienta de post-explotación / red-team que modela `Active Directory` como un grafo para identificar rutas de ataque para escalar privilegios o moverse lateralmente en un dominio.
