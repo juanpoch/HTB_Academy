@@ -414,7 +414,7 @@ Utilizaremos los comandos `log`, luego `sekurlsa::minidump C:\Users\jordan\lsass
 Obtuvimos el hash del usuario `sccm_svc`:
 
 - `NTLM` : `64f12cddaa88057e06a81b54e73b949b`
-Eso es el NT hash (también llamado NTLM hash o NT hash). Es el resultado del algoritmo MD4 aplicado al password codificado en UTF-16LE. Es la representación hexadecimal de 16 bytes (32 hex).
+Eso es el NT hash (NTLM hash). Es el resultado del algoritmo MD4 aplicado al password codificado en UTF-16LE. Es la representación hexadecimal de 16 bytes (32 hex).
 
 - `SHA1` : `cba4e545b7ec918129725154b29f055e4cd5aea8` Es un hash SHA-1 relacionado con la credencial. Mimikatz a veces muestra hashes adicionales (SHA1, Kerberos keys, etc.) dependiendo de qué artefactos estén en memoria (tickets, claves derivadas, caches). En cualquier caso: ambos son secretos sensibles.
 
