@@ -335,6 +335,9 @@ Buscamos el ejecutable ProcDump mediante el siguiente comando de powershell:
 ```
 powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *ProcDump*.exe | Select-Object FullName"
 ```
-gfghfhg
+
+
+<img width="1025" height="197" alt="imagen" src="https://github.com/user-attachments/assets/30509d31-21f1-4a89-89fb-8dc957ab6bac" />
+
 
 ---
