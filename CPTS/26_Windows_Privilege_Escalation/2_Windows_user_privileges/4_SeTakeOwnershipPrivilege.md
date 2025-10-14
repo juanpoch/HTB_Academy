@@ -97,6 +97,44 @@ SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
 
 ## Elegir un fichero objetivo y recopilar información
 
+## Estructura típica de un file share
+
+En entornos corporativos es común encontrar una estructura de recursos compartidos con carpetas del tipo **Public** y **Private**, y subdirectorios organizados por departamentos (IT, HR, Finance, etc.).
+
+* **Public**: accesible por muchos usuarios; normalmente contiene documentación pública, plantillas y recursos compartidos genéricos.
+* **Private**: restringido por departamento o por rol; contiene información interna, configuraciones, backups y ficheros sensibles.
+
+Aunque la estructura parece lógica, la configuración de permisos puede estar incompleta o mal aplicada, sobre todo en directorios profundos o heredados.
+
+---
+
+## Utilidad los file shares 
+
+1. **Amplio volumen de datos**: los shares suelen concentrar documentos, scripts, backups y claves que no se encuentran en perfiles individuales.
+2. **Errores de configuración**: administradores pueden haber aplicado permisos de forma inconsistente (herencia mal configurada, grupos mal aplicados), lo que deja vectores para escalada o acceso a secretos.
+3. **Acceso basado en roles**: según el puesto del usuario, suele ser posible listar directorios o ver nombres de archivos incluso cuando la lectura de su contenido está restringida; eso da pistas valiosas durante la enumeración.
+4. **Ficheros sensibles típicos**: archivos de configuración, exportación de bases de datos, scripts con credenciales o claves SSH pueden residir en shares.
+
+---
+
+## Flujo lógico de la búsqueda
+
+1. **Enumeración pasiva**: navegar la estructura (Public vs Private) y detectar qué subcarpetas se pueden listar o explorar con las credenciales disponibles.
+2. **Correlación**: por nombre, ruta y contexto (por ejemplo `\share\Private\IT\`) inferir qué ficheros pueden contener datos sensibles.
+3. **Intento de acceso**: intentar leer ficheros; en muchos casos se obtendrá `Access denied` para lectura, pero la capacidad de listar el directorio ya es información útil.
+4. **Decisión**: si se dispone de recursos o privilegios (ej. `SeTakeOwnershipPrivilege`) y está permitido por el alcance del engagement, valorar la posibilidad de tomar acciones adicionales para acceder a un fichero objetivo.
+
+---
+
+## Escenario ilustrativo
+
+En el escenario hipotético tenemos acceso al share y localizamos `C:\Department Shares\Private\IT\cred.txt`. Aunque los usuarios de dominio pueden listar la carpeta, al intentar leer `cred.txt` obtenemos `Access denied`. Si el usuario con el que trabajamos dispone del privilegio `SeTakeOwnershipPrivilege` (o conseguimos que se lo asignen mediante una falla de configuración), la teoría indica que podríamos cambiar la propiedad del archivo y ajustar sus permisos para acceder a su contenido.
+
+> Importante: este tipo de acciones son potencialmente destructivas y detectables. Siempre deben ejecutarse **solo** en entornos autorizados y con la aprobación del cliente; a veces bastará con documentar la capacidad de efectuar la acción sin llevarla a cabo.
+
+---
+
+
 Localiza un fichero interesante en el recurso compartido o en el disco. En el ejemplo se eligió `C:\Department Shares\Private\IT\cred.txt`.
 
 Comprobamos detalles del fichero (nombre completo, fechas, atributos y owner):
@@ -195,5 +233,6 @@ root:n1X_p0wer_us3er!
 > **Atención:** este contenido puede contener credenciales reales. Solo manejarlo según el alcance del engagement y las reglas del cliente.
 
 ---
+
 
 
