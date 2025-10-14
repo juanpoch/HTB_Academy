@@ -203,7 +203,34 @@ cred.txt C:\Department Shares\Private\IT WINLPE-SRV01\htb-student
 
 ---
 
+
+# Intento de lectura del fichero
+
+Comando ejecutado:
+
+```powershell
+cat 'C:\Department Shares\Private\IT\cred.txt'
+```
+
+Salida:
+
+```text
+cat : Access to the path 'C:\Department Shares\Private\IT\cred.txt' is denied.
+At line:1 char:1
++ cat 'C:\Department Shares\Private\IT\cred.txt'
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Department Shares\Private\IT\cred.txt:String) [Get-Content], Unaut
+   horizedAccessException
+    + FullyQualifiedErrorId : GetContentReaderUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetContentCommand
+```
+
+El error indica que el proceso actual **no tiene permiso de lectura** sobre el archivo. `Get-Content` (alias `cat`) lanzó una `UnauthorizedAccessException` porque la ACL del fichero o la carpeta impide la lectura al usuario en sesión.
+
+---
+
+
 ## Modificar la ACL del fichero para conceder permisos de lectura
+
 
 Ser propietario no siempre implica tener permisos efectivos de lectura. Tras tomar ownership, usamos `icacls` para darnos control total (Full Control):
 
@@ -236,7 +263,6 @@ NIX01 admin
 root:n1X_p0wer_us3er!
 ```
 
-> **Atención:** este contenido puede contener credenciales reales. Solo manejarlo según el alcance del engagement y las reglas del cliente.
 
 ---
 
