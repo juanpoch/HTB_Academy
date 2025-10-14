@@ -27,10 +27,6 @@ En ese contenedor es donde se asignan derechos sensibles como **SeDebugPrivilege
 
 ---
 
-# Riesgos y uso de **SeTakeOwnershipPrivilege**
-
-Con este privilegio, un usuario puede **tomar la propiedad** de cualquier archivo u objeto y realizar cambios que impliquen acceso a datos sensibles, ejecución remota de código o incluso producir denegación de servicio sobre recursos críticos.
-
 ## Escenario de abuso
 
 Si detectamos un usuario que posee este privilegio —o si logramos asignárselo mediante un ataque (por ejemplo abuso de GPO con herramientas como [`SharpGPOAbuse`)](https://github.com/FSecureLABS/SharpGPOAbuse)— podemos aprovecharlo para:
