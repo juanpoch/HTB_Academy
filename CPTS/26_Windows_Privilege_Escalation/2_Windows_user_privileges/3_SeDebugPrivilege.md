@@ -312,4 +312,17 @@ Tener en cuenta estos ejemplos para los casos en que volcar LSASS no produzca cr
 
 # Laboratorio
 
+### Aproveche los derechos de SeDebugPrivilege y obtenga el hash de contraseña NTLM para la cuenta sccm_svc.
+
+`Ip víctima`: `10.129.159.5`
+`Usuario`: `jordan`
+`Contraseña`: `HTB_@cademy_j0rdan!`
+
+Nos conectamos al host mediante rdp con el siguiente comando:
+```bash
+xfreerdp /v:10.129.159.5 /u:jordan
+```
+
+<img width="1516" height="922" alt="image" src="https://github.com/user-attachments/assets/d472a2f6-e0ae-413b-b3ef-caa439b193ad" />
+
 ---
