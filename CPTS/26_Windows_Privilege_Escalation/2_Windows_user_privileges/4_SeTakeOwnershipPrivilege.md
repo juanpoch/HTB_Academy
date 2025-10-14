@@ -70,7 +70,7 @@ Si el privilegio aparece como `Disabled`, lo podemos habilitar en nuestro token 
 
 ## Habilitar `SeTakeOwnershipPrivilege` en el token
 
-Una forma sencilla en laboratorio es cargar un script que active privilegios en el token (ej.: `Enable-Privilege.ps1` y `EnableAllTokenPrivs.ps1`).
+Una forma sencilla en laboratorio es cargar un script que active privilegios en el token (ej.: [`EnableAllTokenPrivs.ps1`](https://raw.githubusercontent.com/fashionproof/EnableAllTokenPrivs/master/EnableAllTokenPrivs.ps1)).
 
 ```powershell
 # Importar y ejecutar scripts que habilitan privilegios en el token
