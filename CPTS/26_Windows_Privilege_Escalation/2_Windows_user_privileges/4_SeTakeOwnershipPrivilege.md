@@ -41,11 +41,9 @@ Si detectamos un usuario que posee este privilegio —o si logramos asignárselo
 
 # Uso de SeTakeOwnershipPrivilege
 
-Este lienzo explica paso a paso cómo revisar y aprovechar el privilegio **SeTakeOwnershipPrivilege** para tomar la propiedad de un fichero y leerlo (solo en entornos autorizados / laboratorio). Incluye comandos, salidas de ejemplo y recomendaciones de cuidado y remediación.
 
----
 
-## 1) Revisar privilegios del usuario actual
+## Revisar privilegios del usuario actual
 
 Primero comprobamos los privilegios del token de la sesión actual:
 
@@ -71,7 +69,7 @@ Si el privilegio aparece como `Disabled`, lo podemos habilitar en nuestro token 
 
 ---
 
-## 2) Habilitar `SeTakeOwnershipPrivilege` en el token
+## Habilitar `SeTakeOwnershipPrivilege` en el token
 
 Una forma sencilla en laboratorio es cargar un script que active privilegios en el token (ej.: `Enable-Privilege.ps1` y `EnableAllTokenPrivs.ps1`).
 
@@ -96,7 +94,7 @@ SeIncreaseWorkingSetPrivilege Increase a process working set           Enabled
 
 ---
 
-## 3) Elegir un fichero objetivo y recopilar información
+## Elegir un fichero objetivo y recopilar información
 
 Localiza un fichero interesante en el recurso compartido o en el disco. En el ejemplo se eligió `C:\Department Shares\Private\IT\cred.txt`.
 
@@ -128,7 +126,7 @@ En este ejemplo la carpeta está bajo la propiedad de la cuenta `WINLPE-SRV01\sc
 
 ---
 
-## 4) Tomar la propiedad del fichero
+## Tomar la propiedad del fichero
 
 Si nuestro token tiene el privilegio habilitado, podemos ejecutar `takeown` para cambiar la propiedad del archivo al usuario actual.
 
@@ -160,7 +158,7 @@ cred.txt C:\Department Shares\Private\IT WINLPE-SRV01\htb-student
 
 ---
 
-## 5) Modificar la ACL del fichero para conceder permisos de lectura
+## Modificar la ACL del fichero para conceder permisos de lectura
 
 Ser propietario no siempre implica tener permisos efectivos de lectura. Tras tomar ownership, usamos `icacls` para darnos control total (Full Control):
 
@@ -177,7 +175,7 @@ Successfully processed 1 files; Failed processing 0 files
 
 ---
 
-## 6) Leer el fichero
+## Leer el fichero
 
 Si todo ha funcionado, ahora podemos leer el fichero:
 
