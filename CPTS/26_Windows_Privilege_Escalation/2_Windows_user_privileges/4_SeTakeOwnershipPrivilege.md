@@ -29,35 +29,15 @@ En ese contenedor es donde se asignan derechos sensibles como **SeDebugPrivilege
 
 # Riesgos y uso de **SeTakeOwnershipPrivilege**
 
-Con este privilegio, un usuario puede **tomar la propiedad** de cualquier archivo u objeto y realizar cambios que impliquen acceso a datos sensibles, ejecución remota de código (RCE) o incluso producir denegación de servicio (DoS) sobre recursos críticos.
+Con este privilegio, un usuario puede **tomar la propiedad** de cualquier archivo u objeto y realizar cambios que impliquen acceso a datos sensibles, ejecución remota de código o incluso producir denegación de servicio sobre recursos críticos.
 
 ## Escenario de abuso
 
-Si detectamos un usuario que posee este privilegio —o si logramos asignárselo mediante un ataque (por ejemplo abuso de GPO con herramientas como `SharpGPOAbuse`)— podemos aprovecharlo para:
+Si detectamos un usuario que posee este privilegio —o si logramos asignárselo mediante un ataque (por ejemplo abuso de GPO con herramientas como [`SharpGPOAbuse`)](https://github.com/FSecureLABS/SharpGPOAbuse)— podemos aprovecharlo para:
 
 * **Tomar control de un recurso compartido** y cambiar permisos/propietario para acceder a ficheros protegidos.
 * **Acceder a ficheros sensibles** (documentos con contraseñas, claves SSH, backups) cambiando el owner y luego modificando la ACL para concedernos lectura/escritura.
 * **Provocar DoS** sobre servicios que dependen de ficheros concretos (por ejemplo bloquear o sustituir ficheros de configuración críticos).
 * **Facilitar RCE** en casos donde la manipulación de un ejecutable/servicio permita ejecutar código con mayor privilegio.
-
-## Ejemplo operativo
-
-1. Tomar propiedad del archivo:
-
-```cmd
-takeown /f "\\server\share\secreto.txt"
-```
-
-2. Cambiar el owner a un usuario controlado y conceder permisos completos:
-
-```cmd
-icacls "\\server\share\secreto.txt" /setowner "DOMINIO\Atacante"
-icacls "\\server\share\secreto.txt" /grant "DOMINIO\Atacante:(F)"
-```
-
-3. Acceder/descargar el fichero y analizarlo fuera del host objetivo.
-
-
-
 
 
