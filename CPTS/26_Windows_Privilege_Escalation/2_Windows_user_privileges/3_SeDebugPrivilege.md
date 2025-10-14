@@ -419,3 +419,8 @@ Eso es el NT hash (NTLM hash). Es el resultado del algoritmo MD4 aplicado al pas
 - `SHA1` : `cba4e545b7ec918129725154b29f055e4cd5aea8` Es un hash SHA-1 relacionado con la credencial. Mimikatz a veces muestra hashes adicionales (SHA1, Kerberos keys, etc.) dependiendo de qué artefactos estén en memoria (tickets, claves derivadas, caches). En cualquier caso: ambos son secretos sensibles.
 
 ---
+
+Si quisiesemos acceder al archivo `.log` creado por `mimikatz` podemos buscarlo con el siguiente comando:
+```cmd
+powershell -Command "Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include *mimikatz*.log | Select-Object FullName"
+```
