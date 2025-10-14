@@ -89,7 +89,7 @@ Este procedimiento genera un volcado de memoria (`lsass.dmp`) que puede analizar
 
 `Mimikatz` es una herramienta para Windows creada por Benjamin DELPY que permite extraer credenciales (contraseñas en texto, hashes NTLM, tickets Kerberos) y realizar pruebas de post‑explotación en entornos controlados.
 
-Esto funciona correctamente; podemos cargar el volcado en `Mimikatz` usando el comando `sekurlsa::minidump`. Tras ejecutar `sekurlsa::logonpasswords` obtenemos el hash NTLM de la cuenta de administrador local que inició sesión de forma local.
+Como el volcado funciononó correctamente; podemos cargarlo en `Mimikatz` usando el comando `sekurlsa::minidump`. Tras ejecutar `sekurlsa::logonpasswords` obtenemos el hash NTLM de la cuenta de administrador local que inició sesión de forma local.
 
 **Nota:** siempre es buena idea teclear `log` antes de ejecutar comandos en Mimikatz; así toda la salida de comandos se guardará en un archivo `.txt`. Esto resulta especialmente útil al volcar credenciales de un servidor que puede tener muchos conjuntos de credenciales en memoria.
 
