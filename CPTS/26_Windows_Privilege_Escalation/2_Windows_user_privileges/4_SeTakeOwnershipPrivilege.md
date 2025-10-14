@@ -139,8 +139,7 @@ Localiza un fichero interesante en el recurso compartido o en el disco. En el ej
 Comprobamos detalles del fichero (nombre completo, fechas, atributos y owner):
 
 ```powershell
-Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | \
-  Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
+Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
 ```
 <img width="1453" height="160" alt="image" src="https://github.com/user-attachments/assets/97fb469b-4965-4e2c-9513-31b41d98d065" />
 
@@ -189,8 +188,7 @@ SUCCESS: The file (or folder): "C:\Department Shares\Private\IT\cred.txt" now ow
 Confirmamos que ahora somos propietarios:
 
 ```powershell
-Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | \
-  select name,directory,@{Name='Owner';Expression={(Get-ACL $_.Fullname).Owner}}
+Get-ChildItem -Path 'C:\Department Shares\Private\IT\cred.txt' | select name,directory,@{Name='Owner';Expression={(Get-ACL $_.Fullname).Owner}}
 ```
 
 **Salida:**
@@ -357,4 +355,10 @@ Logramos habilitar el privilegio.
 Comprobamos detalles del fichero que nos interesa:
 ```powershell
 Get-ChildItem -Path 'C:\TakeOwn\flag.txt' | Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
+```
+<img width="1025" height="163" alt="image" src="https://github.com/user-attachments/assets/5213552c-fcea-43ee-bbef-f4a81d6e68f2" />
+
+No podemos visualizar el owner por lo que probamos con el comando en cmd:
+```powershell
+cmd /c dir /q 'C:\TakeOwn\flag.txt'
 ```
