@@ -7,6 +7,10 @@ Los administradores reciben este privilegio por defecto. Aunque es poco frecuent
 Estas capacidades por sí solas **pueden** facilitar una escalada de privilegios. Sin embargo, en algunos escenarios necesitaremos **tomar la propiedad** de ficheros específicos porque otros métodos están bloqueados o no funcionan como se espera. El abuso de este privilegio es un caso algo extremo (edge case), pero vale la pena comprenderlo en profundidad, especialmente en entornos Active Directory donde podríamos asignar este derecho a un usuario controlado y aprovecharlo para leer un archivo sensible en un recurso compartido.
 
 
+<img width="1239" height="838" alt="image" src="https://github.com/user-attachments/assets/965d3167-5897-4713-8571-a4e4042fbd22" />
+
+
+
 ---
 
 
