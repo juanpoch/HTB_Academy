@@ -382,3 +382,47 @@ Get-ChildItem -Path 'C:\TakeOwn\flag.txt' | Select Fullname,LastWriteTime,Attrib
 
 <img width="1020" height="205" alt="image" src="https://github.com/user-attachments/assets/e3559b07-cab4-40cd-ad4b-531d9d9c87c1" />
 
+Intentamos leer el archivo `C:\TakeOwn\flag.txt`:
+```powershell
+Get-Content C:\TakeOwn\flag.txt
+```
+
+<img width="866" height="142" alt="image" src="https://github.com/user-attachments/assets/fec04198-5ba1-4e4a-b4e8-631b52d4f0ee" />
+
+La salida nos muestra que no tenemos privilegios para acceder al archivo.
+
+Utilizamos el siguiente comando para visualizar los archivos:
+
+```powershell
+(Get-Acl C:\TakeOwn\flag.txt).Access
+```
+<img width="671" height="516" alt="image" src="https://github.com/user-attachments/assets/38d82d74-a7ec-494e-b387-3d4604f42de4" />
+
+La salida confirma que por más que seamos owner, no tenemos aún los permisos para acceder al archivo.
+
+
+Nos brindamos `Full Control` mediante `icacls`:
+```powershell
+icacls 'C:\TakeOwn\flag.txt' /grant htb-student:F
+```
+
+<img width="620" height="107" alt="image" src="https://github.com/user-attachments/assets/ee97d306-7778-4fd6-870b-93a5f2476edb" />
+
+
+La salida nos dice que el proceso se desarrolló con éxito. Volvemos a visualizar los permisos:
+```powershell
+(Get-Acl C:\TakeOwn\flag.txt).Access
+```
+
+<img width="583" height="505" alt="image" src="https://github.com/user-attachments/assets/196c4ebf-2728-42a1-a6d3-bf82711e2ae2" />
+
+Ahora sí confirmamos que tenemos `Full Control` sobre el archivo.
+
+Procedemos a leerlo con el siguiente comando:
+```powershell
+Get-Content C:\TakeOwn\flag.txt
+```
+
+<img width="490" height="120" alt="image" src="https://github.com/user-attachments/assets/eff58be3-91d2-4d78-bedd-c706ca8cd9fe" />
+
+- `Flag`: ``
