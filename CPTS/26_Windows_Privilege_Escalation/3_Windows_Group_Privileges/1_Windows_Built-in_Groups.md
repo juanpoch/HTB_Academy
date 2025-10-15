@@ -10,14 +10,15 @@
 
 **Grupos a revisar:**
 
-* Backup Operators
-* Event Log Readers
-* DnsAdmins
-* Hyper-V Administrators
-* Print Operators
-* Server Operators
+* [Backup Operators](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-groups#bkmk-backupoperators)
+* [Event Log Readers](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-groups#bkmk-eventlogreaders)
+* [DnsAdmins](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-groups#bkmk-dnsadmins)
+* [Hyper-V Administrators](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-groups#bkmk-hypervadministrators)
+* [Print Operators](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/manage/understand-security-groups#bkmk-printoperators)
+* [Server Operators](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#bkmk-serveroperators)
 
 > *Nota:* los administradores de backup u otras cuentas de servicio suelen añadirse para delegar tareas (backups, impresión, DNS). A veces quedan por error.
+> Siempre debemos revisar estos grupos e incluir una lista de los miembros de cada uno como apéndice en nuestro informe para que el cliente la revise y determine si el acceso sigue siendo necesario.
 
 [Grupos de Windows](https://ss64.com/nt/syntax-security_groups.html)
 
