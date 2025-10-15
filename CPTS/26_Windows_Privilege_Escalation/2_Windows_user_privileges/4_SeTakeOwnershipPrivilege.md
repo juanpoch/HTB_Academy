@@ -425,4 +425,4 @@ Get-Content C:\TakeOwn\flag.txt
 
 <img width="490" height="120" alt="image" src="https://github.com/user-attachments/assets/eff58be3-91d2-4d78-bedd-c706ca8cd9fe" />
 
-- `Flag`: ``
+- `Flag`: `1m_th3_f1l3_0wn3r_n0W!`
