@@ -35,7 +35,7 @@
 
 ### Limitaciones y matices
 
-* No siempre basta el `copy`/`type`/`cat`; es necesario usar APIs/flags que respeten *backup semantics*, por ejemplo `FILE_FLAG_BACKUP_SEMANTICS`.
+* No siempre basta el `copy`/`type`/`cat`; es necesario usar APIs/flags que respeten *backup semantics*, por ejemplo [`FILE_FLAG_BACKUP_SEMANTICS`](https://learn.microsoft.com/es-es/windows/win32/api/fileapi/nf-fileapi-createfilea).
 * Si existe una entrada explícita *Deny* en la ACL para el usuario/grupo, esta prevalecerá y bloqueará el acceso aun con el privilegio de backup.
 * En algunos servidores puede ser necesario un **símbolo del sistema elevado** (bypass UAC) para activar/usar el privilegio.
 
