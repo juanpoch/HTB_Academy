@@ -73,10 +73,10 @@ SeChangeNotifyPrivilege      Bypass traverse checking       Enabled
 ```powershell
 PS C:\htb> Set-SeBackupPrivilege
 PS C:\htb> Get-SeBackupPrivilege
-# Ahora deberá indicar: SeBackupPrivilege is enabled
+SeBackupPrivilege is enabled
 ```
 
-> **Advertencia:** habilitar privilegios y operar como Backup Operator puede requerir elevación y tener impacto en el sistema. Documentar cambios y revertir cuando sea posible.
+> **Nota:** Según la configuración del servidor, es posible que sea necesario generar un símbolo del sistema elevado para omitir el UAC y tener este privilegio.
 
 ---
 
