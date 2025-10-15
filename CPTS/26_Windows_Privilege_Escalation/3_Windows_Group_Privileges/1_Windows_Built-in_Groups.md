@@ -19,6 +19,10 @@
 
 > *Nota:* los administradores de backup u otras cuentas de servicio suelen añadirse para delegar tareas (backups, impresión, DNS). A veces quedan por error.
 
+[Grupos de Windows](https://ss64.com/nt/syntax-security_groups.html)
+
+[Cuentas y grupos con privilegios en AD](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/plan/security-best-practices/appendix-b--privileged-accounts-and-groups-in-active-directory)
+
 ---
 
 ## Backup Operators
