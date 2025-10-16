@@ -370,5 +370,15 @@ Si no existen LM hashes (lo común en sistemas modernos), se usa aad3b435b51404e
 
 #### Aproveche los derechos de SeBackupPrivilege y obtenga la bandera ubicada en c:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt
 
+- `Ip`: `10.129.43.42`
+
+- `Credenciales`: `svc_backup`:`HTB_@cademy_stdnt!`
 
 
+Nos conectamos al host mediante rdp:
+
+```bash
+xfreerdp /v:10.129.43.42 /u:svc_backup
+```
+
+<img width="1547" height="919" alt="image" src="https://github.com/user-attachments/assets/710d0726-36a0-455c-8366-82cbfc7f2f74" />
