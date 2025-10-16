@@ -337,10 +337,9 @@ printsvc:1107:aad3b435b51404eeaad3b435b51404ee:cf3a5525ee9414229e66279623ed5c58:
 
 Si no existen LM hashes (lo común en sistemas modernos), se usa aad3b435b51404eeaad3b435b51404ee como valor vacío.
 
-Ejemplo: -hashes aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+---
 
 
-* Output: lista en formato `user:rid:lmhash:nthash`.
 * Con los hashes se puede realizar **pass-the-hash** o cracking offline (Hashcat) para obtener contraseñas en texto.
 
 ---
