@@ -361,3 +361,14 @@ Si no existen LM hashes (lo común en sistemas modernos), se usa aad3b435b51404e
 * Proteger y auditar cuentas de servicio: evitar añadir cuentas de alto privilegio innecesarias.
 * Habilitar control de acceso y alertas cuando se crean/exponen shadow copies o cuando `vssadmin`, `diskshadow` o `robocopy /B` se usan en servidores críticos.
 * Restringir acceso a la consola local de Domain Controllers (MFA, control físico y bastionado).
+
+
+
+---
+
+# Laboratorio
+
+#### Aproveche los derechos de SeBackupPrivilege y obtenga la bandera ubicada en c:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt
+
+
+
