@@ -25,7 +25,7 @@
 [Cuentas y grupos con privilegios en AD](https://learn.microsoft.com/es-es/windows-server/identity/ad-ds/plan/security-best-practices/appendix-b--privileged-accounts-and-groups-in-active-directory)
 
 
-[Asignación de cuentas de usuario](https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/user-rights-assignment)
+[Asignación de derechos de usuario](https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/user-rights-assignment)
 
 ---
 
