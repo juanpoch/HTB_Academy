@@ -46,6 +46,13 @@
 
 ---
 
+Tras acceder a una máquina, podemos mostrar nuestra pertenencia actual a los grupos usando el comando:
+```powershell
+whoami /groups
+```
+
+En el siguiente ejemplo examinaremos el caso que pertenecemos al grupo `Backup Operators`.
+
 ## Herramientas y PoC: activar y explotar SeBackupPrivilege
 
 [PoC](https://github.com/giuliano108/SeBackupPrivilege)
