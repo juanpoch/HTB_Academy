@@ -141,6 +141,7 @@ Board of Directors:
 ### NTDS.dit está bloqueado en uso
 
 * El archivo está bloqueado por el sistema mientras AD está funcionando. Solución: crear un **shadow copy** del volumen y exponerlo.
+El sistema no utilizará el archivo NTDS.dit de esta instantánea.
 
 ### Usando DiskShadow para exponer la copia
 
