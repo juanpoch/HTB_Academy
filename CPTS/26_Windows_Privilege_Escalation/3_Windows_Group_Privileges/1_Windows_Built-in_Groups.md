@@ -36,6 +36,8 @@
 * Miembros del grupo **Backup Operators** reciben los privilegios **SeBackupPrivilege** y **SeRestorePrivilege**.
 * [**SeBackupPrivilege**](https://learn.microsoft.com/es-es/windows-hardware/drivers/ifs/privileges) permite *recorrer* cualquier carpeta y leer contenido para fines de backup, **ignorando** las ACE normales del ACL —pero no mediante comandos de copia estándar sin tratar la semántica de backup.
 
+`Nota`: [SeBackupPrivilege doc](https://learn.microsoft.com/es-es/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/back-up-files-and-directories)
+
 ### Limitaciones y matices
 
 * No siempre basta el `copy`/`type`/`cat`; es necesario usar APIs/flags que respeten *backup semantics*, por ejemplo [`FILE_FLAG_BACKUP_SEMANTICS`](https://learn.microsoft.com/es-es/windows/win32/api/fileapi/nf-fileapi-createfilea).
