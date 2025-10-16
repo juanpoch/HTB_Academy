@@ -204,6 +204,12 @@ C:\htb> robocopy /B E:\Windows\NTDS .\ntds ntds.dit
 
 ## Hacer backup de las colmenas del registro (SAM y SYSTEM)
 
+
+- `HKLM\SAM` contiene las cuentas locales (SAM) y hashes locales (en equipos no-DC).
+
+
+- `HKLM\SYSTEM` contiene la configuración del sistema, y contiene la boot key (información que permite derivar la bootkey necesaria para descifrar protección interna; en AD es necesaria para desmontar/descifrar ciertos secretos) que se usa para extraer hashes del `ntds.dit` o del `SAM`.
+
 * Con privilegios de backup podemos guardar las colmenas y analizarlas offline.
 
 ```cmd
