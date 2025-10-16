@@ -127,7 +127,7 @@ Board of Directors:
 <...SNIP...>
 ```
 
-**Explicación:** `Copy-FileSeBackupPrivilege` lee el contenido del archivo protegido utilizando la semántica de backup y crea una copia local de la que el proceso/usuario será propietario.
+**Explicación:** `Copy-FileSeBackupPrivilege` abre el archivo protegido usando la semántica de backup (ej.: `BackupRead` / `FILE_FLAG_BACKUP_SEMANTICS`), lo lee pese a la DACL original y escribe un nuevo archivo en la ruta destino. El nuevo fichero es creado por el proceso atacante y, por defecto, su propietario será el token que realizó la copia. El ownership y las ACL del archivo original no se modifican.
 
 ---
 
