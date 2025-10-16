@@ -127,7 +127,7 @@ Board of Directors:
 <...SNIP...>
 ```
 
-**Explicación:** `Copy-FileSeBackupPrivilege` usa la semántica de backup para leer el archivo ignorando ACLs normales (salvo entradas *Deny*). Permite acceder a información sensible sin tener ACE directa.
+**Explicación:** `Copy-FileSeBackupPrivilege` lee el contenido del archivo protegido utilizando la semántica de backup y crea una copia local de la que el proceso/usuario será propietario.
 
 ---
 
