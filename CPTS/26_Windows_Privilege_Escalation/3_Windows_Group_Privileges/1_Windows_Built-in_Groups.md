@@ -182,6 +182,8 @@ d-----        3/24/2021   6:38 PM                Windows
 
 ## Copiar NTDS.dit desde la shadow copy
 
+La shadow copy preserva la metadata del sistema de archivos del volumen original (ACLs, owners, timestamps).
+
 Utilizamos el PoC para omitir la ACL y copiar NTDS.dit localmente:
 
 ```powershell
