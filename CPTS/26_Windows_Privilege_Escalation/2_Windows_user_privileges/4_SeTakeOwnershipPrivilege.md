@@ -393,7 +393,7 @@ Get-Content C:\TakeOwn\flag.txt
 
 La salida nos muestra que no tenemos privilegios para acceder al archivo.
 
-Utilizamos el siguiente comando para visualizar los archivos:
+Utilizamos el siguiente comando para visualizar ver la lista de permisos (ACL) del archivo:
 
 ```powershell
 (Get-Acl C:\TakeOwn\flag.txt).Access
