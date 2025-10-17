@@ -413,7 +413,7 @@ Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include SeBackup
 
 <img width="1125" height="408" alt="image" src="https://github.com/user-attachments/assets/9a433bcf-8ce9-4d15-bebf-343b68492818" />
 
-Ambos archivos están en la ruta `C:\Tools\
+Ambos archivos están en la ruta `C:\Tools\`
 
 Importamos los módulos:
 ```powershell
