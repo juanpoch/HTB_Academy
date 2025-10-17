@@ -343,11 +343,13 @@ Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include EnableAl
 
 <img width="1019" height="211" alt="image" src="https://github.com/user-attachments/assets/bd15522e-4de1-4b9f-8395-3290568e5d4c" />
 
-Ejecutamos el archivo `EnableAllTokenPrivs.ps1` para habilitar `SeTakeOwnershipPrivilege` en el token:
+Ejecutamos el archivo `EnableAllTokenPrivs.ps1` para habilitar `SeTakeOwnershipPrivilege` en el token:  
+
 ```powershell
 C:\Tools\EnableAllTokenPrivs.ps1
 ```
-Luego volvemos a listar nuestros privilegios:
+Luego volvemos a listar nuestros privilegios:  
+
 <img width="636" height="221" alt="image" src="https://github.com/user-attachments/assets/391580eb-36c8-4cfd-b31d-e22efe85630f" />
 
 Logramos habilitar el privilegio.
