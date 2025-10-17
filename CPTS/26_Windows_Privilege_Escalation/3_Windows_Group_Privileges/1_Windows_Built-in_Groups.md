@@ -433,7 +433,7 @@ Get-SeBackupPrivilege
 
 
 
-Intentamos leer el archivo del laboratorio con el somando:
+Intentamos leer el archivo del laboratorio con el comando:
 ```powershell
 cat C:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt
 ```
