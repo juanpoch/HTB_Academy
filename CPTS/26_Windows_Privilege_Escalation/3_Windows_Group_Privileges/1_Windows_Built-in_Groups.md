@@ -200,6 +200,12 @@ C:\htb> robocopy /B E:\Windows\NTDS .\ntds ntds.dit
 * La opción `/B` (backup mode) permite leer archivos con la semántica de backup.
 * `robocopy` es conveniente porque ya viene en Windows y evita herramientas externas.
 
+
+`Sintaxis`:
+```powershell
+robocopy [origen] [destino] [archivo(s)] [opciones]
+```
+
 ---
 
 ## Hacer backup de las colmenas del registro (SAM y SYSTEM)
