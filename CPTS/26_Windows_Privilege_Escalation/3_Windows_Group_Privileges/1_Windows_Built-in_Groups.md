@@ -451,3 +451,9 @@ Una vez copiado el fichero, obtenemos la flag leyendolo:
 
 
 - `Flag`: `Car3ful_w1th_gr0up_m3mberSh1p!`
+
+
+También podríamos haber usado `Robocopy`:
+```powershell
+robocopy /B C:\Users\Administrator\Desktop\SeBackupPrivilege\ flag2 flag2.txt
+```
