@@ -154,14 +154,21 @@ Command completed successfully.
 
 ```cmd
 wmic useraccount where name="netadm" get sid
+
+SID
+S-1-5-21-669053619-2741956077-1013132368-1109
 ```
 
 * `wmic useraccount where name="..." get sid` devuelve el SID del usuario `netadm`.
 
 **Mostrar descriptor de seguridad del servicio:**
 
+[Artículo](https://www.winhelponline.com/blog/view-edit-service-permissions-windows/)
+
 ```cmd
 sc.exe sdshow DNS
+
+D:(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;SO)(A;;RPWP;;;S-1-5-21-669053619-2741956077-1013132368-1109)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)
 ```
 
 * `sc sdshow <Servicio>` muestra la SDDL (Security Descriptor Definition Language) del servicio.
