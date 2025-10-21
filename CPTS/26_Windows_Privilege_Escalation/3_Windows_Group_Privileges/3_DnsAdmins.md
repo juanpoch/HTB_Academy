@@ -18,6 +18,9 @@
 
 ## Herramienta usada para escribir la clave: `dnscmd`
 
+- [`dnscmd` documentación](https://learn.microsoft.com/es-es/windows-server/administration/windows-commands/dnscmd)
+- [Publicación](https://adsecurity.org/?p=4064)
+
 * **`dnscmd.exe /config /serverlevelplugindll <ruta>`** — comando para configurar la ruta del plugin a nivel servidor.
 
   * `/config` indica que vamos a cambiar configuración del servidor DNS.
