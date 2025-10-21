@@ -153,3 +153,24 @@ xfreerdp /v:10.129.173.128 /u:logger
 ```
 
 <img width="1513" height="932" alt="image" src="https://github.com/user-attachments/assets/e3f036b6-0feb-4833-9dc7-425280178f9f" />
+
+
+Abrimos una powershell y verificamos qué usuarios pertenecen al grupo `Event Log Readers` con el siguiente comando:
+```powershell
+net localgroup "Event Log Readers"
+```
+
+
+<img width="1015" height="388" alt="image" src="https://github.com/user-attachments/assets/0c284006-3eec-4380-b57e-8d61290ca6a8" />
+
+Vemos que nosotros pertenecemos al grupo.
+
+Esto es peligroso porque si se registra la línea de comandos, las contraseñas podrían quedar en los eventos.
+
+Realizamos una consulta de los registros de seguridad mediante el utilitario `wevtutil` filtrando por la cadena `/user`:
+```powershell
+wevtutil qe Security /rd:true /f:text | Select-String "/user"
+```
+
+<img width="1025" height="319" alt="image" src="https://github.com/user-attachments/assets/9f3c682f-21f2-4a0e-b110-214ab929d7d2" />
+
