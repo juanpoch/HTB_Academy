@@ -12,7 +12,7 @@
 ## `ServerLevelPluginDll`
 
 * **Qué es:** una clave/valor en el registro que indica una DLL de "plugin" que el servicio DNS cargará.
-* **Debilidad:** `ServerLevelPluginDll` acepta una ruta a DLL sin verificar contenido ni origen. Si un administrador DNS controla ese valor, puede apuntar a una DLL maliciosa.
+* **Debilidad:** [`ServerLevelPluginDll`](https://learn.microsoft.com/es-es/openspecs/windows_protocols/ms-dnsp/c9d38538-8827-44e6-aa5e-022a016ed723) acepta una ruta a DLL sin verificar contenido ni origen. Si un administrador DNS controla ese valor, puede apuntar a una DLL maliciosa.
 
 ---
 
