@@ -100,6 +100,7 @@ Command failed: ERROR_ACCESS_DENIED
 
 ---
 
+## Caso contrario, se tienen privilegios
 ## Confirmar pertenencia a `DnsAdmins`
 
 Comando PowerShell mostrado:
