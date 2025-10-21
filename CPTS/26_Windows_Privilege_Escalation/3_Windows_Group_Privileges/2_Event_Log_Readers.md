@@ -140,9 +140,9 @@ El texto finaliza indicando que el [*PowerShell Operational log*](https://learn.
 
 #### Utilizando los métodos demostrados en esta sección, busque la contraseña del usuario `mary`.
 
-`ip`: `10.129.173.128`
-`usuario`: `logger`
-`contraseña`: `HTB_@cademy_stdnt!`
+`ip`: `10.129.173.128`  
+`usuario`: `logger`  
+`contraseña`: `HTB_@cademy_stdnt!`  
 
 
 Nos conectamos al host mediante protocolo `RDP` con el siguiente comando:
