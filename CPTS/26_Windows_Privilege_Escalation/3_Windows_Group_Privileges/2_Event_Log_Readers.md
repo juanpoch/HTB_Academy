@@ -174,3 +174,4 @@ wevtutil qe Security /rd:true /f:text | Select-String "/user"
 
 <img width="1025" height="319" alt="image" src="https://github.com/user-attachments/assets/9f3c682f-21f2-4a0e-b110-214ab929d7d2" />
 
+Obtenemos la contraseña del usuario `mary`: `W1ntergreen_gum_2021!`
