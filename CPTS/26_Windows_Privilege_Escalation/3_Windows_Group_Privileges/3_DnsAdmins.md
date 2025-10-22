@@ -475,3 +475,21 @@ sc.exe sdshow DNS
 Observamos que `RPWP` está vinculado a nuestro `SID`, que se traduce a `SERVICE_START` y `SERVICE_STOP`.
 
 Esto quiere decir que tenemos permisos suficientes para reiniciar el servicio `DNS`.
+
+Pausamos el servicio:
+```cmd
+sc stop dns
+```
+
+Iniciamos el servicio nuevamente:
+```cmd
+sc start dns
+```
+
+Tras reinicio exitoso, si la DLL ejecutaba `net group "Domain Admins" ...` deberíamos ver al usuario añadido al grupo `Domain Admins`.
+
+Listamos miembros del grupo `Domain Admins` en el dominio:
+```powershell
+net group "Domain Admins" /domain
+```
+
