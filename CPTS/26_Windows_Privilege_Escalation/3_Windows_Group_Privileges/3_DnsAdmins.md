@@ -520,6 +520,10 @@ Reiniciamos el servidor mediante el comando:
 shutdown /l
 ```
 
+Volvemios a conectarnos por `RDP` y observamos que nos aparece el panel de `Server Manager`:
+<img width="1021" height="713" alt="image" src="https://github.com/user-attachments/assets/b61fe166-90bc-46c9-91fa-f992f2fdb318" />
+
+Abrimos el archivo y obtenemos la flag:
 <img width="816" height="202" alt="image" src="https://github.com/user-attachments/assets/85466d13-fab9-4707-b09e-3d850ec5fbf1" />
 
 `Flag`: `Dll_abus3_ftw!`
