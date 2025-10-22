@@ -391,8 +391,12 @@ Add-DnsServerResourceRecordA -Name wpad -ZoneName inlanefreight.local -ComputerN
 - `password`: `HTB_@cademy_stdnt!`
 
 
-Nos conectamos al host mediante rdp:
+Nos conectamos al host mediante `rdp`:
 
 ```bash
 xfreerdp /v:10.129.11.96 /u:netadm
 ```
+
+<img width="1534" height="988" alt="image" src="https://github.com/user-attachments/assets/fca709e9-6252-439a-a693-b48e07394953" />
+
+Abrimos una `powershell` elevada
