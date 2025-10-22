@@ -553,4 +553,8 @@ reg delete \\10.129.43.42\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters 
 
 <img width="957" height="116" alt="image" src="https://github.com/user-attachments/assets/cd5f27cf-c2b8-4204-8497-c4913c5ec99b" />
 
+Volvemos a realizar `reg query` y visualizamos que no está más `ServerLevelPluginDll`:
+<img width="924" height="182" alt="image" src="https://github.com/user-attachments/assets/00bdd4cc-d801-47f1-8832-0466b59f6be1" />
+
+Reiniciamos el servidor `DNS` y realizamos la query
 
