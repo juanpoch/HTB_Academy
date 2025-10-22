@@ -509,6 +509,7 @@ net group "Domain Admins" /domain
 
 <img width="611" height="178" alt="image" src="https://github.com/user-attachments/assets/2ff34ef8-b0b6-434a-9c30-0bc641ecd685" />
 
+Pertenecemos al grupo `Domain Admins`.
 
 Intentamos leer el archivo para resolver el ejercicio pero obtenemos acceso denegado:
 <img width="1013" height="320" alt="image" src="https://github.com/user-attachments/assets/111ef745-9f6d-4306-b836-4dd7afd4be09" />
