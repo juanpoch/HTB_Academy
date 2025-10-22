@@ -370,10 +370,29 @@ Add-DnsServerResourceRecordA -Name wpad -ZoneName inlanefreight.local -ComputerN
 
 ---
 
-## Resumen final: vector, requisitos y mitigaciones (según el texto)
+## Resumen final: vector, requisitos y mitigaciones
 
 * **Vector:** abuso de la funcionalidad de plugins del servicio DNS mediante la clave `ServerLevelPluginDll` o creación de registros WPAD.
 * **Requisitos:** ser miembro de `DnsAdmins` (o tener permisos equivalentes), posibilidad de colocar una DLL accesible al DC (por ejemplo en un share accesible por la cuenta de máquina), y la capacidad de reiniciar el servicio DNS o esperar a reinicio.
 * **Riesgos/impacto:** escalada a `SYSTEM` o `Domain Admin`, caída del servicio DNS si se realiza mal.
-* **Buenas prácticas (implícitas en el texto):** no ejecutar cambios de este tipo sin permiso, limpiar registros y configuración después de pruebas, y limitar quién es miembro de `DnsAdmins`.
+* **Buenas prácticas:** no ejecutar cambios de este tipo sin permiso, limpiar registros y configuración después de pruebas, y limitar quién es miembro de `DnsAdmins`.
 
+
+
+---
+
+## Laboratorio
+
+
+#### Aproveche la pertenencia al grupo DnsAdmins para escalar privilegios. Envíe el contenido de la bandera ubicada en c:\Users\Administrator\Desktop\DnsAdmins\flag.txt
+
+- `ip`: `10.129.11.96`
+- `user`: `netadm`
+- `password`: `HTB_@cademy_stdnt!`
+
+
+Nos conectamos al host mediante rdp:
+
+```bash
+xfreerdp /v:10.129.11.96 /u:netadm
+```
