@@ -27,7 +27,7 @@
 **Términos clave:**
 
 * *vmms.exe*: servicio de administración de Hyper‑V.
-* *NT AUTHORITY\SYSTEM*: la cuenta con más privilegios locales en Windows (similar a "root").
+* *NT AUTHORITY\SYSTEM*: la cuenta con más privilegios locales en Windows.
 * *Hard link (enlace duro)*: una referencia a un archivo a nivel de sistema de ficheros NTFS que hace que dos nombres diferentes referencien el mismo contenido en disco.
 
 ---
