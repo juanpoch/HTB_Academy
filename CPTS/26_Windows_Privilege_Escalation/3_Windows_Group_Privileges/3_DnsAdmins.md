@@ -284,7 +284,11 @@ SERVICE_NAME: dns
 
 ## Uso alternativo: `mimilib.dll` (Mimikatz integrado)
 
-El texto muestra un fragmento de código (`kdns.c`) con funciones que implementa un plugin DNS. Explicación de las partes claves:
+[Publicación](https://www.labofapenetrationtester.com/2017/05/abusing-dnsadmins-privilege-for-escalation-in-active-directory.html)
+
+La publicación muestra cómo utilizar [mimilib.dll](https://github.com/gentilkiwi/mimikatz/tree/master/mimilib) del creador de `Mimikatz` para obtener ejecución de comandos modificando el archivo [`kdns.c`](https://github.com/gentilkiwi/mimikatz/blob/master/mimilib/kdns.c) 
+
+El archivo contiene funciones que implementa un plugin DNS. Explicación de las partes claves:
 
 ```c
 /*	Benjamin DELPY `gentilkiwi`
@@ -318,6 +322,7 @@ DWORD WINAPI kdns_DnsPluginQuery(PSTR pszQueryName, WORD wQueryType, PSTR pszRec
 	}
 	return ERROR_SUCCESS;
 }
+
 ```
 
 * `kdns_DnsPluginInitialize(...)` y `kdns_DnsPluginCleanup()` — funciones de inicialización/limpieza que retornan `ERROR_SUCCESS` (0) para indicar que todo bien.
