@@ -15,6 +15,7 @@
 
 ## Comportamiento de `vmms.exe` y restauración de permisos
 
+[Blog](https://decoder.cloud/2020/01/20/from-hyper-v-admin-to-system/)
 
 * Al borrar una máquina virtual, `vmms.exe` (el servicio de Virtual Machine Management Service de Hyper‑V) intenta restaurar los permisos originales del archivo `.vhdx` correspondiente.
 * Lo hace ejecutándose como `NT AUTHORITY\SYSTEM` y *sin* suplantar (impersonate) al usuario.
