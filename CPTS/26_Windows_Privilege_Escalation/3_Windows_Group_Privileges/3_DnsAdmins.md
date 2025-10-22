@@ -406,7 +406,7 @@ Get-ADGroupMember -Identity DnsAdmins
 
 <img width="1015" height="217" alt="image" src="https://github.com/user-attachments/assets/0b3612d7-2dc2-43c2-abce-5716edca3412" />
 
-Al pertenecer al grupo `DnsAdmins` podemos cargar una dll maliciosa en el `ServerLevelPluginDll` del registro para elevar privilegios.
+Al pertenecer al grupo `DnsAdmins` podemos usar las herramientas de administración `DNS` para configurar la clave `ServerLevelPluginDll` en el registro. Si la `DLL` apuntada es maliciosa y el servicio `DNS` (que corre como SYSTEM) la carga —por ejemplo tras reiniciar el servicio— su código se ejecutará con privilegios `SYSTEM`, lo que puede permitir la elevación de privilegios (especialmente grave si DNS corre en un Domain Controller).
 
 Creamos la dll maliciosa en nuestro host utilizando `msfvenom`:
 ```bash
