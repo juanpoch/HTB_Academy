@@ -551,5 +551,6 @@ Eliminar la clave que apunta a la DLL:
 reg delete \\10.129.43.42\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters /v ServerLevelPluginDll
 ```
 
-<img width="871" height="162" alt="image" src="https://github.com/user-attachments/assets/8aea423e-e29c-4f30-92c4-25753a44792b" />
+<img width="957" height="116" alt="image" src="https://github.com/user-attachments/assets/cd5f27cf-c2b8-4204-8497-c4913c5ec99b" />
+
 
