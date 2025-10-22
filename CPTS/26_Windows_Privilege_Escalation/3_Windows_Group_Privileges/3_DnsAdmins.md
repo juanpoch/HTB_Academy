@@ -463,3 +463,11 @@ wmic useraccount where "name='netadm'" get sid
 <img width="693" height="70" alt="image" src="https://github.com/user-attachments/assets/fcbb9c52-c6af-4e93-9f08-07118acbc1fb" />
 
 Obtenemos nuestro `SID`: `S-1-5-21-669053619-2741956077-1013132368-1109`
+
+
+Ahora que tenemos nuestro `SID` procedemos a mostrar el descriptor de seguridad de `DNS`:
+```powershell
+sc.exe sdshow DNS
+```
+
+<img width="1016" height="169" alt="image" src="https://github.com/user-attachments/assets/4e89759a-7ad1-4ff1-a1fe-9376657b49fc" />
