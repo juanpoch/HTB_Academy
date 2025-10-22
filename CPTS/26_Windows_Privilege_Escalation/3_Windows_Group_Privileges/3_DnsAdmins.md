@@ -249,6 +249,9 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DNS\Parameters
 
 ```cmd
 reg delete \\\\10.129.43.9\\HKLM\\SYSTEM\\CurrentControlSet\\Services\\DNS\\Parameters  /v ServerLevelPluginDll
+
+Delete the registry value ServerLevelPluginDll (Yes/No)? Y
+The operation completed successfully.
 ```
 
 * `reg delete <ruta> /v <valor>` elimina el valor de registro `ServerLevelPluginDll`. El comando pedirá confirmación `(Yes/No)?`.
