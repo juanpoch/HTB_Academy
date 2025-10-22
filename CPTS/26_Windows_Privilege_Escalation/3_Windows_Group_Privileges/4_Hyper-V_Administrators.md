@@ -1,4 +1,4 @@
-# PrivEsc en Windows: Hyper-V Administrators 
+# Hyper-V Administrators 
 
 ---
 
