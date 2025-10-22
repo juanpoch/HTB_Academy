@@ -1,12 +1,10 @@
 # Print Operators — Explicación paso a paso (traducción y explicación de HTB)
 
-## 1) Contexto y objetivo
-
 **Print Operators** es un grupo con privilegios elevados en un dominio: otorga entre otras cosas el privilegio `SeLoadDriverPrivilege` (capacidad de cargar drivers), permisos para gestionar impresoras en un Domain Controller, iniciar sesión localmente en un DC y apagarlo. El objetivo del flujo es: confirmar que la cuenta es miembro de Print Operators, habilitar `SeLoadDriverPrivilege`, instalar un driver vulnerable (Capcom.sys) y usar un exploit que aprovecha ese driver para conseguir una shell como SYSTEM.
 
 ---
 
-## 2) Confirmar privilegios (`whoami /priv`)
+## 1) Confirmar privilegios (`whoami /priv`)
 
 Comando usado:
 
@@ -32,7 +30,7 @@ SeShutdownPrivilege      Shut down the system                 Disabled
 
 ---
 
-## 3) Bypass UAC / obtener contexto elevado
+## 2) Bypass UAC / obtener contexto elevado
 
 El texto menciona el repo "UACMe" (lista de bypasses de UAC) o alternativamente abrir una consola administrativa desde GUI e introducir credenciales de la cuenta miembro de Print Operators. Tras hacerlo, al volver a ejecutar `whoami /priv`, `SeLoadDriverPrivilege` aparece pero inicialmente **Disabled** (luego se habilita con la PoC).
 
@@ -48,13 +46,13 @@ SeIncreaseWorkingSetPrivilege Increase a process working set       Disabled
 
 ---
 
-## 4) Concepto: Capcom.sys y por qué explotar el driver
+## 3) Concepto: Capcom.sys y por qué explotar el driver
 
 El driver `Capcom.sys` es conocido por permitir la ejecución de *shellcode* con privilegios SYSTEM cuando se carga y se explota adecuadamente. La estrategia es: usar el privilegio `SeLoadDriverPrivilege` para cargar `Capcom.sys` (malicioso/ vulnerable) y ejecutar exploit que realice *token stealing* o ejecute shellcode que derive en una shell SYSTEM.
 
 ---
 
-## 5) Preparar la PoC que habilita el privilegio `SeLoadDriverPrivilege`
+## 4) Preparar la PoC que habilita el privilegio `SeLoadDriverPrivilege`
 
 ### Código (fragmento de includes)
 
@@ -96,7 +94,7 @@ Salida de ejemplo (resumida) que muestra el proceso de compilación y enlazado y
 
 ---
 
-## 6) Añadir referencia al driver en el registro (HKCU)
+## 5) Añadir referencia al driver en el registro (HKCU)
 
 El texto indica descargar `Capcom.sys` y guardarlo en `C:\temp` (o `C:\Tools\Capcom.sys` en ejemplos) y luego **crear claves** bajo `HKCU\System\CurrentControlSet\CAPCOM` con `reg add`.
 
@@ -122,7 +120,7 @@ reg add HKCU\System\CurrentControlSet\CAPCOM /v Type /t REG_DWORD /d 1
 
 ---
 
-## 7) Verificar que el driver NO esté cargado (DriverView)
+## 6) Verificar que el driver NO esté cargado (DriverView)
 
 Herramienta usada: `DriverView.exe` de Nirsoft.
 
@@ -141,7 +139,7 @@ cat drivers.txt | Select-String -pattern Capcom
 
 ---
 
-## 8) Ejecutar la PoC para habilitar el privilegio
+## 7) Ejecutar la PoC para habilitar el privilegio
 
 Comando:
 
@@ -149,7 +147,7 @@ Comando:
 EnableSeLoadDriverPrivilege.exe
 ```
 
-Salida de ejemplo (del texto):
+Salida de ejemplo:
 
 ```
 whoami:
@@ -168,7 +166,7 @@ NTSTATUS: 00000000, WinError: 0
 
 ---
 
-## 9) Verificar que Capcom aparece ahora listado
+## 8) Verificar que Capcom aparece ahora listado
 
 Repetir el volcado de drivers y filtrar por `Capcom`:
 
@@ -188,7 +186,7 @@ Esto confirma que el driver fue cargado.
 
 ---
 
-## 10) Compilar y ejecutar `ExploitCapcom.exe` para escalar
+## 9) Compilar y ejecutar `ExploitCapcom.exe` para escalar
 
 Comando (ejecutar el binario ya compilado):
 
@@ -211,7 +209,7 @@ Salida de ejemplo del exploit:
 
 ---
 
-## 11) Alternativa sin GUI — modificar `ExploitCapcom.cpp`
+## 10) Alternativa sin GUI — modificar `ExploitCapcom.cpp`
 
 El texto indica que si no hay acceso GUI (no se puede abrir `cmd.exe` localmente), hay que modificar el código fuente `ExploitCapcom.cpp` (línea 292 en el ejemplo) para cambiar el programa que se lanza tras explotar el driver.
 
@@ -260,7 +258,7 @@ y así lanzar un binario de *reverse shell* (`revshell.exe`) generado con `msfve
 
 ---
 
-## 12) Automatizar: `EoPLoadDriver`
+## 11) Automatizar: `EoPLoadDriver`
 
 El texto menciona la herramienta `EoPLoadDriver` que automatiza pasos: habilitar el privilegio, crear la clave de registro y ejecutar `NtLoadDriver`.
 
@@ -279,7 +277,7 @@ NTSTATUS: c000010e, WinError: 0
 
 ---
 
-## 13) Limpieza
+## 12) Limpieza
 
 Eliminar la clave que añadimos en HKCU:
 
@@ -291,13 +289,13 @@ PowerShell/Prompt pedirá confirmación (Yes/No). El texto muestra la confirmaci
 
 ---
 
-## 14) Nota final importante
+## 13) Nota final importante
 
 **Desde Windows 10 versión 1803**, `SeLoadDriverPrivilege` **ya no es explotable** de la forma descrada porque no es posible incluir referencias a claves de registro bajo `HKEY_CURRENT_USER` para este propósito. Esta nota cierra el flujo y señala que la técnica tiene limitaciones en sistemas modernos.
 
 ---
 
-## 15) Resumen rápido de los pasos
+## 14) Resumen rápido de los pasos
 
 1. Confirmar privilegios con `whoami /priv`.
 2. Obtener contexto elevado (bypass UAC o autenticación GUI) hasta ver `SeLoadDriverPrivilege` disponible.
@@ -314,4 +312,3 @@ PowerShell/Prompt pedirá confirmación (Yes/No). El texto muestra la confirmaci
 
 ---
 
-Si quieres, puedo convertir este lienzo en un **documento listo para imprimir** o en un **archivo de texto/markdown descargable**. ¿Lo exporto así? (Si deseas exportar, lo generaré aquí mismo.)
