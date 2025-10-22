@@ -497,6 +497,7 @@ sc.exe start dns
 
 <img width="735" height="384" alt="image" src="https://github.com/user-attachments/assets/6a9727a5-3417-4b6f-902d-b28088ec440d" />
 
+`Nota`: A veces, al correr `sc start` o `net start` desde `PowerShell`, se aplica un contexto de ejecución diferente, y el reinicio no llega a recargar completamente los componentes del servicio (especialmente las DLL de plugin). Con `sc.exe`, el servicio se reinicia completamente, y Windows vuelve a cargar todas las dependencias.
 
 Tras reinicio exitoso, si la DLL ejecutaba `net group "Domain Admins" ...` deberíamos ver al usuario añadido al grupo `Domain Admins`.
 
@@ -507,4 +508,7 @@ net group "Domain Admins" /domain
 
 <img width="611" height="178" alt="image" src="https://github.com/user-attachments/assets/2ff34ef8-b0b6-434a-9c30-0bc641ecd685" />
 
+
+Intentamos leer el archivo para resolver el ejercicio pero obtenemos acceso denegado:
+<img width="1013" height="320" alt="image" src="https://github.com/user-attachments/assets/111ef745-9f6d-4306-b836-4dd7afd4be09" />
 
