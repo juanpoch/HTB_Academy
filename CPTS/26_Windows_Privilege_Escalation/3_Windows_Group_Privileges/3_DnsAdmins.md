@@ -514,3 +514,12 @@ Pertenecemos al grupo `Domain Admins`.
 Intentamos leer el archivo para resolver el ejercicio pero obtenemos acceso denegado:
 <img width="1013" height="320" alt="image" src="https://github.com/user-attachments/assets/111ef745-9f6d-4306-b836-4dd7afd4be09" />
 
+
+Reiniciamos el servidor mediante el comando:
+```powershell
+shutdown /l
+```
+
+<img width="816" height="202" alt="image" src="https://github.com/user-attachments/assets/85466d13-fab9-4707-b09e-3d850ec5fbf1" />
+
+`Flag`: `Dll_abus3_ftw!`
