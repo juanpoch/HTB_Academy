@@ -471,3 +471,7 @@ sc.exe sdshow DNS
 ```
 
 <img width="1016" height="169" alt="image" src="https://github.com/user-attachments/assets/4e89759a-7ad1-4ff1-a1fe-9376657b49fc" />
+
+Observamos que `RPWP` está vinculado a nuestro `SID`, que se traduce a `SERVICE_START` y `SERVICE_STOP`.
+
+Esto quiere decir que tenemos permisos suficientes para reiniciar el servicio `DNS`.
