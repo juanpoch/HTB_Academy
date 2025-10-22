@@ -514,6 +514,7 @@ Pertenecemos al grupo `Domain Admins`.
 Intentamos leer el archivo para resolver el ejercicio pero obtenemos acceso denegado:
 <img width="1013" height="320" alt="image" src="https://github.com/user-attachments/assets/111ef745-9f6d-4306-b836-4dd7afd4be09" />
 
+A veces es conveniente reiniciar el sistema por completo para que los cambios se ejecuten completamente.
 
 Reiniciamos el servidor mediante el comando:
 ```powershell
@@ -523,8 +524,9 @@ shutdown /l
 Volvemios a conectarnos por `RDP` y observamos que nos aparece el panel de `Server Manager`:
 <img width="1021" height="713" alt="image" src="https://github.com/user-attachments/assets/b61fe166-90bc-46c9-91fa-f992f2fdb318" />
 
-Vemos los permisos sobre el archivo que nos pide el laboratorio:
+Vemos los permisos sobre el archivo que nos pide el laboratorio mediante `icacls`:
 <img width="689" height="107" alt="image" src="https://github.com/user-attachments/assets/fb7e0d4e-21ab-40a7-92d3-ef7a61d56dc4" />
+Vemos que efectivamente tenemos `Full Control` sobre el fichero.
 
 Abrimos el archivo y obtenemos la flag:
 <img width="816" height="202" alt="image" src="https://github.com/user-attachments/assets/85466d13-fab9-4707-b09e-3d850ec5fbf1" />
@@ -533,4 +535,10 @@ Abrimos el archivo y obtenemos la flag:
 
 ---
 
+## Revertir cambios
 
+
+Comprobamos la clave de registro:
+```powershell
+ reg query \\10.129.43.42\HKLM\SYSTEM\CurrentControlSet\Services\DNS\Parameters
+```
