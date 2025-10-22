@@ -4,11 +4,10 @@
 
 ## Grupo **Hyper-V Administrators**
 
-**Qué significa**
 
 * Es un grupo de seguridad de Windows que otorga acceso completo a las funcionalidades de Hyper‑V en la máquina/servidor.
 
-**Implicación importante (tal como indica el texto):**
+**Implicación importante:**
 
 * Si los Controladores de Dominio (Domain Controllers) están virtualizados en Hyper‑V, los miembros de `Hyper‑V Administrators` pueden controlar esas máquinas virtuales. Con suficiente acceso a una VM que alojase un Domain Controller, un administrador de virtualización podría clonar la VM, acceder al disco virtual y obtener el fichero `NTDS.dit` (la base de datos de Active Directory), lo que permitiría extraer hashes NTLM de todas las cuentas del dominio.
 
@@ -16,12 +15,11 @@
 
 ## Comportamiento de `vmms.exe` y restauración de permisos
 
-**Qué ocurre (resumen del texto):**
 
 * Al borrar una máquina virtual, `vmms.exe` (el servicio de Virtual Machine Management Service de Hyper‑V) intenta restaurar los permisos originales del archivo `.vhdx` correspondiente.
 * Lo hace ejecutándose como `NT AUTHORITY\SYSTEM` y *sin* suplantar (impersonate) al usuario.
 
-**Consecuencia práctica (explicada):**
+**Consecuencia práctica:**
 
 * Si eliminamos el `.vhdx` y luego creamos un *enlace duro* (native NT hard link) con ese mismo nombre apuntando a un archivo protegido por SYSTEM, cuando `vmms.exe` intente restaurar permisos lo hará en el archivo apuntado *como SYSTEM*. Así podemos forzar que el archivo protegido pase a tener permisos que nos permitan operar sobre él.
 
@@ -74,7 +72,7 @@ C:\htb> takeown /F C:\Program Files (x86)\Mozilla Maintenance Service\maintenanc
 * `takeown`: utilidad de Windows para tomar la propiedad de un archivo o directorio.
 * `/F <ruta>`: especifica la ruta del archivo o carpeta sobre la que se desea tomar la propiedad.
 
-**Qué hace exactamente**
+
 
 * El comando cambia el dueño del fichero al usuario que ejecuta `takeown` (o a un grupo que represente al usuario), de forma que después se pueden modificar los permisos (ACL) si el usuario tiene suficientes privilegios para hacerlo.
 
@@ -84,18 +82,18 @@ C:\htb> takeown /F C:\Program Files (x86)\Mozilla Maintenance Service\maintenanc
 
 ## Iniciar el servicio y ejecución como SYSTEM — `sc.exe start`
 
-**Comando mostrado en el texto:**
+**Comando:**
 
 ```
 C:\htb> sc.exe start MozillaMaintenance
 ```
 
-**Explicación de la sintaxis**
+**Explicación**
 
 * `sc.exe`: herramienta de línea de comandos para administrar servicios en Windows.
 * `start <NombreServicio>`: orden para arrancar el servicio cuyo nombre interno es `<NombreServicio>`.
 
-**Qué pretende el texto con este paso**
+#
 
 * Tras reemplazar `maintenanceservice.exe` por una versión maliciosa (por ejemplo, un ejecutable que abra una shell), iniciar el servicio con `sc.exe start MozillaMaintenance` hará que el servicio se ejecute bajo la cuenta `SYSTEM` (según cómo esté configurado el servicio). Si el servicio realmente corre como `SYSTEM`, el binario malicioso se ejecutará con esos privilegios y nos dará ejecución como `SYSTEM`.
 
