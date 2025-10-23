@@ -78,6 +78,9 @@ El texto indica que debemos descargar la herramienta [PoC](https://github.com/3g
 * `<sddl.h>`: funciones para manejar SDDL (Security Descriptor Definition Language).
 * `<stdio.h>`: I/O en C (printf, etc.).
 * `"tchar.h"`: macros para compatibilidad Unicode/ANSI (`TCHAR`, `TEXT()` etc.).
+  
+
+`Nota`: La `PoC` habilita el privilegio y carga el controlador automáticamente.
 
 ### Compilar con Visual Studio (cl.exe)
 
@@ -85,6 +88,16 @@ Comando usado en el texto:
 
 ```
 cl /DUNICODE /D_UNICODE EnableSeLoadDriverPrivilege.cpp
+
+Microsoft (R) C/C++ Optimizing Compiler Version 19.28.29913 for x86
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+EnableSeLoadDriverPrivilege.cpp
+Microsoft (R) Incremental Linker Version 14.28.29913.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+/out:EnableSeLoadDriverPrivilege.exe
+EnableSeLoadDriverPrivilege.obj
 ```
 
 **Explicación de los flags**:
@@ -93,7 +106,7 @@ cl /DUNICODE /D_UNICODE EnableSeLoadDriverPrivilege.cpp
 * `/DUNICODE /D_UNICODE`: definen los símbolos `UNICODE` y `_UNICODE` para compilar la aplicación en modo Unicode — hace que macros como `TEXT()` y tipos `TCHAR` apunten a versiones wide-char (wchar_t).
 * El resultado es un `EnableSeLoadDriverPrivilege.exe` compilado con entrada wide-char.
 
-Salida de ejemplo (resumida) que muestra el proceso de compilación y enlazado y el fichero `.exe` producido.
+Salida de ejemplo que muestra el proceso de compilación y enlazado y el fichero `.exe` producido.
 
 ---
 
