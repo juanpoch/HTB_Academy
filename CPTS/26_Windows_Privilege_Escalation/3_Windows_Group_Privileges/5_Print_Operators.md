@@ -311,13 +311,13 @@ PowerShell/Prompt pedirá confirmación (Yes/No). El texto muestra la confirmaci
 
 ---
 
-## 13) Nota final importante
 
-**Desde Windows 10 versión 1803**, `SeLoadDriverPrivilege` **ya no es explotable** de la forma descrada porque no es posible incluir referencias a claves de registro bajo `HKEY_CURRENT_USER` para este propósito. Esta nota cierra el flujo y señala que la técnica tiene limitaciones en sistemas modernos.
+
+**Desde Windows 10 versión 1803**, `SeLoadDriverPrivilege` **ya no es explotable** de esta forma porque no es posible incluir referencias a claves de registro bajo `HKEY_CURRENT_USER` para este propósito. 
 
 ---
 
-## 14) Resumen rápido de los pasos
+## Resumen 
 
 1. Confirmar privilegios con `whoami /priv`.
 2. Obtener contexto elevado (bypass UAC o autenticación GUI) hasta ver `SeLoadDriverPrivilege` disponible.
@@ -333,4 +333,23 @@ PowerShell/Prompt pedirá confirmación (Yes/No). El texto muestra la confirmaci
 12. Tener en cuenta la limitación desde Windows 10 1803.
 
 ---
+
+
+# Laboratorio
+
+#### Siga los pasos de esta sección para escalar privilegios a SYSTEM y enviar el contenido del archivo flag.txt al escritorio del administrador. Las herramientas necesarias para ambos métodos se encuentran en el directorio C:\Tools, o puede practicar compilándolas y subiéndolas usted mismo.
+
+
+`IP`: `10.129.43.31`
+`user`: `printsvc`
+`password`: `HTB_@cademy_stdnt!`
+
+
+Nos conectamos al host mediante `RDP`:
+```bash
+xfreerdp /v:10.129.43.31 /u:printsvc
+```
+
+
+<img width="1021" height="757" alt="image" src="https://github.com/user-attachments/assets/fc8b5ee6-722c-4f12-b70b-02b4705866b2" />
 
