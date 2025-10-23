@@ -206,7 +206,9 @@ Esto confirma que el driver fue cargado.
 
 ## 9) Compilar y ejecutar `ExploitCapcom.exe` para escalar
 
-Comando (ejecutar el binario ya compilado):
+Compilar [`ExploitCapcom.exe`](https://github.com/tandasat/ExploitCapcom)
+
+Ejecutar el binario:
 
 ```
 .\ExploitCapcom.exe
