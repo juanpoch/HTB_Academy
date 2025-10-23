@@ -353,3 +353,23 @@ xfreerdp /v:10.129.43.31 /u:printsvc
 
 <img width="1021" height="757" alt="image" src="https://github.com/user-attachments/assets/fc8b5ee6-722c-4f12-b70b-02b4705866b2" />
 
+
+Abrimos una `powershell` y confirmamos privilegios:
+```powershell
+whoami /priv
+```
+
+<img width="1001" height="272" alt="image" src="https://github.com/user-attachments/assets/99c8979a-c582-4d1f-9e10-22fe5285c196" />
+
+Vemos que `SeLoadDriverPrivilege` no aparece entre los privilegios que tenemos.
+
+Confirmamos que pertenecemos al grupo `Print Operators`:
+
+```powershell
+whoami /groups
+```
+
+<img width="977" height="267" alt="image" src="https://github.com/user-attachments/assets/bbeeae2c-4059-42a1-a512-863f474f12b5" />
+
+
+
