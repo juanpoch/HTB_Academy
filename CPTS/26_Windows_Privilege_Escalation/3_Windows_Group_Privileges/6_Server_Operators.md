@@ -357,4 +357,4 @@ C:\Tools\PsService.exe security AppReadiness
 ```
 <img width="1025" height="722" alt="image" src="https://github.com/user-attachments/assets/e1b1f8b6-5443-48f1-965f-a685d2e274d6" />
 
-Confirmamos que nuestro grupo 
+Confirmamos que nuestro grupo tiene control total sobre el servicio (`All`). Esto nos permitirá modificar la configuración del servicio.
