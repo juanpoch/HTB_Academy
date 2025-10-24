@@ -374,3 +374,13 @@ whoami /groups
 
 Confirmamos que pertenecemos al grupo `Print Operators` ya que aparece la línea `BUILTIN\Print Operators`.
 
+
+Entonces, debido a que nuestra powershell no es elevada, es probable que nuestro token se encuentre limitado por `UAC`.
+
+En este putno tenemos 2 alternativas:
+
+Abrimos una powershell elevada y realizamos el comando `whoami /priv`:
+
+<img width="850" height="365" alt="image" src="https://github.com/user-attachments/assets/082ec298-bc47-40f1-8242-30d3f478f220" />
+
+Observamos que esta vez el privilegio `SeLoadDriverPrivilege` aparece `Disabled`. En este caso está actuando `UAC`
