@@ -430,3 +430,7 @@ El siguiente paso es ejecutar la `PoC` para habilitar el privilegio:
 .\EnableSeLoadDriverPrivilege.exe
 ```
 <img width="1018" height="199" alt="image" src="https://github.com/user-attachments/assets/8ba4f666-6fbe-478a-b52c-95a9da623e7a" />
+
+
+
+`EnableSeLoadDriverPrivilege.exe` habilita `SeLoadDriverPrivilege` en el token del proceso que lo ejecuta. Esa habilitación no se propaga al token del PowerShell padre, por eso `whoami /priv` en la misma sesión de PowerShell sigue mostrando el privilegio como `Disabled`.
