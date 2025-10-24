@@ -445,3 +445,5 @@ cat drivers.txt | Select-String -pattern Capcom
 <img width="887" height="106" alt="image" src="https://github.com/user-attachments/assets/0a7e380d-2e5f-4e55-8d0e-cf3798f43ab3" />
 
 Verificamos que el driver está cargado.
+
+Cuando ejecutatamos `EnableSeLoadDriverPrivilege.exe` se habilitó `SeLoadDriverPrivilege` en su token y luego llamó a `NtLoadDriver` desde el mismo proceso. Esto significa que el `exe` pudo habilitar el privilegio y la llamada a cargar el driver terminó con éxito.
