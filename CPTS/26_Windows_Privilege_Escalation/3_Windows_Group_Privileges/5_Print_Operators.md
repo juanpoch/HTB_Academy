@@ -354,7 +354,7 @@ xfreerdp /v:10.129.43.31 /u:printsvc
 <img width="1021" height="757" alt="image" src="https://github.com/user-attachments/assets/fc8b5ee6-722c-4f12-b70b-02b4705866b2" />
 
 
-Abrimos una `powershell` y confirmamos privilegios:
+Abrimos una `powershell` y visualizamos los privilegios: 
 ```powershell
 whoami /priv
 ```
@@ -363,7 +363,8 @@ whoami /priv
 
 Vemos que `SeLoadDriverPrivilege` no aparece entre los privilegios que tenemos.
 
-Confirmamos que pertenecemos al grupo `Print Operators`:
+Visualizamos los grupos que están presentes en el token de nuestra sesión:
+
 
 ```powershell
 whoami /groups
@@ -371,5 +372,5 @@ whoami /groups
 
 <img width="977" height="267" alt="image" src="https://github.com/user-attachments/assets/bbeeae2c-4059-42a1-a512-863f474f12b5" />
 
-
+Confirmamos que pertenecemos al grupo `Print Operators` ya que aparece la línea `BUILTIN\Print Operators`.
 
