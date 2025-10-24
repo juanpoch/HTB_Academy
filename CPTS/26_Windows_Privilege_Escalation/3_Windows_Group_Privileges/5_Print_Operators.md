@@ -29,7 +29,7 @@ SeShutdownPrivilege      Shut down the system                 Disabled
 * `State`: estado (`Enabled` o `Disabled`).
 
 
-**Interpretación**: si `SeLoadDriverPrivilege` no aparece habilitado desde un contexto sin elevar, hay que **bypassear UAC** o conseguir un contexto elevado.
+**Interpretación**: si `SeLoadDriverPrivilege` no aparece desde un contexto sin elevar, hay que **bypassear UAC** o conseguir un contexto elevado.
 
 ---
 
@@ -378,6 +378,9 @@ Confirmamos que pertenecemos al grupo `Print Operators` ya que aparece la línea
 Entonces, debido a que nuestra powershell no es elevada, es probable que nuestro token se encuentre limitado por `UAC`.
 
 En este putno tenemos 2 alternativas:
+
+- Utilizar el repo ["UACMe" (lista de bypasses de UAC)](https://github.com/hfiref0x/UACME)
+- Abrir una consola administrativa desde GUI e introducir credenciales de la cuenta miembro de `Print Operators`.
 
 Abrimos una powershell elevada y realizamos el comando `whoami /priv`:
 
