@@ -405,3 +405,14 @@ cat C:\Users\Administrator\Desktop\ServerOperators\flag.txt
 <img width="985" height="287" alt="image" src="https://github.com/user-attachments/assets/d9eb6e35-c11c-4e1e-8ada-1b513b7590e2" />
 
 No tenemos acceso.
+
+
+
+Reiniciamos el host mediante `shutdown /f` y volvemos a intentar acceder al archivo:
+```powershell
+cat C:\Users\Administrator\Desktop\ServerOperators\flag.txt
+```
+<img width="663" height="138" alt="image" src="https://github.com/user-attachments/assets/7a5c4035-e773-4326-922c-e9f76025e5d4" />
+
+
+`Flag`: `S3rver_0perators_@ll_p0werfull!`
