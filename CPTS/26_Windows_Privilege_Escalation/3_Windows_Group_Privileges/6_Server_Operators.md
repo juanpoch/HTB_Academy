@@ -302,6 +302,10 @@ Administrator:500:aad3b435b51404eeaad3b435b51404ee:cf3a5525ee9414229e66279623ed5
 
 ## 10) Resumen técnico estrictamente según el texto
 
+`Condiciones del servicio a explotar`:
+1 - El servicio debe ejecutarse como `LocalSystem` para posteriormente poder ejecutar comandos como `SYSTEM`.
+2 - El grupo al que pertenecemos debe tener `SERVICE_ALL_ACCESS` en el descriptor de seguridad del servicio para poder cambiar su configuración.
+
 * Ser miembro de `Server Operators` confiere controles sobre servicios (incluyendo `SERVICE_ALL_ACCESS` en AppReadiness en este ejemplo).
 * Cambiar `binPath` de un servicio que corre como `LocalSystem` permite ejecutar comandos con los privilegios de `LocalSystem` cuando el servicio se inicia (la técnica aplicada aquí consistió en apuntar `binPath` a un `cmd /c` que modifica el grupo de Administradores locales).
 * Aunque el servicio no se inicie correctamente (error 1053), la acción deseada (agregar el usuario al grupo Administrators) se completó.
