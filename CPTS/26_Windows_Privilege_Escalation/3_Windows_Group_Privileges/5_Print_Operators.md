@@ -446,7 +446,7 @@ cat drivers.txt | Select-String -pattern Capcom
 
 Verificamos que el driver está cargado.
 
-Cuando ejecutatamos `EnableSeLoadDriverPrivilege.exe` se habilitó `SeLoadDriverPrivilege` en su token y luego llamó a `NtLoadDriver` desde el mismo proceso. Esto significa que el `exe` pudo habilitar el privilegio y la llamada a cargar el driver terminó con éxito.
+Cuando ejecutamos `EnableSeLoadDriverPrivilege.exe` se habilitó `SeLoadDriverPrivilege` en su token y luego llamó a `NtLoadDriver` desde el mismo proceso. Esto significa que el `exe` pudo habilitar el privilegio y la llamada a cargar el driver terminó con éxito.
 
 
 El último paso sería compilar y ejecutar `ExploitCapcom.exe` para escalar privilegios. En este caso lo tenemos en `C:\Tools\`:
