@@ -421,4 +421,4 @@ cat drivers.txt | Select-String -pattern Capcom
 <img width="717" height="122" alt="image" src="https://github.com/user-attachments/assets/67af838e-3a76-4c98-b113-eecac9019a5a" />
 
 
-Vemos que no está cargado.
+Vemos que no está cargado porque no recibimos salida  
