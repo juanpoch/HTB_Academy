@@ -408,7 +408,7 @@ No tenemos acceso.
 
 
 
-Reiniciamos el host mediante `shutdown /f` y volvemos a intentar acceder al archivo:
+Reiniciamos el host mediante `shutdown /f` y abrimos el archivo utilizando una powershell elevada:
 ```powershell
 cat C:\Users\Administrator\Desktop\ServerOperators\flag.txt
 ```
