@@ -447,3 +447,17 @@ cat drivers.txt | Select-String -pattern Capcom
 Verificamos que el driver está cargado.
 
 Cuando ejecutatamos `EnableSeLoadDriverPrivilege.exe` se habilitó `SeLoadDriverPrivilege` en su token y luego llamó a `NtLoadDriver` desde el mismo proceso. Esto significa que el `exe` pudo habilitar el privilegio y la llamada a cargar el driver terminó con éxito.
+
+
+El último paso sería compilar y ejecutar `ExploitCapcom.exe` para escalar privilegios. En este caso lo tenemos en `C:\Tools\`:
+
+<img width="980" height="410" alt="image" src="https://github.com/user-attachments/assets/d994b66d-ffd1-4c05-8604-78dba3e2e6b1" />
+
+El exploit `ExploitCapcom.exe` aprovecha la vulnerabilidad del driver `Capcom.sys` para ejecutar shellcode en modo kernel. Este código roba el token del proceso `SYSTEM` y lo asigna al proceso actual, otorgando una shell con privilegios `NT AUTHORITY\SYSTEM`.
+
+Hemos escalado privilegios. Procedemos a mostrar el contenido de la flag para resolver el laboratorio:
+
+<img width="1024" height="280" alt="image" src="https://github.com/user-attachments/assets/083d5f43-9bf8-471b-ab5f-9f39d2397851" />
+
+
+`Flag`: 
