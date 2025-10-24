@@ -398,3 +398,10 @@ net localgroup Administrators
 Por lo que confirmamos que ya formamos parte de el grupo `Administrators`.
 
 
+Intentamos abrir el archivo que contiene la flag:
+```powershell
+cat C:\Users\Administrator\Desktop\ServerOperators\flag.txt
+```
+<img width="985" height="287" alt="image" src="https://github.com/user-attachments/assets/d9eb6e35-c11c-4e1e-8ada-1b513b7590e2" />
+
+No tenemos acceso.
