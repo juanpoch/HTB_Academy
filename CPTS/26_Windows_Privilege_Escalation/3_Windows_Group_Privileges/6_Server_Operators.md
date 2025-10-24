@@ -414,5 +414,6 @@ cat C:\Users\Administrator\Desktop\ServerOperators\flag.txt
 ```
 <img width="663" height="138" alt="image" src="https://github.com/user-attachments/assets/7a5c4035-e773-4326-922c-e9f76025e5d4" />
 
+`Nota`: Cuando se agrega una cuenta a un grupo, el token de acceso que Windows asocia a la sesión del usuario no se actualiza automáticamente. Ese token contiene los grupos y privilegios efectivos. Al reiniciar, la sesión se crea de nuevo y el sistema genera un token nuevo que ya incluye la pertenencia a `Administrators`.
 
 `Flag`: `S3rver_0perators_@ll_p0werfull!`
