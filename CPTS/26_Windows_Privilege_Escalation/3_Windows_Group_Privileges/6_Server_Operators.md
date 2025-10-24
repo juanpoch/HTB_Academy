@@ -330,3 +330,31 @@ xfreerdp /v:10.129.43.42 /u:server_adm
 ```
 <img width="1027" height="767" alt="image" src="https://github.com/user-attachments/assets/4944559f-2df5-4612-b1cb-bd0ca8519114" />
 
+El primer paso es consultar a qué grupos pertenece nuestro usuario usando `whoami /groups`:
+<img width="968" height="297" alt="image" src="https://github.com/user-attachments/assets/b508791f-8474-418b-a3d7-c495c060b213" />
+
+Confirmamos que somos miembros del grupo `Server Operators`.
+
+El siguiente paso es consultar el servicio `AppReadiness`:
+```powershell
+sc qc AppReadiness
+```
+
+<img width="1022" height="175" alt="image" src="https://github.com/user-attachments/assets/41901ffa-f053-4485-87a5-69bc65f3de5b" />
+
+Por lo que hacemos:
+```powershell
+sc.exe qc AppReadiness
+```
+
+<img width="708" height="293" alt="image" src="https://github.com/user-attachments/assets/5d021c79-4bfc-427a-91d0-b79c8f6a02da" />
+
+Confirmamos que se ejecuta como `LocalSystem`.
+
+El siguiente paso es comprobar los permisos del servicio con `PsService.exe`:
+```powershell
+C:\Tools\PsService.exe security AppReadiness
+```
+<img width="1025" height="722" alt="image" src="https://github.com/user-attachments/assets/e1b1f8b6-5443-48f1-965f-a685d2e274d6" />
+
+Confirmamos que nuestro grupo 
