@@ -330,7 +330,7 @@ xfreerdp /v:10.129.43.42 /u:server_adm
 ```
 <img width="1027" height="767" alt="image" src="https://github.com/user-attachments/assets/4944559f-2df5-4612-b1cb-bd0ca8519114" />
 
-El primer paso es consultar a qué grupos pertenece nuestro usuario usando `whoami /groups`:
+El primer paso es consultar a qué grupos pertenece nuestro usuario usando `whoami /groups` mediante una powershell elevada:
 <img width="968" height="297" alt="image" src="https://github.com/user-attachments/assets/b508791f-8474-418b-a3d7-c495c060b213" />
 
 Confirmamos que somos miembros del grupo `Server Operators`.
@@ -349,7 +349,7 @@ sc.exe qc AppReadiness
 
 <img width="708" height="293" alt="image" src="https://github.com/user-attachments/assets/5d021c79-4bfc-427a-91d0-b79c8f6a02da" />
 
-Confirmamos que se ejecuta como `LocalSystem`.
+Confirmamos que se ejecuta como `LocalSystem`. Esto nos permitirá ejecutar comandos como `SYSTEM`.
 
 El siguiente paso es comprobar los permisos del servicio con `PsService.exe`:
 ```powershell
@@ -358,3 +358,14 @@ C:\Tools\PsService.exe security AppReadiness
 <img width="1025" height="722" alt="image" src="https://github.com/user-attachments/assets/e1b1f8b6-5443-48f1-965f-a685d2e274d6" />
 
 Confirmamos que nuestro grupo tiene control total sobre el servicio (`All`). Esto nos permitirá modificar la configuración del servicio.
+
+
+Ahora verificamos membresía del grupo Administradores local:
+
+```powershell
+net localgroup Administrators
+```
+
+<img width="719" height="241" alt="image" src="https://github.com/user-attachments/assets/1b55b752-9812-4dea-b3cd-a1fdb23bc2fd" />
+
+En la salida se muestran los miembros del grupo `Administrators`. Vemos que no pertenecemos al grupo.
