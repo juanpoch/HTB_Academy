@@ -460,4 +460,4 @@ Hemos escalado privilegios. Procedemos a mostrar el contenido de la flag para re
 <img width="1024" height="280" alt="image" src="https://github.com/user-attachments/assets/083d5f43-9bf8-471b-ab5f-9f39d2397851" />
 
 
-`Flag`: 
+`Flag`: `Pr1nt_0p3rat0rs_ftw!` 
