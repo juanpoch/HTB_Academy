@@ -388,7 +388,7 @@ sc.exe start AppReadiness
 
 <img width="916" height="106" alt="image" src="https://github.com/user-attachments/assets/fd8e24a5-d21f-4d8b-9114-b415dc9386a9" />
 
-- Confirmación de membresía del Administrators local:
+- Confirmación la ejecución del comando visualizando la membresía del grupo `Adminisrtators`:
 ```powershell
 net localgroup Administrators
 ```
