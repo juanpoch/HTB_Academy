@@ -435,3 +435,13 @@ El siguiente paso es ejecutar la `PoC` para habilitar el privilegio:
 
 
 `EnableSeLoadDriverPrivilege.exe` habilita `SeLoadDriverPrivilege` en el token del proceso que lo ejecuta. Esa habilitación no se propaga al token del PowerShell padre, por eso `whoami /priv` en la misma sesión de PowerShell sigue mostrando el privilegio como `Disabled`.
+
+Repetir el volcado de drivers y filtrar por Capcom:
+```powershell
+.\DriverView.exe /stext drivers.txt
+cat drivers.txt | Select-String -pattern Capcom
+```
+
+<img width="887" height="106" alt="image" src="https://github.com/user-attachments/assets/0a7e380d-2e5f-4e55-8d0e-cf3798f43ab3" />
+
+Verificamos que el driver está cargado.
