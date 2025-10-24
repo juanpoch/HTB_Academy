@@ -421,4 +421,12 @@ cat drivers.txt | Select-String -pattern Capcom
 <img width="717" height="122" alt="image" src="https://github.com/user-attachments/assets/67af838e-3a76-4c98-b113-eecac9019a5a" />
 
 
-Vemos que no está cargado porque no recibimos salida  
+Vemos que no está cargado porque no recibimos salid  
+
+
+El siguiente paso es ejecutar la `PoC` para habilitar el privilegio:
+
+```powershell
+.\EnableSeLoadDriverPrivilege.exe
+```
+<img width="1018" height="199" alt="image" src="https://github.com/user-attachments/assets/8ba4f666-6fbe-478a-b52c-95a9da623e7a" />
