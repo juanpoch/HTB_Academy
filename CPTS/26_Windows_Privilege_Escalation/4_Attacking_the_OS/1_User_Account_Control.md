@@ -394,3 +394,19 @@ SeDelegateSessionUserImpersonatePrivilege Obtain an impersonation token for anot
 ---
 
 
+# Laboratorio
+
+Siga los pasos de esta sección para obtener una conexión de shell inversa con privilegios de usuario normales y otra que omita el UAC. Envíe el contenido de `flag.txt` que se encuentra en el escritorio de Sarah al finalizar.
+
+
+- `ip`: `10.129.131.248`
+- `usuario`: `sarah`
+- `password`: `HTB_@cademy_stdnt!`
+
+
+Nos conectamos al host mediante `RDP`:
+```bash
+xfreerdp /v:10.129.131.248 /u:sarah
+```
+
+<img width="1013" height="778" alt="image" src="https://github.com/user-attachments/assets/90231a43-4846-418b-a44c-1f9d1b7e6859" />
