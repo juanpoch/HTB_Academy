@@ -143,7 +143,12 @@ Major  Minor  Build  Revision
 ```
 
 * **Qué hace:** Muestra la versión del sistema operativo en formato numérico (Major, Minor, Build, Revision).
-* **Interpretación:** Build `14393` corresponde a Windows 10 **release 1607** (según la tabla de versiones referenciada en el texto). Esto es relevante porque las técnicas de bypass de UAC son dependientes del *build*.
+* **Interpretación:** Build `14393` corresponde a Windows 10 **release 1607**. Esto es relevante porque las técnicas de bypass de UAC son dependientes del *build*.
+
+[Conocer release](https://en.wikipedia.org/wiki/Windows_10_version_history)
+
+<img width="959" height="442" alt="image" src="https://github.com/user-attachments/assets/d2fb38cb-4c08-49a6-a552-ebcda1fac95e" />
+
 
 ---
 
