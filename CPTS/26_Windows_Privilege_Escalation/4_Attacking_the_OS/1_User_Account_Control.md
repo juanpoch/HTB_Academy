@@ -436,3 +436,12 @@ whoami /priv
 
 Por más que seamos administradores, los privilegios elevados aparecen deshabilitados ya que el proceso corre con el token limitado.
 
+Confirmar si el `UAC` está habilitado:
+```powershell
+REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System /v EnableLUA
+```
+
+<img width="1006" height="171" alt="image" src="https://github.com/user-attachments/assets/731f9c01-84d6-4837-ae0f-c8a3f0a9d993" />
+
+El valor `0x1` indica que `UAC` está habilitado.
+
