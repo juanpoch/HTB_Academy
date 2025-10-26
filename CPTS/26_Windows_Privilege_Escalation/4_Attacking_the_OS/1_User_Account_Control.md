@@ -154,9 +154,11 @@ Major  Minor  Build  Revision
 
 ## 8. Elección de técnica — UACME y técnica 54
 
-* **UACME:** Proyecto que lista bypasses de UAC y para qué builds funcionan.
+* **[UACME](https://github.com/hfiref0x/UACME):** Proyecto que lista bypasses de UAC y para qué builds funcionan.
 * **Técnica 54:** Indica que funciona a partir del *build* `14393` y ataca la versión de 32 bits del binario auto-elevador `SystemPropertiesAdvanced.exe`.
 * **Objetivo:** Aprovechar binarios de confianza que Windows auto-eleva sin pedir consentimiento.
+
+[Publicación](https://egre55.github.io/system-properties-uac-bypass/)
 
 ---
 
