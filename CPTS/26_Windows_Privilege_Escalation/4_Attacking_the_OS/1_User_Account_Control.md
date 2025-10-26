@@ -410,3 +410,29 @@ xfreerdp /v:10.129.131.248 /u:sarah
 ```
 
 <img width="1013" height="778" alt="image" src="https://github.com/user-attachments/assets/90231a43-4846-418b-a44c-1f9d1b7e6859" />
+
+
+Abrimos una powershell y confirmamos nuestro usuario actual y pertenencia a grupos:
+
+```powershell
+whoami /user
+```
+
+```powershell
+net localgroup administrators
+```
+
+<img width="1004" height="488" alt="image" src="https://github.com/user-attachments/assets/10ed2ec5-6139-49b6-8c64-19f1cae0a732" />
+
+
+Con estos resultados confirmamos que nuestro usuario es `sarah` y pertenece al grupo `administrators`.
+
+Listamos los privilegios existentes en el token actual:
+```powershell
+whoami /priv
+```
+
+<img width="1012" height="340" alt="image" src="https://github.com/user-attachments/assets/b9791488-ca43-45e9-87f5-3970d0b68bb3" />
+
+Por más que seamos administradores, los privilegios elevados aparecen deshabilitados ya que el proceso corre con el token limitado.
+
