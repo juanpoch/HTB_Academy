@@ -42,6 +42,9 @@
 
 El ejemplo menciona un prompt pidiendo permiso para que el Editor del Registro haga cambios: el publisher verificado es Microsoft Windows y las opciones son **Yes** o **No**.
 
+<img width="1608" height="668" alt="image" src="https://github.com/user-attachments/assets/6ba42c03-c458-4de6-bbc7-d7abe0d57dad" />
+
+
 ---
 
 ## 5. Confirmar usuario actual y pertenencia a grupos — comandos usados y su explicación
