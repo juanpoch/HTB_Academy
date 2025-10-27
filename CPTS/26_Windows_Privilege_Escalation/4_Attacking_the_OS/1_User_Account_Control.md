@@ -524,3 +524,9 @@ El siguiente paso es probar la `DLL` con `rundll32`:
 ```powershell
 rundll32 shell32.dll,Control_RunDLL C:\Users\sarah\AppData\Local\Microsoft\WindowsApps\srrstr.dll
 ```
+
+<img width="1004" height="124" alt="image" src="https://github.com/user-attachments/assets/ffbff585-4afb-4959-b8f3-befd637da4fc" />
+
+<img width="1353" height="885" alt="image" src="https://github.com/user-attachments/assets/2389d903-736e-406b-9817-c54ab1582b90" />
+
+
