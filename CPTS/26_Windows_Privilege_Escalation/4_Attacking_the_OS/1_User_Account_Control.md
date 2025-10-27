@@ -474,4 +474,15 @@ findstr /C:\"<autoElevate>true" C:\Windows\SysWOW64\SystempropertiesAdvanced.exe
 
 <img width="1020" height="248" alt="image" src="https://github.com/user-attachments/assets/2ecb8aac-8416-4bd8-9b1e-9922b9ff490e" />
 
+Esto es una evidencia de que el ejecutable contiene un manifiesto con `autoElevate=true`, es decir, el binario solicita que ciertas invocaciones se le concedan elevación automática.
 
+Nosotros sabemos que el binario intenta cargar la dll `srrstr.dll`, la cual no existe.
+
+En el momento que se intente ejecutar el binario `SystempropertiesAdvanced.exe`, el sistema irá a buscar la dll `srrstr.dll` al `PATH`.
+
+El paso siguiente es revisar la variable `PATH`:
+```powershell
+cmd /c echo %PATH%
+```
+
+<img width="1007" height="175" alt="image" src="https://github.com/user-attachments/assets/878be864-7fa7-4ca1-9839-314a917c266d" />
