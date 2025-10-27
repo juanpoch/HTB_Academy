@@ -488,3 +488,5 @@ cmd /c echo %PATH%
 <img width="1007" height="175" alt="image" src="https://github.com/user-attachments/assets/878be864-7fa7-4ca1-9839-314a917c266d" />
 
 Encontramos en el path la ruta `C:\Users\sarah\AppData\Local\Microsoft\WindowsApps`. Nuestro usuario tiene permisos de escritura sobre esta ruta.
+
+Esto quiere decir que podríamos colocar una dll maliciosa con el nombre `srrstr.dll` en esa ruta y lograr que el binario la ejecute en un contexto elevado.
