@@ -535,7 +535,7 @@ Obtuvimos una shell como usuario sarah en contexto no elevado.
 
 Procedemos a bypasear `UAC` ejecutando el binario vulnerable.
 
-Cerramos la shell reversa.
+Cerramos la shell reversa y volvemos a iniciar el listener.
 
 El siguiente paso es verificar y terminar procesos `rundll32` antes del exploit final:
 
