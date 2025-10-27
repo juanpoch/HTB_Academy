@@ -466,3 +466,12 @@ Build `14393` corresponde a Windows 10 release `1607`:
 En el proyecto `UACME` notamos que la build `14393` es vulnerable a la técnica 54:
 <img width="1262" height="583" alt="image" src="https://github.com/user-attachments/assets/a9284b48-58d9-4234-ad20-50674b704302" />
 
+
+La técnica dice que el binario `\syswow64\SystemPropertiesAdvanced.exe` es autoelevado. Utilizamos el siguiente comando para confirmarlo:
+```powershell
+findstr /C:\"<autoElevate>true" C:\Windows\SysWOW64\SystempropertiesAdvanced.exe
+```
+
+<img width="1020" height="248" alt="image" src="https://github.com/user-attachments/assets/2ecb8aac-8416-4bd8-9b1e-9922b9ff490e" />
+
+
