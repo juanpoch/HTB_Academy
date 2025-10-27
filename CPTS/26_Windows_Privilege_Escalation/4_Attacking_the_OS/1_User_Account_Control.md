@@ -562,6 +562,6 @@ C:\Windows\SysWOW64\SystemPropertiesAdvanced.exe
 
 <img width="764" height="107" alt="image" src="https://github.com/user-attachments/assets/719bdeeb-8a3c-4ecf-89f5-ae13c4495ffc" />
 
-Vemos que obtuvimos la shell reversa como `SYSTEM`
+Vemos que obtuvimos la shell reversa con contexto elevado:
 
 <img width="1860" height="1025" alt="image" src="https://github.com/user-attachments/assets/de824ea3-6f24-49dd-ba9c-39eca22573c1" />
