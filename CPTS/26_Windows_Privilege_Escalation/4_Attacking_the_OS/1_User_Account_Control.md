@@ -453,3 +453,16 @@ Consultamos el comportamiento del prompt para administradores:
 <img width="1006" height="192" alt="image" src="https://github.com/user-attachments/assets/b6f6b49d-ec56-43aa-a734-66921cd912e5" />
 
 El valor `0x5` corresponde a `Prompt solo cuando el ejecutable no pertenece a Microsoft`.
+
+
+El siguiente paso es comprobar la versión y la build de Windows:
+```powershell
+[environment]::OSVersion.Version
+```
+
+Build `14393` corresponde a Windows 10 release `1607`:
+<img width="1528" height="829" alt="image" src="https://github.com/user-attachments/assets/632fce6c-21a0-4ee5-bda8-fb1a85928d5b" />
+
+En el proyecto `UACME` notamos que la build `14393` es vulnerable a la técnica 54:
+<img width="1262" height="583" alt="image" src="https://github.com/user-attachments/assets/a9284b48-58d9-4234-ad20-50674b704302" />
+
