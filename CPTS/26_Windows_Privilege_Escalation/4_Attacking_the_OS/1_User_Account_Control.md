@@ -565,3 +565,8 @@ C:\Windows\SysWOW64\SystemPropertiesAdvanced.exe
 Vemos que obtuvimos la shell reversa con contexto elevado:
 
 <img width="1860" height="1025" alt="image" src="https://github.com/user-attachments/assets/de824ea3-6f24-49dd-ba9c-39eca22573c1" />
+
+
+Obtenemos la flag:
+
+<img width="1124" height="136" alt="image" src="https://github.com/user-attachments/assets/dd3f4801-3037-4270-8370-7177176cbb9e" />
