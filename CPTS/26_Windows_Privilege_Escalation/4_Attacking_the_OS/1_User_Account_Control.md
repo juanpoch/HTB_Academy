@@ -445,3 +445,11 @@ REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\
 
 El valor `0x1` indica que `UAC` está habilitado.
 
+Consultamos el comportamiento del prompt para administradores:
+```powershell
+ REG QUERY HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System\ /v ConsentPromptBehaviorAdmin
+```
+
+<img width="1006" height="192" alt="image" src="https://github.com/user-attachments/assets/b6f6b49d-ec56-43aa-a734-66921cd912e5" />
+
+El valor `0x5` corresponde a `Prompt solo cuando el ejecutable no pertenece a Microsoft`.
