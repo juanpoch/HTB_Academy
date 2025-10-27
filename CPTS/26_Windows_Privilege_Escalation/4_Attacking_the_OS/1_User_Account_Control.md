@@ -529,4 +529,27 @@ rundll32 shell32.dll,Control_RunDLL C:\Users\sarah\AppData\Local\Microsoft\Windo
 
 <img width="1353" height="885" alt="image" src="https://github.com/user-attachments/assets/2389d903-736e-406b-9817-c54ab1582b90" />
 
+Obtuvimos una shell como usuario sarah en contexto no elevado.
 
+---
+
+Procedemos a bypasear `UAC` ejecutando el binario vulnerable.
+
+Cerramos la shell reversa.
+
+El siguiente paso es verificar y terminar procesos `rundll32` antes del exploit final:
+
+```powershell
+tasklist /svc | findstr "rundll32"
+```
+
+<img width="1021" height="189" alt="image" src="https://github.com/user-attachments/assets/afe13e32-470d-44c5-82e3-04d2da71cc23" />
+
+Matamos los procesos abiertos:
+
+```powershell
+taskkill /PID 6576 /F
+taskkill /PID 6492 /F
+```
+
+<img width="699" height="90" alt="image" src="https://github.com/user-attachments/assets/23234015-389e-4874-a1a6-9b92acd7e731" />
