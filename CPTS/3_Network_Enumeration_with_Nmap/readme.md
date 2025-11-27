@@ -58,7 +58,7 @@ Muchos creen que fallan porque “no usaron todas las herramientas”, pero la r
 * **No interactúan manualmente con el servicio**.
 * **Confían demasiado en el output de los escáneres** sin validar nada por su cuenta.
 
-👉 **Un pentester avanzado entiende los protocolos**, no solo ejecuta herramientas.
+
 
 ---
 
