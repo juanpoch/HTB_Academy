@@ -1,4 +1,4 @@
-# 🕵️‍♂️ Enumeración en Hacking — Conceptos Fundamentales
+# 🕵️‍♂️ Enumeración 
 
 *Módulo: Network Enumeration with Nmap (HTB)*
 
