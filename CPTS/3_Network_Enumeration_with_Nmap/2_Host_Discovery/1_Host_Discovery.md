@@ -201,3 +201,18 @@ Los detalles importan. Observar diferencias entre ARP, ICMP y las respuestas de 
 
 Más estrategias:
 🔗 [https://nmap.org/book/host-discovery-strategies.html](https://nmap.org/book/host-discovery-strategies.html)
+
+
+---
+
+### Preguntas
+
+Con base en el último resultado, determine a qué sistema operativo pertenece. Envíe el nombre del sistema operativo como resultado.
+
+El TTL = 128 es un indicador clásico de que el host está corriendo Windows.
+
+| TTL recibido | Sistema operativo típico |
+| ------------ | ------------------------ |
+| **64**       | Linux / Unix / macOS     |
+| **128**      | **Windows**              |
+| **255**      | Cisco / Equipos de red   |
