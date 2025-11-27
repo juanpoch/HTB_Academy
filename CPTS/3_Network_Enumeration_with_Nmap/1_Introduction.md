@@ -143,4 +143,4 @@ Cada línea contiene:
 
 ---
 
-Este lienzo cubre íntegramente la parte "Introduction to Nmap" del módulo que pasaste. Cuando quieras, enviame la siguiente sección y continúo con el próximo lienzo.
+
