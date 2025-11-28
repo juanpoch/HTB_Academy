@@ -388,3 +388,5 @@ Realizamos un escaneo TCP SYN y descubrimos 7 puertos abiertos:
 
 <img width="1131" height="730" alt="image" src="https://github.com/user-attachments/assets/9e8b3ef6-63ac-4ee7-807e-a03258c886cb" />
 
+
+#### Enumere el nombre de host de su objetivo y envíelo como respuesta. (distingue entre mayúsculas y minúsculas)
