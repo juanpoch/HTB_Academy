@@ -390,3 +390,6 @@ Realizamos un escaneo TCP SYN y descubrimos 7 puertos abiertos:
 
 
 #### Enumere el nombre de host de su objetivo y envíelo como respuesta. (distingue entre mayúsculas y minúsculas)
+
+Encontramos el nombre del host haciendo un escaneo de versiones:
+<img width="1157" height="559" alt="image" src="https://github.com/user-attachments/assets/0e2e507e-40a4-4439-a3e4-8a18bb70df31" />
