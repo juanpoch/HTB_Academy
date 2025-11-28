@@ -375,3 +375,13 @@ Nmap concluye que:
 
 Más detalles sobre técnicas de escaneo de puertos:
 👉 [https://nmap.org/book/man-port-scanning-techniques.html](https://nmap.org/book/man-port-scanning-techniques.html)
+
+
+
+---
+
+#### Preguntas
+
+#### Encuentra todos los puertos TCP en tu objetivo. Indica el número total de puertos TCP encontrados como respuesta.
+
+
