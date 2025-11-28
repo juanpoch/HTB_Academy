@@ -127,7 +127,7 @@ PORT   STATE  SERVICE
 
 ## 🔐 Connect Scan (-sT)
 
-El **TCP Connect Scan (-sT)** utiliza el **three-way handshake completo** para determinar el estado del puerto:
+El [**TCP Connect Scan (-sT)**](https://nmap.org/book/scan-methods-connect-scan.html) utiliza el **three-way handshake completo** para determinar el estado del puerto:
 
 * Enviar SYN
 * Recibir SYN-ACK → puerto **open**
