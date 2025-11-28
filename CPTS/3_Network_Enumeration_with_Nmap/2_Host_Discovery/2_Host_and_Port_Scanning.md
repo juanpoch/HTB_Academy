@@ -384,4 +384,7 @@ Más detalles sobre técnicas de escaneo de puertos:
 
 #### Encuentra todos los puertos TCP en tu objetivo. Indica el número total de puertos TCP encontrados como respuesta.
 
+Realizamos un escaneo TCP SYN y descubrimos 7 puertos abiertos:
+
+<img width="1131" height="730" alt="image" src="https://github.com/user-attachments/assets/9e8b3ef6-63ac-4ee7-807e-a03258c886cb" />
 
