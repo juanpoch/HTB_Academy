@@ -198,3 +198,7 @@ Hacemos un escaneo de los top 1000 puertos para identificar puertos abiertos:
 
 Realizamos un escaneo rápido de versiones:
 <img width="1662" height="431" alt="image" src="https://github.com/user-attachments/assets/56a4259f-2692-4403-86e6-223bc5dc45d4" />
+
+
+Lanzamos un script banner:
+<img width="1651" height="534" alt="image" src="https://github.com/user-attachments/assets/db7c1471-85d8-443e-98a0-d7208154e055" />
