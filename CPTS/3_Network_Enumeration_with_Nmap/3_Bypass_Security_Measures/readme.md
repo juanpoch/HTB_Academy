@@ -49,7 +49,7 @@ Sabemos que, en Nmap, un puerto puede aparecer como:
 * `closed`
 * `filtered`
 
-Cuando vemos `filtered`, normalmente hay un firewall de por medio que está:
+Cuando vemos `filtered` (sin respuesta o con respuesta), normalmente hay un firewall de por medio que está:
 
 * **dejando caer** paquetes → no hay respuesta.
 * o **rechazando** → devuelve mensajes ICMP o RST.
@@ -99,17 +99,19 @@ Nmap done: 1 IP address (1 host up) scanned in 0.07 seconds
 
 Resultado (resumen):
 
-* `21/tcp` → `filtered`
+* `21/tcp` → `filtered` --> Unreachable|
 * `22/tcp` → `open`
-* `25/tcp` → `filtered`
+* `25/tcp` → `filtered` --> Sin respuesta
 
 ### 🔹 ACK Scan (-sA)
 
 El **ACK scan** es **más difícil de filtrar** por algunos firewalls.
 
-* Envía un paquete TCP con **solo flag ACK**.
-* Si el puerto está **open o closed**, el host debe responder con **RST**.
+* Envía un paquete TCP con **solo flag ACK** aunque no exista sesión previa, lo cual es “anómalo” pero válido para testear firewalls.
+* Si el puerto está **open o closed**, el host debe responder con **RST** (porque el host recibe un ACK inesperado, sin haber un TCP handshake previo), indicando que no hay una conexión activa.
 * No sirve para saber si el puerto está `open` o `closed`, sino si está **protegido por firewall**.
+
+
 
 Ejemplo:
 
@@ -143,8 +145,21 @@ Resultado (resumen):
 
 ### 🧠 Interpretación clave
 
-* `unfiltered` en un ACK scan → el paquete ACK llegó al host y recibió respuesta → el firewall **no está bloqueando** ese puerto.
-* `filtered` → el firewall está interviniendo.
+
+
+Si no responde nada (o ICMP reject) → filtered → el firewall filtra el puerto.
+
+* `unfiltered` (responde RST) en un ACK scan → el paquete ACK llegó al host y recibió respuesta → el firewall **no está bloqueando** ese puerto.
+* `filtered` (no responde nada o ICMP reject) → el firewall está interviniendo.
+
+| Resultado SYN (-sS)          | Resultado ACK (-sA)  | Interpretación                                                          |
+| ---------------------------- | -------------------- | ----------------------------------------------------------------------- |
+| **open (SYN/ACK)**           | **unfiltered (RST)** | Puerto **realmente abierto** y sin filtrado significativo.              |
+| **closed (RST)**             | **unfiltered (RST)** | Puerto **cerrado**, sin firewall bloqueando.                            |
+| **filtered (sin respuesta)** | **unfiltered (RST)** | **Firewall detectado**: bloquea SYN pero deja pasar ACK.                |
+| **filtered**                 | **filtered**         | Firewall fuerte / IDS bloquea ambos (SYN y ACK).                        |
+| **open**                     | **filtered**         | Firewall/IPS inspecciona ACK (menos común, firewall avanzado/stateful). |
+
 
 Comparando SYN vs ACK scan podemos inferir:
 
