@@ -34,6 +34,7 @@ SYN Stealth Scan Timing: About 3.64% done; ETC: 19:45
 ```bash
 sudo nmap 10.129.2.28 -p- -sV --stats-every=5s
 ```
+`Nota`: Podemos especificar minutos con `m`
 
 ### Aumentar el nivel de verbosidad
 
