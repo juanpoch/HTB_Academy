@@ -160,4 +160,3 @@ Por eso, un pentester experto siempre complementa la enumeración automática co
 
 ---
 
-¿Querés que prepare también una sección práctica con ejercicios de enumeración manual (banners, netcat, openssl, SMTP commands, etc.)? 😊
