@@ -103,6 +103,8 @@ Resultado (resumen):
 * `22/tcp` → `open`  --> SYN/ACK
 * `25/tcp` → `filtered` --> Sin respuesta
 
+`Nota`: Si está cerrado recibimos un `RA`.
+
 ### 🔹 ACK Scan (-sA)
 
 El **ACK scan** es **más difícil de filtrar** por algunos firewalls.
