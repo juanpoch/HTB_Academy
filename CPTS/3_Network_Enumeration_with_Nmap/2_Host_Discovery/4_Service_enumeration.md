@@ -200,3 +200,7 @@ Probar con tcpdump y nc:
 
 
 `Nota`: Cuando hacemos `host A and B` significa `Capturar tráfico cuyo origen o destino incluya a A y también a B en la misma sesión`.
+
+Hacemos banner grabbing:
+<img width="618" height="119" alt="image" src="https://github.com/user-attachments/assets/6c3e8791-1d32-4965-82ea-af44bd059c1b" />
+
