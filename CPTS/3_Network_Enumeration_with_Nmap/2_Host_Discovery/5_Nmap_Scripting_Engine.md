@@ -190,3 +190,7 @@ sudo nmap -A <target>
 
 
 `Pista`: Los servidores web se encuentran entre los servicios más atacados porque son accesibles a los usuarios y presentan un alto potencial de ataque.
+
+
+Hacemos un escaneo de los top 1000 puertos para identificar puertos abiertos:
+
