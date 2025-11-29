@@ -146,6 +146,9 @@ Luego simplemente abrimos `target.html` en el navegador.
 
 ### Ejemplo de reporte generado
 
+<img width="982" height="462" alt="image" src="https://github.com/user-attachments/assets/3625eca7-df61-4517-8818-1db197d2edd4" />
+
+
 > "Nmap scan report for IP 10.10.10.28 shows open ports: 22 (SSH), 25 (SMTP), 80 (HTTP). Scanned on June 16, 2020."
 
 ---
