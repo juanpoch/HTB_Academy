@@ -148,13 +148,13 @@ Resultado (resumen):
 ### 🧠 Interpretación clave
 
 
-* `unfiltered` (responde RST) en un ACK scan → el paquete ACK llegó al host y recibió respuesta → el firewall **no está bloqueando** ese puerto.
+* `unfiltered` (responde RST) en un ACK scan → el paquete ACK llegó al host y recibió respuesta → el firewall **no está bloqueando** ese puerto para la recepción de ACK.
 * `filtered` (no responde nada o ICMP reject) → el firewall está interviniendo.
 
 | Resultado SYN (-sS)          | Resultado ACK (-sA)  | Interpretación                                                          |
 | ---------------------------- | -------------------- | ----------------------------------------------------------------------- |
 | **open (SYN/ACK)**           | **unfiltered (RST)** | Puerto **realmente abierto** y sin filtrado significativo.              |
-| **closed (RST)**             | **unfiltered (RST)** | Puerto **cerrado**, sin firewall bloqueando.                            |
+| **closed (RST/ACK)**             | **unfiltered (RST)** | Puerto **cerrado**, sin firewall bloqueando.                            |
 | **filtered (sin respuesta)** | **unfiltered (RST)** | **Firewall detectado**: bloquea SYN pero deja pasar ACK.                |
 | **filtered**                 | **filtered**         | Firewall fuerte / IDS bloquea ambos (SYN y ACK).                        |
 | **open**                     | **filtered**         | Firewall/IPS inspecciona ACK (menos común, firewall avanzado/stateful). |
