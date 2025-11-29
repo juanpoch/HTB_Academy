@@ -196,11 +196,12 @@ Alternativa 2:
 
 Probar con tcpdump y nc:
 
-<img width="1064" height="97" alt="image" src="https://github.com/user-attachments/assets/1b9a5d8e-a93e-40eb-9671-f3473e9a250c" />
+<img width="589" height="140" alt="image" src="https://github.com/user-attachments/assets/997c9fc4-d2e8-4624-8310-748f06ca4239" />
+
+<img width="1762" height="242" alt="image" src="https://github.com/user-attachments/assets/42782421-c84e-49c9-9439-9f6cd1c5f7e3" />
 
 
-`Nota`: Cuando hacemos `host A and B` significa `Capturar tráfico cuyo origen o destino incluya a A y también a B en la misma sesión`.
+`Nota`: Cuando hacemos `host A and B` significa `Capturar tráfico cuyo origen o destino incluya a A y también a B en la misma sesión`. En tcpdump con la opción `-A` o `-X` podríamos ver el banner.
 
-Hacemos banner grabbing:
-<img width="618" height="119" alt="image" src="https://github.com/user-attachments/assets/6c3e8791-1d32-4965-82ea-af44bd059c1b" />
+
 
