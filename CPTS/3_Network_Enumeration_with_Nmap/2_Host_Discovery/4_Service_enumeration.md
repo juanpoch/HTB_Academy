@@ -169,3 +169,9 @@ Por eso, un pentester experto siempre complementa la enumeración automática co
 
 ---
 
+
+---
+
+### Preguntas
+
+#### Enumere todos los puertos y sus servicios. Uno de los servicios contiene la bandera que debe enviar como respuesta.
