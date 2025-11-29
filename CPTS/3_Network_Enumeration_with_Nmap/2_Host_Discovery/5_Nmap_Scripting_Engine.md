@@ -195,3 +195,6 @@ sudo nmap -A <target>
 Hacemos un escaneo de los top 1000 puertos para identificar puertos abiertos:
 
 <img width="845" height="278" alt="image" src="https://github.com/user-attachments/assets/29c9a24c-9498-46e0-905c-efd1186c226f" />
+
+Realizamos un escaneo rápido de versiones:
+<img width="1662" height="431" alt="image" src="https://github.com/user-attachments/assets/56a4259f-2692-4403-86e6-223bc5dc45d4" />
