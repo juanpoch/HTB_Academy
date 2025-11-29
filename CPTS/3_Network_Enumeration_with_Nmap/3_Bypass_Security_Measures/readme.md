@@ -167,7 +167,9 @@ Comparando SYN vs ACK scan podemos inferir:
 
 
 #### Resultado final del escaneo:
-* 21/tcp → filtered --> -sS Unreachable, -sA Unreachable --> (Filtered, Filtered reject) Firewall fuerte / IDS bloquea ambos (SYN y ACK). * 22/tcp → unfiltered --> -sS Open, -sA Unfiltered (RST) --> Puerto **realmente abierto** y sin filtrado significativo. * 25/tcp → filtered --> -sS Sin respuesta, -sA filtered sin respuesta (filtered droped, filtered droped) --> Firewall fuerte / IDS DROPEA ambos (SYN y ACK). No se puede realizar bypass.
+* `21/tcp`→ filtered --> `-sS` Unreachable, `-sA` Unreachable --> (Filtered, Filtered reject) Firewall fuerte / IDS bloquea ambos (SYN y ACK).  
+* `22/tcp` → unfiltered --> `-sS` Open, `-sA` Unfiltered (RST) --> Puerto **realmente abierto** y sin filtrado significativo.  
+* `25/tcp` → filtered --> `-sS` Sin respuesta, `-sA` filtered sin respuesta (filtered droped, filtered droped) --> Firewall fuerte / IDS DROPEA ambos (SYN y ACK). No se puede realizar bypass.  
 
 
 ---
