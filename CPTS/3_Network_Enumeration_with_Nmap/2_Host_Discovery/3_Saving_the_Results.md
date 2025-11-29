@@ -160,4 +160,8 @@ Más información sobre formatos de salida:
 
 ---
 
-Si querés, a continuación puedo preparar un lienzo separado solo con ejemplos prácticos para grep, automatización y scripting sobre `.gnmap` y `.xml`. ¿Querés eso también?
+
+
+### Preguntas
+
+Realice un escaneo completo del puerto TCP en su objetivo y genere un informe HTML. Indique el número del puerto más alto como respuesta.
