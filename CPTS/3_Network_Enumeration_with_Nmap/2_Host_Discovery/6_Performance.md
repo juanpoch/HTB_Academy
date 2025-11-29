@@ -1,6 +1,6 @@
 # Nmap — Performance
 
-Este documento resume y explica en detalle la sección **Performance** del módulo *Network Enumeration with Nmap* de Hack The Box. Está escrito en español y en formato Markdown para ser almacenado en GitHub.
+
 
 ---
 
