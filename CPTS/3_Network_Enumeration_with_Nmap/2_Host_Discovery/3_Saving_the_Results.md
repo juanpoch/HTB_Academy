@@ -164,4 +164,16 @@ Más información sobre formatos de salida:
 
 ### Preguntas
 
-Realice un escaneo completo del puerto TCP en su objetivo y genere un informe HTML. Indique el número del puerto más alto como respuesta.
+#### Realice un escaneo completo del puerto TCP en su objetivo y genere un informe HTML. Indique el número del puerto más alto como respuesta.
+
+Realizamos un escaneo con los 1000 puertos más importantes y guardamos los resultados en todos sus formatos:
+<img width="973" height="546" alt="image" src="https://github.com/user-attachments/assets/d91c2aff-c623-437a-888e-363405dd4699" />
+
+Creamos el reporte:
+<img width="970" height="241" alt="image" src="https://github.com/user-attachments/assets/8a35554f-fcb2-42e4-a740-536b0277248a" />
+
+
+Abrimos el reporte en el navegador y observamos el puerto más alto abierto (31337):
+<img width="1527" height="815" alt="image" src="https://github.com/user-attachments/assets/ce618990-9589-4f6c-b66b-f1ac102d94a1" />
+
+
