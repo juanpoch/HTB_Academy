@@ -189,3 +189,14 @@ Inspeccionamos la salida mientras escaneamos y encontramos la flag correspondien
 
 `Nota`: Fijarse que en la salida común no aparece el banner obtenido:
 <img width="1823" height="520" alt="image" src="https://github.com/user-attachments/assets/619fe535-a7a5-4656-9a88-da697e4a0b72" />
+
+----
+
+Alternativa 2:
+
+Probar con tcpdump y nc:
+
+<img width="1064" height="97" alt="image" src="https://github.com/user-attachments/assets/1b9a5d8e-a93e-40eb-9671-f3473e9a250c" />
+
+
+`Nota`: Cuando hacemos `host A and B` significa `Capturar tráfico cuyo origen o destino incluya a A y también a B en la misma sesión`.
