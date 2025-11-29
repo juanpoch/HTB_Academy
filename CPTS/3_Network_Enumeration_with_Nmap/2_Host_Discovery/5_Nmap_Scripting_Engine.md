@@ -187,3 +187,6 @@ sudo nmap -A <target>
 ### Preguntas
 
 #### Utilice NSE y sus scripts para encontrar la bandera que contiene uno de los servicios y enviarla como respuesta.
+
+
+`Pista`: Los servidores web se encuentran entre los servicios más atacados porque son accesibles a los usuarios y presentan un alto potencial de ataque.
