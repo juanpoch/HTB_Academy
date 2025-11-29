@@ -175,3 +175,17 @@ Por eso, un pentester experto siempre complementa la enumeración automática co
 ### Preguntas
 
 #### Enumere todos los puertos y sus servicios. Uno de los servicios contiene la bandera que debe enviar como respuesta.
+
+Hacemos nuestro escaneo TCP SYN:
+<img width="1071" height="500" alt="image" src="https://github.com/user-attachments/assets/c8ee2f65-b00f-450c-856d-991584482f36" />
+
+Luego hacemos un escaneo de versiones a los puertos encontrados abiertos:
+<img width="1322" height="684" alt="image" src="https://github.com/user-attachments/assets/f9004334-65a1-46db-ab99-55878b337727" />
+
+
+
+Inspeccionamos la salida mientras escaneamos y encontramos la flag correspondiente al puerto 31337
+<img width="1771" height="738" alt="image" src="https://github.com/user-attachments/assets/79599168-3ae4-4838-b624-49ef0b0e6dda" />
+
+`Nota`: Fijarse que en la salida común no aparece el banner obtenido:
+<img width="1823" height="520" alt="image" src="https://github.com/user-attachments/assets/619fe535-a7a5-4656-9a88-da697e4a0b72" />
