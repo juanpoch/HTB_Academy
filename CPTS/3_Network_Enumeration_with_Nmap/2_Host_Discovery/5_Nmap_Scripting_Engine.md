@@ -179,3 +179,11 @@ sudo nmap -p 80 -sV --script vuln <target>
 ```bash
 sudo nmap -A <target>
 ```
+
+
+---
+
+
+### Preguntas
+
+#### Utilice NSE y sus scripts para encontrar la bandera que contiene uno de los servicios y enviarla como respuesta.
