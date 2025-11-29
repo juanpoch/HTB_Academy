@@ -146,9 +146,6 @@ Resultado (resumen):
 ### 🧠 Interpretación clave
 
 
-
-Si no responde nada (o ICMP reject) → filtered → el firewall filtra el puerto.
-
 * `unfiltered` (responde RST) en un ACK scan → el paquete ACK llegó al host y recibió respuesta → el firewall **no está bloqueando** ese puerto.
 * `filtered` (no responde nada o ICMP reject) → el firewall está interviniendo.
 
