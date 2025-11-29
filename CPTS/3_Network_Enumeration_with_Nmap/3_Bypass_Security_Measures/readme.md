@@ -99,7 +99,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.07 seconds
 
 Resultado (resumen):
 
-* `21/tcp` → `filtered` --> Unreachable|
+* `21/tcp` → `filtered` --> Unreachable
 * `22/tcp` → `open`
 * `25/tcp` → `filtered` --> Sin respuesta
 
@@ -139,9 +139,9 @@ Nmap done: 1 IP address (1 host up) scanned in 0.15 seconds
 ```
 Resultado (resumen):
 
-* `21/tcp` → `filtered`
+* `21/tcp` → `filtered` --> Unreachable
 * `22/tcp` → `unfiltered`
-* `25/tcp` → `filtered`
+* `25/tcp` → `filtered` --> Sin respuesta
 
 ### 🧠 Interpretación clave
 
