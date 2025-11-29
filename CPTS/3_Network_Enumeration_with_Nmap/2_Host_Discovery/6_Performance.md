@@ -1,4 +1,4 @@
-# Nmap — Performance (Optimización de Rendimiento)
+# Nmap — Performance
 
 Este documento resume y explica en detalle la sección **Performance** del módulo *Network Enumeration with Nmap* de Hack The Box. Está escrito en español y en formato Markdown para ser almacenado en GitHub.
 
@@ -171,9 +171,3 @@ sudo nmap 10.129.2.0/24 -F -oN tnet.T5 -T 5
 * Timing templates detallados: [https://nmap.org/book/performance-timing-templates.html](https://nmap.org/book/performance-timing-templates.html)
 
 ---
-
-Si querés, puedo agregar una sección extra con:
-
-* Cheatsheet de performance
-* Comparación visual de parámetros
-* Ejercicios prácticos para HTB
