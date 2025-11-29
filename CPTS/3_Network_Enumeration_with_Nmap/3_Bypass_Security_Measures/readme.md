@@ -100,7 +100,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.07 seconds
 Resultado (resumen):
 
 * `21/tcp` → `filtered` --> Unreachable
-* `22/tcp` → `open`
+* `22/tcp` → `open`  --> SYN/ACK
 * `25/tcp` → `filtered` --> Sin respuesta
 
 ### 🔹 ACK Scan (-sA)
@@ -140,7 +140,7 @@ Nmap done: 1 IP address (1 host up) scanned in 0.15 seconds
 Resultado (resumen):
 
 * `21/tcp` → `filtered` --> Unreachable
-* `22/tcp` → `unfiltered`
+* `22/tcp` → `unfiltered` --> RST
 * `25/tcp` → `filtered` --> Sin respuesta
 
 ### 🧠 Interpretación clave
