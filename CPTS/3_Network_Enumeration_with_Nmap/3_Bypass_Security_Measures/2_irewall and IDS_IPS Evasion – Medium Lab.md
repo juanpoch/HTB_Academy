@@ -16,3 +16,10 @@ Como resultado, esta nueva ronda de pruebas será más difícil y requerirá té
 
 
 
+---
+
+### Preguntas
+
+#### Tras transferir las configuraciones al sistema, nuestro cliente desea saber si es posible conocer la versión del servidor DNS de nuestro objetivo. Envíe la versión del servidor DNS del objetivo como respuesta.
+
+`IP`: `10.129.2.48`
