@@ -25,3 +25,9 @@ Como resultado, esta nueva ronda de pruebas será más difícil y requerirá té
 `Pista`: Durante la reunión, los administradores hablaron sobre el host que probamos como un servidor de acceso público que no se mencionó antes.
 
 `IP`: `10.129.2.48`
+
+Realizamos un ping para ver si el host está activo:
+
+```bash
+nmap -sn -PE --disable-arp-ping -n --reason --packet-trace 10.129.2.48
+```
