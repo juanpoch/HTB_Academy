@@ -26,9 +26,16 @@ Como resultado, esta nueva ronda de pruebas será más difícil y requerirá té
 
 `IP`: `10.129.2.48`
 
-Realizamos un ping para ver si el host está activo:
+- Realizamos un ping para ver si el host está activo:
 
 ```bash
 nmap -sn -PE --disable-arp-ping -n --reason --packet-trace 10.129.2.48
 ```
 <img width="1360" height="302" alt="image" src="https://github.com/user-attachments/assets/c5cbe903-26ca-45c6-aa0f-61329cf618c3" />
+
+
+- Hacemos un escaneo TCP SYN lo más silencioso posible:
+
+```bash
+nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 10 10.129.2.48 --initial-rtt-timeout 3000ms
+```
