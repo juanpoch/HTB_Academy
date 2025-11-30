@@ -77,3 +77,9 @@ nmap -sU --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 1000 10.1
 ```
 
 <img width="858" height="105" alt="image" src="https://github.com/user-attachments/assets/b6fe1a56-40e4-4433-ae9f-a682eeb4418c" />
+
+
+Como no encontramos nada, seguramente sea en el puerto tcp 50000. Intentamos conectarnos con netcat:
+```bash
+```
+<img width="784" height="137" alt="image" src="https://github.com/user-attachments/assets/615f8734-6e60-4640-b9e4-9e5d4337eab5" />
