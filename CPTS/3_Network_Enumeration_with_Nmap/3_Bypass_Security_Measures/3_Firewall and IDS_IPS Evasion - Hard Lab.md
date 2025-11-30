@@ -69,3 +69,4 @@ Procedemos a realizar un escaneo de versiones con los mismos parámetros seteado
 nmap -sV --disable-arp-ping -Pn -n --packet-trace --reason -p50000 10.129.97.161 --initial-rtt-timeout 3000ms -T2 -D RND:20 --source-port 53 --max-retries 2
 ```
 
+<img width="646" height="88" alt="image" src="https://github.com/user-attachments/assets/09de6c8f-5cb0-4115-a0f7-ff38de5ebcd7" />
