@@ -76,3 +76,6 @@ Realizamos el mismo escaneo para esos 2 puertos, utilizando `--script banner` pa
 nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason -p22,80 10 10.129.153.253 --initial-rtt-timeout 3000ms --script banner
 ```
 <img width="1331" height="805" alt="image" src="https://github.com/user-attachments/assets/ffeadd99-f6c9-46dd-804f-68cf85572da1" />
+
+<img width="574" height="164" alt="image" src="https://github.com/user-attachments/assets/985da3eb-1820-49b0-bcc6-fb9c42d1c100" />
+
