@@ -50,5 +50,8 @@ Si hacemos el mísmo escaneo para el puerto 53 nos dá cerrado:
 
 Hacemos un escaneo UDP al puerto 53:
 
+```bash
+nmap -sU -p 53 --script dns-version -T2 --max-retries 1 10.129.2.48
+```
 <img width="920" height="256" alt="image" src="https://github.com/user-attachments/assets/907104cd-e5ca-4858-817b-a75adc49ddc1" />
 
