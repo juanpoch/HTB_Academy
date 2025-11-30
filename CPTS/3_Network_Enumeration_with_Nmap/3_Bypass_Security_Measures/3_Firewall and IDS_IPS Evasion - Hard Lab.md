@@ -84,3 +84,7 @@ Como no encontramos nada, seguramente sea en el puerto tcp 50000. Intentamos con
 nc -nv -p53 10.129.97.161 50000
 ```
 <img width="784" height="137" alt="image" src="https://github.com/user-attachments/assets/615f8734-6e60-4640-b9e4-9e5d4337eab5" />
+
+
+<img width="533" height="179" alt="image" src="https://github.com/user-attachments/assets/2da6ca59-7204-472b-8971-4cd07a6aacf7" />
+
