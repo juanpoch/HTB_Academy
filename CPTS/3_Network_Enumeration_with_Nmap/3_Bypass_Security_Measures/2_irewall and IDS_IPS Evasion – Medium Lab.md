@@ -22,4 +22,6 @@ Como resultado, esta nueva ronda de pruebas será más difícil y requerirá té
 
 #### Tras transferir las configuraciones al sistema, nuestro cliente desea saber si es posible conocer la versión del servidor DNS de nuestro objetivo. Envíe la versión del servidor DNS del objetivo como respuesta.
 
+`Pista`: Durante la reunión, los administradores hablaron sobre el host que probamos como un servidor de acceso público que no se mencionó antes.
+
 `IP`: `10.129.2.48`
