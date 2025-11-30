@@ -75,3 +75,5 @@ No encontramos la flag, procedemos a realizar un escaneo UDP:
 ```bash
 nmap -sU --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 1000 10.129.97.161 --initial-rtt-timeout 3000ms -T2 -D RND:20 --source-port 53 --max-retries 2 
 ```
+
+<img width="858" height="105" alt="image" src="https://github.com/user-attachments/assets/b6fe1a56-40e4-4433-ae9f-a682eeb4418c" />
