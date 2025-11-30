@@ -58,3 +58,4 @@ Realizamos un ping para ver si el host está activo:
 ```bash
 nmap -sn -PE --disable-arp-ping -n --reason --packet-trace 10.129.153.253
 ```
+<img width="1683" height="293" alt="image" src="https://github.com/user-attachments/assets/55629e12-a187-42ef-9c4b-c085373b739c" />
