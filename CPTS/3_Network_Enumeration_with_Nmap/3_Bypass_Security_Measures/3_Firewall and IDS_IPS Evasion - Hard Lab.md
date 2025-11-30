@@ -41,3 +41,9 @@ nmap -sn -PE --disable-arp-ping -n --reason --packet-trace 10.129.97.161
 <img width="1536" height="224" alt="image" src="https://github.com/user-attachments/assets/e64b9426-6c0c-4f4d-b6bc-2deb28a47432" />
 
 El host está activo.
+
+
+- Hacemos un escaneo TCP SYN lo más silencioso posible:
+```bash
+nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 200 10.129.97.161 --initial-rtt-timeout 3000ms -T2
+```
