@@ -46,3 +46,9 @@ nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 10 10.129
 
 Si hacemos el mísmo escaneo para el puerto 53 nos dá cerrado:
 <img width="1452" height="407" alt="image" src="https://github.com/user-attachments/assets/b311ccd0-e812-436b-a103-f6870583d08f" />
+
+
+Hacemos un escaneo UDP al puerto 53:
+
+<img width="920" height="256" alt="image" src="https://github.com/user-attachments/assets/907104cd-e5ca-4858-817b-a75adc49ddc1" />
+
