@@ -238,6 +238,21 @@ Ejemplo:
 sudo nmap 10.129.2.28 -n -Pn -p 445 -O
 ```
 
+```bash
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-22 01:23 CEST
+Nmap scan report for 10.129.2.28
+Host is up (0.032s latency).
+
+PORT    STATE    SERVICE
+445/tcp filtered microsoft-ds
+MAC Address: DE:AD:00:00:BE:EF (Intel Corporate)
+Too many fingerprints match this host to give specific OS details
+Network Distance: 1 hop
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 3.14 seconds
+```
+
 Salida (resumen):
 
 * `445/tcp filtered microsoft-ds`
