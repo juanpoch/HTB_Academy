@@ -61,3 +61,12 @@ nmap -sn -PE --disable-arp-ping -n --reason --packet-trace 10.129.153.253
 <img width="1683" height="293" alt="image" src="https://github.com/user-attachments/assets/55629e12-a187-42ef-9c4b-c085373b739c" />
 
 `Nota`: El TTL corresponde a Linux.
+
+
+Hacemos un escaneo TCP SYN lo más silencioso posible:
+<img width="1279" height="771" alt="image" src="https://github.com/user-attachments/assets/5791bc9a-e453-42f6-b9dc-a63b4047113d" />
+
+Puerto 22 y 80 abiertos.
+
+Realizamos el mismo escaneo para esos 2 puertos, utilizando `--script banner` para realizar banner grabing:
+<img width="1331" height="805" alt="image" src="https://github.com/user-attachments/assets/ffeadd99-f6c9-46dd-804f-68cf85572da1" />
