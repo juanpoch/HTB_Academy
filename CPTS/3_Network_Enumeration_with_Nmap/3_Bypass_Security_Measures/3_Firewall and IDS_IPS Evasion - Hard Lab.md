@@ -63,3 +63,9 @@ nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 1000 10.1
 Encontramos el puerto 50000 open.
 
 
+Procedemos a realizar un escaneo de versiones con los mismos parámetros seteados para el escaneo anterior:
+
+```bash
+nmap -sV --disable-arp-ping -Pn -n --packet-trace --reason -p50000 10.129.97.161 --initial-rtt-timeout 3000ms -T2 -D RND:20 --source-port 53 --max-retries 2
+```
+
