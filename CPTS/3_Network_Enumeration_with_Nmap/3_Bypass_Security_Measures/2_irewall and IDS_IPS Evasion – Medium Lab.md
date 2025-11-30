@@ -39,3 +39,6 @@ nmap -sn -PE --disable-arp-ping -n --reason --packet-trace 10.129.2.48
 ```bash
 nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 10 10.129.2.48 --initial-rtt-timeout 3000ms
 ```
+
+<img width="707" height="282" alt="image" src="https://github.com/user-attachments/assets/1736eb7f-a0d0-4625-ae75-7ba372c010ba" />
+
