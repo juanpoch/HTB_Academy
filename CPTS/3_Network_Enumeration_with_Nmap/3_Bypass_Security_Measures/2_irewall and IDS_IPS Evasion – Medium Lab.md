@@ -65,3 +65,4 @@ nmap -sU -p 53 --script dns-nsid -T2 --max-retries 1 10.129.2.48
 
 - `bind.version`: HTB{GoTtgUnyze9Psw4vGjcuMpHRp}
 
+<img width="540" height="161" alt="image" src="https://github.com/user-attachments/assets/58dfe49f-752c-4f60-8fc0-ce066549e13a" />
