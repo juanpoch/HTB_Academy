@@ -25,7 +25,17 @@ Una vez identificada la versión del servicio en cuestión, debemos **enviar la 
 
 
 
+### Preguntas
 
+#### Ahora nuestro cliente quiere saber si es posible averiguar la versión de los servicios en ejecución. Identifique la versión del servicio al que se refería y envíe la marca como respuesta.
 
+`Pista`: Nuestro cliente también mencionó que se vieron obligados a agregar un servicio que juega un papel vital para sus clientes porque requieren grandes cantidades de datos.
+
+`IP`: `10.129.97.161`
+
+- Realizamos un ping para ver si el host está activo:
+```bash
+nmap -sn -PE --disable-arp-ping -n --reason --packet-trace 10.129.97.161
+```
 
 
