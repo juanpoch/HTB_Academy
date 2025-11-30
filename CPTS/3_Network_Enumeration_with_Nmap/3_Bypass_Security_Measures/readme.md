@@ -263,6 +263,22 @@ Salida (resumen):
 ```bash
 sudo nmap 10.129.2.28 -n -Pn -p 445 -O -S 10.129.2.200 -e tun0
 ```
+```bash
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-22 01:16 CEST
+Nmap scan report for 10.129.2.28
+Host is up (0.010s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+MAC Address: DE:AD:00:00:BE:EF (Intel Corporate)
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Linux 2.6.32 (96%), Linux 3.2 - 4.9 (96%), Linux 2.6.32 - 3.10 (96%), Linux 3.4 - 3.10 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (94%), Synology DiskStation Manager 5.2-5644 (94%), Linux 2.6.32 - 2.6.35 (94%), Linux 2.6.32 - 3.5 (94%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 1 hop
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 4.11 seconds
+```
 
 Aquí:
 
