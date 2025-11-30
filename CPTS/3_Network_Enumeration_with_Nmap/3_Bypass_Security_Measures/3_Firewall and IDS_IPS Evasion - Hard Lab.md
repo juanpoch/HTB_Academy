@@ -38,4 +38,6 @@ Una vez identificada la versión del servicio en cuestión, debemos **enviar la 
 nmap -sn -PE --disable-arp-ping -n --reason --packet-trace 10.129.97.161
 ```
 
+<img width="1536" height="224" alt="image" src="https://github.com/user-attachments/assets/e64b9426-6c0c-4f4d-b6bc-2deb28a47432" />
 
+El host está activo.
