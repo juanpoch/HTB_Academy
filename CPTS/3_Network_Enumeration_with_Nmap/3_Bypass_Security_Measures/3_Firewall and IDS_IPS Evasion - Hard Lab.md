@@ -47,3 +47,10 @@ El host está activo.
 ```bash
 nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 200 10.129.97.161 --initial-rtt-timeout 3000ms -T2
 ```
+
+<img width="980" height="83" alt="image" src="https://github.com/user-attachments/assets/5a112e75-9d20-429f-80f9-4058ae242654" />
+
+Puerto 80 abierto.
+
+Volvemos a realizar un escaneo pero esta vez escaneamos los top 1000 puertos, utilizaremos decoy y DNS source port:
+
