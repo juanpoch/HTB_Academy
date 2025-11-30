@@ -56,8 +56,12 @@ nmap -sU -p 53 --script dns-version -T2 --max-retries 1 10.129.2.48
 <img width="920" height="256" alt="image" src="https://github.com/user-attachments/assets/907104cd-e5ca-4858-817b-a75adc49ddc1" />
 
 
-Como el puerto está abierto, lo enumeramos con el script `dns-nsid.nse`:
-
+Como el puerto está abierto, lo enumeramos con el script `dns-nsid.nse` enumera versiones dns:
+```bash
+nmap -sU -p 53 --script dns-nsid -T2 --max-retries 1 10.129.2.48
+```
 
 <img width="1153" height="321" alt="image" src="https://github.com/user-attachments/assets/e91974c4-fb8d-4602-9c0e-33ac574b5c16" />
+
+- `bind.version`: HTB{GoTtgUnyze9Psw4vGjcuMpHRp}
 
