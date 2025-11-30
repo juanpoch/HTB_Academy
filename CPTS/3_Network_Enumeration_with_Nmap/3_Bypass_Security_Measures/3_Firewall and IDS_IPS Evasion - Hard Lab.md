@@ -57,3 +57,9 @@ Volvemos a realizar un escaneo pero esta vez escaneamos los top 1000 puertos, ut
 ```bash
 nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 1000 10.129.97.161 --initial-rtt-timeout 3000ms -T2 -D RND:20 --source-port 53 --max-retries 2
 ```
+
+<img width="910" height="101" alt="image" src="https://github.com/user-attachments/assets/9193a2ee-a042-4ec1-b2e8-ecd906eddd69" />
+
+Encontramos el puerto 50000 open.
+
+
