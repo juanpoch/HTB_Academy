@@ -52,5 +52,8 @@ nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 200 10.12
 
 Puerto 80 abierto.
 
-Volvemos a realizar un escaneo pero esta vez escaneamos los top 1000 puertos, utilizaremos decoy y DNS source port:
+Volvemos a realizar un escaneo pero esta vez escaneamos los top 1000 puertos, utilizaremos decoy y DNS source port y disminuimos el `max-retires`:
 
+```bash
+nmap -sS --disable-arp-ping -Pn -n --packet-trace --reason --top-ports 1000 10.129.97.161 --initial-rtt-timeout 3000ms -T2 -D RND:20 --source-port 53 --max-retries 2
+```
