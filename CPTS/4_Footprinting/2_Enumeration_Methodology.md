@@ -139,6 +139,9 @@ La metodología puede visualizarse como un **laberinto**. Cada capa es un “mur
 
 Los cuadrados en el diagrama representan **vulnerabilidades** (gaps).
 
+<img width="1224" height="733" alt="image" src="https://github.com/user-attachments/assets/bdab5cab-80e7-4bf6-9c97-a2c45aa21720" />
+
+
 Puntos clave:
 
 * No todos los gaps llevan al interior.
