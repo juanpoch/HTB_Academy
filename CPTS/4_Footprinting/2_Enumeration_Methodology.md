@@ -22,6 +22,8 @@ Estas capas representan "muros" o límites que debemos atravesar para acercarnos
 
 La metodología utiliza **capas concéntricas** que representan barreras a superar. Cada capa contiene información específica que debemos identificar.
 
+<img width="1248" height="701" alt="image" src="https://github.com/user-attachments/assets/97464bd2-95df-4037-a125-439cf96c324d" />
+
 ---
 
 ## 🟦 Capa 1: Internet Presence
