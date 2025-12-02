@@ -199,15 +199,3 @@ El cómo se obtiene cada dato es dinámico: herramientas cambian, tecnologías e
 
 ---
 
-## 6. Conclusión
-
-Dominar esta metodología permite:
-
-* Evitar omisiones
-* Priorizar rutas útiles
-* Organizar el trabajo
-* Adaptarse a cada entorno
-* Mantener enfoque profesional
-
-
----
