@@ -148,7 +148,7 @@ Puntos clave:
 * Se debe priorizar qué caminos explorar según el tiempo disponible.
 * En un pentest siempre existe la posibilidad de más vulnerabilidades que no descubrimos.
 
-La historia del ataque a **SolarWinds** muestra que un atacante con meses de estudio del entorno puede descubrir vectores que un pentest típico no llega a ver.
+La historia del ataque a [**SolarWinds**](https://www.rpc.senate.gov/policy-papers/the-solarwinds-cyberattack) muestra que un atacante con meses de estudio del entorno puede descubrir vectores que un pentest típico no llega a ver.
 
 ---
 
