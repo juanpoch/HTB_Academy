@@ -222,7 +222,7 @@ Manual oficial:
 
 | Configuración               | Riesgo                                    |
 | --------------------------- | ----------------------------------------- |
-| `rwuser noauth`             | Acceso total sin autenticación            |
+| `rwuser noauth`             | Acceso total al OID sin autenticación     |
 | `rwcommunity <string> <IP>` | Escritura completa desde cualquier origen |
 | `rwcommunity6`              | Igual riesgo en IPv6                      |
 
