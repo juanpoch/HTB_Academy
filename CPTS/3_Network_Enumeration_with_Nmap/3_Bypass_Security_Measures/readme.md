@@ -155,11 +155,11 @@ Resultado (resumen):
 | ---------------------------- | -------------------- | ----------------------------------------------------------------------- |
 | **open (SYN/ACK)**           | **unfiltered (RST)** | Puerto **realmente abierto** y sin filtrado significativo.              |
 | **closed (RST/ACK)**             | **unfiltered (RST)** | Puerto **cerrado**, sin firewall bloqueando.                            |
-| **filtered (sin respuesta)** | **unfiltered (RST)** | **Firewall detectado**: bloquea SYN pero deja pasar ACK.                |
+| **filtered (sin respuesta)** | **unfiltered (RST)** | **Firewall detectado**: bloquea SYN pero deja pasar ACK. *               |
 | **filtered**                 | **filtered**         | Firewall fuerte / IDS bloquea ambos (SYN y ACK).                        |
 | **open**                     | **filtered**         | Firewall/IPS inspecciona ACK (menos común, firewall avanzado/stateful). |
 
-
+* El puerto está cerrado y el firewall NO filtra ACK
 Comparando SYN vs ACK scan podemos inferir:
 
 * Qué puertos están realmente expuestos.
