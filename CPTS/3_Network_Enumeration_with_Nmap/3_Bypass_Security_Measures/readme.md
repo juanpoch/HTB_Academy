@@ -159,7 +159,7 @@ Resultado (resumen):
 | **filtered**                 | **filtered**         | Firewall fuerte / IDS bloquea ambos (SYN y ACK).                        |
 | **open**                     | **filtered**         | Firewall/IPS inspecciona ACK (menos común, firewall avanzado/stateful). |
 
-* El puerto está cerrado y el firewall NO filtra ACK
+\* El puerto está cerrado y el firewall NO filtra ACK
 Comparando SYN vs ACK scan podemos inferir:
 
 * Qué puertos están realmente expuestos.
