@@ -301,6 +301,10 @@ Observación:
 
 ---
 
+A menudo, cuando ciertas cadenas de comunidad se vinculan a direcciones IP específicas, se nombran con el nombre del host, e incluso se les añaden símbolos para dificultar su identificación. Sin embargo, si imaginamos una red extensa con más de 100 servidores diferentes administrados mediante SNMP, las etiquetas, en ese caso, seguirán un patrón. Por lo tanto, podemos usar diferentes reglas para deducirlas. Podemos usar la herramienta [crunch](https://secf00tprint.github.io/blog/passwords/crunch/advanced/en) para crear listas de palabras personalizadas. 
+
+---
+
 ## 13. Enumeración masiva de OIDs – braa
 
 Instalación:
@@ -321,23 +325,6 @@ Esto permite:
 * Menos ruido que snmpwalk
 * Identificar información crítica rápidamente
 
----
-
-## 14. Recomendación práctica
-
-SNMP es:
-
-* Un **aliado para sysadmins**
-* Una **pesadilla para blue teams mal configurados**
-
-👉 Ningún tutorial reemplaza la experiencia real.
-
-Recomendación:
-
-* Montar una VM
-* Configurar SNMPv1 / v2c / v3
-* Jugar con permisos
-* Ver cómo cambia la superficie de ataque
 
 ---
 
@@ -354,6 +341,16 @@ Un SNMP mal configurado puede revelar:
 
 Y todo esto **sin explotación activa**.
 
-Este lienzo cierra una de las piezas clave del módulo **Footprinting**.
+
 
 ---
+
+
+
+### Preguntas
+
+`IP`: `10.129.226.159`
+
+Enumere el servicio SNMP y obtenga la dirección de correo electrónico del administrador. Envíela como respuesta.
+
+
