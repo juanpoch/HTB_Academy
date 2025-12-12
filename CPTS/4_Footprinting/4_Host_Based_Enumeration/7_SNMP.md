@@ -366,3 +366,11 @@ Realizamos un escaneo de versiones:
 Vemos SNMPv1 activo y la comunity string `public`.
 
 SNMPv3 está instalado, pero SNMPv1/v2c sigue abierto, lo cual anula completamente la seguridad.
+
+
+
+Enumeramos con `snmpwalk`:
+<img width="1383" height="808" alt="image" src="https://github.com/user-attachments/assets/f8898458-8952-48c7-bcd3-cbd3bc3b67b9" />
+
+---
+
