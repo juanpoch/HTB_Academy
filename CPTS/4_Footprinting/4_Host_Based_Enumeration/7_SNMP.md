@@ -395,3 +395,8 @@ Versión personalizada:  InFreight SNMP v0.91
 
 
 #### Enumere el script personalizado que se está ejecutando en el sistema y envíe su salida como respuesta.
+
+
+`Script`: `/usr/share/flag.sh`
+
+`Salida del script`: `HTB{5nMp_fl4g_uidhfljnsldiuhbfsdij44738b2u763g}
