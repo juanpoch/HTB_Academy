@@ -367,7 +367,19 @@ Vemos SNMPv1 activo y la comunity string `public`.
 
 SNMPv3 está instalado, pero SNMPv1/v2c sigue abierto, lo cual anula completamente la seguridad.
 
+---
 
+Utilizamos todos los scripts de nmap correspondientes a snmp:
+<img width="1245" height="790" alt="image" src="https://github.com/user-attachments/assets/07c8b52c-2114-4a9e-baaf-efa59800a812" />
+<img width="1103" height="841" alt="image" src="https://github.com/user-attachments/assets/4a136e3b-1841-4ab0-bcf5-bd57a74da62a" />
+<img width="963" height="814" alt="image" src="https://github.com/user-attachments/assets/3551597a-1244-4630-b065-81391aefe77d" />
+<img width="929" height="857" alt="image" src="https://github.com/user-attachments/assets/a2a68a3f-8e29-421e-b50f-47f73a6fa7de" />
+<img width="960" height="848" alt="image" src="https://github.com/user-attachments/assets/e42e85fd-1349-416c-96e9-85e24c3d4102" />
+<img width="1143" height="737" alt="image" src="https://github.com/user-attachments/assets/ce5552ba-bdcb-4731-bf0d-9192d6021b0f" />
+
+
+
+---
 
 Enumeramos con `snmpwalk`:
 <img width="1383" height="808" alt="image" src="https://github.com/user-attachments/assets/f8898458-8952-48c7-bcd3-cbd3bc3b67b9" />
