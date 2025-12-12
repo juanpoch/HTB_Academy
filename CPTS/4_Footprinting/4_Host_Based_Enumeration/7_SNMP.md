@@ -351,6 +351,18 @@ Y todo esto **sin explotación activa**.
 
 `IP`: `10.129.226.159`
 
-Enumere el servicio SNMP y obtenga la dirección de correo electrónico del administrador. Envíela como respuesta.
+#### Enumere el servicio SNMP y obtenga la dirección de correo electrónico del administrador. Envíela como respuesta.
 
 
+Hacemos un escaneo UDP rápido:
+<img width="769" height="307" alt="image" src="https://github.com/user-attachments/assets/1e761e02-d23d-462e-938e-d463ec5e5ae0" />
+
+Descubrimos es servicio SNMP en el puerto UDP 161.
+
+Realizamos un escaneo de versiones:
+<img width="1239" height="333" alt="image" src="https://github.com/user-attachments/assets/c11c6e2c-63e8-4870-b401-d4a5d3b047dd" />
+
+
+Vemos SNMPv1 activo y la comunity string `public`.
+
+SNMPv3 está instalado, pero SNMPv1/v2c sigue abierto, lo cual anula completamente la seguridad.
