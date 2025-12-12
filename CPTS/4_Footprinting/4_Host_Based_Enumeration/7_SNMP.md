@@ -214,7 +214,7 @@ Esto define:
 
 Manual oficial:
 
-* [https://man7.org/linux/man-pages/man5/snmpd.conf.5.html](https://man7.org/linux/man-pages/man5/snmpd.conf.5.html)
+* [https://www.net-snmp.org/docs/man/snmpd.conf.html](https://www.net-snmp.org/docs/man/snmpd.conf.html)
 
 ---
 
