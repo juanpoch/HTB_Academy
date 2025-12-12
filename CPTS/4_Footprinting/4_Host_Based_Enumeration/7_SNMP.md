@@ -386,3 +386,5 @@ Enumeramos con `snmpwalk`:
 
 ---
 
+
+#### ¿Cuál es la versión personalizada del servidor SNMP?
