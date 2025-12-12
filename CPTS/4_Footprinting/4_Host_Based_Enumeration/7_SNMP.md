@@ -388,3 +388,5 @@ Enumeramos con `snmpwalk`:
 
 
 #### ¿Cuál es la versión personalizada del servidor SNMP?
+
+Versión personalizada:  InFreight SNMP v0.91
