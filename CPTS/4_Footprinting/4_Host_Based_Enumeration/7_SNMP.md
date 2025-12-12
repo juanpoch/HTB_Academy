@@ -223,7 +223,7 @@ Manual oficial:
 | Configuración               | Riesgo                                    |
 | --------------------------- | ----------------------------------------- |
 | `rwuser noauth`             | Acceso total al OID sin autenticación     |
-| `rwcommunity <string> <IP>` | Escritura completa desde cualquier origen |
+| `rwcommunity <string> <IP>` | Proporciona acceso al árbol OID completo independientemente de dónde se enviaron las solicitudes. |
 | `rwcommunity6`              | Igual riesgo en IPv6                      |
 
 👉 Esto puede permitir:
