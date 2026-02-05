@@ -76,9 +76,14 @@ Salida (fragmento):
 
 ;; ANSWER SECTION:
 google.com.             0       IN      A       142.251.47.142
+
+;; Query time: 0 msec
+;; SERVER: 172.23.176.1#53(172.23.176.1) (UDP)
+;; WHEN: Thu Jun 13 10:45:58 SAST 2024
+;; MSG SIZE  rcvd: 54
 ```
 
-> 📸 **Acá pegá la captura del comando dig ejecutado**.
+
 
 ---
 
