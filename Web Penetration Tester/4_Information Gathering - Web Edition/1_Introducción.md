@@ -38,7 +38,8 @@ De manera general, un pentest suele seguir el siguiente flujo:
 8. **Post-Engagement**
    Reporte final, conclusiones y recomendaciones.
 
-> 📸 **Acá podés pegar un diagrama del flujo completo del proceso de pentesting**.
+<img width="1689" height="638" alt="image" src="https://github.com/user-attachments/assets/c72380b9-0360-4384-8afc-0c29e1bd0bdc" />
+
 
 ---
 
