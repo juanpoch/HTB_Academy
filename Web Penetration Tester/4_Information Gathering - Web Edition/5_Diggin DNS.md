@@ -189,10 +189,16 @@ Dominar dig marca una diferencia clara entre un reconocimiento superficial y uno
 
 ## ¿Qué dirección IP corresponde a inlanefreight.com?
 
+<img width="524" height="64" alt="image" src="https://github.com/user-attachments/assets/b9d78713-527e-4010-9d19-aae717672b86" />
+
 
 
 ## ¿Qué dominio se devuelve al consultar el registro PTR para 134.209.24.248?
 
+<img width="689" height="369" alt="image" src="https://github.com/user-attachments/assets/007ca4eb-1299-45e6-94ef-ae22953ef167" />
 
 
 ## ¿Cuál es el dominio completo que se devuelve cuando se consultan los registros de correo de facebook.com?
+
+
+<img width="850" height="381" alt="image" src="https://github.com/user-attachments/assets/da4dcf07-3ff9-441e-9504-00ef8b12882f" />
