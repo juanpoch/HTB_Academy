@@ -120,13 +120,13 @@ En el **reconocimiento activo**, el atacante interactúa directamente con el sis
 
 Algunas técnicas comunes incluyen:
 
-* **Port Scanning**: identificación de puertos y servicios abiertos.
-* **Vulnerability Scanning**: búsqueda de vulnerabilidades conocidas.
-* **Network Mapping**: mapeo de la topología de red.
-* **Banner Grabbing**: obtención de información desde banners de servicios.
-* **OS Fingerprinting**: identificación del sistema operativo.
-* **Service Enumeration**: detección de versiones de servicios.
-* **Web Spidering**: rastreo automático del sitio web.
+* **Port Scanning**: identificación de puertos y servicios abiertos. Herramientas: Nmap, Masscan, Unicornscan.
+* **Vulnerability Scanning**: búsqueda de vulnerabilidades conocidas. Herramientas: Nessus, OpenVAS, Nikto.
+* **Network Mapping**: mapeo de la topología de red. Herramientas: Traceroute, nmap.
+* **Banner Grabbing**: obtención de información desde banners de servicios. Herramientas: Netcat, curl.
+* **OS Fingerprinting**: identificación del sistema operativo. Herramientas: Nmap, Xprobe2
+* **Service Enumeration**: detección de versiones de servicios. Herramientas: Nmap.
+* **Web Spidering**: rastreo automático del sitio web. Burp Suite Spider, OWASP Zap Spider, Scrapy.
 
 > ⚠️ El reconocimiento activo suele ser más completo, pero implica un **mayor riesgo de detección**, ya que puede disparar alertas, IDS o firewalls.
 
