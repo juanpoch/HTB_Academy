@@ -181,3 +181,18 @@ El uso de **dig** es fundamental para cualquier tarea de reconocimiento DNS. Per
 * Identificación de configuraciones débiles
 
 Dominar dig marca una diferencia clara entre un reconocimiento superficial y uno **profesional y preciso**.
+
+
+---
+
+# Preguntas
+
+## ¿Qué dirección IP corresponde a inlanefreight.com?
+
+
+
+## ¿Qué dominio se devuelve al consultar el registro PTR para 134.209.24.248?
+
+
+
+## ¿Cuál es el dominio completo que se devuelve cuando se consultan los registros de correo de facebook.com?
