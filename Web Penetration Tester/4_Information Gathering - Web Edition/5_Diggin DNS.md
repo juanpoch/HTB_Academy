@@ -50,7 +50,7 @@ El comando **dig** (*Domain Information Groper*) es una de las herramientas más
 | `dig -x 192.168.1.1`            | Resolución inversa (PTR)                                            |
 | `dig +short domain.com`         | Salida mínima, solo la respuesta                                    |
 | `dig +noall +answer domain.com` | Muestra solo la sección ANSWER                                      |
-| `dig domain.com ANY`            | Intenta obtener todos los registros (muchos servidores lo bloquean) |
+| `dig domain.com ANY`            | Intenta obtener todos los registros (muchos servidores lo bloquean según el [RFC 8482](https://datatracker.ietf.org/doc/html/rfc8482)) |
 
 > ⚠️ **Advertencia:** consultas excesivas pueden ser detectadas o bloqueadas. Siempre respetar límites y actuar únicamente con autorización.
 
