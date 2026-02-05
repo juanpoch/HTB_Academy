@@ -231,7 +231,7 @@ DNS es una fuente crítica de información durante el reconocimiento web:
 * Servidores de correo
 * Infraestructura de DNS
 
-Un CNAME mal configurado puede apuntar a servidores obsoletos o vulnerables.
+Un CNAME mal configurado puede apuntar a servidores obsoletos o vulnerables. Por ejemplo apuntar a `dev.example.com` o a `oldserver.example.com`
 
 ---
 
