@@ -253,6 +253,8 @@ Mediante servicios de terceros (por ejemplo, historiales de WHOIS), es posible o
 
 Este análisis puede revelar **reorganizaciones internas**, **migraciones de infraestructura** o prácticas de seguridad deficientes.
 
+[Whoisfreaks](https://whoisfreaks.com/)
+
 ---
 
 ## Conclusión
