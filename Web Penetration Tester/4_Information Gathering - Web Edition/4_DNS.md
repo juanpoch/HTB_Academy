@@ -78,7 +78,8 @@ Este servidor:
 
 Con la IP ya conocida, el navegador se conecta directamente al servidor web y el sitio se carga.
 
-> 📸 **Acá podés pegar un diagrama del flujo de resolución DNS**.
+<img width="1786" height="366" alt="image" src="https://github.com/user-attachments/assets/675f211f-8620-430d-92d2-750c363f9ab8" />
+
 
 ---
 
