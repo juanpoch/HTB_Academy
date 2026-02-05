@@ -128,7 +128,6 @@ Name Server: C.NS.FACEBOOK.COM
 Name Server: D.NS.FACEBOOK.COM
 ```
 
-> 📸 **Acá pegá la captura del comando WHOIS ejecutado sobre facebook.com**.
 
 ---
 
