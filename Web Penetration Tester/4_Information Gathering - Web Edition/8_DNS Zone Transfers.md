@@ -196,3 +196,17 @@ Aunque hoy son menos comunes, cuando están presentes permiten obtener:
 * Un punto de partida sólido para fases posteriores del pentest
 
 Por su **alto impacto y bajo esfuerzo**, verificar la posibilidad de una zone transfer debería formar parte de cualquier estrategia seria de Web Reconnaissance.
+
+---
+
+# PREGUNTAS
+
+### Tras realizar una transferencia de zona para el dominio inlanefreight.htb en el sistema de destino, ¿cuántos registros DNS se recuperan del servidor de nombres del sistema de destino? Indique su respuesta como un número entero, por ejemplo, 123.
+
+
+
+### Dentro del registro de zona transferido anteriormente, busque la dirección IP de ftp.admin.inlanefreight.htb. Responda solo con la dirección IP, p. ej., 127.0.0.1.
+
+
+
+### Dentro del mismo registro de zona, identifique la dirección IP más grande asignada dentro del rango de IP 10.10.200. Responda con la dirección IP completa, p. ej., 10.10.200.1.
