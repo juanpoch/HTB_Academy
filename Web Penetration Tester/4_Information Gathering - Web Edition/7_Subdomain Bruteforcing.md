@@ -64,12 +64,12 @@ Existen múltiples herramientas especializadas para este tipo de enumeración:
 
 | Herramienta     | Descripción                                                        |
 | --------------- | ------------------------------------------------------------------ |
-| **dnsenum**     | Herramienta completa de enumeración DNS con soporte de brute-force |
-| **fierce**      | Enumeración recursiva con detección de wildcards                   |
-| **dnsrecon**    | Combina múltiples técnicas de reconocimiento DNS                   |
-| **amass**       | Muy completa y activamente mantenida; integra múltiples fuentes    |
-| **assetfinder** | Simple y rápida, ideal para escaneos livianos                      |
-| **puredns**     | Potente herramienta enfocada en resolución y filtrado eficiente    |
+| [**dnsenum**](https://github.com/fwaeytens/dnsenum)     | Herramienta completa de enumeración DNS con soporte de brute-force |
+| [**fierce**](https://github.com/mschwager/fierce)      | Enumeración recursiva con detección de wildcards                   |
+| [**dnsrecon**](https://github.com/darkoperator/dnsrecon)    | Combina múltiples técnicas de reconocimiento DNS                   |
+| [**amass**](https://github.com/owasp-amass/amass)       | Muy completa y activamente mantenida; integra múltiples fuentes    |
+| [**assetfinder**](https://github.com/tomnomnom/assetfinder) | Simple y rápida, ideal para escaneos livianos                      |
+| [**puredns**](https://github.com/d3mondev/puredns)     | Potente herramienta enfocada en resolución y filtrado eficiente    |
 
 ---
 
