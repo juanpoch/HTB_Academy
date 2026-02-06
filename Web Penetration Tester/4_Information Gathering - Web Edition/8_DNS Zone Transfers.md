@@ -36,7 +36,7 @@ El proceso típico consta de los siguientes pasos:
    El servidor secundario envía una solicitud de transferencia completa (*AXFR*) al servidor primario.
 
 2. **Transferencia del registro SOA**
-   El servidor primario responde con el registro **SOA (Start of Authority)**, que contiene información clave como el número de serie de la zona.
+   El servidor primario responde con el registro **SOA (Start of Authority)**, que contiene información clave como el número de serie de la zona, lo que ayuda al servidor secundario a determinar si los datos de su zona están actualizados.
 
 3. **Transmisión de registros DNS**
    Se transfieren todos los registros de la zona: A, AAAA, MX, NS, CNAME, TXT, SRV, etc.
