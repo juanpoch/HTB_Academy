@@ -201,12 +201,38 @@ Por su **alto impacto y bajo esfuerzo**, verificar la posibilidad de una zone tr
 
 # PREGUNTAS
 
+
+`IP`:`0.129.27.223`
+
 ### Tras realizar una transferencia de zona para el dominio inlanefreight.htb en el sistema de destino, ¿cuántos registros DNS se recuperan del servidor de nombres del sistema de destino? Indique su respuesta como un número entero, por ejemplo, 123.
+
+
+
+Al encontrarnos dentro de una red interna, no podemos utilizar el comando `dig` utilizando el resolver de nuestro ISP, ya que necesitamos resolver a una ip privada dentro de la intranet. Por lo tanto, necesitamos encontrar el servidor `DNS` para este dominio.
+
+Luego de agregar la ip objetivo al `/etc/hosts` escaneamos con nmap el dominio:
+
+<img width="638" height="177" alt="image" src="https://github.com/user-attachments/assets/4b0c1083-2206-42fb-951a-633b81779e72" />
+
+Descubrimos que el mismo dominio es el servidor `DNS`.
+
+Realizamos la transferencia de zona utilizando el siguiente comando:
+```bash
+dig AXFR @10.129.27.223 inlanefreight.htb
+```
+
+<img width="1153" height="574" alt="image" src="https://github.com/user-attachments/assets/46d412f5-45c4-46d2-8001-a757ddd96647" />
+
 
 
 
 ### Dentro del registro de zona transferido anteriormente, busque la dirección IP de ftp.admin.inlanefreight.htb. Responda solo con la dirección IP, p. ej., 127.0.0.1.
 
+<img width="1153" height="574" alt="image" src="https://github.com/user-attachments/assets/fbbd5d47-d72d-45f0-8824-8daa2add5c62" />
 
 
 ### Dentro del mismo registro de zona, identifique la dirección IP más grande asignada dentro del rango de IP 10.10.200. Responda con la dirección IP completa, p. ej., 10.10.200.1.
+
+
+<img width="1153" height="574" alt="image" src="https://github.com/user-attachments/assets/59db145d-7208-4aa9-9f15-848b40c5d8c5" />
+
