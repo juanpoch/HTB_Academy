@@ -47,7 +47,8 @@ El proceso típico consta de los siguientes pasos:
 5. **Acknowledgement (ACK)**
    El servidor secundario confirma la recepción correcta de la información.
 
-> 📸 **Acá podés pegar un diagrama del flujo de una DNS Zone Transfer**.
+<img width="975" height="608" alt="image" src="https://github.com/user-attachments/assets/dd1a8eb4-10e2-4547-b71e-27a3e2d6cb71" />
+
 
 ---
 
