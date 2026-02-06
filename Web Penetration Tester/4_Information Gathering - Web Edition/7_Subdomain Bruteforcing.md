@@ -117,11 +117,29 @@ dnsenum --enum inlanefreight.com \
 ### Fragmento del output
 
 ```text
-www.inlanefreight.com.        300  IN  A  134.209.24.248
-support.inlanefreight.com.    300  IN  A  134.209.24.248
+dnsenum VERSION:1.2.6
+
+-----   inlanefreight.com   -----
+
+
+Host's addresses:
+__________________
+
+inlanefreight.com.                       300      IN    A        134.209.24.248
+
+[...]
+
+Brute forcing with /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt:
+_______________________________________________________________________________________
+
+www.inlanefreight.com.                   300      IN    A        134.209.24.248
+support.inlanefreight.com.               300      IN    A        134.209.24.248
+[...]
+
+
+done.
 ```
 
-> 📸 **Acá pegá la captura del output completo de dnsenum**.
 
 ---
 
