@@ -90,7 +90,7 @@ Existen múltiples herramientas especializadas para este tipo de enumeración:
 
 ## Ejemplo práctico con dnsenum
 
-En este ejemplo se enumeran subdominios del objetivo `inlanefreight.com` utilizando una wordlist de **SecLists**.
+En este ejemplo se enumeran subdominios del objetivo `inlanefreight.com` utilizando una wordlist de [**SecLists**](https://github.com/danielmiessler/SecLists).
 
 ### Comando utilizado
 
