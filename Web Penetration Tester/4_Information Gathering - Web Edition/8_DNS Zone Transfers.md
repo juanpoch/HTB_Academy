@@ -159,6 +159,7 @@ canberra-office.zonetransfer.me. 7200 IN A	202.14.81.230
 ;; XFR size: 50 records (messages 1, bytes 2085)
 ```
 
+<img width="1913" height="718" alt="image" src="https://github.com/user-attachments/assets/27dcdbea-7a49-4ba9-8ebb-71ffd3c35494" />
 
 
 Este resultado expone:
