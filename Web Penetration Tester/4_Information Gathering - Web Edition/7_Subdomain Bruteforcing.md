@@ -178,3 +178,15 @@ permite descubrir activos críticos que suelen quedar fuera del alcance del domi
 # Preguntas
 
 ## Utilizando los subdominios conocidos de inlanefreight.com (www, ns1, ns2, ns3, blog, soporte, cliente), encuentre los subdominios faltantes mediante fuerza bruta. Proporcione su respuesta con el subdominio completo, por ejemplo, www.inlanefreight.com.
+
+
+
+Utilizamos la herramienta `dnsenum` con el siguiente comando:
+```bash
+dnsenum --enum inlanefreight.com \
+  -f /opt/SecLists/Discovery/DNS/subdomains-top1million-20000.txt \
+  -r
+```
+
+<img width="841" height="817" alt="image" src="https://github.com/user-attachments/assets/6baf06ce-d9f1-418e-b377-6ce96c2f1bc1" />
+
