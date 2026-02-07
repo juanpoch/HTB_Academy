@@ -121,7 +121,8 @@ Proceso simplificado:
 4. Selecciona el `DocumentRoot` correspondiente.
 5. Devuelve el contenido al cliente.
 
-> 📸 **Acá podés pegar un diagrama de secuencia del lookup de VHost**.
+<img width="1252" height="775" alt="image" src="https://github.com/user-attachments/assets/34c9a80b-771b-48eb-8798-310bdeca693d" />
+
 
 ---
 
