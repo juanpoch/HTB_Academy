@@ -293,3 +293,23 @@ La combinación de:
 * fuzzing del Host header
 
 permite descubrir VHosts ocultos que muchas veces contienen **aplicaciones internas o mal configuradas**, aportando hallazgos de alto valor en un pentest web.
+
+
+---
+
+# PREGUNTAS
+
+#### Ejecute ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "web"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
+
+
+#### Ejecute ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "vm"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
+
+
+#### Ejecutar ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "br"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
+
+
+#### Ejecutar ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "a"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
+
+
+
+#### Ejecutar ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "su"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
