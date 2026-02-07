@@ -299,17 +299,42 @@ permite descubrir VHosts ocultos que muchas veces contienen **aplicaciones inter
 
 # PREGUNTAS
 
+`IP`: `154.57.164.64:30248`
+
+`vHosts necesarios para estas preguntas`: `inlanefreight.htb`
+
 #### Ejecute ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "web"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
+
+Agregamos la ip `154.57.164.64` al `/etc/hosts`.
+
+Una vez realizado esto, hacemos un fuzzing de vhosts con `gobuster`:
+```bash
+gobuster vhost -u http://inlanefreight.htb:30248 -w /opt/SecLists/Discovery/DNS/subdomains-top1million-110000.txt --append-domain
+```
+
+<img width="1352" height="444" alt="image" src="https://github.com/user-attachments/assets/d3bd0024-3238-421e-a454-4689c6db782f" />
+
+
 
 
 #### Ejecute ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "vm"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
 
+<img width="1352" height="444" alt="image" src="https://github.com/user-attachments/assets/777f4d1c-b313-4c90-bf45-198525b52b34" />
+
+
 
 #### Ejecutar ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "br"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
+
+<img width="1352" height="444" alt="image" src="https://github.com/user-attachments/assets/e62b2177-e412-43a6-8db7-30e6a98a6a1b" />
 
 
 #### Ejecutar ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "a"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
 
+<img width="1352" height="444" alt="image" src="https://github.com/user-attachments/assets/e04406cb-e232-4e66-b25d-8147a8e509df" />
+
 
 
 #### Ejecutar ataques de fuerza bruta contra hosts virtuales en el sistema objetivo. ¿Cuál es el subdominio completo con el prefijo "su"? Responda usando el dominio completo, por ejemplo, "x.inlanefreight.htb".
+
+
+<img width="1352" height="444" alt="image" src="https://github.com/user-attachments/assets/0ec03d9e-0b67-471e-9482-dee0739cc3c6" />
