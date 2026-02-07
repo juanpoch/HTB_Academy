@@ -187,7 +187,7 @@ Ejemplo:
 | Herramienta     | Descripción                                          | Features                               |
 | --------------- | ---------------------------------------------------- | -------------------------------------- |
 | [**gobuster**](https://github.com/OJ/gobuster)    | Brute-force de directorios/archivos y también VHosts | Rápida, múltiples métodos, wordlists   |
-| [**feroxbuster**](https://github.com/epi052/feroxbuster) | Similar a gobuster (Rust)                            | Recursión, wildcard discovery, filtros |
+| [**feroxbuster**](https://github.com/epi052/feroxbuster) | Similar a gobuster (Rust), conocido por su velocidad y flexibilidad                            | Recursión, wildcard discovery, filtros |
 | [**ffuf**](https://github.com/ffuf/ffuf)        | Fuzzer web muy rápido (Host header)                  | Alta personalización y filtrado        |
 
 ---
