@@ -311,3 +311,6 @@ Agregamos los vHosts al archivo `/etc/hosts`
 
 #### ¿En qué sistema operativo se ejecuta el servidor web dev.inlanefreight.local en el sistema de destino? Responda solo con el nombre, p. ej., Debian.
 
+<img width="859" height="197" alt="image" src="https://github.com/user-attachments/assets/87012d99-0107-4652-904a-5a365cdfaca3" />
+
+<img width="962" height="622" alt="image" src="https://github.com/user-attachments/assets/6c4a020c-4f7c-4b83-899e-6067c0b30660" />
