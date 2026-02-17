@@ -377,7 +377,6 @@ newdev.facebook.com
 secure.dev.facebook.com
 ```
 
-> 📸 **Acá podés pegar la captura del output del comando CT log**.
 
 ---
 
