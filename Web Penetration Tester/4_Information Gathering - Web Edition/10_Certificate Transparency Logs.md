@@ -172,7 +172,9 @@ La Merkle Root es un único hash que representa el estado completo del log.
 
 ## Ejemplo Conceptual
 
-<img width="1257" height="595" alt="image" src="https://github.com/user-attachments/assets/f55c9237-61b6-4f75-8bb7-b4152770616e" />
+
+<img width="1257" height="595" alt="image" src="https://github.com/user-attachments/assets/f55c9237-61b6-4f75-8bb7-b4152770616e" />  
+
 
 
 Imaginemos que tenemos cuatro certificados:
