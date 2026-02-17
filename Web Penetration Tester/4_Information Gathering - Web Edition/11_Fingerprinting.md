@@ -78,7 +78,9 @@ El contenido HTML puede proporcionar pistas sobre tecnologías subyacentes:
 * Comentarios en el código
 * Estructura específica del CMS
 * Archivos como `license.txt`
-* Scripts cargados
+* Scripts cargados y otros elementos
+
+Por ejemplo, puede haber un encabezado de copyright que indique el software específico que se utiliza
 
 ---
 
@@ -298,8 +300,13 @@ Agregamos los vHosts al archivo `/etc/hosts`
 
 #### Determinar la versión de Apache que se ejecuta en app.inlanefreight.local en el sistema de destino. (Formato: 0.0.0)
 
+<img width="888" height="221" alt="image" src="https://github.com/user-attachments/assets/a8c5cb1a-66e4-4df8-a064-45d3603852f5" />
+
+
 
 #### ¿Qué CMS se utiliza en app.inlanefreight.local en el sistema de destino? Responda solo con el nombre, p. ej., WordPress.
+
+<img width="953" height="119" alt="image" src="https://github.com/user-attachments/assets/ee3fb786-70fa-4d95-b93d-9587b260dcc0" />
 
 
 #### ¿En qué sistema operativo se ejecuta el servidor web dev.inlanefreight.local en el sistema de destino? Responda solo con el nombre, p. ej., Debian.
