@@ -53,6 +53,225 @@ Los CT logs introducen **auditoría pública** sobre la emisión de certificados
 
 ---
 
+# Registros de Transparencia de Certificados (Certificate Transparency Logs)
+
+## ¿Cómo funcionan los Certificate Transparency Logs?
+
+Los **Certificate Transparency (CT) Logs** son un mecanismo diseñado para aumentar la seguridad y la confianza en el ecosistema de certificados SSL/TLS. Su funcionamiento combina técnicas criptográficas con un modelo de auditoría pública.
+
+A continuación se detalla el proceso paso a paso:
+
+---
+
+### 1. Emisión del Certificado
+
+Cuando el propietario de un sitio web solicita un certificado SSL/TLS a una Autoridad Certificadora (CA):
+
+1. La CA realiza un proceso de validación (due diligence) para verificar:
+
+   * La identidad del solicitante.
+   * La propiedad o control del dominio.
+2. Una vez validado, la CA genera un **pre-certificado**.
+
+El *pre-certificado* es una versión preliminar del certificado final que será emitido.
+
+---
+
+### 2. Envío a los CT Logs
+
+La CA envía ese pre-certificado a múltiples servidores de CT Logs.
+
+Características importantes:
+
+* Cada CT Log es operado por una organización diferente.
+* Esto garantiza **redundancia y descentralización**.
+* Los logs son **append-only** (solo se pueden agregar entradas).
+
+  * No se pueden modificar.
+  * No se pueden eliminar.
+
+Esto asegura la integridad histórica de los certificados emitidos.
+
+---
+
+### 3. Signed Certificate Timestamp (SCT)
+
+Cuando un CT Log recibe el pre-certificado:
+
+1. Genera un **Signed Certificate Timestamp (SCT)**.
+2. El SCT es una prueba criptográfica que demuestra que:
+
+   * El certificado fue recibido.
+   * Fue registrado en un momento específico.
+
+Luego:
+
+* El SCT se incorpora al certificado final.
+* El certificado final es entregado al propietario del sitio web.
+
+El SCT funciona como evidencia pública de que el certificado fue correctamente registrado.
+
+---
+
+### 4. Verificación por el Navegador
+
+Cuando un usuario visita un sitio web:
+
+1. El navegador recibe el certificado SSL/TLS.
+2. Verifica los SCTs incluidos.
+3. Comprueba que esos SCTs existan y sean válidos en los CT Logs públicos.
+
+Si:
+
+* ✅ Los SCTs son válidos → Se establece la conexión segura.
+* ❌ No son válidos → El navegador puede mostrar una advertencia.
+
+Esto evita que certificados emitidos de forma fraudulenta pasen desapercibidos.
+
+---
+
+### 5. Monitoreo y Auditoría
+
+Los CT Logs son monitoreados constantemente por:
+
+* Investigadores de seguridad.
+* Propietarios de dominios.
+* Vendors de navegadores.
+
+Se buscan anomalías como:
+
+* Certificados emitidos para dominios que el solicitante no controla.
+* Certificados que violan estándares de la industria.
+* Emisiones sospechosas.
+
+Si se detecta un problema:
+
+* Se reporta a la CA correspondiente.
+* Puede iniciarse una investigación.
+* El certificado puede ser revocado.
+
+Este modelo introduce **transparencia pública en la emisión de certificados**, algo que antes no existía.
+
+---
+
+# La Estructura del Árbol de Merkle
+
+Para garantizar que los CT Logs sean íntegros y resistentes a manipulaciones, utilizan una estructura criptográfica llamada **Árbol de Merkle (Merkle Tree)**.
+
+## ¿Qué es un Árbol de Merkle?
+
+Es una estructura en forma de árbol donde:
+
+* Cada nodo hoja representa el hash de un certificado.
+* Cada nodo intermedio es el hash de la concatenación de sus nodos hijos.
+* La raíz del árbol se llama **Merkle Root**.
+
+La Merkle Root es un único hash que representa el estado completo del log.
+
+---
+
+## Ejemplo Conceptual
+
+Imaginemos que tenemos cuatro certificados:
+
+* Cert 1
+* Cert 2
+* Cert 3
+* Cert 4
+
+### Nivel 1 – Hojas
+
+Cada certificado se convierte en un hash:
+
+* H(Cert 1)
+* H(Cert 2)
+* H(Cert 3)
+* H(Cert 4)
+
+### Nivel 2 – Nodos Intermedios
+
+Se combinan de a pares:
+
+* Hash 1 = H(H(Cert 1) + H(Cert 2))
+* Hash 2 = H(H(Cert 3) + H(Cert 4))
+
+### Nivel 3 – Raíz
+
+* Root Hash = H(Hash 1 + Hash 2)
+
+Esta raíz representa el estado completo del log.
+
+---
+
+## Verificación Eficiente (Merkle Path)
+
+Una ventaja clave del Árbol de Merkle es que permite verificar la inclusión de un certificado sin descargar todo el log.
+
+Por ejemplo, para verificar **Cert 2**, necesitamos:
+
+1. El hash de Cert 2.
+2. El hash de Cert 1 (su par en el árbol).
+3. El Hash 2 (para reconstruir la raíz).
+
+Con estos valores podemos:
+
+* Reconstruir Hash 1.
+* Luego reconstruir la Root Hash.
+* Compararla con la Root pública del log.
+
+Si coincide → El certificado está efectivamente incluido.
+
+---
+
+## Propiedad de Inmutabilidad
+
+Si:
+
+* Se modifica un solo bit de un certificado.
+* Se altera cualquier nodo intermedio.
+
+Entonces:
+
+* Cambia su hash.
+* Cambia el hash superior.
+* Cambia la Root Hash.
+
+Esto hace que cualquier manipulación sea detectable inmediatamente.
+
+---
+
+# Importancia en Seguridad Ofensiva (Pentesting / OSINT)
+
+Desde el punto de vista de un analista de seguridad:
+
+* Los CT Logs permiten descubrir subdominios expuestos.
+* Permiten identificar entornos olvidados (dev, staging, test).
+* Revelan infraestructura histórica.
+* Ayudan en reconocimiento pasivo sin interacción directa con el target.
+
+Son una fuente extremadamente valiosa en la fase de **Information Gathering**.
+
+---
+
+# Conclusión
+
+Los Certificate Transparency Logs:
+
+* Introducen transparencia pública en la emisión de certificados.
+* Detectan emisiones fraudulentas.
+* Permiten auditoría continua.
+* Utilizan Árboles de Merkle para garantizar integridad criptográfica.
+
+Gracias a esta arquitectura, cualquier intento de manipulación o emisión indebida puede ser detectado, fortaleciendo la seguridad del ecosistema SSL/TLS y aumentando la confianza en Internet.
+
+
+
+
+
+
+
+---
+
 ## CT Logs y Web Reconnaissance
 
 Desde el punto de vista del **reconocimiento web**, los CT logs son una **fuente extremadamente valiosa** para la enumeración de subdominios.
