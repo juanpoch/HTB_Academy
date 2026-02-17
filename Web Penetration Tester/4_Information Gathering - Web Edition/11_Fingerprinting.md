@@ -266,25 +266,11 @@ nikto -h inlanefreight.com -Tuning b
 
 Hallazgos relevantes:
 
-* Apache/2.4.41 (Ubuntu)
-* WordPress detectado
-* `/wp-login.php` identificado
-* Archivo `/license.txt` expuesto
-* Falta header Strict-Transport-Security
-* Falta header X-Content-Type-Options
-* Posible riesgo BREACH (Content-Encoding: deflate)
-* Soporte IPv4 e IPv6
-* Certificado emitido por Let's Encrypt
-
----
-
-# Resumen del Stack Detectado
-
-* Web Server: Apache 2.4.41 (Ubuntu)
-* CMS: WordPress
-* WAF: Wordfence
-* Certificado TLS: Let's Encrypt
-* Posibles debilidades: headers de seguridad faltantes, software potencialmente desactualizado
+- `IPs`: El sitio web se resuelve en direcciones IPv4 (`134.209.24.248`) e IPv6 (`2a03:b0c0:1:e0::32c:b001`).
+- `Server Technology`: El sitio web funciona en `Apache/2.4.41 (Ubuntu)`.
+- `WordPress Presence`: El análisis identificó una instalación de `WordPress`, incluida la página de inicio de sesión (`/wp-login.php`). Esto sugiere que el sitio podría ser un objetivo potencial de exploits comunes relacionados con `WordPress`.
+- `Information Disclosure`: La presencia de el archivo `license.txt` podría revelar detalles adicionales sobre los componentes de software del sitio web.
+`Headers`: Se encontraron varios encabezados no estándar o inseguros, incluido un encabezado faltante y un encabezado potencialmente inseguro:`Strict-Transport-Security` y `x-redirect-by`.
 
 ---
 
@@ -298,3 +284,21 @@ El fingerprinting permite:
 * Reducir la superficie de incertidumbre antes de la explotación.
 
 En una metodología profesional de pentesting, esta fase es crítica para transformar un reconocimiento genérico en un ataque dirigido y eficiente.
+
+---
+
+
+# Preguntas
+
+vHosts necesarios para estas preguntas:
+app.inlanefreight.local
+dev.inlanefreight.local
+
+#### Determinar la versión de Apache que se ejecuta en app.inlanefreight.local en el sistema de destino. (Formato: 0.0.0)
+
+
+#### ¿Qué CMS se utiliza en app.inlanefreight.local en el sistema de destino? Responda solo con el nombre, p. ej., WordPress.
+
+
+#### ¿En qué sistema operativo se ejecuta el servidor web dev.inlanefreight.local en el sistema de destino? Responda solo con el nombre, p. ej., Debian.
+
