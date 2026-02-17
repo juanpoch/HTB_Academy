@@ -107,12 +107,14 @@ Aplicaremos técnicas manuales y automatizadas para identificar el stack tecnol�
 curl -I inlanefreight.com
 ```
 
-Resultado relevante:
+Resultado:
 
 ```
 HTTP/1.1 301 Moved Permanently
+Date: Fri, 31 May 2024 12:07:44 GMT
 Server: Apache/2.4.41 (Ubuntu)
 Location: https://inlanefreight.com/
+Content-Type: text/html; charset=iso-8859-1
 ```
 
 Observación:
@@ -128,9 +130,12 @@ curl -I https://inlanefreight.com
 ```
 
 ```
+HTTP/1.1 301 Moved Permanently
+Date: Fri, 31 May 2024 12:12:12 GMT
 Server: Apache/2.4.41 (Ubuntu)
 X-Redirect-By: WordPress
 Location: https://www.inlanefreight.com/
+Content-Type: text/html; charset=UTF-8
 ```
 
 Observación:
