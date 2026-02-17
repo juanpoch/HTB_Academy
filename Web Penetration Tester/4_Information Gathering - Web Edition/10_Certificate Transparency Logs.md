@@ -367,10 +367,14 @@ curl -s "https://crt.sh/?q=facebook.com&output=json" \
 
 ```text
 *.dev.facebook.com
+*.newdev.facebook.com
+*.secure.dev.facebook.com
 dev.facebook.com
-secure.dev.facebook.com
+devvm1958.ftw3.facebook.com
+facebook-amex-dev.facebook.com
+facebook-amex-sign-enc-dev.facebook.com
 newdev.facebook.com
-...
+secure.dev.facebook.com
 ```
 
 > 📸 **Acá podés pegar la captura del output del comando CT log**.
