@@ -212,11 +212,11 @@ Esta raíz representa el estado completo del log.
 
 Una ventaja clave del Árbol de Merkle es que permite verificar la inclusión de un certificado sin descargar todo el log.
 
-Por ejemplo, para verificar **Cert 2**, necesitamos:
+Por ejemplo, para verificar **Cert 2** (blog.inlanefreight.com), necesitamos:
 
 1. El hash de Cert 2.
-2. El hash de Cert 1 (su par en el árbol).
-3. El Hash 2 (para reconstruir la raíz).
+2. El hash 1 que verifica también su par en el árbol (Cert 1).
+3. Root hash.
 
 Con estos valores podemos:
 
