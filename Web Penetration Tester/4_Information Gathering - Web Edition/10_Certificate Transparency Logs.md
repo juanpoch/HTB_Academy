@@ -323,8 +323,8 @@ Existen múltiples servicios para consultar CT logs. Dos de los más utilizados 
 
 | Herramienta | Características                                        | Casos de uso                              | Pros                 | Contras           |
 | ----------- | ------------------------------------------------------ | ----------------------------------------- | -------------------- | ----------------- |
-| **crt.sh**  | Interfaz web simple, búsqueda por dominio, muestra SAN | Enumeración rápida de subdominios         | Gratis, sin registro | Filtros limitados |
-| **Censys**  | Motor de búsqueda avanzado, filtros por certificados   | Análisis profundo, correlación de activos | Muy potente, API     | Requiere cuenta   |
+| [**crt.sh**](https://crt.sh/)  | Interfaz web simple, búsqueda por dominio, muestra SAN | Enumeración rápida de subdominios         | Gratis, sin registro | Filtros limitados |
+| [**Censys**](https://search.censys.io/)  | Motor de búsqueda avanzado, filtros por certificados   | Análisis profundo, correlación de activos | Muy potente, API     | Requiere cuenta   |
 
 ---
 
