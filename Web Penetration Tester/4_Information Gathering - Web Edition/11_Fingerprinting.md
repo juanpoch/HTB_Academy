@@ -291,8 +291,8 @@ En una metodología profesional de pentesting, esta fase es crítica para transf
 # Preguntas
 
 vHosts necesarios para estas preguntas:
-app.inlanefreight.local
-dev.inlanefreight.local
+- `app.inlanefreight.local`
+- `dev.inlanefreight.local`
 
 #### Determinar la versión de Apache que se ejecuta en app.inlanefreight.local en el sistema de destino. (Formato: 0.0.0)
 
