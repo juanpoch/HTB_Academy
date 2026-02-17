@@ -4,7 +4,7 @@
 
 En el ecosistema de Internet, la **confianza** es un pilar fundamental. Uno de los mecanismos clave que sostienen esta confianza es el uso de **SSL/TLS**, que permite cifrar la comunicación entre un navegador y un servidor web.
 
-En el centro de SSL/TLS se encuentran los **certificados digitales**, que validan la identidad de un sitio web. Sin embargo, el proceso de emisión de certificados no es infalible: pueden existir certificados mal emitidos, fraudulentos o directamente maliciosos.
+En el centro de SSL/TLS se encuentran los **certificados digitales**, que validan la identidad de un sitio web. Sin embargo, el proceso de emisión de certificados no es infalible: pueden existir certificados mal emitidos, fraudulentos o directamente maliciosos que permitan suplantar sitios web legítimos, interceptar datos confidenciales o propagar malware
 
 Para mitigar este riesgo surge **Certificate Transparency (CT)**.
 
