@@ -42,7 +42,7 @@ Algunos ejemplos relevantes:
 | URI Suffix           | Descripción                                            | Estado      | Referencia                 |
 | -------------------- | ------------------------------------------------------ | ----------- | -------------------------- |
 | security.txt         | Información de contacto para reportar vulnerabilidades | Permanente  | RFC 9116                   |
-| change-password      | URL estándar para cambio de contraseña                 | Provisional | W3C Spec                   |
+| change-password      | URL estándar para cambio de contraseña                 | Provisional | [W3C Spec](https://w3c.github.io/webappsec-change-password-url/#the-change-password-well-known-uri)                   |
 | openid-configuration | Configuración de OpenID Connect                        | Permanente  | OpenID Connect Discovery   |
 | assetlinks.json      | Verificación de propiedad de activos digitales         | Permanente  | Google Digital Asset Links |
 | mta-sts.txt          | Política de MTA-STS para seguridad de email            | Permanente  | RFC 8461                   |
