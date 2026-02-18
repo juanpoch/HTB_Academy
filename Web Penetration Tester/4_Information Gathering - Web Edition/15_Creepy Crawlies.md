@@ -82,6 +82,11 @@ Si no está instalado:
 pip3 install scrapy
 ```
 
+En debian:
+```bash
+pipx install scrapy
+```
+
 Esto instalará Scrapy y sus dependencias.
 
 ---
