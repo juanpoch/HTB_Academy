@@ -33,7 +33,7 @@ Este enfoque elimina la necesidad de "adivinar" rutas.
 
 # Registro Oficial (IANA)
 
-La **Internet Assigned Numbers Authority (IANA)** mantiene un registro oficial de URIs .well-known.
+La **Internet Assigned Numbers Authority (IANA)** mantiene un [registro](https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml) oficial de URIs .well-known.
 
 Cada sufijo tiene un propósito específico definido por estándares o especificaciones.
 
