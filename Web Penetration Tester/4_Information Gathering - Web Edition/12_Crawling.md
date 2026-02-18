@@ -163,12 +163,12 @@ Proporciona contexto sobre el propósito y relevancia del contenido.
 
 Un crawler puede detectar archivos expuestos como:
 
-* `.bak`
-* `.old`
-* `web.config`
-* `settings.php`
-* `error_log`
-* `access_log`
+* `.bak`  --> Backup
+* `.old`  --> Backup
+* `web.config`  --> Archivos de configuración
+* `settings.php`  --> Archivos de configuración
+* `error_log`  --> Log files
+* `access_log`  --> Log files
 
 Estos pueden contener:
 
