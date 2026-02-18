@@ -43,8 +43,8 @@ Algunos ejemplos relevantes:
 | -------------------- | ------------------------------------------------------ | ----------- | -------------------------- |
 | security.txt         | Información de contacto para reportar vulnerabilidades | Permanente  | RFC 9116                   |
 | change-password      | URL estándar para cambio de contraseña                 | Provisional | [W3C Spec](https://w3c.github.io/webappsec-change-password-url/#the-change-password-well-known-uri)                   |
-| openid-configuration | Configuración de OpenID Connect   (oAuth 2.0)                      | Permanente  | [OpenID Connect](http://openid.net/specs/openid-connect-discovery-1_0.html) Discovery   |
-| assetlinks.json      | Verificación de propiedad de activos digitales         | Permanente  | [Google Digital](https://github.com/google/digitalassetlinks/blob/master/well-known/specification.md) Asset Links |
+| openid-configuration | Configuración de OpenID Connect   (oAuth 2.0)                      | Permanente  | [OpenID Connect Discovery](http://openid.net/specs/openid-connect-discovery-1_0.html)    |
+| assetlinks.json      | Verificación de propiedad de activos digitales         | Permanente  | [Google Digital Asset Links](https://github.com/google/digitalassetlinks/blob/master/well-known/specification.md)  |
 | mta-sts.txt          | Política de MTA-STS para seguridad de email            | Permanente  | RFC 8461                   |
 
 Cada entrada define cómo debe implementarse el recurso.
