@@ -86,6 +86,12 @@ En debian:
 ```bash
 pipx install scrapy
 ```
+Recomendación manual:
+```bash
+python3 -m venv recon-env
+source recon-env/bin/activate
+pip install scrapy
+```
 
 Esto instalará Scrapy y sus dependencias.
 
