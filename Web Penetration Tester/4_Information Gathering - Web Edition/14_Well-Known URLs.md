@@ -1,6 +1,6 @@
 # Well-Known URIs
 
-El estándar **.well-known**, definido en el RFC 8615, establece un directorio estandarizado dentro del dominio raíz de un sitio web. Este directorio, accesible normalmente a través de la ruta:
+El estándar **.well-known**, definido en el [RFC 8615](https://datatracker.ietf.org/doc/html/rfc8615), establece un directorio estandarizado dentro del dominio raíz de un sitio web. Este directorio, accesible normalmente a través de la ruta:
 
 ```
 https://example.com/.well-known/
