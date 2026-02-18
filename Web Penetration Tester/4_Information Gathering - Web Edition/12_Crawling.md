@@ -97,6 +97,8 @@ Seed
         └── Page 3
 ```
 
+<img width="1268" height="222" alt="image" src="https://github.com/user-attachments/assets/ca280474-1cf7-4fa2-9cc2-a4aac2c1ae70" />
+
 El crawler:
 
 * Sigue un camino hasta el final.
