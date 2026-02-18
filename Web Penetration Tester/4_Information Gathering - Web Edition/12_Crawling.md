@@ -72,6 +72,8 @@ Seed
 │   └── Page 3
 ```
 
+<img width="1234" height="783" alt="image" src="https://github.com/user-attachments/assets/235762de-44f3-4399-828d-e85ebf115766" />
+
 El crawler:
 
 * Explora todos los enlaces del nivel actual.
