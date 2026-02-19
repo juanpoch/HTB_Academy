@@ -33,6 +33,9 @@ Su funcionamiento puede dividirse en tres etapas:
 
 ---
 
+<img width="1258" height="745" alt="image" src="https://github.com/user-attachments/assets/ee50e818-c0a6-4995-b2c8-be3af387cb72" />
+
+
 ## 1️⃣ Crawling
 
 La Wayback Machine utiliza bots automatizados que:
