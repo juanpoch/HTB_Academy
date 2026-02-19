@@ -6,6 +6,8 @@ En el dinámico mundo digital, los sitios web cambian constantemente: páginas q
 
 # ¿Qué es la Wayback Machine?
 
+[Wayback Machine](https://web.archive.org/)
+
 La **Wayback Machine** es un archivo digital de la World Wide Web y otros recursos de Internet.
 
 Fue creada por la organización sin fines de lucro **Internet Archive** y archiva sitios web desde 1996.
