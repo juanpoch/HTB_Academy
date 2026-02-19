@@ -8,6 +8,9 @@ En el dinámico mundo digital, los sitios web cambian constantemente: páginas q
 
 [Wayback Machine](https://web.archive.org/)
 
+<img width="1764" height="821" alt="image" src="https://github.com/user-attachments/assets/7efb680f-44cd-47a6-9593-3eb1f62a022f" />
+
+
 La **Wayback Machine** es un archivo digital de la World Wide Web y otros recursos de Internet.
 
 Fue creada por la organización sin fines de lucro **Internet Archive** y archiva sitios web desde 1996.
