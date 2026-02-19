@@ -65,35 +65,32 @@ Los **Search Operators** son comandos especiales que permiten realizar búsqueda
 
 ---
 
-## Operadores Fundamentales
+# Tabla de Operadores de Búsqueda
 
-| Operator  | Descripción                               | Ejemplo                       | Descripción del Ejemplo                     |
-| --------- | ----------------------------------------- | ----------------------------- | ------------------------------------------- |
-| site:     | Limita resultados a un dominio específico | site:example.com              | Muestra páginas públicas del dominio        |
-| inurl:    | Busca términos en la URL                  | inurl:login                   | Encuentra páginas con "login" en la URL     |
-| filetype: | Busca tipos de archivo específicos        | filetype:pdf                  | Encuentra PDFs descargables                 |
-| intitle:  | Busca términos en el título               | intitle:"confidential report" | Encuentra títulos con esa frase             |
-| intext:   | Busca términos en el contenido            | intext:"password reset"       | Encuentra páginas con esa frase en el texto |
-| cache:    | Muestra versión cacheada                  | cache:example.com             | Ver versión anterior almacenada             |
-| related:  | Busca sitios similares                    | related:example.com           | Encuentra páginas similares                 |
-| info:     | Muestra información básica del dominio    | info:example.com              | Muestra detalles generales                  |
-| define:   | Define un término                         | define:phishing               | Devuelve definiciones                       |
+| Operador                | Descripción del Operador                                                          | Ejemplo                                           | Descripción del Ejemplo                                                     |
+| ----------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------- |
+| site:                   | Limita los resultados a un sitio web o dominio específico.                        | site:example.com                                  | Encuentra todas las páginas públicas accesibles en example.com.             |
+| inurl:                  | Busca páginas que contengan un término específico en la URL.                      | inurl:login                                       | Busca páginas de inicio de sesión en cualquier sitio web.                   |
+| filetype:               | Busca archivos de un tipo específico.                                             | filetype:pdf                                      | Encuentra documentos PDF descargables.                                      |
+| intitle:                | Busca páginas que contengan un término específico en el título.                   | intitle:"confidential report"                     | Busca documentos titulados "confidential report" o variaciones similares.   |
+| intext: / inbody:       | Busca un término dentro del contenido de la página.                               | intext:"password reset"                           | Identifica páginas que contienen el término "password reset".               |
+| cache:                  | Muestra la versión en caché de una página web (si está disponible).               | cache:example.com                                 | Visualiza la versión almacenada en caché de example.com.                    |
+| link:                   | Encuentra páginas que enlazan a una página específica.                            | link:example.com                                  | Identifica sitios web que enlazan a example.com.                            |
+| related:                | Encuentra sitios web relacionados con una página específica.                      | related:example.com                               | Descubre sitios similares a example.com.                                    |
+| info:                   | Proporciona información básica sobre una página web.                              | info:example.com                                  | Muestra detalles generales como título y descripción.                       |
+| define:                 | Proporciona definiciones de una palabra o frase.                                  | define:phishing                                   | Obtiene la definición de "phishing" desde distintas fuentes.                |
+| numrange:               | Busca números dentro de un rango específico.                                      | site:example.com numrange:1000-2000               | Encuentra páginas en example.com que contengan números entre 1000 y 2000.   |
+| allintext:              | Encuentra páginas que contengan todas las palabras especificadas en el contenido. | allintext:admin password reset                    | Busca páginas que contengan "admin" y "password reset" en el texto.         |
+| allinurl:               | Encuentra páginas que contengan todas las palabras especificadas en la URL.       | allinurl:admin panel                              | Busca páginas que contengan "admin" y "panel" en la URL.                    |
+| allintitle:             | Encuentra páginas que contengan todas las palabras especificadas en el título.    | allintitle:confidential report 2023               | Busca páginas que contengan "confidential", "report" y "2023" en el título. |
+| AND                     | Reduce resultados requiriendo que todos los términos estén presentes.             | site:example.com AND (inurl:admin OR inurl:login) | Encuentra páginas de admin o login específicamente en example.com.          |
+| OR                      | Amplía resultados incluyendo cualquiera de los términos.                          | "linux" OR "ubuntu" OR "debian"                   | Busca páginas que mencionen Linux, Ubuntu o Debian.                         |
+| NOT                     | Excluye resultados que contengan el término especificado.                         | site:bank.com NOT inurl:login                     | Encuentra páginas en bank.com excluyendo páginas de login.                  |
+| * (comodín)             | Representa cualquier palabra o carácter.                                          | site:socialnetwork.com filetype:pdf user* manual  | Busca manuales de usuario (user guide, user handbook) en PDF.               |
+| .. (búsqueda por rango) | Encuentra resultados dentro de un rango numérico específico.                      | site:ecommerce.com "price" 100..500               | Busca productos con precios entre 100 y 500.                                |
+| " " (comillas)          | Busca una frase exacta.                                                           | "information security policy"                     | Encuentra documentos que contengan exactamente esa frase.                   |
+| - (signo menos)         | Excluye términos de los resultados de búsqueda.                                   | site:news.com -inurl:sports                       | Busca noticias en news.com excluyendo contenido deportivo.                  |
 
----
-
-## Operadores Avanzados
-
-| Operator    | Descripción                                      | Ejemplo                             |
-| ----------- | ------------------------------------------------ | ----------------------------------- |
-| AND         | Requiere que todos los términos estén presentes  | site:example.com AND inurl:admin    |
-| OR          | Amplía resultados con cualquiera de los términos | "linux" OR "ubuntu"                 |
-| NOT o -     | Excluye términos                                 | site:bank.com -inurl:login          |
-| *           | Comodín                                          | filetype:pdf user* manual           |
-| ..          | Rango numérico                                   | "price" 100..500                    |
-| " "         | Frase exacta                                     | "information security policy"       |
-| allintext:  | Todos los términos en el cuerpo                  | allintext:admin password reset      |
-| allinurl:   | Todos los términos en URL                        | allinurl:admin panel                |
-| allintitle: | Todos los términos en título                     | allintitle:confidential report 2023 |
 
 ---
 
