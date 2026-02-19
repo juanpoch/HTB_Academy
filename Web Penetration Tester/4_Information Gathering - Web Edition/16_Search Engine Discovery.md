@@ -100,6 +100,10 @@ También conocido como **Google Hacking**, consiste en combinar operadores para 
 
 ---
 
+[Source](https://www.exploit-db.com/google-hacking-database)
+
+---
+
 ## 🔐 Encontrar páginas de login
 
 ```
