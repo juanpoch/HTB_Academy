@@ -147,6 +147,9 @@ Acceder a snapshots archivados:
 
 # Ejemplo: Hack The Box en el Pasado
 
+<img width="1237" height="583" alt="image" src="https://github.com/user-attachments/assets/894e9472-1c5a-40ab-b8f4-fc8d92d57ef7" />
+
+
 Si buscamos versiones antiguas de Hack The Box en la Wayback Machine y seleccionamos la captura más temprana disponible (por ejemplo 2017-06-10), podemos observar:
 
 * Diseño inicial de la plataforma.
@@ -174,14 +177,35 @@ Durante un pentest:
 
 ---
 
-# Conclusión
 
-La Wayback Machine es una herramienta poderosa para el reconocimiento pasivo.
 
-Permite:
 
-* Analizar la historia digital de un objetivo.
-* Descubrir recursos ocultos o eliminados.
-* Obtener inteligencia sin interacción directa.
+# Preguntas
 
-En combinación con crawling, fingerprinting, robots.txt y OSINT, ofrece una visión profunda y estratégica de la superficie de ataque del objetivo.
+
+#### ¿Cuántos laboratorios de pruebas de penetración tenía HackTheBox el 8 de agosto de 2018? Responda con un número entero, por ejemplo, 1234
+
+
+
+#### ¿Cuántos miembros tenía HackTheBox el 10 de junio de 2017? Responde con un número entero, p. ej., 1234.
+
+
+
+#### En marzo de 2002, ¿a qué sitio web redirigía el dominio facebook.com? Responda con el dominio completo, por ejemplo, http://www.facebook.com/
+
+
+
+#### Según el sitio web paypal.com en octubre de 1999, ¿qué se podía usar para transferir dinero a cualquier persona? Responda con el nombre del producto, por ejemplo, "Mi Dispositivo". Quite el símbolo ™ de su respuesta.
+
+
+
+
+#### Volviendo a noviembre de 1998 en google.com, ¿qué dirección albergaba el "Prototipo de Motor de Búsqueda de Google" no alfa de Google? Responda con la dirección completa, por ejemplo, http://google.com
+
+
+
+#### Volviendo a marzo de 2000 en www.iana.org, ¿cuándo exactamente se actualizó el sitio por última vez? Responda con la fecha en el pie de página, por ejemplo, 11 de marzo de 1999
+
+
+
+#### Según la instantánea de wikipedia.com tomada el 9 de febrero de 2003, ¿en cuántos artículos estaban trabajando ya en la versión en inglés? Responda con el número que indican sin comas, por ejemplo, 100000, no 100000
