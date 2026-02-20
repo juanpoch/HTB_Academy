@@ -201,6 +201,11 @@ chmod +x ./finalrecon.py
 ./finalrecon.py --help
 ```
 
+Cómo ya no se puede utilizar `pip3` de esa forma, hacemos lo siguiente luego de `cd FinalRecon`
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip3install -r requirements.txt
 ---
 
 # Opciones Principales
