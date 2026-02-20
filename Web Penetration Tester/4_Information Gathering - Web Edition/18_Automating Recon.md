@@ -66,6 +66,8 @@ Estos frameworks buscan ofrecer una suite completa de herramientas.
 
 Herramienta escrita en Python con estructura modular.
 
+[FinalRecon](https://github.com/thewhiteh4t/FinalRecon)
+
 Permite:
 
 * Análisis de headers
@@ -83,6 +85,8 @@ Permite:
 
 Framework modular en Python.
 
+[Recon-ng](https://github.com/lanmaster53/recon-ng)
+
 Incluye:
 
 * Enumeración DNS
@@ -96,6 +100,8 @@ Incluye:
 ## 📧 theHarvester
 
 Enfocado en OSINT.
+
+[theHarvester](https://github.com/laramies/theHarvester)
 
 Recolecta:
 
@@ -111,6 +117,8 @@ Recolecta:
 
 Herramienta de automatización OSINT.
 
+[SpiderFoot](https://github.com/smicallef/spiderfoot)
+
 Integra múltiples fuentes de datos para:
 
 * IPs
@@ -123,6 +131,8 @@ Integra múltiples fuentes de datos para:
 ## 🗂 OSINT Framework
 
 Colección organizada de herramientas OSINT clasificadas por tipo de fuente.
+
+[OSINT Framework](https://osintframework.com/)
 
 ---
 
