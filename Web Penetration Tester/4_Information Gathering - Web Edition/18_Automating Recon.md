@@ -205,7 +205,7 @@ Cómo ya no se puede utilizar `pip3` de esa forma, hacemos lo siguiente luego de
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip3install -r requirements.txt
+pip3 install -r requirements.txt
 ---
 
 # Opciones Principales
