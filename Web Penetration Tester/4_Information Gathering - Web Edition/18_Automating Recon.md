@@ -241,6 +241,8 @@ python3 ./finalrecon.py --help
 ./finalrecon.py --headers --whois --url http://inlanefreight.com
 ```
 
+<img width="1025" height="828" alt="image" src="https://github.com/user-attachments/assets/f29a0758-9db7-4bbd-b649-62f1e3c6aedd" />
+
 Salida relevante:
 
 * Dirección IP del objetivo
