@@ -206,7 +206,15 @@ Cómo ya no se puede utilizar `pip3` de esa forma, hacemos lo siguiente luego de
 python3 -m venv venv
 source venv/bin/activate
 pip3 install -r requirements.txt
----
+```
+
+Probamos el programa:
+```bash
+python3 ./finalrecon.py --help
+```
+
+<img width="913" height="590" alt="image" src="https://github.com/user-attachments/assets/628bb9dd-8e2f-4194-a9c9-1430199fcde8" />
+
 
 # Opciones Principales
 
