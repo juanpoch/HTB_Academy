@@ -139,6 +139,9 @@ sudo apt install vsftpd
 
 > Ejemplo mostrado filtrando comentarios: `cat /etc/vsftpd.conf | grep -v "#"`
 
+<img width="606" height="256" alt="image" src="https://github.com/user-attachments/assets/3fa1b54f-39f9-43f1-8740-3e2faa176455" />
+
+
 | Setting                                   | Descripción                                  |
 | ----------------------------------------- | -------------------------------------------- |
 | `listen=NO`                               | ¿Corre desde inetd o como daemon standalone? |
