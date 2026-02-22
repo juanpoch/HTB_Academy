@@ -867,7 +867,7 @@ MIIENTCCAx2gAwIBAgIUD+SlFZAWzX5yLs2q3ZcfdsRQqMYwDQYJKoZIhvcNAQEL
 
 ---
 
-## 13) Checklist rápido para tu writeup (práctico)
+## 13) Checklist rápido
 
 1. **Descubrir servicio**
 
@@ -898,13 +898,11 @@ MIIENTCCAx2gAwIBAgIUD+SlFZAWzX5yLs2q3ZcfdsRQqMYwDQYJKoZIhvcNAQEL
 
 ---
 
-## 14) Notas de seguridad (en modo reporte)
 
-* FTP clásico es **texto plano** (riesgo de sniffing).
-* Anonymous FTP puede exponer información y/o permitir escritura.
-* La posibilidad de **upload** en un FTP asociado a un webserver o a un pipeline de despliegue incrementa severidad (potencial RCE).
-* Incluso sin descarga, el simple **listing** puede filtrar inteligencia (nombres de clientes, documentos, estructura interna).
+## Preguntas
 
----
 
-> Fin del writeup. Si querés, después lo extendemos con una sección “**Findings típicos**” (severidad, impacto, evidencias y recomendaciones) para que quede 100% listo para reporte/pentest real.
+#### ¿Qué versión del servidor FTP se ejecuta en el sistema de destino? Envíe el banner completo como respuesta
+
+
+#### Enumere el servidor FTP y busque el archivo flag.txt. Envíe su contenido como respuesta.
