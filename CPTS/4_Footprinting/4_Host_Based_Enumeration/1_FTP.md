@@ -793,6 +793,17 @@ NSOCK INFO [11.4660s] nsock_trace_handler_callback(): Callback: READ SUCCESS for
 NSE: TCP 10.10.14.4:54228 < 10.129.14.136:21 | 220 Welcome to HTB-Academy FTP service.
 ```
 
+## Análisis del Script Trace en Nmap
+
+El historial del escaneo muestra que se están ejecutando múltiples escaneos en paralelo contra el servicio, cada uno con distintos tiempos de espera (timeouts). Esto es normal cuando Nmap utiliza scripts NSE, ya que puede abrir varias conexiones simultáneamente para obtener información más rápidamente.
+
+En el caso observado, la máquina local utiliza puertos efímeros distintos (por ejemplo, 54226, 54228, 54230, 54232) para iniciar conexiones hacia el puerto 21 del servidor FTP. Cada script NSE establece su propia conexión mediante el comando `CONNECT`.
+
+A partir de la primera respuesta del servidor, podemos identificar el banner FTP, lo que confirma que el servicio está activo y responde correctamente a las solicitudes enviadas por los scripts.
+
+Si es necesario realizar pruebas manuales o validar comportamientos específicos, también es posible interactuar directamente con el servicio utilizando herramientas como `netcat` o `telnet`, lo que permite observar las respuestas del servidor sin intermediarios.
+
+
 ---
 
 ## 12) Interacción manual (netcat / telnet / TLS)
