@@ -420,6 +420,86 @@ drwxrwxrwx    2 ftp      ftp          4096 Sep 16 18:00 Inlanefreight
 
 ## 10) Transferencias: descargar y subir
 
+### Impacto de Descarga y Subida de Archivos en FTP
+
+La descarga y subida de archivos es la funcionalidad principal de un servidor FTP. Sin embargo, desde la perspectiva de un pentester, estas capacidades pueden tener implicancias de seguridad mucho más profundas.
+
+### 1. Descarga de archivos (Information Disclosure)
+
+Cuando el servidor permite listar y descargar archivos:
+
+- Podemos acceder a documentos internos (contratos, plantillas, notas, backups, etc.).
+- Es posible encontrar credenciales almacenadas en texto plano.
+- Pueden aparecer configuraciones sensibles, archivos `.env`, scripts o respaldos.
+- La estructura de directorios puede revelar información organizacional (clientes, empleados, proyectos).
+
+Incluso si no se permite la descarga, el simple listado de archivos ya constituye una fuga de información valiosa.
+
+---
+
+### 2. Subida de archivos (File Upload Abuse)
+
+Si el servidor permite la subida de archivos (`STOR`) y además:
+
+- El FTP está vinculado a un servidor web.
+- Existe sincronización automática con el webroot.
+- O hay vulnerabilidades como LFI (Local File Inclusion).
+
+Entonces puede producirse un escenario de explotación más grave.
+
+#### Escenario típico con LFI:
+
+1. Se sube un archivo malicioso (por ejemplo, un script PHP).
+2. Se utiliza una vulnerabilidad LFI para incluir ese archivo.
+3. El servidor interpreta y ejecuta el código.
+4. Esto puede derivar en ejecución remota de comandos (RCE).
+
+---
+
+### 3. Abuso de logs de FTP
+
+Otra técnica interesante consiste en aprovechar los logs del servidor FTP.
+
+En ciertos escenarios:
+
+- El servidor registra comandos o nombres de usuario en archivos de log.
+- Si existe una vulnerabilidad LFI en la aplicación web.
+- Y el atacante logra inyectar código dentro del log (por ejemplo, como nombre de usuario).
+
+Entonces:
+
+1. Se fuerza al servidor a escribir código malicioso en el archivo de log.
+2. Se utiliza la vulnerabilidad LFI para incluir el log.
+3. El código se ejecuta en el contexto del servidor web.
+
+Esto puede conducir a **Remote Command Execution (RCE)**.
+
+---
+
+### 4. Importancia durante la fase de Enumeración
+
+Durante la fase de enumeración debemos:
+
+- Verificar permisos de lectura y escritura.
+- Identificar si el FTP está expuesto a Internet.
+- Determinar si permite acceso anónimo.
+- Analizar si está integrado con otros servicios (como un servidor web).
+
+El FTP no debe analizarse de forma aislada.  
+Debe evaluarse en conjunto con todos los servicios detectados, ya que su combinación con vulnerabilidades como LFI puede escalar el impacto significativamente.
+
+---
+
+## Conclusión
+
+Un servidor FTP mal configurado puede pasar de ser un simple repositorio de archivos a convertirse en un vector de:
+
+- Fuga de información.
+- Escalada de privilegios.
+- Ejecución remota de comandos (RCE).
+
+Por ello, cualquier capacidad de lectura o escritura detectada durante el footprinting debe ser evaluada cuidadosamente dentro del contexto completo de la infraestructura.
+
 ### Descargar un archivo (RETR)
 
 Ejemplo con espacios escapados:
