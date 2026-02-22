@@ -128,17 +128,8 @@ curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq . | grep name |
 
 Resultado esperado:
 
-```
-account.ttn.inlanefreight.com
-blog.inlanefreight.com
-bots.inlanefreight.com
-console.ttn.inlanefreight.com
-iot.inlanefreight.com
-matomo.inlanefreight.com
-smartfactory.inlanefreight.com
-www.inlanefreight.com
-...
-```
+<img width="1575" height="964" alt="image" src="https://github.com/user-attachments/assets/aa0a649e-e370-4f6b-92e4-bb86bac8ece9" />
+
 
 Esta lista ya da un panorama muy claro del tipo de infraestructura.
 
