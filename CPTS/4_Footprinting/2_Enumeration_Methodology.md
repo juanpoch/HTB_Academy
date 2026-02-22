@@ -154,9 +154,6 @@ La historia del ataque a [**SolarWinds**](https://www.rpc.senate.gov/policy-pape
 
 ## 4. Aplicación Práctica: Pentest Externo Black Box
 
-4. Aplicación Práctica: Pentest Externo Black Box
-   Cuando comienza un engagement externo:
-
 ### **Capa 1: Internet Presence**
 Encontramos todos los activos posibles.
 
