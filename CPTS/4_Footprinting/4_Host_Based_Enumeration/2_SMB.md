@@ -179,20 +179,22 @@ Más [opciones de configuración](https://www.samba.org/samba/docs/current/man-h
 
 ## 8) Opciones comunes en Samba (tabla)
 
-| Setting                        | Descripción                                           |
-| ------------------------------ | ----------------------------------------------------- |
-| `[sharename]`                  | Nombre del recurso compartido                         |
-| `workgroup = WORKGROUP/DOMAIN` | Workgroup/Dominio visible a clientes                  |
-| `path = /path/here/`           | Directorio del servidor que se comparte               |
-| `server string = STRING`       | Texto/banner identificatorio del servidor             |
-| `unix password sync = yes`     | Sincroniza password UNIX con password SMB             |
-| `usershare allow guests = yes` | Permite acceso no autenticado a shares definidos      |
-| `map to guest = bad user`      | Acción cuando el login no mapea a usuario UNIX válido |
-| `browseable = yes`             | ¿El share aparece en listados?                        |
-| `guest ok = yes`               | Permite conexión sin password                         |
-| `read only = yes`              | Solo lectura                                          |
-| `create mask = 0700`           | Permisos por defecto de archivos creados              |
+| Setting | Descripción |
+|---|---|
+| `[sharename]` | Nombre del recurso compartido (share) publicado. |
+| `workgroup = WORKGROUP/DOMAIN` | Workgroup/dominio que verán los clientes al consultar. |
+| `path = /path/here/` | Ruta local del servidor que se expone como share. |
+| `server string = STRING` | Texto descriptivo mostrado al iniciar conexión (identificación). |
+| `unix password sync = yes` | Sincroniza la contraseña UNIX con la contraseña SMB. |
+| `usershare allow guests = yes` | Permite “usershares” accesibles sin autenticación (según definición). |
+| `map to guest = bad user` | Si el usuario no existe, lo mapea al usuario guest. |
+| `browseable = yes` | El share aparece en listados de recursos disponibles. |
+| `guest ok = yes` | Permite entrar al share como invitado (sin credenciales). |
+| `read only = yes` | Restringe a lectura: no crear, modificar ni borrar. |
+| `create mask = 0700` | Permisos por defecto en archivos nuevos creados (owner). |
 
+
+**Diferencia:** `usershare allow guests` habilita que los *usershares* (shares creados por usuarios) puedan ser accesibles sin autenticación, mientras que `guest ok` permite que un share específico acepte conexiones como usuario invitado (guest) sin credenciales.
 ---
 
 ## 9) Settings peligrosos (por qué importan)
