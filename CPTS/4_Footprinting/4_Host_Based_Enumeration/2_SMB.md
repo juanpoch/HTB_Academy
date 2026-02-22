@@ -1,6 +1,5 @@
 # SMB y Samba (Footprinting / Enumeración)
 
-> Sección del curso **Footprinting** (HTB Academy) dedicada a **SMB** y su implementación en Linux/Unix mediante **Samba**. Incluye fundamentos, puertos, versiones, configuración por defecto, settings riesgosos y enumeración práctica (manual + herramientas).
 
 ---
 
