@@ -675,6 +675,20 @@ Si se permite escritura, verás `150 Ok to send data` y `226 Transfer complete`.
 
 ## 11) Footprinting con Nmap + NSE
 
+
+El uso de escáneres de red es una técnica práctica y ampliamente utilizada durante la fase de footprinting. Estas herramientas permiten identificar servicios activos en un host, incluso cuando no se encuentran expuestos en sus puertos estándar.
+
+Una de las herramientas más utilizadas para este propósito es **Nmap**. Además de detectar puertos abiertos y versiones de servicios, Nmap incorpora el **Nmap Scripting Engine (NSE)**, un conjunto de scripts diseñados para interactuar con servicios específicos y obtener información adicional.
+
+Estos scripts pueden realizar tareas como:
+
+- Identificar configuraciones inseguras.
+- Detectar acceso anónimo en servicios como FTP.
+- Extraer información del sistema remoto.
+- Verificar vulnerabilidades conocidas.
+
+La base de datos de scripts NSE puede actualizarse fácilmente mediante el comando correspondiente, asegurando que se utilicen las últimas versiones disponibles durante la enumeración.
+
 ### Actualizar base de scripts NSE
 
 ```bash
