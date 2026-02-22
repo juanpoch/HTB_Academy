@@ -832,12 +832,38 @@ Cuando hay cifrado, necesitás un cliente que lo soporte. Ejemplo con OpenSSL:
 openssl s_client -connect <IP>:21 -starttls ftp
 ```
 
+
 **Valor del certificado en footprinting:**
 
 * Puede revelar **hostname (CN/SAN)**.
 * Puede incluir **email** de contacto.
 * Puede indicar **organización/unidad** y **ubicación** (si el cert está bien rellenado).
 * Si es self-signed, igual puede dar pistas internas.
+
+
+```
+CONNECTED(00000003)                                                                                      
+Can't use SSL_get_servername                        
+depth=0 C = US, ST = California, L = Sacramento, O = Inlanefreight, OU = Dev, CN = master.inlanefreight.htb, emailAddress = admin@inlanefreight.htb
+verify error:num=18:self signed certificate
+verify return:1
+
+depth=0 C = US, ST = California, L = Sacramento, O = Inlanefreight, OU = Dev, CN = master.inlanefreight.htb, emailAddress = admin@inlanefreight.htb
+verify return:1
+---                                                 
+Certificate chain
+ 0 s:C = US, ST = California, L = Sacramento, O = Inlanefreight, OU = Dev, CN = master.inlanefreight.htb, emailAddress = admin@inlanefreight.htb
+ 
+ i:C = US, ST = California, L = Sacramento, O = Inlanefreight, OU = Dev, CN = master.inlanefreight.htb, emailAddress = admin@inlanefreight.htb
+---
+ 
+Server certificate
+
+-----BEGIN CERTIFICATE-----
+
+MIIENTCCAx2gAwIBAgIUD+SlFZAWzX5yLs2q3ZcfdsRQqMYwDQYJKoZIhvcNAQEL
+...SNIP...
+```
 
 ---
 
