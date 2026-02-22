@@ -106,7 +106,7 @@ En una red SMB clásica, cada host suele pertenecer a un **workgroup** (grupo de
 * Esto puede hacerse:
 
   * Por registro directo del hostname (cada host reserva su nombre), o
-  * Usando un **NBNS** (NetBIOS Name Server).
+  * Usando un **NBNS** ([NetBIOS Name Server](https://networkencyclopedia.com/netbios-name-server-nbns/)).
 * En Windows, NBNS evolucionó en **WINS**.
 
 ---
