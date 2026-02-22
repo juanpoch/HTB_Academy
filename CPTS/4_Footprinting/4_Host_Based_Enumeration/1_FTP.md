@@ -678,7 +678,7 @@ Si se permite escritura, verás `150 Ok to send data` y `226 Transfer complete`.
 
 El uso de escáneres de red es una técnica práctica y ampliamente utilizada durante la fase de footprinting. Estas herramientas permiten identificar servicios activos en un host, incluso cuando no se encuentran expuestos en sus puertos estándar.
 
-Una de las herramientas más utilizadas para este propósito es **Nmap**. Además de detectar puertos abiertos y versiones de servicios, Nmap incorpora el **Nmap Scripting Engine (NSE)**, un conjunto de scripts diseñados para interactuar con servicios específicos y obtener información adicional.
+Una de las herramientas más utilizadas para este propósito es **Nmap**. Además de detectar puertos abiertos y versiones de servicios, Nmap incorpora el [**Nmap Scripting Engine (NSE)**](https://nmap.org/book/nse.html), un conjunto de scripts diseñados para interactuar con servicios específicos y obtener información adicional.
 
 Estos scripts pueden realizar tareas como:
 
