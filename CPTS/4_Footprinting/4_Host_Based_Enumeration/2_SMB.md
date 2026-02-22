@@ -123,7 +123,42 @@ Ejemplo (filtrando comentarios):
 cat /etc/samba/smb.conf | grep -v "#\|;"
 ```
 
-### Ejemplo de estructura
+```
+[global]
+   workgroup = DEV.INFREIGHT.HTB
+   server string = DEVSMB
+   log file = /var/log/samba/log.%m
+   max log size = 1000
+   logging = file
+   panic action = /usr/share/samba/panic-action %d
+
+   server role = standalone server
+   obey pam restrictions = yes
+   unix password sync = yes
+
+   passwd program = /usr/bin/passwd %u
+   passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+
+   pam password change = yes
+   map to guest = bad user
+   usershare allow guests = yes
+
+[printers]
+   comment = All Printers
+   browseable = no
+   path = /var/spool/samba
+   printable = yes
+   guest ok = no
+   read only = yes
+   create mask = 0700
+
+[print$]
+   comment = Printer Drivers
+   path = /var/lib/samba/printers
+   browseable = yes
+   read only = yes
+   guest ok = no
+```
 
 * Sección **[global]**: aplica como base para todos los shares.
 * Secciones **[share]**: definen recursos compartidos específicos.
