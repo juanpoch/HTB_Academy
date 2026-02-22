@@ -8,7 +8,7 @@
 
 ### ¿Qué es FTP?
 
-**FTP** es uno de los protocolos más antiguos de Internet para **transferencia de archivos**. Opera en la **capa de aplicación** del stack TCP/IP, al igual que **HTTP** o **POP**. Puede utilizarse mediante:
+[**FTP**](https://datatracker.ietf.org/doc/html/rfc959) es uno de los protocolos más antiguos de Internet para **transferencia de archivos**. Opera en la **capa de aplicación** del stack TCP/IP, al igual que **HTTP** o **POP**. Puede utilizarse mediante:
 
 * Clientes dedicados (CLI/GUI).
 * Herramientas integradas en sistemas operativos.
@@ -53,7 +53,7 @@ Una conexión FTP **abre dos canales**:
 
 ## 3) Comandos y códigos de estado
 
-FTP define **muchos comandos** y **códigos de estado**, pero **no todos** están implementados igual en todos los servidores.
+FTP define [**muchos comandos**](https://web.archive.org/web/20230326204635/https://www.smartfile.com/blog/the-ultimate-ftp-commands-list/) y [**códigos de estado**](https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes), pero **no todos** están implementados igual en todos los servidores.
 
 * El cliente puede pedir: subir/bajar archivos, listar/crear/borrar directorios, renombrar, etc.
 * El servidor responde con **status codes** (ej.: `220`, `230`, `150`, `226`, etc.) indicando si se ejecutó y el resultado.
