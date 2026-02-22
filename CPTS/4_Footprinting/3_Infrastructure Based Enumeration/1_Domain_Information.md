@@ -167,17 +167,16 @@ Shodan permite obtener información detallada sobre:
 Procesar IPs:
 
 ```bash
-for i in $(cat subdomainlist); do
-  host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f4 >> ip-addresses.txt
-done
+for i in $(cat subdomainlist);do host $i | grep "has address" | grep cisco.com | cut -d" " -f4 >> ip-addresses.txt;done
 ```
+<img width="398" height="421" alt="image" src="https://github.com/user-attachments/assets/3a97bd97-83ab-43db-8c3f-10b08c26cfea" />
+
+
 
 Consultar cada IP:
 
 ```bash
-for i in $(cat ip-addresses.txt); do
-  shodan host $i
-done
+for i in $(cat ip-addresses.txt);do shodan host $i;done
 ```
 
 Resultados posibles:
@@ -196,6 +195,9 @@ Ports:
 80/tcp Apache
 443/tcp Apache
 ```
+
+<img width="1910" height="818" alt="image" src="https://github.com/user-attachments/assets/3116c352-c1c6-4d43-865f-0b4063eec39e" />
+
 
 Esto nos da una **vista rápida del ataque superficial** de cada host.
 
