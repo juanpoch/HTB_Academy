@@ -268,6 +268,21 @@ smbclient -N -L //<IP>
 * `-N` usa **null session** (sin usuario/contraseña).
 * Te devuelve lista de shares y comentarios.
 
+
+```
+smbclient -N -L //10.129.14.128
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        print$          Disk      Printer Drivers
+        home            Disk      INFREIGHT Samba
+        dev             Disk      DEVenv
+        notes           Disk      CheckIT
+        IPC$            IPC       IPC Service (DEVSM)
+SMB1 disabled -- no workgroup available
+```
+
+
 ### Conectarse a un share
 
 ```bash
