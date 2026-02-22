@@ -133,7 +133,7 @@ Uno de los servidores FTP más usados en Linux es [**vsFTPd**](https://security.
 sudo apt install vsftpd
 ```
 
-> vsFTPd es “uno de varios” servidores FTP. Se usa mucho para demostrar configuraciones de forma simple. No todas las opciones están en el archivo por defecto: el resto está en el **man page**.
+> vsFTPd es “uno de varios” servidores FTP. Se usa mucho para demostrar configuraciones de forma simple. No todas las opciones están en el archivo por defecto: el resto está en el [**man page**](http://vsftpd.beasts.org/vsftpd_conf.html).
 
 ### Opciones típicas (ejemplo de `vsftpd.conf`)
 
