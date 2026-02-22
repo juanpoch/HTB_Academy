@@ -129,7 +129,7 @@ El uso de almacenamiento externo suele realizarse para aliviar carga del servido
 
 # Uso de Servicios de Terceros – Domain.glass
 
-Herramientas como **domain.glass** permiten analizar:
+Herramientas como [**domain.glass**](https://domain.glass/) permiten analizar:
 
 * Infraestructura DNS
 * Certificados SSL
@@ -138,6 +138,8 @@ Herramientas como **domain.glass** permiten analizar:
 * Evaluación de seguridad (ej. estado Cloudflare)
 
 En el ejemplo del curso, se observa que Cloudflare clasifica el dominio como "Safe".
+
+<img width="985" height="607" alt="image" src="https://github.com/user-attachments/assets/10d356b3-864b-49a0-8f5d-b2d1738db22d" />
 
 Esto indica que:
 
@@ -151,7 +153,7 @@ Esto debe anotarse dentro del análisis de superficie de ataque.
 
 # Descubrimiento de Buckets con GrayHatWarfare
 
-GrayHatWarfare es una plataforma que permite buscar buckets públicos de:
+[GrayHatWarfare](https://buckets.grayhatwarfare.com/) es una plataforma que permite buscar buckets públicos de:
 
 * AWS
 * Azure
@@ -164,6 +166,13 @@ Permite:
 * Descubrir buckets relacionados con la empresa
 
 Una vez identificado un bucket vía Google, se puede pivotear hacia GrayHatWarfare para descubrir más contenido.
+
+<img width="978" height="540" alt="image" src="https://github.com/user-attachments/assets/5b357089-531b-477d-ab8d-f14cb85d33ef" />
+
+Si buscamos por cisco:
+
+<img width="1861" height="962" alt="image" src="https://github.com/user-attachments/assets/c879d3ad-1147-4fb3-a2aa-7b59991358fb" />
+
 
 ---
 
@@ -206,6 +215,9 @@ Esto puede permitir a un atacante:
 * Evadir autenticación por contraseña
 
 Este tipo de error puede comprometer gravemente la infraestructura.
+
+<img width="982" height="134" alt="image" src="https://github.com/user-attachments/assets/13c01821-e794-4320-9ff4-0776124cec6f" />
+
 
 ---
 
