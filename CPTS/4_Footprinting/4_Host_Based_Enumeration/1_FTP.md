@@ -513,6 +513,33 @@ Resultado típico:
 * `150 Opening BINARY mode data connection ...`
 * `226 Transfer complete.`
 
+```
+ftp> ls
+
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+-rwxrwxrwx    1 ftp      ftp             0 Sep 16 17:24 Calendar.pptx
+drwxrwxrwx    4 ftp      ftp          4096 Sep 16 17:57 Clients
+drwxrwxrwx    2 ftp      ftp          4096 Sep 16 18:05 Documents
+drwxrwxrwx    2 ftp      ftp          4096 Sep 16 17:24 Employees
+-rwxrwxrwx    1 ftp      ftp            41 Sep 18 15:58 Important Notes.txt
+226 Directory send OK.
+
+
+ftp> get Important\ Notes.txt
+
+local: Important Notes.txt remote: Important Notes.txt
+200 PORT command successful. Consider using PASV.
+150 Opening BINARY mode data connection for Important Notes.txt (41 bytes).
+226 Transfer complete.
+41 bytes received in 0.00 secs (606.6525 kB/s)
+
+
+ftp> exit
+
+221 Goodbye.
+```
+
 ### Descargar “todo” con `wget` (mirror)
 
 Para obtener todo lo accesible (útil en jerarquías grandes, pero ruidoso):
@@ -526,6 +553,35 @@ Notas:
 * `-m` crea un “mirror” y guarda estructura.
 * Suele crear un directorio con nombre del host/IP destino.
 * **Riesgo operacional:** puede disparar alertas por volumen/behavior.
+
+```
+wget -m --no-passive ftp://anonymous:anonymous@10.129.14.136
+
+--2021-09-19 14:45:58--  ftp://anonymous:*password*@10.129.14.136/                                         
+           => ‘10.129.14.136/.listing’                                                                     
+Connecting to 10.129.14.136:21... connected.                                                               
+Logging in as anonymous ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD not needed.
+==> PORT ... done.    ==> LIST ... done.                                                                 
+12.12.1.136/.listing           [ <=>                                  ]     466  --.-KB/s    in 0s       
+                                                                                                         
+2021-09-19 14:45:58 (65,8 MB/s) - ‘10.129.14.136/.listing’ saved [466]                                     
+--2021-09-19 14:45:58--  ftp://anonymous:*password*@10.129.14.136/Calendar.pptx   
+           => ‘10.129.14.136/Calendar.pptx’                                       
+==> CWD not required.                                                           
+==> SIZE Calendar.pptx ... done.                                                                                                                            
+==> PORT ... done.    ==> RETR Calendar.pptx ... done.       
+
+...SNIP...
+
+2021-09-19 14:45:58 (48,3 MB/s) - ‘10.129.14.136/Employees/.listing’ saved [119]
+
+FINISHED --2021-09-19 14:45:58--
+Total wall clock time: 0,03s
+Downloaded: 15 files, 1,7K in 0,001s (3,02 MB/s)
+```
+
 
 ### Subir un archivo (STOR)
 
