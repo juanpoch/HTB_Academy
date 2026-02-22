@@ -201,7 +201,7 @@ Ports:
 
 Esto nos da una **vista rápida del ataque superficial** de cada host.
 
-Recordar IP importante:
+Recordar IP importante (previo proceso para inlanefreight):
 
 ```
 10.129.127.22 → matomo.inlanefreight.com
@@ -218,20 +218,48 @@ dig any inlanefreight.com
 ```
 
 Esto revela:
-
+```
 * **A records**: Direcciones IP
 * **MX records**: Servicios de correo (Google, Outlook, etc.)
 * **NS records**: Hosting del dominio (INWX)
 * **TXT records**: Validaciones y configuraciones
 * **SOA record**: Servidor autoritativo
 
-Ejemplo de TXT reveladores:
+; <<>> DiG 9.16.1-Ubuntu <<>> any inlanefreight.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 52058
+;; flags: qr rd ra; QUERY: 1, ANSWER: 17, AUTHORITY: 0, ADDITIONAL: 1
 
-```
-atlassian-domain-verification=...
-google-site-verification=...
-logmein-verification-code=...
-v=spf1 include:mailgun.org include:_spf.google.com ...
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;inlanefreight.com.             IN      ANY
+
+;; ANSWER SECTION:
+inlanefreight.com.      300     IN      A       10.129.27.33
+inlanefreight.com.      300     IN      A       10.129.95.250
+inlanefreight.com.      3600    IN      MX      1 aspmx.l.google.com.
+inlanefreight.com.      3600    IN      MX      10 aspmx2.googlemail.com.
+inlanefreight.com.      3600    IN      MX      10 aspmx3.googlemail.com.
+inlanefreight.com.      3600    IN      MX      5 alt1.aspmx.l.google.com.
+inlanefreight.com.      3600    IN      MX      5 alt2.aspmx.l.google.com.
+inlanefreight.com.      21600   IN      NS      ns.inwx.net.
+inlanefreight.com.      21600   IN      NS      ns2.inwx.net.
+inlanefreight.com.      21600   IN      NS      ns3.inwx.eu.
+inlanefreight.com.      3600    IN      TXT     "MS=ms92346782372"
+inlanefreight.com.      21600   IN      TXT     "atlassian-domain-verification=IJdXMt1rKCy68JFszSdCKVpwPN"
+inlanefreight.com.      3600    IN      TXT     "google-site-verification=O7zV5-xFh_jn7JQ31"
+inlanefreight.com.      300     IN      TXT     "google-site-verification=bow47-er9LdgoUeah"
+inlanefreight.com.      3600    IN      TXT     "google-site-verification=gZsCG-BINLopf4hr2"
+inlanefreight.com.      3600    IN      TXT     "logmein-verification-code=87123gff5a479e-61d4325gddkbvc1-b2bnfghfsed1-3c789427sdjirew63fc"
+inlanefreight.com.      300     IN      TXT     "v=spf1 include:mailgun.org include:_spf.google.com include:spf.protection.outlook.com include:_spf.atlassian.net ip4:10.129.24.8 ip4:10.129.27.2 ip4:10.72.82.106 ~all"
+inlanefreight.com.      21600   IN      SOA     ns.inwx.net. hostmaster.inwx.net. 2021072600 10800 3600 604800 3600
+
+;; Query time: 332 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Mi Sep 01 18:27:22 CEST 2021
+;; MSG SIZE  rcvd: 940
 ```
 
 ---
