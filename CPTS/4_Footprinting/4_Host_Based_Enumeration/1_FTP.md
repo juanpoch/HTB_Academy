@@ -540,6 +540,9 @@ ftp> exit
 221 Goodbye.
 ```
 
+
+
+
 ### Descargar “todo” con `wget` (mirror)
 
 Para obtener todo lo accesible (útil en jerarquías grandes, pero ruidoso):
@@ -583,7 +586,44 @@ Downloaded: 15 files, 1,7K in 0,001s (3,02 MB/s)
 ```
 
 
+
+Una vez descargados todos los archivos, wgetse creará un directorio con la dirección IP de nuestro objetivo. Todos los archivos descargados se almacenan allí, y luego podemos inspeccionarlos localmente.
+
+```
+tree .
+
+.
+└── 10.129.14.136
+    ├── Calendar.pptx
+    ├── Clients
+    │   └── Inlanefreight
+    │       ├── appointments.xlsx
+    │       ├── contract.docx
+    │       ├── meetings.txt
+    │       └── proposal.pptx
+    ├── Documents
+    │   ├── appointments-template.xlsx
+    │   ├── contract-template.docx
+    │   └── contract-template.pdf
+    ├── Employees
+    └── Important Notes.txt
+
+5 directories, 9 files
+```
+
 ### Subir un archivo (STOR)
+
+## Verificación de Permisos de Subida en FTP
+
+Luego de identificar un servidor FTP, es importante comprobar si tenemos permisos para subir archivos. En muchos entornos, especialmente en servidores web, el FTP se utiliza como mecanismo de sincronización para que los desarrolladores suban rápidamente contenido al servidor.
+
+Con frecuencia, los administradores asumen que estos servicios no son accesibles desde el exterior, lo que lleva a descuidar su hardening. Esta falsa sensación de seguridad puede provocar configuraciones incorrectas, como permisos excesivos o autenticación débil.
+
+Si el servidor FTP permite la subida de archivos y está conectado a un servidor web, el riesgo aumenta considerablemente. En ese caso, un atacante podría subir un archivo malicioso (por ejemplo, una webshell) y ejecutarlo desde el navegador, obteniendo ejecución remota de comandos (RCE).
+
+Además, esto podría permitir el establecimiento de una reverse shell, facilitando la ejecución de comandos internos y potencialmente la escalada de privilegios.
+
+Por ello, durante la fase de enumeración, no solo debemos identificar el servicio FTP, sino también evaluar cuidadosamente los permisos de escritura y su integración con otros servicios.
 
 Crear archivo local:
 
@@ -595,6 +635,34 @@ Luego en `ftp>`:
 
 ```ftp
 put testupload.txt
+```
+
+```
+ftp> put testupload.txt 
+
+local: testupload.txt remote: testupload.txt
+---> PORT 10,10,14,4,184,33
+200 PORT command successful. Consider using PASV.
+---> STOR testupload.txt
+150 Ok to send data.
+226 Transfer complete.
+
+
+ftp> ls
+
+---> TYPE A
+200 Switching to ASCII mode.
+---> PORT 10,10,14,4,223,101
+200 PORT command successful. Consider using PASV.
+---> LIST
+150 Here comes the directory listing.
+-rw-rw-r--    1 1002     1002      8138592 Sep 14 16:54 Calender.pptx
+drwxrwxr-x    2 1002     1002         4096 Sep 14 17:03 Clients
+drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Documents
+drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Employees
+-rw-rw-r--    1 1002     1002           41 Sep 14 16:45 Important Notes.txt
+-rw-------    1 1002     133             0 Sep 15 14:57 testupload.txt
+226 Directory send OK.
 ```
 
 Si se permite escritura, verás `150 Ok to send data` y `226 Transfer complete`.
