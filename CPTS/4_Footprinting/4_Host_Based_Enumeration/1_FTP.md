@@ -163,11 +163,8 @@ sudo apt install vsftpd
 Este archivo se usa para **negar acceso** a usuarios específicos.
 Ejemplo:
 
-```txt
-guest
-john
-kevin
-```
+<img width="696" height="286" alt="image" src="https://github.com/user-attachments/assets/e6c32437-f7df-4952-9411-bb28ce0d7e85" />
+
 
 Aunque existan como usuarios del sistema, **no podrán** loguearse por FTP si están listados ahí.
 
