@@ -123,7 +123,7 @@ Esto devuelve:
 ## 6. Filtrar únicamente subdominios únicos
 
 ```bash
-curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -u
+curl -s https://crt.sh/\?q\=cisco.com\&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -u
 ```
 
 Resultado esperado:
@@ -141,18 +141,13 @@ Debemos evitar atacar hosts no autorizados (ej. Google, AWS, Cloudflare).
 Por eso filtramos solo los **A records que pertenecen a la organización**.
 
 ```bash
-for i in $(cat subdomainlist); do
-    host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f1,4
-done
+for i in $(cat subdomainlist);do host $i | grep "has address" | grep cisco.com | cut -d" " -f1,4;done
 ```
 
 Ejemplo:
 
-```
-blog.inlanefreight.com 10.129.24.93
-inlanefreight.com 10.129.27.33
-matomo.inlanefreight.com 10.129.127.22
-```
+<img width="1105" height="949" alt="image" src="https://github.com/user-attachments/assets/0675e5e4-823a-4da6-bae4-0cb4266c82bd" />
+
 
 ---
 
