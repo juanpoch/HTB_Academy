@@ -103,7 +103,7 @@ Estos proveedores nos indican:
 ## 5. Extraer resultados de crt.sh en JSON
 
 ```bash
-curl -s https://crt.sh/?q=inlanefreight.com&output=json | jq .
+curl -s https://crt.sh/?q=inlanefreight.com\&output=json | jq .
 ```
 
 Esto devuelve:
