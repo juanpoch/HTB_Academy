@@ -154,33 +154,53 @@ La historia del ataque a [**SolarWinds**](https://www.rpc.senate.gov/policy-pape
 
 ## 4. Aplicación Práctica: Pentest Externo Black Box
 
-Cuando comienza un engagement externo:
+4. Aplicación Práctica: Pentest Externo Black Box
+   Cuando comienza un engagement externo:
 
 ### **Capa 1: Internet Presence**
-
 Encontramos todos los activos posibles.
 
-### **Capa 2: Gateway**
+* Identificamos dominios, subdominios, IPs públicas, ASN y netblocks asociados.
+* Buscamos interfaces expuestas (web, VPN, portales, paneles) y huellas de infraestructura.
+* El objetivo es definir la superficie real de ataque dentro del alcance permitido.
 
+### **Capa 2: Gateway**
 Descubrimos defensas y arquitectura.
 
-### **Capa 3: Accessible Services**
+* Entendemos cómo “se llega” al objetivo: perímetro, segmentación visible y puntos de entrada.
+* Detectamos controles como WAF, proxies, balanceadores, firewalls, CDN y mecanismos anti-bot.
+* El objetivo es anticipar restricciones, rutas de acceso y comportamiento esperado del perímetro.
 
+### **Capa 3: Accessible Services**
 Analizamos servicios, funciones y configuraciones.
 
-### **Capa 4: Processes**
+* Enumeramos servicios expuestos (puertos, protocolos, versiones) y su propósito.
+* Revisamos configuraciones, endpoints, banners, autenticación y posibles misconfigurations.
+* El objetivo es comprender cómo comunicarnos con cada servicio y qué vectores pueden derivar en impacto.
 
+### **Capa 4: Processes**
 Comprendemos tarea, origen y destino.
 
-### **Capa 5: Privileges**
+* Con acceso interno o ejecución en el host, observamos procesos y flujos reales de datos.
+* Identificamos dependencias entre componentes (quién habla con quién, qué consume qué, y por qué).
+* El objetivo es revelar rutas de datos, acoplamientos y puntos débiles que no son visibles desde el exterior.
 
+### **Capa 5: Privileges**
 Estudiamos permisos y usuarios.
 
-### **Capa 6: OS Setup**
+* Determinamos con qué usuario/grupo corre cada servicio y qué privilegios efectivos posee.
+* Buscamos permisos excesivos, delegaciones, credenciales expuestas, y oportunidades de escalada.
+* El objetivo es entender qué acciones son posibles (y cuáles no) con los permisos actuales.
 
+### **Capa 6: OS Setup**
 Investigamos el sistema operativo y su configuración.
 
+* Recolectamos información del OS: versión, parches, hardening, servicios internos y políticas.
+* Identificamos configuraciones inseguras, secretos en archivos/configs, y controles defensivos activos.
+* El objetivo es evaluar la postura interna y extraer información sensible útil para avanzar o demostrar impacto.
+
 Cada capa nos acerca más al núcleo de la infraestructura.
+
 
 ---
 
