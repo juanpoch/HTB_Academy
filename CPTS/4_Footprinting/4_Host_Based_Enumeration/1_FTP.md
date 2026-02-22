@@ -175,7 +175,7 @@ Aunque existan como usuarios del sistema, **no podrán** loguearse por FTP si es
 ### Anonymous login habilitado + escritura
 
 En vsFTPd, habilitar anónimo y permitir escritura puede ser crítico.
-Opciones típicas (cuando existen):
+[Opciones](http://vsftpd.beasts.org/vsftpd_conf.html) típicas (cuando existen):
 
 | Setting                        | Descripción                                                                                     |
 | ------------------------------ | ----------------------------------------------------------------------------------------------- |
