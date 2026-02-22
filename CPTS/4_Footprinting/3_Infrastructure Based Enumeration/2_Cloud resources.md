@@ -59,12 +59,24 @@ Ejemplos:
 ```
 intext:[empresa] inurl:amazonaws.com
 ```
+<img width="1523" height="887" alt="image" src="https://github.com/user-attachments/assets/3fb1d735-469f-4381-bcdf-9885bd02f4ed" />
+
+<img width="1523" height="887" alt="image" src="https://github.com/user-attachments/assets/a617b88a-04b5-4a2b-a33e-e569edaa7b57" />
+
+
+
+
 
 ### Buscar Azure Blob Storage
 
 ```
 intext:[empresa] inurl:blob.core.windows.net
 ```
+
+<img width="1397" height="842" alt="image" src="https://github.com/user-attachments/assets/98a6997f-7ff6-4f71-af7d-2322f43362ab" />
+
+<img width="1523" height="887" alt="image" src="https://github.com/user-attachments/assets/c8ff1d63-489e-4976-a2b4-ffbe92f97c4e" />
+
 
 Estos filtros permiten encontrar:
 
