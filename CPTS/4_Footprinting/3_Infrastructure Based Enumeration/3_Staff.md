@@ -126,6 +126,9 @@ A partir de una sola oferta, podemos inferir con bastante precisión:
 
 ## LinkedIn – Employee #1 (About)
 
+<img width="961" height="254" alt="image" src="https://github.com/user-attachments/assets/5cb4d1a4-76c7-430d-a36b-e8106a9e0222" />
+
+
 En descripciones técnicas se suelen encontrar pistas sobre:
 
 * Tecnologías web: **W3C specs, Web Components, React, Svelte, AngularJS**
