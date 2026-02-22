@@ -59,9 +59,11 @@ Estos SANs pueden contener **subdominios adicionales activos**.
 
 Ejemplo típico:
 
-```
-DNS names: inlanefreight.htb, www.inlanefreight.htb, support.inlanefreight.htb
-```
+<img width="848" height="244" alt="image" src="https://github.com/user-attachments/assets/e1687731-a35c-49a5-9568-da4101ffc775" />
+
+<img width="836" height="427" alt="image" src="https://github.com/user-attachments/assets/51cec106-58d5-4faf-939f-f730e36ff60a" />
+
+
 
 ---
 
