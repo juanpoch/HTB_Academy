@@ -195,6 +195,7 @@ Más [opciones de configuración](https://www.samba.org/samba/docs/current/man-h
 
 
 **Diferencia:** `usershare allow guests` habilita que los *usershares* (shares creados por usuarios) puedan ser accesibles sin autenticación, mientras que `guest ok` permite que un share específico acepte conexiones como usuario invitado (guest) sin credenciales.
+
 ---
 
 ## 9) Settings peligrosos (por qué importan)
