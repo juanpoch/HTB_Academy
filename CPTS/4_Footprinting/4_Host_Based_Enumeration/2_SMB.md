@@ -291,6 +291,44 @@ smbclient //<IP>/notes
 
 Si permite acceso anónimo, puede decir “Anonymous login successful”.
 
+
+```
+Enter WORKGROUP\<username>'s password: 
+Anonymous login successful
+Try "help" to get a list of possible commands.
+
+
+smb: \> help
+
+?              allinfo        altname        archive        backup         
+blocksize      cancel         case_sensitive cd             chmod          
+chown          close          del            deltree        dir            
+du             echo           exit           get            getfacl        
+geteas         hardlink       help           history        iosize         
+lcd            link           lock           lowercase      ls             
+l              mask           md             mget           mkdir          
+more           mput           newer          notify         open           
+posix          posix_encrypt  posix_open     posix_mkdir    posix_rmdir    
+posix_unlink   posix_whoami   print          prompt         put            
+pwd            q              queue          quit           readlink       
+rd             recurse        reget          rename         reput          
+rm             rmdir          showacls       setea          setmode        
+scopy          stat           symlink        tar            tarmode        
+timeout        translate      unlock         volume         vuid           
+wdel           logon          listconnect    showconnect    tcon           
+tdis           tid            utimes         logoff         ..             
+!            
+
+
+smb: \> ls
+
+  .                                   D        0  Wed Sep 22 18:17:51 2021
+  ..                                  D        0  Wed Sep 22 12:03:59 2021
+  prep-prod.txt                       N       71  Sun Sep 19 15:45:21 2021
+
+                30313412 blocks of size 1024. 16480084 blocks available
+```
+
 ### Comandos útiles dentro de `smbclient`
 
 * `help` → lista comandos disponibles.
