@@ -904,5 +904,22 @@ MIIENTCCAx2gAwIBAgIUD+SlFZAWzX5yLs2q3ZcfdsRQqMYwDQYJKoZIhvcNAQEL
 
 #### ¿Qué versión del servidor FTP se ejecuta en el sistema de destino? Envíe el banner completo como respuesta
 
+Realizamos banner grabbing con cualquiera de los dos comandos:
+
+```bash
+nc -nv <ip> 21
+```
+```bash
+telnet <ip> 21
+<generar error con un caracter>
+quit
+```
+
+<img width="486" height="227" alt="image" src="https://github.com/user-attachments/assets/e55b9581-fc83-4290-adbf-c5e767617f37" />
+
+Obtenemos el banner:
+```
+InFreight FTP v1.1
+```
 
 #### Enumere el servidor FTP y busque el archivo flag.txt. Envíe su contenido como respuesta.
