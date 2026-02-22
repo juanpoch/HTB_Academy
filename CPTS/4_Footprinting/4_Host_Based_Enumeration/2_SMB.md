@@ -173,6 +173,8 @@ Ejemplo simplificado (como en el contenido):
 
 > Importante: los settings globales pueden ser **sobrescritos** por share. Ahí aparecen muchas misconfigs típicas.
 
+Más [opciones de configuración](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html)
+
 ---
 
 ## 8) Opciones comunes en Samba (tabla)
