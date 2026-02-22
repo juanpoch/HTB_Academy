@@ -73,7 +73,8 @@ intext:[empresa] inurl:amazonaws.com
 intext:[empresa] inurl:blob.core.windows.net
 ```
 
-<img width="1397" height="842" alt="image" src="https://github.com/user-attachments/assets/98a6997f-7ff6-4f71-af7d-2322f43362ab" />
+<img width="1523" height="887" alt="image" src="https://github.com/user-attachments/assets/c5a48db8-17e0-461a-8bf8-a7303f9908a8" />
+
 
 <img width="1523" height="887" alt="image" src="https://github.com/user-attachments/assets/c8ff1d63-489e-4976-a2b4-ffbe92f97c4e" />
 
