@@ -262,6 +262,20 @@ inlanefreight.com.      21600   IN      SOA     ns.inwx.net. hostmaster.inwx.net
 ;; MSG SIZE  rcvd: 940
 ```
 
+
+`Nota`:
+`Registros TXT`: Este tipo de registro suele contener claves de verificación para diferentes proveedores externos y otros aspectos de seguridad del DNS, como [SPF](https://datatracker.ietf.org/doc/html/rfc7208) , [DMARC](https://datatracker.ietf.org/doc/html/rfc7489) y [DKIM](https://datatracker.ietf.org/doc/html/rfc6376) , que se encargan de verificar y confirmar el origen de los correos electrónicos enviados. Si analizamos los resultados con más detalle, podemos obtener información valiosa.
+
+```
+...SNIP... TXT     "MS=ms92346782372"
+...SNIP... TXT     "atlassian-domain-verification=IJdXMt1rKCy68JFszSdCKVpwPN"
+...SNIP... TXT     "google-site-verification=O7zV5-xFh_jn7JQ31"
+...SNIP... TXT     "google-site-verification=bow47-er9LdgoUeah"
+...SNIP... TXT     "google-site-verification=gZsCG-BINLopf4hr2"
+...SNIP... TXT     "logmein-verification-code=87123gff5a479e-61d4325gddkbvc1-b2bnfghfsed1-3c789427sdjirew63fc"
+...SNIP... TXT     "v=spf1 include:mailgun.org include:_spf.google.com include:spf.protection.outlook.com include:_spf.atlassian.net ip4:10.129.24.8 ip4:10.129.27.2 ip4:10.72.82.106 ~all"
+```
+
 ---
 
 # 10. Análisis de Proveedores Identificados
