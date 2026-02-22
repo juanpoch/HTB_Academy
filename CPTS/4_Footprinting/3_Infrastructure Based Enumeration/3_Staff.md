@@ -143,6 +143,10 @@ En descripciones técnicas se suelen encontrar pistas sobre:
   * Herramientas usadas
   * Estilo de desarrollo
   * Posibles errores operativos
+ 
+
+Por ejemplo, si buscamos brevemente errores de configuración de seguridad en Django, encontraremos el siguiente [repositorio de Github](https://github.com/boomcamp/django-security) que describe el Top 10 de OWASP para Django. Podemos usarlo para comprender la estructura interna de Django y su funcionamiento. Las mejores prácticas también suelen indicarnos qué buscar, ya que muchos confían ciegamente en ellas e incluso nombran muchos de los archivos como se muestra en las instrucciones.
+
 
 ---
 
@@ -156,7 +160,9 @@ Publicar proyectos puede ser una ventaja profesional, pero también introduce ri
 
 ### Ejemplo conceptual del curso
 
-En un repositorio se detecta:
+<img width="962" height="285" alt="image" src="https://github.com/user-attachments/assets/d247670c-76b6-4f6f-b0b6-40bac0110d88" />
+
+En el repositorio se detecta:
 
 * Email personal en un archivo (metadata / author)
 * Un **JWT hardcodeado** en el código
@@ -168,6 +174,9 @@ En un repositorio se detecta:
 ## LinkedIn – Employee #2 (Career)
 
 Los historiales de carrera también aportan señales fuertes:
+
+<img width="1250" height="829" alt="image" src="https://github.com/user-attachments/assets/0ffb409f-3f72-46e0-acee-9297548ab379" />
+
 
 * Seniority (ej. VP Software Engineer)
 * Proyectos (apps móviles CRM, sistemas internos)
