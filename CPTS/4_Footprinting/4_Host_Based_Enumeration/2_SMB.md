@@ -30,6 +30,8 @@ Antes de intercambiar datos, ambas partes **negocian y establecen la conexión**
 
 En redes IP, SMB utiliza **TCP**, por lo que hereda el **three‑way handshake** (SYN → SYN/ACK → ACK). Luego, TCP gobierna la entrega ordenada de datos y retransmisiones.
 
+[Ejemplos](https://web.archive.org/web/20240815212710/https://winprotocoldoc.blob.core.windows.net/productionwindowsarchives/MS-SMB2/%5BMS-SMB2%5D.pdf#%5B%7B%22num%22%3A920%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C69%2C738%2C0%5D)
+
 ---
 
 ## 3) Shares, jerarquía y ACL
