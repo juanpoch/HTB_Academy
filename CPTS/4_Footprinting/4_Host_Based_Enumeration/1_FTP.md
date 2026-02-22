@@ -294,6 +294,34 @@ ls
 
 Vas a ver los comandos reales enviados (ej.: `PORT`, `LIST`) y respuestas del servidor.
 
+
+```
+ftp> debug
+
+Debugging on (debug=1).
+
+
+ftp> trace
+
+Packet tracing on.
+
+
+ftp> ls
+
+---> PORT 10,10,14,4,188,195
+200 PORT command successful. Consider using PASV.
+---> LIST
+150 Here comes the directory listing.
+-rw-rw-r--    1 1002     1002      8138592 Sep 14 16:54 Calender.pptx
+drwxrwxr-x    2 1002     1002         4096 Sep 14 17:03 Clients
+drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Documents
+drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Employees
+-rw-rw-r--    1 1002     1002           41 Sep 14 16:45 Important Notes.txt
+226 Directory send OK.
+```
+
+
+
 ---
 
 ## 9) Settings útiles que impactan enumeración
