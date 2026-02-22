@@ -11,7 +11,7 @@
 * **Recursos de red**: impresoras, routers, interfaces o servicios publicados.
 * **Intercambio de información** entre procesos en red (según implementación).
 
-Históricamente, SMB se popularizó en entornos Microsoft (p.ej., LAN Manager / LAN Server) y se volvió el estándar de facto en la familia **Windows**, manteniendo **compatibilidad hacia atrás** (equipos nuevos pueden comunicarse con versiones antiguas).
+Históricamente, [SMB](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-smb/f210069c-7086-4dc2-885e-861d837df688) se popularizó en entornos Microsoft (p.ej., LAN Manager / LAN Server) y se volvió el estándar de facto en la familia **Windows**, manteniendo **compatibilidad hacia atrás** (equipos nuevos pueden comunicarse con versiones antiguas).
 
 Para sistemas Linux/Unix existe el proyecto **Samba**, que habilita comunicación **cross‑platform** vía SMB.
 
