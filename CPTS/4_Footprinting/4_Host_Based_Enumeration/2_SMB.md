@@ -100,7 +100,7 @@ Para esto, Samba utiliza *daemons* (procesos en background):
 
 En una red SMB clásica, cada host suele pertenecer a un **workgroup** (grupo de trabajo). Un workgroup identifica una colección de equipos y recursos.
 
-**NetBIOS** (Network Basic Input/Output System) es una API histórica para networking. En entornos NetBIOS:
+**NetBIOS** (Network Basic Input/Output System) es una API histórica para networking, desarrollada por `IBM`. En entornos NetBIOS:
 
 * Cuando una máquina “aparece” en la red, necesita registrar un nombre.
 * Esto puede hacerse:
