@@ -79,6 +79,17 @@ intext:[empresa] inurl:blob.core.windows.net
 <img width="1523" height="887" alt="image" src="https://github.com/user-attachments/assets/c8ff1d63-489e-4976-a2b4-ffbe92f97c4e" />
 
 
+### Buscar en GCP
+
+```
+intext:[empresa] inurl:storage.googleapis.com
+```
+
+<img width="1523" height="887" alt="image" src="https://github.com/user-attachments/assets/67ef86af-80f0-4f56-8a99-20d8b7f6242b" />
+
+<img width="1523" height="887" alt="image" src="https://github.com/user-attachments/assets/ade55ab3-04ad-49e6-81c2-5b6756ec8195" />
+
+
 Estos filtros permiten encontrar:
 
 * PDFs
@@ -108,6 +119,9 @@ blob.core.windows.net
 amazonaws.com
 storage.googleapis.com
 ```
+
+<img width="971" height="185" alt="image" src="https://github.com/user-attachments/assets/9ee43c17-778a-4501-8520-4c6afed33430" />
+
 
 El uso de almacenamiento externo suele realizarse para aliviar carga del servidor principal, pero puede revelar infraestructura adicional.
 
