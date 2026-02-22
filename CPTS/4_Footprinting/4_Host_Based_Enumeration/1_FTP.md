@@ -226,6 +226,27 @@ El listado puede mostrar:
 * Directorios por área (Clients, Documents, Employees…).
 * Permisos (útil para inferir si hay escritura habilitada).
 
+
+Connected to 10.129.14.136.
+220 "Welcome to the HTB Academy vsFTP service."
+Name (10.129.14.136:cry0l1t3): anonymous
+
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+
+
+ftp> ls
+
+200 PORT command successful. Consider using PASV.
+150 Here comes the directory listing.
+-rw-rw-r--    1 1002     1002      8138592 Sep 14 16:54 Calender.pptx
+drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Clients
+drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Documents
+drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Employees
+-rw-rw-r--    1 1002     1002           41 Sep 14 16:45 Important Notes.txt
+226 Directory send OK.
+
 ### Ver estado (overview del cliente/sesión)
 
 ```ftp
