@@ -226,7 +226,7 @@ El listado puede mostrar:
 * Directorios por área (Clients, Documents, Employees…).
 * Permisos (útil para inferir si hay escritura habilitada).
 
-
+```
 Connected to 10.129.14.136.
 220 "Welcome to the HTB Academy vsFTP service."
 Name (10.129.14.136:cry0l1t3): anonymous
@@ -246,6 +246,7 @@ drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Documents
 drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Employees
 -rw-rw-r--    1 1002     1002           41 Sep 14 16:45 Important Notes.txt
 226 Directory send OK.
+```
 
 ### Ver estado (overview del cliente/sesión)
 
@@ -253,11 +254,30 @@ drwxrwxr-x    2 1002     1002         4096 Sep 14 16:50 Employees
 status
 ```
 
+
 Sirve para ver:
 
 * Modo actual (binario/ascii).
 * Si usa comandos PORT.
 * Flags de cliente.
+
+
+```
+ftp> status
+
+Connected to 10.129.14.136.
+No proxy connection.
+Connecting using address family: any.
+Mode: stream; Type: binary; Form: non-print; Structure: file
+Verbose: on; Bell: off; Prompting: on; Globbing: on
+Store unique: off; Receive unique: off
+Case: off; CR stripping: on
+Quote control characters: on
+Ntrans: off
+Nmap: off
+Hash mark printing: off; Use of PORT cmds: on
+Tick counter printing: off
+```
 
 ### Más detalle: `debug` y `trace`
 
