@@ -923,3 +923,14 @@ InFreight FTP v1.1
 ```
 
 #### Enumere el servidor FTP y busque el archivo flag.txt. Envíe su contenido como respuesta.
+
+Lanzamos el script `ftp-anon` y observamos que es posible la conexión como `anonymous` y lista el archivo `flag.txt`:
+
+<img width="667" height="223" alt="image" src="https://github.com/user-attachments/assets/e3b01ac1-df1b-43ed-8602-b3c4b49a2e12" />
+
+Nos logueamos como `anonymous`:
+<img width="753" height="288" alt="image" src="https://github.com/user-attachments/assets/87464e2d-dff5-45d0-99e5-870bb3fa6fcd" />
+
+Nos descargamos el archivo:
+<img width="741" height="215" alt="image" src="https://github.com/user-attachments/assets/8ba349b3-69b7-47ef-995d-c154fa637a72" />
+
