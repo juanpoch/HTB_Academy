@@ -1,7 +1,5 @@
 # FTP y TFTP (Footprinting / Enumeración)
 
-> Sección del curso **Footprinting** (HTB Academy) enfocada en **FTP**/**TFTP**: conceptos, modos de operación, configuración típica con **vsFTPd**, settings peligrosos y técnicas prácticas de enumeración.
-
 ---
 
 ## 1) FTP (File Transfer Protocol)
