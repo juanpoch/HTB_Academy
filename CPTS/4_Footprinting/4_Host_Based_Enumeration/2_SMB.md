@@ -55,7 +55,7 @@ Importante: estas ACL están **definidas a nivel share** y **no necesariamente**
 
 ## 4) Samba, CIFS y SMB/CIFS
 
-**Samba** es una implementación alternativa de SMB para sistemas Unix‑like. Implementa **CIFS (Common Internet File System)**, que es un **dialecto** de SMB (una variante/implementación específica). Por eso muchas veces se ve como **SMB/CIFS**.
+**Samba** es una implementación alternativa de SMB para sistemas Unix‑like. Implementa [**CIFS (Common Internet File System)**](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-cifs/934c2faa-54af-4526-ac74-6a24d126724e), que es un **dialecto** de SMB (una variante/implementación específica). Por eso muchas veces se ve como **SMB/CIFS**.
 
 ### CIFS y puertos
 
