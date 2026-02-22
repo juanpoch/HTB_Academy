@@ -720,6 +720,37 @@ Qué aporta:
 * `-sC`: scripts por defecto (incluye checks útiles como `ftp-anon`, `ftp-syst` si aplica).
 * `-A`: agresivo (detecciones extra).
 
+```
+sudo nmap -sV -p21 -sC -A 10.129.14.136
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-16 18:12 CEST
+Nmap scan report for 10.129.14.136
+Host is up (0.00013s latency).
+
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 2.0.8 or later
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| -rwxrwxrwx    1 ftp      ftp       8138592 Sep 16 17:24 Calendar.pptx [NSE: writeable]
+| drwxrwxrwx    4 ftp      ftp          4096 Sep 16 17:57 Clients [NSE: writeable]
+| drwxrwxrwx    2 ftp      ftp          4096 Sep 16 18:05 Documents [NSE: writeable]
+| drwxrwxrwx    2 ftp      ftp          4096 Sep 16 17:24 Employees [NSE: writeable]
+| -rwxrwxrwx    1 ftp      ftp            41 Sep 16 17:24 Important Notes.txt [NSE: writeable]
+|_-rwxrwxrwx    1 ftp      ftp             0 Sep 15 14:57 testupload.txt [NSE: writeable]
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 10.10.14.4
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 2
+|      vsFTPd 3.0.3 - secure, fast, stable
+|_End of status
+```
+
 **Interpretación típica de salida:**
 
 * Confirma `21/tcp open ftp`.
