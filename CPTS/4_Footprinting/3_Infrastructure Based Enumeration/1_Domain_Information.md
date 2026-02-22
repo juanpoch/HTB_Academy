@@ -103,7 +103,7 @@ Estos proveedores nos indican:
 ## 5. Extraer resultados de crt.sh en JSON
 
 ```bash
-curl -s https://crt.sh/?q=inlanefreight.com\&output=json | jq .
+curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq .
 ```
 
 Esto devuelve:
@@ -115,14 +115,15 @@ Esto devuelve:
 * *name_value* (subdominio)
 * *issuer*
 
+<img width="752" height="912" alt="image" src="https://github.com/user-attachments/assets/7d63ae7c-2b4e-4903-bb55-02b481610ed9" />
+
+
 ---
 
 ## 6. Filtrar únicamente subdominios únicos
 
 ```bash
-curl -s https://crt.sh/?q=inlanefreight.com&output=json | jq . |\
-  grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 |\
-  awk '{gsub(/\\n/,"\n");}1;' | sort -u
+curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -u
 ```
 
 Resultado esperado:
