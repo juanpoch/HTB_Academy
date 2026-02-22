@@ -755,8 +755,8 @@ PORT   STATE SERVICE VERSION
 
 * Confirma `21/tcp open ftp`.
 * Indica servidor (ej.: `vsftpd`).
-* `ftp-anon` puede listar contenido y marcar si hay **writeable**.
-* `ftp-syst` puede devolver status del server (incluye si control/datos son texto plano).
+* [`ftp-anon`](https://nmap.org/nsedoc/scripts/ftp-anon.html) puede listar contenido y marcar si hay **writeable**.
+* [`ftp-syst`](https://nmap.org/nsedoc/scripts/ftp-syst.html) puede devolver status del server (incluye si control/datos son texto plano).
 
 ### Traza de scripts (qué comandos viajan)
 
