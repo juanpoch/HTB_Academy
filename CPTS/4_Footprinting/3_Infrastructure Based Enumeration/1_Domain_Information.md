@@ -72,7 +72,7 @@ Ejemplo típico:
 ➡️ **crt.sh**: [https://crt.sh](https://crt.sh)
 ➡️ Introducir dominio: `https://crt.sh/?q=inlanefreight.com`
 
-**Certificate Transparency (RFC 6962)** obliga a que las autoridades certificadoras registren todos los certificados emitidos en logs públicos.
+[**Certificate Transparency**](https://en.wikipedia.org/wiki/Certificate_Transparency), [RFC 6962](https://datatracker.ietf.org/doc/html/rfc6962), obliga a que las autoridades certificadoras registren todos los certificados emitidos en logs públicos.
 
 Esto permite:
 
@@ -83,10 +83,8 @@ Esto permite:
 
 Ejemplo real de crt.sh:
 
-* matomo.inlanefreight.com
-* smartfactory.inlanefreight.com
-* shop.inlanefreight.com
-* mails.inlanefreight.com
+<img width="990" height="398" alt="image" src="https://github.com/user-attachments/assets/fff1ebba-8305-4270-8ce8-b0b1165cc817" />
+
 
 La búsqueda también revela los **Issuer**:
 
