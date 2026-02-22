@@ -218,6 +218,8 @@ Dentro del prompt `ftp>`:
 ls
 ```
 
+<img width="696" height="268" alt="image" src="https://github.com/user-attachments/assets/c68a68ce-032a-4f70-814b-2a349a2dd3e6" />
+
 El listado puede mostrar:
 
 * Archivos sueltos (`.pptx`, `.txt`, etc.).
