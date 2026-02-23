@@ -721,7 +721,7 @@ La consulta ANY intenta recuperar todos los registros disponibles que el servido
 CyberWolfSec@htb[/htb]$ dig any inlanefreight.htb @10.129.14.128
 
 ;; ANSWER SECTION:
-inlanefreight.htb. 604800 IN TXT "v=spf1 include:mailgun.org ..."
+inlanefreight.htb. 604800 IN TXT "v=v=spf1 include:mailgun.org include:_spf.google.com include:spf.protection.outlook.com include:_spf.atlassian.net ip4:10.129.124.8 ip4:10.129.127.2 ip4:10.129.42.106 ~all"
 inlanefreight.htb. 604800 IN NS ns.inlanefreight.htb.
 ```
 
