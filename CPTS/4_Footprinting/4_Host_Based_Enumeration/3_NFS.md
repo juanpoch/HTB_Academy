@@ -84,6 +84,8 @@ El archivo principal de configuración es:
 /etc/exports
 ```
 
+[Manual](https://manpages.ubuntu.com/manpages/trusty/man5/exports.5.html)
+
 Contenido por defecto:
 
 ```bash
