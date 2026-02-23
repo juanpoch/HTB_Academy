@@ -10,7 +10,7 @@ A diferencia de SMB (usado principalmente en entornos Windows), NFS se utiliza p
 
 ⚠️ Un cliente NFS no puede comunicarse directamente con un servidor SMB.
 
-NFS es un estándar de Internet que define los procedimientos de un sistema de archivos distribuido.
+[NFS](https://en.wikipedia.org/wiki/Network_File_System) es un estándar de Internet que define los procedimientos de un sistema de archivos distribuido.
 
 ---
 
