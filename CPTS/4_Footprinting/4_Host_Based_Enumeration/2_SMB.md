@@ -679,6 +679,175 @@ DACL
 
 ---
 
+# Enumeración de Usuarios SMB mediante `rpcclient`
+
+## Riesgo del Acceso Anónimo
+
+Los ejemplos anteriores demuestran que un servidor SMB mal configurado puede filtrar información sensible incluso a usuarios anónimos. Cuando un servicio de red permite conexiones sin autenticación (null session), el riesgo no está únicamente en el acceso inicial, sino en la **información que puede ser enumerada sin credenciales válidas**.
+
+Un simple error de configuración puede otorgar:
+
+* Visibilidad sobre usuarios del dominio.
+* Información sobre grupos internos.
+* Detalles de cuentas y políticas.
+
+Esto incrementa significativamente la superficie de ataque, ya que conocer los nombres de usuarios es el primer paso para realizar ataques como:
+
+* Password spraying.
+* Fuerza bruta dirigida.
+* Ataques de credenciales débiles.
+
+El factor humano suele ser el eslabón más débil: contraseñas simples, reutilización de claves o falta de políticas estrictas pueden facilitar el compromiso del sistema.
+
+---
+
+# Enumeración de Usuarios con `rpcclient`
+
+Una vez establecida una sesión anónima:
+
+```bash
+rpcclient -U "" <IP>
+```
+
+Podemos utilizar distintos comandos para extraer información.
+
+---
+
+### 1️⃣ Enumerar usuarios del dominio
+
+```bash
+rpcclient $> enumdomusers
+
+user:[mrb3n] rid:[0x3e8]
+user:[cry0l1t3] rid:[0x3e9]
+```
+
+Este comando devuelve:
+
+* Nombre de usuario.
+* RID (Relative Identifier).
+
+El RID es importante porque identifica de forma única a cada usuario dentro del dominio.
+
+---
+
+### 2️⃣ Obtener información detallada de un usuario
+
+### Usuario cry0l1t3
+
+```bash
+rpcclient $> queryuser 0x3e9
+
+        User Name   :   cry0l1t3
+        Full Name   :   cry0l1t3
+        Home Drive  :   \\devsmb\\cry0l1t3
+        Dir Drive   :
+        Profile Path:   \\devsmb\\cry0l1t3\\profile
+        Logon Script:
+        Description :
+        Workstations:
+        Comment     :
+        Remote Dial :
+        Logon Time               :      Do, 01 Jan 1970 01:00:00 CET
+        Logoff Time              :      Mi, 06 Feb 2036 16:06:39 CET
+        Kickoff Time             :      Mi, 06 Feb 2036 16:06:39 CET
+        Password last set Time   :      Mi, 22 Sep 2021 17:50:56 CEST
+        Password can change Time :      Mi, 22 Sep 2021 17:50:56 CEST
+        Password must change Time:      Do, 14 Sep 30828 04:48:05 CEST
+        unknown_2[0..31]...
+        user_rid :      0x3e9
+        group_rid:      0x201
+        acb_info :      0x00000014
+        fields_present: 0x00ffffff
+        logon_divs:     168
+        bad_password_count:     0x00000000
+        logon_count:    0x00000000
+        padding1[0..7]...
+        logon_hrs[0..21]...
+```
+
+Información relevante que podemos extraer:
+
+* Ruta del perfil y home directory.
+* Fecha del último cambio de contraseña.
+* Grupo principal (group_rid).
+* Contador de intentos fallidos.
+
+---
+
+### Usuario mrb3n
+
+```bash
+rpcclient $> queryuser 0x3e8
+
+        User Name   :   mrb3n
+        Full Name   :
+        Home Drive  :   \\devsmb\\mrb3n
+        Dir Drive   :
+        Profile Path:   \\devsmb\\mrb3n\\profile
+        Logon Script:
+        Description :
+        Workstations:
+        Comment     :
+        Remote Dial :
+        Logon Time               :      Do, 01 Jan 1970 01:00:00 CET
+        Logoff Time              :      Mi, 06 Feb 2036 16:06:39 CET
+        Kickoff Time             :      Mi, 06 Feb 2036 16:06:39 CET
+        Password last set Time   :      Mi, 22 Sep 2021 17:47:59 CEST
+        Password can change Time :      Mi, 22 Sep 2021 17:47:59 CEST
+        Password must change Time:      Do, 14 Sep 30828 04:48:05 CEST
+        unknown_2[0..31]...
+        user_rid :      0x3e8
+        group_rid:      0x201
+        acb_info :      0x00000010
+        fields_present: 0x00ffffff
+        logon_divs:     168
+        bad_password_count:     0x00000000
+        logon_count:    0x00000000
+        padding1[0..7]...
+        logon_hrs[0..21]...
+```
+
+---
+
+### 3️⃣ Enumeración de grupo asociado
+
+Ambos usuarios pertenecen al grupo con RID 0x201.
+
+```bash
+rpcclient $> querygroup 0x201
+
+        Group Name:     None
+        Description:    Ordinary Users
+        Group Attribute:7
+        Num Members:2
+```
+
+Esto indica:
+
+* El grupo corresponde a usuarios estándar.
+* Contiene 2 miembros.
+
+---
+
+### Impacto de Seguridad
+
+Si un atacante puede realizar esta enumeración de manera anónima:
+
+* Obtiene una lista válida de usuarios.
+* Reduce el ruido en ataques de fuerza bruta.
+* Puede dirigir ataques de password spraying.
+* Puede correlacionar información con otras fuentes OSINT.
+
+La enumeración de usuarios es una fase crítica en el reconocimiento interno, ya que transforma un acceso anónimo limitado en una oportunidad real de compromiso si existen credenciales débiles
+
+
+
+
+
+---
+
+
 ## 16) Enumeración de usuarios por RIDs
 
 Aunque algunos comandos estén restringidos, `queryuser <RID>` suele funcionar si el RID es válido. Por eso se puede:
