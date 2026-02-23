@@ -888,19 +888,90 @@ for i in $(seq 500 1100);do rpcclient -N -U "" 10.129.14.128 -c "queryuser 0x$(p
 
 Permite enumerar usuarios y metadatos del dominio/workgroup.
 
+- [Impacket](https://github.com/fortra/impacket)
+- [samrdump](https://github.com/fortra/impacket/blob/master/examples/samrdump.py)
+
+```
+samrdump.py 10.129.14.128
+
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+
+[*] Retrieving endpoint list from 10.129.14.128
+Found domain(s):
+ . DEVSMB
+ . Builtin
+[*] Looking up users in domain DEVSMB
+Found user: mrb3n, uid = 1000
+Found user: cry0l1t3, uid = 1001
+mrb3n (1000)/FullName: 
+mrb3n (1000)/UserComment: 
+mrb3n (1000)/PrimaryGroupId: 513
+mrb3n (1000)/BadPasswordCount: 0
+mrb3n (1000)/LogonCount: 0
+mrb3n (1000)/PasswordLastSet: 2021-09-22 17:47:59
+mrb3n (1000)/PasswordDoesNotExpire: False
+mrb3n (1000)/AccountIsDisabled: False
+mrb3n (1000)/ScriptPath: 
+cry0l1t3 (1001)/FullName: cry0l1t3
+cry0l1t3 (1001)/UserComment: 
+cry0l1t3 (1001)/PrimaryGroupId: 513
+cry0l1t3 (1001)/BadPasswordCount: 0
+cry0l1t3 (1001)/LogonCount: 0
+cry0l1t3 (1001)/PasswordLastSet: 2021-09-22 17:50:56
+cry0l1t3 (1001)/PasswordDoesNotExpire: False
+cry0l1t3 (1001)/AccountIsDisabled: False
+cry0l1t3 (1001)/ScriptPath: 
+[*] Received 2 entries.
+```
+
 ### SMBMap
+
+- [smbmap](https://github.com/ShawnDEvans/smbmap)
 
 ```bash
 smbmap -H <IP>
+```
+
+```
+smbmap -H 10.129.14.128
+
+[+] Finding open SMB ports....
+[+] User SMB session established on 10.129.14.128...
+[+] IP: 10.129.14.128:445       Name: 10.129.14.128                                     
+        Disk                                                    Permissions     Comment
+        ----                                                    -----------     -------
+        print$                                                  NO ACCESS       Printer Drivers
+        home                                                    NO ACCESS       INFREIGHT Samba
+        dev                                                     NO ACCESS       DEVenv
+        notes                                                   NO ACCESS       CheckIT
+        IPC$                                                    NO ACCESS       IPC Service (DEVS
 ```
 
 Útil para ver shares y permisos según sesión.
 
 ### CrackMapExec (CME)
 
+- [CrackMapExec](https://github.com/byt3bl33d3r/CrackMapExec)
+
 ```bash
 crackmapexec smb <IP> --shares -u '' -p ''
 ```
+
+```
+crackmapexec smb 10.129.14.128 --shares -u '' -p ''
+
+SMB         10.129.14.128   445    DEVSMB           [*] Windows 6.1 Build 0 (name:DEVSMB) (domain:) (signing:False) (SMBv1:False)
+SMB         10.129.14.128   445    DEVSMB           [+] \: 
+SMB         10.129.14.128   445    DEVSMB           [+] Enumerated shares
+SMB         10.129.14.128   445    DEVSMB           Share           Permissions     Remark
+SMB         10.129.14.128   445    DEVSMB           -----           -----------     ------
+SMB         10.129.14.128   445    DEVSMB           print$                          Printer Drivers
+SMB         10.129.14.128   445    DEVSMB           home                            INFREIGHT Samba
+SMB         10.129.14.128   445    DEVSMB           dev                             DEVenv
+SMB         10.129.14.128   445    DEVSMB           notes           READ,WRITE      CheckIT
+SMB         10.129.14.128   445    DEVSMB           IPC$                            IPC Service (DEVSM)
+```
+
 
 Suele reportar:
 
