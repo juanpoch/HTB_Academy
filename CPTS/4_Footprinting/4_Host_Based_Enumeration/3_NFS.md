@@ -143,12 +143,12 @@ Se comparte `/mnt/nfs` a toda la red `10.129.14.0/24`.
 
 # 7. Configuraciones Peligrosas
 
-| Opción         | Riesgo                          |
-| -------------- | ------------------------------- |
-| rw             | Permite modificar archivos      |
-| insecure       | Permite uso de puertos altos    |
-| nohide         | Expone sistemas montados debajo |
-| no_root_squash | Root remoto mantiene UID 0      |
+| Opción | Riesgo |
+|--------|--------|
+| **rw** | Permite lectura y escritura sobre el recurso exportado. Si el acceso no está correctamente restringido por IP o red, un atacante podría modificar, eliminar o subir archivos maliciosos dentro del share. |
+| **insecure** | Permite conexiones desde puertos mayores a 1024. Como estos puertos pueden ser utilizados por usuarios no privilegiados, un atacante podría interactuar con el servicio NFS sin necesidad de privilegios elevados en su sistema local. |
+| **nohide** | Si existe otro sistema de archivos montado dentro de un directorio exportado, esta opción permite que también sea visible automáticamente. Esto puede exponer recursos adicionales que el administrador no tenía intención de publicar. |
+| **no_root_squash** | Desactiva la protección que convierte al root remoto en usuario anónimo. Si está habilitado, el usuario root desde el cliente mantendrá UID 0 en el servidor, lo que puede permitir la creación de archivos SUID o la modificación de archivos críticos, facilitando escaladas de privilegios. |
 
 ⚠️ `no_root_squash` es extremadamente peligroso.
 
