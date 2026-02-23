@@ -1222,7 +1222,40 @@ Hacemos rápidamente un `TCP SYN Scann` de los top 100 ports:
 <img width="1268" height="468" alt="image" src="https://github.com/user-attachments/assets/2921e85c-a08c-4a83-94a0-2e4e51ac7fe4" />
 
 
+Realizamos un escaneo de versiones y script=bannersobre los puertos TCP 139 y 445, obviamos por ahora los cripts de reconocimiento `-sC`:
+```bash
+nmap -sV --script=banner -p139,445 10.129.4.97
+```
+
+<img width="1262" height="291" alt="image" src="https://github.com/user-attachments/assets/5b05c0af-04b9-44ea-a3e6-9c23f4dd1dc2" />
+
+Obtenemos `Samba smbd 4`
+
 #### ¿Cuál es el nombre del recurso compartido accesible en el destino?
+
+Realizamos el siguiente comando para visualizar los scripts de nmap:
+```bash
+find / -type f -name smb* 2>/dev/null |grep scripts
+```
+
+<img width="923" height="852" alt="image" src="https://github.com/user-attachments/assets/aece8ad9-c82f-41f9-8a2b-5d17c2263725" />
+
+Realizamos un escaneo con nmap utilizando el script `smb-enum-shares`:
+```bash
+nmap --script=smb-enum-shares -p139,445 10.129.4.97
+```
+<img width="1221" height="324" alt="image" src="https://github.com/user-attachments/assets/274cfa54-c884-4c33-abb7-e85c4b829d9f" />
+
+
+
+Como no obtuvimos nada significativo al respecto con nmap, procedemos a intentar listar los shares con `smbclient` utilizando una null session:
+
+```bash
+smbclient -N -L //10.129.4.97
+```
+<img width="1189" height="223" alt="image" src="https://github.com/user-attachments/assets/37dc1a0f-5412-4342-a388-cc7e7c366aba" />
+
+Obtnemos el nombre del recurso compartido en el destino.
 
 #### Conéctese al recurso compartido detectado y busque el archivo flag.txt. Envíe el contenido como respuesta.
 
