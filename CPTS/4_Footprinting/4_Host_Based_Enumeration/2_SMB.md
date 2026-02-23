@@ -163,7 +163,7 @@ cat /etc/samba/smb.conf | grep -v "#\|;"
 * Sección **[global]**: aplica como base para todos los shares.
 * Secciones **[share]**: definen recursos compartidos específicos.
 
-Ejemplo simplificado (como en el contenido):
+Ejemplo simplificado:
 
 * `[global]` define `workgroup`, `server string`, logs, rol de servidor, PAM, mapeo a guest, etc.
 * Shares por defecto relacionados con impresión:
@@ -223,7 +223,7 @@ Para un administrador, permite que empleados encuentren y naveguen shares fácil
 
 ## 10) Ejemplo de share inseguro (`[notes]`)
 
-Ejemplo de share con settings peligrosos (como en el contenido):
+Ejemplo de share con settings peligrosos:
 
 ```ini
 [notes]
@@ -854,7 +854,7 @@ Aunque algunos comandos estén restringidos, `queryuser <RID>` suele funcionar s
 
 * **Bruteforcear RIDs** y extraer usuarios/grupos.
 
-Ejemplo (loop Bash, como en el contenido):
+Ejemplo:
 
 ```bash
 for i in $(seq 500 1100); do
