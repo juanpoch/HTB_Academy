@@ -254,6 +254,11 @@ CyberWolfSec@htb[/htb]$ tree .
 
 # 11. Análisis de Permisos
 
+Al montar el recurso NFS podemos ver los permisos, propietarios y grupos asociados a cada archivo.  
+Si identificamos los nombres de usuario, grupos, UID y GID, podemos replicarlos en nuestro sistema local para que coincidan con los del servidor.  
+
+De esta forma, si la configuración lo permite, podremos acceder o modificar archivos respetando los mismos identificadores que espera el servidor NFS.
+
 ## Con nombres
 
 ```bash
@@ -275,6 +280,16 @@ Si `root_squash` está activo, root no podrá modificar ciertos archivos.
 ---
 
 # 12. Escalada de Privilegios vía NFS
+
+NFS también puede utilizarse como vector de escalada de privilegios.  
+Si tenemos acceso por SSH y existe un recurso NFS mal configurado (por ejemplo, con `no_root_squash`), podemos subir un binario al share y asignarle el bit SUID correspondiente a un usuario privilegiado.  
+
+Luego, al ejecutar ese binario desde el sistema comprometido, heredaremos los permisos del propietario, lo que puede permitir acceso a archivos restringidos o incluso privilegios elevados.
+
+Una vez finalizado el análisis o la explotación, es recomendable desmontar el recurso NFS para limpiar el entorno:
+
+```bash
+sudo umount ./target-NFS
 
 Escenario típico:
 
