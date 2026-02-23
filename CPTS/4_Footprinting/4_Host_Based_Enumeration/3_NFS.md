@@ -232,6 +232,8 @@ Export list for 10.129.14.128:
 
 # 10. Montaje Manual del Share
 
+Una vez que hayamos detectado dicho servicio NFS, podemos montarlo en nuestra máquina local. Para ello, podemos crear una nueva carpeta vacía donde se montará el recurso compartido NFS. Una vez montado, podemos navegar por ella y ver su contenido como en nuestro sistema local.
+
 ```bash
 CyberWolfSec@htb[/htb]$ mkdir target-NFS
 CyberWolfSec@htb[/htb]$ sudo mount -t nfs 10.129.14.128:/ ./target-NFS/ -o nolock
