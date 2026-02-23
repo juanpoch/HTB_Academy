@@ -485,16 +485,6 @@ Con este comando buscamos:
 En el siguiente paso analizaremos qué información concreta puede devolver Nmap sobre nuestro servidor Samba de prueba, donde hemos creado el share `[notes]` para fines de laboratorio.
 
 
-Escaneo típico:
-
-```bash
-sudo nmap <IP> -sV -sC -p139,445
-```
-
-
-Lo común es obtener:
-
-* Servicio y versión (ej.: `Samba smbd 4.6.2`).
 ```
 Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 15:15 CEST
 Nmap scan report for sharing.inlanefreight.htb (10.129.14.128)
