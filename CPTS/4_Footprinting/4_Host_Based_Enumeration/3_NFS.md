@@ -42,9 +42,9 @@ Lo que facilita su paso a través de firewalls.
 
 NFS se basa en:
 
-* **ONC-RPC (Open Network Computing Remote Procedure Call)**
+* [**ONC-RPC (Open Network Computing Remote Procedure Call)**](https://en.wikipedia.org/wiki/Sun_RPC)
 * También conocido como SUN-RPC
-* Usa representación de datos independiente del sistema (XDR)
+* Usa representación de datos independiente del sistema ([XDR](https://en.wikipedia.org/wiki/External_Data_Representation))
 
 Puertos importantes:
 
