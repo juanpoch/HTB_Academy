@@ -16,7 +16,7 @@ Podemos imaginarlo como una biblioteca global con múltiples guías telefónicas
 
 | Tipo de Servidor             | Descripción                                                                                                                                        |
 | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DNS Root Server              | Responsable de los Top-Level Domains (TLD). Son la última instancia cuando no se obtiene respuesta. Existen 13 root servers coordinados por ICANN. |
+| DNS Root Server              | Responsable de los Top-Level Domains (TLD). Son la última instancia cuando no se obtiene respuesta. Existen 13 root servers coordinados por [ICANN](https://www.icann.org/). |
 | Authoritative Nameserver     | Tiene autoridad sobre una zona específica. Sus respuestas son vinculantes.                                                                         |
 | Non-authoritative Nameserver | No es responsable directo de una zona; obtiene información mediante consultas recursivas o iterativas.                                             |
 | Caching DNS Server           | Almacena respuestas durante un tiempo definido (TTL).                                                                                              |
