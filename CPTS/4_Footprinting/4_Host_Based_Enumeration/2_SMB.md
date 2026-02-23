@@ -522,7 +522,7 @@ Nmap done: 1 IP address (1 host up) scanned in 11.35 seconds
 
 ### Concepto: RPC
 
-**Remote Procedure Call (RPC)** permite invocar funciones remotas (pasando parámetros y recibiendo resultados). En SMB/Windows/Samba es central para enumeración.
+[**Remote Procedure Call (RPC)**](https://www.geeksforgeeks.org/operating-systems/remote-procedure-call-rpc-in-operating-system/) permite invocar funciones remotas (pasando parámetros y recibiendo resultados). En SMB/Windows/Samba es central para enumeración.
 
 ### Conexión anónima (null session)
 
