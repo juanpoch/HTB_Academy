@@ -477,6 +477,9 @@ DNS es un servicio crítico. Un error de configuración no solo puede provocar f
 
 Muchas vulnerabilidades en entornos reales no provienen de fallos del software, sino de **malas configuraciones**.
 
+- [Lista de vulnerabilidades dirigidas al servidor BIND9](https://www.cvedetails.com/product/144/ISC-Bind.html?vendor_id=64)
+- [SecurityTrails ataques más comunes](https://web.archive.org/web/20250329174745/https://securitytrails.com/blog/most-popular-types-dns-attacks)
+
 ---
 
 # 2. Por qué ocurren las malas configuraciones
