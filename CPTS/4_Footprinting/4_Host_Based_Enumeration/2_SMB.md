@@ -1215,6 +1215,13 @@ Completed after 0.61 seconds
 
 #### ¿Qué versión del servidor SMB se ejecuta en el sistema de destino? Envíe el banner completo como respuesta.
 
+Enviamos un paquete `ICMP` de reconocimiento para verificar que el host esté activo:
+<img width="1152" height="327" alt="image" src="https://github.com/user-attachments/assets/88990704-5aa6-40d4-9098-4ba38097c7b1" />
+
+Hacemos rápidamente un `TCP SYN Scann` de los top 100 ports:
+<img width="1268" height="468" alt="image" src="https://github.com/user-attachments/assets/2921e85c-a08c-4a83-94a0-2e4e51ac7fe4" />
+
+
 #### ¿Cuál es el nombre del recurso compartido accesible en el destino?
 
 #### Conéctese al recurso compartido detectado y busque el archivo flag.txt. Envíe el contenido como respuesta.
