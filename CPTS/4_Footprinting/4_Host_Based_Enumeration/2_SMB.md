@@ -602,15 +602,14 @@ Con `rpcclient` puede filtrarse:
 
 > Conclusión operativa: si existe acceso anónimo, un único error de permisos/visibilidad puede elevar mucho el riesgo.
 
-
+```
 rpcclient $> srvinfo
 
         DEVSMB         Wk Sv PrQ Unx NT SNT DEVSM
         platform_id     :       500
         os version      :       6.1
         server type     :       0x809a03
-		
-```		
+			
 rpcclient $> enumdomains
 
 name:[DEVSMB] idx:[0x0]
