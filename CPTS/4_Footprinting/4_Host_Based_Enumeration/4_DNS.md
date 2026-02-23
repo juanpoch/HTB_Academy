@@ -640,9 +640,32 @@ En muchos casos, una mala configuración DNS expone más información que un esc
 
 ---
 
-# 10. Footprinting DNS
 
-## NS Query
+# DNS Footprinting – Análisis Técnico Detallado y Enumeración Avanzada
+
+---
+
+# 1. Introducción al Footprinting DNS
+
+El footprinting en DNS consiste en extraer la mayor cantidad de información posible únicamente mediante consultas DNS legítimas. A diferencia de un escaneo de red tradicional, aquí no estamos explotando vulnerabilidades directamente, sino aprovechando cómo el servicio responde a nuestras solicitudes.
+
+DNS es una de las fuentes más ricas de información en la fase de reconocimiento.
+
+A través de consultas específicas podemos descubrir:
+
+* Nameservers
+* Versión del servidor
+* Registros TXT sensibles
+* Servidores de correo
+* Subdominios
+* Infraestructura interna
+* Posibles configuraciones inseguras
+
+---
+
+# 2. Enumeración de Nameservers (NS Query)
+
+El primer paso lógico es identificar qué servidores tienen autoridad sobre el dominio.
 
 ```bash
 CyberWolfSec@htb[/htb]$ dig ns inlanefreight.htb @10.129.14.128
@@ -652,9 +675,22 @@ inlanefreight.htb. 604800 IN NS ns.inlanefreight.htb.
 ns.inlanefreight.htb. 604800 IN A 10.129.34.136
 ```
 
+## Análisis
+
+* El servidor autoritativo es `ns.inlanefreight.htb`.
+* Su IP es `10.129.34.136`.
+
+Esto es importante porque:
+
+* Podemos consultar directamente ese nameserver.
+* Puede estar configurado diferente al servidor inicial.
+* Puede permitir transferencias de zona.
+
 ---
 
-## Version Query
+# 3. Version Enumeration (CHAOS Query)
+
+Algunos servidores DNS exponen su versión mediante consultas CHAOS.
 
 ```bash
 CyberWolfSec@htb[/htb]$ dig CH TXT version.bind 10.129.120.85
@@ -663,9 +699,23 @@ CyberWolfSec@htb[/htb]$ dig CH TXT version.bind 10.129.120.85
 version.bind. 0 CH TXT "9.10.6-P1"
 ```
 
+## Análisis
+
+* El servidor está corriendo BIND versión 9.10.6-P1.
+
+Esto nos permite:
+
+1. Buscar CVEs específicos para esa versión.
+2. Consultar CVE Details.
+3. Verificar si existen exploits públicos.
+
+⚠️ No todos los servidores permiten esta consulta.
+
 ---
 
-## ANY Query
+# 4. Consulta ANY
+
+La consulta ANY intenta recuperar todos los registros disponibles que el servidor esté dispuesto a revelar.
 
 ```bash
 CyberWolfSec@htb[/htb]$ dig any inlanefreight.htb @10.129.14.128
@@ -675,9 +725,23 @@ inlanefreight.htb. 604800 IN TXT "v=spf1 include:mailgun.org ..."
 inlanefreight.htb. 604800 IN NS ns.inlanefreight.htb.
 ```
 
+## Qué obtenemos aquí
+
+* Registros TXT (SPF, validaciones externas).
+* Nameservers.
+* Posible información sobre proveedores externos.
+
+El registro SPF puede revelar:
+
+* Servicios de correo utilizados.
+* IPs autorizadas.
+* Infraestructura externa integrada.
+
 ---
 
-# 11. Zone Transfer (AXFR)
+# 5. Zone Transfer (AXFR)
+
+La transferencia de zona es uno de los hallazgos más críticos en DNS.
 
 ```bash
 CyberWolfSec@htb[/htb]$ dig axfr inlanefreight.htb @10.129.14.128
@@ -688,16 +752,51 @@ internal.inlanefreight.htb. 604800 IN A 10.129.1.6
 mail1.inlanefreight.htb. 604800 IN A 10.129.18.201
 ```
 
-Si allow-transfer está mal configurado, puede revelarse:
+## Análisis Técnico
+
+AXFR devuelve:
+
+* Todos los registros de la zona.
+* Subdominios internos.
+* Hosts que no estaban expuestos públicamente.
+
+Si `allow-transfer` está mal configurado, el servidor entrega el mapa completo de la infraestructura.
+
+Esto puede revelar:
 
 * Infraestructura interna
 * IP privadas
 * Controladores de dominio
 * Servidores VPN
+* Servidores WSUS
 
 ---
 
-# 12. Subdomain Brute Force
+# 6. AXFR en Subzonas Internas
+
+```bash
+CyberWolfSec@htb[/htb]$ dig axfr internal.inlanefreight.htb @10.129.14.128
+
+internal.inlanefreight.htb. 604800 IN SOA ...
+dc1.internal.inlanefreight.htb. 604800 IN A 10.129.34.16
+dc2.internal.inlanefreight.htb. 604800 IN A 10.129.34.11
+vpn.internal.inlanefreight.htb. 604800 IN A 10.129.1.6
+wsus.internal.inlanefreight.htb. 604800 IN A 10.129.18.2
+```
+
+Aquí vemos claramente:
+
+* Controladores de dominio (dc1, dc2).
+* Servidor VPN.
+* Servidor WSUS.
+
+Esto representa exposición crítica.
+
+---
+
+# 7. Subdomain Brute Forcing
+
+Cuando AXFR falla, se puede intentar brute force.
 
 ```bash
 CyberWolfSec@htb[/htb]$ for sub in $(cat subdomains.txt);do dig $sub.inlanefreight.htb @10.129.14.128 | grep -v 'SOA';done
@@ -707,9 +806,15 @@ mail1.inlanefreight.htb. 604800 IN A 10.129.18.201
 app.inlanefreight.htb. 604800 IN A 10.129.18.15
 ```
 
+Este método:
+
+* Envía consultas secuenciales.
+* Detecta registros A existentes.
+* Permite descubrir subdominios ocultos.
+
 ---
 
-## Uso de DNSenum
+# 8. Uso de DNSenum
 
 ```bash
 CyberWolfSec@htb[/htb]$ dnsenum --dnsserver 10.129.14.128 --enum -p 0 -s 0 -o subdomains.txt -f wordlist.txt inlanefreight.htb
@@ -719,30 +824,26 @@ mail1.inlanefreight.htb. 604800 IN A 10.129.18.201
 app.inlanefreight.htb. 604800 IN A 10.129.18.15
 ```
 
----
+DNSenum automatiza:
 
-# 13. Configuraciones Peligrosas
-
-| Opción          | Riesgo                                       |
-| --------------- | -------------------------------------------- |
-| allow-query     | Permite que cualquiera consulte el servidor. |
-| allow-recursion | Puede convertirlo en open resolver.          |
-| allow-transfer  | Permite zone transfers no autorizados.       |
-| zone-statistics | Puede revelar información sensible.          |
+* Enumeración NS
+* Intentos AXFR
+* Brute force
+* Identificación de registros MX
 
 ---
 
-# 14. Conclusiones Técnicas
+# 9. Impacto Estratégico del Footprinting DNS
 
-✔ Enumerar NS
-✔ Consultar versión
-✔ Probar ANY
-✔ Intentar AXFR
-✔ Brute-force subdominios
-✔ Revisar allow-transfer
+Un servidor DNS mal configurado puede permitir:
 
-DNS mal configurado puede revelar toda la infraestructura interna sin necesidad de explotación activa.
+* Reconocimiento completo sin escaneo activo.
+* Descubrimiento de infraestructura interna.
+* Identificación de vectores de ataque.
+* Mapeo organizacional.
+
+En muchos casos, la información obtenida vía DNS supera la obtenida con un escaneo de puertos inicial.
 
 ---
 
-FIN DEL LIENZO
+
