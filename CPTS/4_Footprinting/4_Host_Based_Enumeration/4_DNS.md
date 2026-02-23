@@ -330,7 +330,7 @@ La configuración permite adaptar el servidor a:
 
 # 1. ¿Qué es un Zone File?
 
-Un **zone file** es un archivo de texto que describe completamente una zona DNS utilizando el formato estándar de **BIND**.
+Un **zone file** es un archivo de texto que describe completamente una zona DNS utilizando el formato estándar de [**BIND**](https://wiki.debian.org/BIND9?action=show&redirect=Bind9).
 
 En términos simples, una zona es un punto de delegación dentro del árbol jerárquico DNS. Es decir, representa la porción del espacio de nombres sobre la cual un servidor tiene autoridad.
 
