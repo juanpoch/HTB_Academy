@@ -1222,7 +1222,7 @@ Hacemos rápidamente un `TCP SYN Scann` de los top 100 ports:
 <img width="1268" height="468" alt="image" src="https://github.com/user-attachments/assets/2921e85c-a08c-4a83-94a0-2e4e51ac7fe4" />
 
 
-Realizamos un escaneo de versiones y script=bannersobre los puertos TCP 139 y 445, obviamos por ahora los cripts de reconocimiento `-sC`:
+Realizamos un escaneo de versiones y utilizamos `script=banner` sobre los puertos TCP 139 y 445, obviamos por ahora los cripts de reconocimiento `-sC`:
 ```bash
 nmap -sV --script=banner -p139,445 10.129.4.97
 ```
@@ -1255,14 +1255,122 @@ smbclient -N -L //10.129.4.97
 ```
 <img width="1189" height="223" alt="image" src="https://github.com/user-attachments/assets/37dc1a0f-5412-4342-a388-cc7e7c366aba" />
 
-Obtnemos el nombre del recurso compartido en el destino.
+Obtenemos el nombre del recurso compartido en el destino.
+
 
 #### Conéctese al recurso compartido detectado y busque el archivo flag.txt. Envíe el contenido como respuesta.
+
+Nos conectamos al recurso con el comando:
+```bash
+smbclient //10.129.4.97/sambashare
+```
+
+Logramos conectarnos por lo que comenzamos a listar los recursos hasta que obtenemos la flag:
+
+<img width="1174" height="488" alt="image" src="https://github.com/user-attachments/assets/b898b2ec-e6b9-49f7-80c8-8870ba60b4e3" />
+
+
 
 #### Descubra a qué dominio pertenece el servidor.
 
 `Pista`: Recuerde que podemos utilizar otros servicios para obtener información sobre acciones específicas.
 
-#### Encuentre información adicional sobre la acción específica que encontramos anteriormente y envíe la versión personalizada de esa acción específica como respuesta.
+Realizamos una conexión anónima, es decir una null session mediante `rpcclient`:
+```bash
+rpcclient -U "" 10.129.4.97
+```
+
+<img width="751" height="87" alt="image" src="https://github.com/user-attachments/assets/de2efa57-1536-4e84-b5ca-b55ad394c967" />
+
+Realizamos los comandos `SRVINFO`, `enumdomains` y `querydominfo`:
+
+<img width="990" height="539" alt="image" src="https://github.com/user-attachments/assets/43bd0080-7d49-4565-a489-1ea142471733" />
+
+
+Y obtenemos el cominio del servidor.
+
+
+#### Encuentre información adicional sobre el share que encontramos anteriormente y envíe la versión personalizada de este share como respuesta.
+
+Listamos los shares con el comando `netshareenumall` y luego buscamos información específica con el comando `netsharegetinfo sambashare`:
+<img width="1495" height="772" alt="image" src="https://github.com/user-attachments/assets/3f8ca6ab-3dc8-467c-b773-af5e8f1e35da" />
+
+Obtenemos la versión personalizada: `InFreight SMB v3.1`
+
 
 #### ¿Cuál es la ruta completa del sistema de ese recurso compartido específico? (formato: "/directorio/nombres")
+
+`Pista`: Recuerde que los sistemas operativos basados ​​en Linux no tienen una unidad "C:\".
+
+Utilizando el último comando obtenemos la respuesta:
+<img width="1495" height="772" alt="image" src="https://github.com/user-attachments/assets/58877b5c-e2dd-4139-99a8-c4cb340fa8f9" />
+
+Respuesta: `/home/sambauser`
+
+---
+
+Adicional:
+
+En este ejercicio no se puede probar la enumeración de usuarios porque no tiene usuarios.
+
+Procedemos a probar las herramientas automatizadas:
+
+## samrdump
+
+```bash
+python3 -m venv impacket-env
+source impacket-env/bin/activate
+pip install impacket
+```
+
+```bash
+samrdump.py 10.129.4.122
+```
+
+<img width="803" height="259" alt="image" src="https://github.com/user-attachments/assets/9ff58aae-b13a-4157-89db-6a7319088c14" />
+
+---
+
+## smbmap
+
+```bash
+apt update
+apt install smbmap
+smbmap -h
+```
+
+TODO
+
+## crackmapexec
+
+```bash
+apt install -y libxml2-dev libxslt1-dev zlib1g-dev git python3-dev build-essential libssl-dev libffi-dev
+python3 -m venv cme-env
+source cme-env/bin/activate
+git clone https://github.com/byt3bl33d3r/CrackMapExec.git
+cd CrackMapExec
+pip install .
+crackmapexec -h
+```
+
+no funciona.
+
+## enum4linux
+
+```bash
+git clone https://github.com/cddmp/enum4linux-ng.git
+cd enum4linux-ng
+python3 -m venv enum4linux-env
+source enum4linux-env/bin/activate
+pip3 install -r requirements.txt
+```
+
+<img width="901" height="791" alt="image" src="https://github.com/user-attachments/assets/ad39858f-8ddc-45b4-9b85-b562417a1c25" />
+
+<img width="901" height="791" alt="image" src="https://github.com/user-attachments/assets/a9b7d3c7-2230-4b0d-8963-aa083bf16fe2" />
+
+<img width="901" height="737" alt="image" src="https://github.com/user-attachments/assets/06301a61-81c2-4a15-a977-8c40a50131d7" />
+
+<img width="901" height="696" alt="image" src="https://github.com/user-attachments/assets/5147a23e-10e8-4750-8d0f-b2ce43794737" />
+
+<img width="901" height="696" alt="image" src="https://github.com/user-attachments/assets/f8ffd404-c0d1-40dd-a101-eeee717d94c3" />
