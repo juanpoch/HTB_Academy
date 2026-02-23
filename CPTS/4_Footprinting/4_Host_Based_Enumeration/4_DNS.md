@@ -14,14 +14,17 @@ Podemos imaginarlo como una biblioteca global con múltiples guías telefónicas
 
 # 2. Tipos de Servidores DNS
 
-| Tipo de Servidor             | Descripción                                                                                                                                        |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DNS Root Server              | Responsable de los Top-Level Domains (TLD). Son la última instancia cuando no se obtiene respuesta. Existen 13 root servers coordinados por [ICANN](https://www.icann.org/). |
-| Authoritative Nameserver     | Tiene autoridad sobre una zona específica. Sus respuestas son vinculantes.                                                                         |
-| Non-authoritative Nameserver | No es responsable directo de una zona; obtiene información mediante consultas recursivas o iterativas.                                             |
-| Caching DNS Server           | Almacena respuestas durante un tiempo definido (TTL).                                                                                              |
-| Forwarding Server            | Reenvía consultas a otro servidor DNS.                                                                                                             |
-| Resolver                     | Realiza la resolución local en el sistema o router.                                                                                                |
+| Tipo de Servidor | Descripción |
+|------------------|------------|
+| **DNS Root Server** | Son la capa más alta de la jerarquía DNS. No resuelven directamente dominios completos, sino que indican qué servidores son responsables de cada Top-Level Domain (TLD) como `.com`, `.net` o `.org`. Existen 13 conjuntos de root servers a nivel mundial, coordinados por [ICANN](https://www.icann.org/), distribuidos globalmente para garantizar redundancia y disponibilidad. |
+| **Authoritative Nameserver** | Tiene autoridad sobre una zona específica (por ejemplo, `empresa.com`). Contiene los registros oficiales (A, MX, NS, etc.) y sus respuestas son definitivas. Si este servidor responde, la información se considera válida y confiable para esa zona. |
+| **Non-authoritative Nameserver** | No posee la zona original, sino que responde basándose en información obtenida previamente de otros servidores mediante consultas recursivas o iterativas. Sus respuestas no son la fuente original, pero pueden ser correctas si están actualizadas. |
+| **Caching DNS Server** | Almacena temporalmente respuestas DNS obtenidas de otros servidores para acelerar futuras consultas. El tiempo que conserva esa información está determinado por el valor TTL (Time To Live) definido en los registros. Reduce latencia y carga en servidores autoritativos. |
+| **Forwarding Server** | No resuelve consultas directamente, sino que reenvía todas las peticiones DNS a otro servidor específico (por ejemplo, el DNS del ISP o un servidor interno). Se utiliza comúnmente en redes corporativas para centralizar el control del tráfico DNS. |
+| **Resolver** | Es el componente que inicia la consulta DNS desde el sistema del usuario o router. Puede ser parte del sistema operativo o un servicio local. Su función es contactar a los servidores DNS adecuados hasta obtener la respuesta final que permita traducir un dominio en una dirección IP. |
+
+
+<img width="948" height="605" alt="image" src="https://github.com/user-attachments/assets/7493524a-ea23-48e6-a9ff-6162849bdf58" />
 
 ---
 
