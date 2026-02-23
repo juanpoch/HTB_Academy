@@ -432,15 +432,92 @@ Muestra:
 
 ## 14) Footprinting con Nmap (puertos 139/445)
 
+
+Volviendo a nuestras herramientas de enumeración, **Nmap** es una de las primeras opciones para analizar un servicio SMB de forma automatizada. Nmap no solo permite detectar puertos abiertos y versiones de servicio, sino que también incorpora scripts del **Nmap Scripting Engine (NSE)** específicamente diseñados para SMB.
+
+Estos scripts pueden ayudarnos a:
+
+* Identificar la versión del servicio (por ejemplo, Samba).
+* Detectar configuraciones de seguridad como SMB signing.
+* Obtener información del sistema operativo.
+* Enumerar información básica del dominio o workgroup.
+
+Sin embargo, este tipo de escaneos puede tardar más tiempo, especialmente cuando se utilizan múltiples scripts o configuraciones agresivas. Además, aunque Nmap es muy útil, no siempre muestra todos los detalles que pueden obtenerse mediante interacción manual con el servicio.
+
+Por esta razón, es recomendable combinar:
+
+* 🔎 Enumeración automatizada (Nmap + NSE)
+* 🖐 Enumeración manual (smbclient, rpcclient, etc.)
+
+---
+
+### ¿Por qué escaneamos los puertos 139 y 445?
+
+El servicio SMB puede operar sobre dos puertos principales:
+
+### 🔹 TCP 139 – NetBIOS Session Service
+
+Este puerto se utiliza cuando SMB funciona sobre la capa NetBIOS. Es más común en implementaciones antiguas o configuraciones que mantienen compatibilidad hacia atrás.
+
+### 🔹 TCP 445 – SMB directo sobre TCP
+
+Este es el puerto utilizado por versiones modernas de SMB (SMB2/SMB3). Aquí SMB funciona directamente sobre TCP sin necesidad de NetBIOS.
+
+Escanear ambos puertos es importante porque:
+
+* Algunos sistemas pueden exponer solo uno de ellos.
+* Pueden estar habilitadas diferentes versiones del protocolo en cada puerto.
+* NetBIOS puede revelar información adicional como nombres de host o workgroup.
+* Nos permite detectar configuraciones heredadas o inseguras.
+
+Un escaneo típico sería:
+
+```bash
+sudo nmap -sV -sC -p139,445 <IP>
+```
+
+Con este comando buscamos:
+
+* Detectar si SMB está activo.
+* Identificar la versión del servicio.
+* Ejecutar scripts básicos de enumeración.
+
+En el siguiente paso analizaremos qué información concreta puede devolver Nmap sobre nuestro servidor Samba de prueba, donde hemos creado el share `[notes]` para fines de laboratorio.
+
+
 Escaneo típico:
 
 ```bash
 sudo nmap <IP> -sV -sC -p139,445
 ```
 
+
 Lo común es obtener:
 
-* Servicio y versión (ej.: `Samba smbd`).
+* Servicio y versión (ej.: `Samba smbd 4.6.2`).
+```
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-19 15:15 CEST
+Nmap scan report for sharing.inlanefreight.htb (10.129.14.128)
+Host is up (0.00024s latency).
+
+PORT    STATE SERVICE     VERSION
+139/tcp open  netbios-ssn Samba smbd 4.6.2
+445/tcp open  netbios-ssn Samba smbd 4.6.2
+MAC Address: 00:00:00:00:00:00 (VMware)
+
+Host script results:
+|_nbstat: NetBIOS name: HTB, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2021-09-19T13:16:04
+|_  start_date: N/A
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 11.35 seconds
+```
+
 * Scripts host:
 
   * `nbstat` (nombres NetBIOS)
