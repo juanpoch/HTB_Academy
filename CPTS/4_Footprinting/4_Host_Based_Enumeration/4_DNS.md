@@ -322,98 +322,177 @@ La configuración permite adaptar el servidor a:
 
 ---
 
-# 6. Tipos de Archivos de Zona
 
-## 1️⃣ Zone Files (Resolución Directa)
 
-Contienen la relación:
+# DNS – Zone Files, Reverse Lookup y Configuraciones Peligrosas
+
+---
+
+# 1. ¿Qué es un Zone File?
+
+Un **zone file** es un archivo de texto que describe completamente una zona DNS utilizando el formato estándar de **BIND**.
+
+En términos simples, una zona es un punto de delegación dentro del árbol jerárquico DNS. Es decir, representa la porción del espacio de nombres sobre la cual un servidor tiene autoridad.
+
+El formato BIND es el estándar de facto en la industria y es utilizado por la mayoría de los servidores DNS.
+
+Un zone file debe contener obligatoriamente:
+
+* Exactamente **un registro SOA (Start of Authority)**.
+* Al menos **un registro NS (Name Server)**.
+
+El registro SOA generalmente aparece al comienzo del archivo y define información crítica sobre la administración y sincronización de la zona.
+
+⚠️ Un error de sintaxis en un zone file puede provocar que toda la zona sea considerada inválida. En ese caso, el servidor DNS responderá con errores `SERVFAIL`, como si la zona no existiera.
+
+---
+
+# 2. Zone File – Resolución Directa (Forward Lookup)
+
+Aquí se definen todos los registros directos:
 
 ```
-Dominio → Dirección IP
+Dominio / Hostname → Dirección IP
 ```
 
-Ejemplo:
+En términos prácticos, este archivo es el "directorio telefónico" que el servidor consulta para saber qué IP corresponde a cada dominio.
 
-```
-www.domain.com → 192.168.1.10
+## Ejemplo Completo
+
+```bash
+root@bind9:~# cat /etc/bind/db.domain.com
+
+;
+; BIND forward data file
+;
+$ORIGIN domain.com
+$TTL 86400
+
+@     IN     SOA    dns1.domain.com.     hostmaster.domain.com. (
+                    2001062501 ; serial
+                    21600      ; refresh (6h)
+                    3600       ; retry (1h)
+                    604800     ; expire (1w)
+                    86400 )    ; minimum TTL (1d)
+
+      IN     NS     ns1.domain.com.
+      IN     NS     ns2.domain.com.
+
+      IN     MX     10     mx.domain.com.
+      IN     MX     20     mx2.domain.com.
+
+             IN     A       10.129.14.5
+
+server1      IN     A       10.129.14.5
+server2      IN     A       10.129.14.7
+ns1          IN     A       10.129.14.2
+ns2          IN     A       10.129.14.3
+
+ftp          IN     CNAME   server1
+mx           IN     CNAME   server1
+mx2          IN     CNAME   server2
+www          IN     CNAME   server2
 ```
 
 ---
 
-## 2️⃣ Reverse Lookup Files
+# 3. Análisis del Registro SOA
 
-Contienen la relación inversa:
+El SOA contiene parámetros clave:
+
+* **Serial**: número de versión de la zona. Si aumenta, los servidores secundarios sincronizan.
+* **Refresh**: cada cuánto el slave consulta al master.
+* **Retry**: tiempo de reintento si falla la consulta.
+* **Expire**: cuándo el slave deja de confiar en los datos.
+* **Minimum TTL**: tiempo mínimo de cacheo.
+
+Este registro controla el mecanismo de replicación entre servidores master y slave.
+
+---
+
+# 4. Reverse Lookup Zone (Resolución Inversa)
+
+Para que una IP pueda resolverse a un FQDN (Fully Qualified Domain Name), se necesita un archivo de resolución inversa.
+
+Aquí la relación es:
 
 ```
 Dirección IP → Dominio (PTR record)
 ```
 
-Se utilizan para:
-
-* Validaciones de correo.
-* Análisis forense.
-* Identificación de hosts.
-
----
-
-# 7. Importancia en Pentesting
-
-Comprender la configuración por defecto permite detectar:
-
-* Zonas mal definidas.
-* allow-transfer mal configurado.
-* Recursión habilitada públicamente.
-* Actualizaciones dinámicas inseguras.
-
-Un servidor BIND mal configurado puede revelar:
-
-* Infraestructura interna.
-* Hosts no públicos.
-* Estructura organizacional.
-
-
-[Docuumentación BIND](https://wiki.debian.org/BIND9?action=show&redirect=Bind9)
-
-
-
----
-
-# 8. Zone Files
-
-```bash
-root@bind9:~# cat /etc/bind/db.domain.com
-
-$ORIGIN domain.com
-$TTL 86400
-@ IN SOA dns1.domain.com. hostmaster.domain.com. (
-        2001062501
-        21600
-        3600
-        604800
-        86400 )
-
-    IN NS ns1.domain.com.
-    IN NS ns2.domain.com.
-
-    IN MX 10 mx.domain.com.
-
-server1 IN A 10.129.14.5
-ns1 IN A 10.129.14.2
-www IN CNAME server1
-```
-
----
-
-# 9. Reverse Lookup Zone
+## Ejemplo Completo
 
 ```bash
 root@bind9:~# cat /etc/bind/db.10.129.14
 
+;
+; BIND reverse data file
+;
 $ORIGIN 14.129.10.in-addr.arpa
 $TTL 86400
 
-5 IN PTR server1.domain.com.
+@     IN     SOA    dns1.domain.com.     hostmaster.domain.com. (
+                    2001062501
+                    21600
+                    3600
+                    604800
+                    86400 )
+
+      IN     NS     ns1.domain.com.
+      IN     NS     ns2.domain.com.
+
+5    IN     PTR    server1.domain.com.
+7    IN     PTR    server2.domain.com.
 ```
+
+En este caso:
+
+* 10.129.14.5 → server1.domain.com
+* 10.129.14.7 → server2.domain.com
+
+Los registros PTR son fundamentales para:
+
+* Validaciones de correo electrónico.
+* Análisis forense.
+* Identificación de infraestructura.
+
+---
+
+# 5. Configuraciones Peligrosas en BIND
+
+DNS puede volverse altamente vulnerable si ciertas directivas no están correctamente restringidas.
+
+| Opción          | Riesgo                                                                                                                 |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| allow-query     | Permite definir qué hosts pueden consultar el servidor. Si está en "any", cualquiera puede enumerar registros.         |
+| allow-recursion | Si está habilitado públicamente, puede convertir al servidor en un open resolver (usable en ataques de amplificación). |
+| allow-transfer  | Si permite transferencias sin restricción, un atacante puede obtener el zone file completo (AXFR).                     |
+| zone-statistics | Puede revelar información estructural adicional de las zonas.                                                          |
+
+---
+
+# 6. Riesgo Operativo Real
+
+En entornos reales, los administradores a veces relajan configuraciones por motivos de funcionalidad:
+
+* Permitir transferencias para facilitar sincronización.
+* Habilitar recursión para pruebas.
+* Exponer estadísticas para monitoreo.
+
+Cuando la funcionalidad tiene prioridad sobre la seguridad, pueden generarse:
+
+* Filtraciones de infraestructura interna.
+* Enumeración completa de subdominios.
+* Exposición de IP privadas.
+* Superficie ampliada para ataques dirigidos.
+
+
+
+
+
+
+
+
 
 ---
 
