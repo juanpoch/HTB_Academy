@@ -1016,4 +1016,23 @@ En muchos casos, la información obtenida vía DNS supera la obtenida con un esc
 
 ---
 
+# Preguntas
+
+
+#### Interactúe con el DNS de destino utilizando su dirección IP y enumere su FQDN para el dominio "inlanefreight.htb".
+
+
+#### Identifique si es posible realizar una transferencia de zona y envíe el registro TXT como respuesta. (Formato: HTB{...})
+
+`Pista`: Las zonas a menudo tienen el nombre de un subdominio.
+
+
+
+#### ¿Cuál es la dirección IPv4 del nombre de host DC1?
+
+
+
+#### ¿Cuál es el FQDN del host donde el último octeto termina con "xxx203"?
+
+`Pista`: Recuerde que las diferentes listas de palabras no siempre tienen las mismas entradas.
 
