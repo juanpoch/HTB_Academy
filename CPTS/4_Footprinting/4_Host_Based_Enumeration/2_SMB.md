@@ -524,6 +524,55 @@ Nmap done: 1 IP address (1 host up) scanned in 11.35 seconds
 
 [**Remote Procedure Call (RPC)**](https://www.geeksforgeeks.org/operating-systems/remote-procedure-call-rpc-in-operating-system/) permite invocar funciones remotas (pasando parámetros y recibiendo resultados). En SMB/Windows/Samba es central para enumeración.
 
+[Manual](https://www.samba.org/samba/docs/current/man-html/rpcclient.1.html)
+
+
+# ¿Qué es MS-RPC y por qué se usa en SMB?
+
+## ¿Qué es MS-RPC?
+
+MS-RPC (Microsoft Remote Procedure Call) es la implementación de Microsoft del concepto de **Remote Procedure Call (RPC)**. RPC es un mecanismo que permite que un programa ejecute funciones en otro sistema remoto como si fueran llamadas locales.
+
+En lugar de simplemente transferir archivos, RPC permite invocar procedimientos específicos en un servidor remoto, enviando parámetros y recibiendo respuestas estructuradas.
+
+---
+
+## ¿Por qué se usa MS-RPC en SMB?
+
+Aunque SMB se conoce principalmente como un protocolo de compartición de archivos, en entornos Windows cumple muchas más funciones. Para ello, utiliza MS-RPC encapsulado dentro del propio canal SMB (normalmente sobre el puerto 445).
+
+Gracias a MS-RPC, SMB puede:
+
+* Enumerar usuarios y grupos del dominio.
+* Consultar información del sistema.
+* Gestionar servicios remotos.
+* Interactuar con componentes de Active Directory.
+* Realizar operaciones administrativas.
+
+Es decir, SMB no solo transporta archivos, sino también llamadas a funciones remotas del sistema.
+
+---
+
+## Relación entre SMB y MS-RPC
+
+En entornos modernos:
+
+* SMB opera sobre TCP 445.
+* Dentro de esa conexión, se encapsulan llamadas MS-RPC.
+* Esto permite que herramientas como `rpcclient`, `enum4linux` o `CrackMapExec` interactúen con el sistema remoto.
+
+Por eso, cuando enumeramos SMB, en realidad también estamos interactuando con servicios RPC expuestos a través de él.
+
+---
+
+## Resumen
+
+SMB es el canal de transporte.
+MS-RPC es el mecanismo que permite ejecutar funciones remotas dentro de ese canal.
+
+Sin MS-RPC, SMB sería solo un protocolo de transferencia de archivos. Con MS-RPC, se convierte en un componente clave de la administración y autenticación en redes Windows.
+
+
 ### Conexión anónima (null session)
 
 ```bash
