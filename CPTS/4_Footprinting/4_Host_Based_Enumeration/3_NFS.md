@@ -112,16 +112,16 @@ Formato general:
 
 # 5. Opciones Comunes
 
-| Opción           | Descripción                         |
-| ---------------- | ----------------------------------- |
-| rw               | Permite lectura y escritura         |
-| ro               | Solo lectura                        |
-| sync             | Transferencia síncrona              |
-| async            | Transferencia asíncrona             |
-| secure           | Solo puertos <1024                  |
-| insecure         | Permite puertos >1024               |
-| no_subtree_check | Desactiva chequeo de subdirectorios |
-| root_squash      | Mapea root a usuario anónimo        |
+| Opción | Descripción |
+|--------|------------|
+| **rw** | Permite lectura y escritura sobre el recurso exportado. Los clientes pueden crear, modificar y eliminar archivos dentro del share NFS. |
+| **ro** | Permite únicamente acceso de lectura. Los clientes pueden listar y visualizar archivos, pero no modificarlos ni eliminarlos. |
+| **sync** | Obliga al servidor a confirmar la escritura en disco antes de responder al cliente. Es más seguro e íntegro, pero puede afectar el rendimiento. |
+| **async** | Permite que el servidor responda antes de que los datos se escriban físicamente en disco. Mejora el rendimiento, pero puede implicar riesgo de pérdida de datos ante fallos. |
+| **secure** | Solo permite conexiones desde puertos privilegiados (<1024). Tradicionalmente estos puertos solo pueden ser utilizados por procesos ejecutados como root, lo que agrega una capa básica de control. |
+| **insecure** | Permite conexiones desde puertos superiores a 1024. Esto puede ser riesgoso, ya que usuarios no privilegiados podrían iniciar conexiones al servicio NFS. |
+| **no_subtree_check** | Desactiva la verificación de subdirectorios cuando se exporta un subdirectorio específico. Mejora el rendimiento y evita problemas de validación, pero reduce ciertos controles de consistencia. |
+| **root_squash** | Mapea al usuario root remoto (UID 0) a un usuario anónimo (generalmente `nobody`). Evita que root desde el cliente tenga privilegios de root en el servidor. Es una medida de seguridad clave. |
 
 ---
 
