@@ -169,25 +169,212 @@ awsdns-hostmaster@amazon.com
 
 ---
 
-# 7. Configuración DNS en BIND9
 
-Archivos principales:
 
-* named.conf.local
-* named.conf.options
-* named.conf.log
+# 7. DNS – Configuración por Defecto en BIND9
 
-## Ejemplo de configuración local
+---
+
+# 1. Introducción
+
+Los servidores DNS pueden configurarse de múltiples formas dependiendo del entorno (corporativo, ISP, laboratorio, nube, etc.). Sin embargo, la mayoría de implementaciones en sistemas Linux utilizan **BIND9 (Berkeley Internet Name Domain)** como servidor DNS.
+
+Desde el punto de vista administrativo, entender la configuración por defecto es fundamental para:
+
+* Comprender cómo se resuelven las consultas.
+* Identificar posibles malas configuraciones.
+* Detectar vulnerabilidades explotables (como zone transfers no restringidos).
+
+Todos los servidores DNS trabajan principalmente con **tres tipos de archivos de configuración**:
+
+1. Archivos de configuración local.
+2. Archivos de zona (zone files).
+3. Archivos de resolución inversa.
+
+---
+
+# 2. Archivos de Configuración Local
+
+En BIND9, el archivo principal es:
+
+```
+/etc/bind/named.conf
+```
+
+Este archivo generalmente incluye otros archivos secundarios que organizan la configuración:
+
+* `named.conf.local`
+* `named.conf.options`
+* `named.conf.log`
+
+## División lógica de named.conf
+
+La configuración se divide en dos grandes bloques:
+
+### 1️⃣ Opciones Globales
+
+Afectan el comportamiento general del servidor DNS.
+
+Ejemplos típicos:
+
+* Control de recursión.
+* Interfaces donde escucha el servidor.
+* Permisos de consulta.
+* Configuración de logging.
+
+Estas opciones impactan a todas las zonas configuradas.
+
+---
+
+### 2️⃣ Declaraciones de Zona
+
+Definen qué dominios administra el servidor.
+
+Cada zona especifica:
+
+* Tipo (master, slave, forward).
+* Archivo donde se almacenan los registros.
+* Restricciones de transferencia.
+
+Si una opción se define tanto globalmente como dentro de una zona, **la configuración específica de la zona tiene prioridad**.
+
+---
+
+# 3. Ejemplo de Configuración Local
 
 ```bash
 root@bind9:~# cat /etc/bind/named.conf.local
 
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
 zone "domain.com" {
     type master;
     file "/etc/bind/db.domain.com";
     allow-update { key rndc-key; };
 };
 ```
+
+---
+
+# 4. Análisis Detallado del Ejemplo
+
+### zone "domain.com"
+
+Define que el servidor es responsable de la zona `domain.com`.
+
+---
+
+### type master
+
+Indica que este servidor es el **servidor primario (master)** para esa zona.
+
+* Aquí se realizan las modificaciones.
+* Es la fuente original de los datos.
+* Los servidores secundarios (slaves) sincronizan desde este.
+
+---
+
+### file "/etc/bind/db.domain.com"
+
+Especifica el archivo donde están almacenados los registros DNS de esa zona.
+
+Este archivo contiene:
+
+* SOA
+* NS
+* A
+* MX
+* CNAME
+* TXT
+
+Es el "libro telefónico" del dominio.
+
+---
+
+### allow-update { key rndc-key; };
+
+Permite actualizaciones dinámicas autenticadas mediante una clave (`rndc-key`).
+
+Esto es importante en entornos donde:
+
+* Servidores DHCP actualizan automáticamente registros DNS.
+* Se utilizan entornos Active Directory.
+
+Si esta directiva está mal configurada, podría permitir modificaciones no autorizadas en la zona.
+
+---
+
+# 5. Relación con los RFC
+
+BIND9 implementa estándares definidos en múltiples RFC relacionados con DNS.
+
+La configuración permite adaptar el servidor a:
+
+* Arquitecturas distribuidas.
+* Balanceo de carga.
+* Alta disponibilidad.
+* Delegación de subzonas.
+
+---
+
+# 6. Tipos de Archivos de Zona
+
+## 1️⃣ Zone Files (Resolución Directa)
+
+Contienen la relación:
+
+```
+Dominio → Dirección IP
+```
+
+Ejemplo:
+
+```
+www.domain.com → 192.168.1.10
+```
+
+---
+
+## 2️⃣ Reverse Lookup Files
+
+Contienen la relación inversa:
+
+```
+Dirección IP → Dominio (PTR record)
+```
+
+Se utilizan para:
+
+* Validaciones de correo.
+* Análisis forense.
+* Identificación de hosts.
+
+---
+
+# 7. Importancia en Pentesting
+
+Comprender la configuración por defecto permite detectar:
+
+* Zonas mal definidas.
+* allow-transfer mal configurado.
+* Recursión habilitada públicamente.
+* Actualizaciones dinámicas inseguras.
+
+Un servidor BIND mal configurado puede revelar:
+
+* Infraestructura interna.
+* Hosts no públicos.
+* Estructura organizacional.
+
+
+
+
+
 
 ---
 
