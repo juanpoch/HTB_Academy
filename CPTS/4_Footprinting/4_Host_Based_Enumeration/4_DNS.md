@@ -177,7 +177,7 @@ awsdns-hostmaster@amazon.com
 
 # 1. Introducción
 
-Los servidores DNS pueden configurarse de múltiples formas dependiendo del entorno (corporativo, ISP, laboratorio, nube, etc.). Sin embargo, la mayoría de implementaciones en sistemas Linux utilizan **BIND9 (Berkeley Internet Name Domain)** como servidor DNS.
+Los servidores DNS pueden configurarse de múltiples formas dependiendo del entorno (corporativo, ISP, laboratorio, nube, etc.). Sin embargo, la mayoría de implementaciones en sistemas Linux utilizan **[BIND9 (Berkeley Internet Name Domain)](https://www.isc.org/bind/)** como servidor DNS.
 
 Desde el punto de vista administrativo, entender la configuración por defecto es fundamental para:
 
