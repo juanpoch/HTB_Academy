@@ -64,11 +64,15 @@ Generalmente se usa autenticación basada en:
 * GID
 * Membresías de grupo
 
-Problema importante:
+### Problema importante
 
 El cliente y el servidor pueden tener mapeos diferentes de UID/GID. El servidor no realiza validaciones adicionales.
 
-Por eso NFS solo debería utilizarse en redes confiables.
+En NFS (especialmente en versiones antiguas como NFSv2 y NFSv3), el servidor confía en los UID/GID que el cliente le envía durante las operaciones. Esto significa que la autorización se basa únicamente en esos identificadores numéricos y no en una validación fuerte de identidad.
+
+Si en el sistema cliente existe un usuario con un UID específico (por ejemplo, UID 0 correspondiente a root) y el servidor no aplica mecanismos como `root_squash`, este podría interpretar esa identidad como legítima. Además, si los mapeos de UID/GID no coinciden entre ambos sistemas, pueden producirse accesos no deseados o comportamientos inesperados en los permisos.
+
+Por eso NFS solo debería utilizarse en redes confiables o combinarse con mecanismos de autenticación más robustos como Kerberos en NFSv4.
 
 ---
 
