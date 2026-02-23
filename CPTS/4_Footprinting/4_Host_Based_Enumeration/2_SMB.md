@@ -348,10 +348,75 @@ smb: \> ls
 
 ## 13) Monitoreo desde el servidor: `smbstatus`
 
-Desde el punto de vista administrativo:
+
+Desde el punto de vista administrativo, el comando:
 
 ```bash
 smbstatus
+```
+
+permite visualizar las sesiones activas en el servidor Samba. Con esta herramienta es posible identificar:
+
+* Qué usuarios están conectados.
+* Desde qué host o dirección IP se originan las conexiones.
+* A qué recurso compartido (share) accede cada cliente.
+* La versión del protocolo SMB utilizada y ciertos parámetros de seguridad.
+
+Esta información es especialmente relevante en redes internas, ya que permite detectar accesos inesperados o actividad sospechosa, incluso dentro de subredes aisladas. En entornos corporativos, donde múltiples usuarios acceden simultáneamente a recursos compartidos, este monitoreo resulta clave para la auditoría y el control de accesos.
+
+---
+
+## Samba en Seguridad a Nivel de Dominio
+
+Cuando Samba forma parte de un entorno con **Active Directory**, el modelo de autenticación cambia significativamente. En este caso, el servidor Samba actúa como miembro de un dominio Windows y delega la validación de credenciales al **Domain Controller (DC)**.
+
+El Domain Controller es el componente central que:
+
+* Mantiene la base de datos de usuarios y grupos.
+* Almacena hashes de contraseñas.
+* Aplica políticas de autenticación.
+* Autoriza el acceso a recursos compartidos.
+
+La información crítica del dominio se gestiona principalmente en la base de datos **NTDS.dit**, que contiene usuarios, grupos y credenciales. Además, el sistema de autenticación se apoya en componentes como el **Security Account Manager (SAM)** para la gestión de cuentas.
+
+Cuando un usuario intenta acceder a un share SMB en un entorno de dominio:
+
+1. El cliente envía sus credenciales.
+2. El servidor Samba consulta al Domain Controller.
+3. El DC valida la identidad del usuario.
+4. Si la autenticación es correcta, el servidor aplica las ACL del share y concede o deniega el acceso.
+
+Esto significa que SMB no es únicamente un protocolo de compartición de archivos, sino también un punto crítico dentro del esquema de autenticación del dominio.
+
+---
+
+## Importancia en Footprinting
+
+En un entorno de dominio, la exposición o mala configuración de SMB puede permitir:
+
+* Enumeración de usuarios del dominio.
+* Descubrimiento de shares internos.
+* Identificación de políticas débiles.
+
+Por ello, comprender la relación entre Samba, Active Directory y el Domain Controller es fundamental para evaluar correctamente el impacto de un servicio SMB expuesto dentro de una infraestructura corporativa.
+
+
+
+```bash
+smbstatus
+```
+
+```
+Samba version 4.11.6-Ubuntu
+PID     Username     Group        Machine                                   Protocol Version  Encryption           Signing              
+----------------------------------------------------------------------------------------------------------------------------------------
+75691   sambauser    samba        10.10.14.4 (ipv4:10.10.14.4:45564)      SMB3_11           -                    -                    
+
+Service      pid     Machine       Connected at                     Encryption   Signing     
+---------------------------------------------------------------------------------------------
+notes        75691   10.10.14.4   Do Sep 23 00:12:06 2021 CEST     -            -           
+
+No locked files
 ```
 
 Muestra:
