@@ -938,7 +938,7 @@ app.inlanefreight.htb.  604800  IN      A       10.129.18.15
 
 # 7. Uso de DNSenum
 
-Herramientas como **dnsenum** automatizan gran parte del proceso.
+Herramientas como [**dnsenum**](https://github.com/fwaeytens/dnsenum) automatizan gran parte del proceso.
 
 ```bash
 CyberWolfSec@htb[/htb]$ dnsenum --dnsserver 10.129.14.128 --enum -p 0 -s 0 -o subdomains.txt -f /opt/useful/seclists/Discovery/DNS/subdomains-top1million-110000.txt inlanefreight.htb
@@ -997,21 +997,6 @@ done.
 * Herramientas automatizadas (dnsenum)
 
 En ambos casos, DNS sigue siendo una fuente crítica de información para mapear y priorizar vectores de ataque.
-
----
-
-FIN DEL LIENZO
-
-
-
-
-
-
-
-
-
-
-
 
 
 
