@@ -372,7 +372,7 @@ Un servidor BIND mal configurado puede revelar:
 * Estructura organizacional.
 
 
-
+[Docuumentación BIND](https://wiki.debian.org/BIND9?action=show&redirect=Bind9)
 
 
 
