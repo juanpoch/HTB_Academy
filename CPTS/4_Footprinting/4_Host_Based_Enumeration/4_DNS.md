@@ -458,37 +458,178 @@ Los registros PTR son fundamentales para:
 
 ---
 
-# 5. Configuraciones Peligrosas en BIND
 
-DNS puede volverse altamente vulnerable si ciertas directivas no están correctamente restringidas.
 
-| Opción          | Riesgo                                                                                                                 |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| allow-query     | Permite definir qué hosts pueden consultar el servidor. Si está en "any", cualquiera puede enumerar registros.         |
-| allow-recursion | Si está habilitado públicamente, puede convertir al servidor en un open resolver (usable en ataques de amplificación). |
-| allow-transfer  | Si permite transferencias sin restricción, un atacante puede obtener el zone file completo (AXFR).                     |
-| zone-statistics | Puede revelar información estructural adicional de las zonas.                                                          |
+# 5 DNS – Configuraciones Peligrosas en BIND 
 
 ---
 
-# 6. Riesgo Operativo Real
+# 1. Introducción
 
-En entornos reales, los administradores a veces relajan configuraciones por motivos de funcionalidad:
+Los servidores DNS, especialmente cuando utilizan **BIND9**, pueden volverse altamente vulnerables si ciertas directivas no están correctamente restringidas.
 
-* Permitir transferencias para facilitar sincronización.
-* Habilitar recursión para pruebas.
-* Exponer estadísticas para monitoreo.
+DNS es un servicio crítico. Un error de configuración no solo puede provocar fallos operativos, sino también:
+
+* Exposición masiva de infraestructura.
+* Participación involuntaria en ataques DDoS.
+* Filtración de información interna.
+* Superficie ampliada para ataques dirigidos.
+
+Muchas vulnerabilidades en entornos reales no provienen de fallos del software, sino de **malas configuraciones**.
+
+---
+
+# 2. Por qué ocurren las malas configuraciones
+
+DNS puede volverse complejo rápidamente:
+
+* Múltiples zonas.
+* Servidores master y slave.
+* Integración con DHCP.
+* Entornos híbridos (on-prem + cloud).
+* Necesidades de recursión interna.
+
+Cuando surgen problemas operativos, los administradores muchas veces "abren" configuraciones para que el sistema funcione, priorizando disponibilidad sobre seguridad.
+
+Esto suele derivar en directivas permisivas como:
+
+* `allow-transfer { any; };`
+* `allow-recursion { any; };`
+* `allow-query { any; };`
+
+Lo que transforma un servidor DNS interno en un objetivo expuesto públicamente.
+
+---
+
+# 3. Directivas Críticas y Sus Riesgos
+
+## allow-query
+
+Define qué hosts pueden enviar consultas al servidor.
+
+### Riesgo
+
+Si está configurado como:
+
+```
+allow-query { any; };
+```
+
+Cualquier persona en Internet puede:
+
+* Enumerar registros.
+* Consultar subdominios.
+* Extraer información estratégica.
+
+Aunque parezca inofensivo, combinado con otras configuraciones débiles puede facilitar reconocimiento masivo.
+
+---
+
+## allow-recursion
+
+Define qué hosts pueden realizar consultas recursivas.
+
+### ¿Qué es recursión?
+
+El servidor no solo responde por sus zonas autoritativas, sino que consulta otros servidores en nombre del cliente.
+
+### Riesgo
+
+Si está habilitado públicamente:
+
+```
+allow-recursion { any; };
+```
+
+El servidor se convierte en un **open resolver**.
+
+Consecuencias:
+
+* Puede ser utilizado en ataques de amplificación DNS (DDoS).
+* Puede ser abusado para ocultar origen real de consultas maliciosas.
+* Genera alto consumo de recursos.
+
+Los ataques de amplificación DNS explotan la diferencia entre el tamaño de la consulta y el tamaño de la respuesta.
+
+---
+
+## allow-transfer
+
+Controla qué hosts pueden realizar transferencias de zona (AXFR).
+
+### Riesgo Crítico
+
+Si está configurado como:
+
+```
+allow-transfer { any; };
+```
+
+Un atacante puede ejecutar:
+
+```
+dig axfr dominio.com @servidor_dns
+```
+
+Y obtener:
+
+* Todos los subdominios.
+* Hosts internos.
+* IP privadas.
+* Servidores de correo.
+* Controladores de dominio.
+
+Esto equivale a entregar el mapa completo de la infraestructura.
+
+En términos de pentesting, una transferencia de zona exitosa puede reducir drásticamente el tiempo de reconocimiento.
+
+---
+
+## zone-statistics
+
+Recopila estadísticas de las zonas configuradas.
+
+### Riesgo
+
+Puede revelar:
+
+* Estructura de consultas.
+* Volumen de tráfico.
+* Información indirecta sobre uso interno.
+
+Aunque no es tan crítico como allow-transfer, puede facilitar análisis avanzados de comportamiento.
+
+---
+
+# 4. Riesgo Operativo Real
+
+En entornos productivos es común encontrar:
+
+* Servidores DNS internos accesibles desde Internet.
+* Recursión habilitada globalmente.
+* Transferencias permitidas a subredes completas.
+* Actualizaciones dinámicas mal autenticadas.
 
 Cuando la funcionalidad tiene prioridad sobre la seguridad, pueden generarse:
 
 * Filtraciones de infraestructura interna.
 * Enumeración completa de subdominios.
 * Exposición de IP privadas.
-* Superficie ampliada para ataques dirigidos.
+* Identificación de sistemas críticos (VPN, DC, mail).
+* Participación involuntaria en ataques DDoS.
 
+---
 
+# 5. Impacto desde el Punto de Vista Ofensivo
 
+Durante una auditoría o pentest, estas configuraciones permiten:
 
+* Reconocimiento pasivo altamente efectivo.
+* Descubrimiento de activos no documentados.
+* Identificación de entornos internos separados.
+* Mapeo completo de la arquitectura tecnológica.
+
+En muchos casos, una mala configuración DNS expone más información que un escaneo activo de red.
 
 
 
