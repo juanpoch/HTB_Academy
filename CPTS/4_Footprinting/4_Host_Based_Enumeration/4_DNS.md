@@ -30,24 +30,94 @@ Podemos imaginarlo como una biblioteca global con múltiples guías telefónicas
 
 # 3. Seguridad en DNS
 
-DNS tradicionalmente no está cifrado.
+
+---
+
+## 1. DNS y la Falta de Cifrado
+
+El protocolo DNS tradicional fue diseñado en una época en la que la seguridad y la privacidad no eran prioridades centrales en Internet. Por defecto, las consultas DNS viajan en texto plano a través de la red (normalmente por el puerto 53 UDP/TCP).
 
 Esto implica que:
 
-* Proveedores de Internet pueden inspeccionar consultas.
-* Dispositivos en la red local pueden espiar tráfico DNS.
+* Cualquier dispositivo dentro de la misma red local (WLAN) puede interceptar las consultas.
+* El proveedor de Internet (ISP) puede registrar y analizar todos los dominios que visitamos.
+* Un atacante con capacidad de "Man-in-the-Middle" puede espiar o incluso manipular respuestas DNS.
 
-Soluciones modernas:
+En otras palabras, aunque el contenido de una página web esté protegido con HTTPS, la consulta DNS previa puede revelar qué dominio estamos intentando visitar.
 
-* DNS over TLS (DoT)
-* DNS over HTTPS (DoH)
-* DNSCrypt
+---
+
+## 2. Riesgos Asociados
+
+La falta de cifrado en DNS puede provocar:
+
+* Pérdida de privacidad (historial de navegación expuesto).
+* Ataques de DNS Spoofing o DNS Poisoning.
+* Redirección maliciosa hacia servidores controlados por atacantes.
+* Enumeración pasiva de infraestructura interna en redes corporativas.
+
+Por esta razón, el DNS tradicional representa un punto crítico desde el punto de vista de seguridad.
+
+---
+
+## 3. Mecanismos Modernos de Cifrado DNS
+
+Para mitigar estos riesgos, se desarrollaron soluciones que encapsulan o cifran las consultas DNS:
+
+### DNS over TLS (DoT)
+
+* Utiliza el protocolo TLS para cifrar el tráfico DNS.
+* Opera normalmente sobre el puerto 853.
+* Establece un canal seguro entre el cliente y el servidor DNS.
+* Ofrece confidencialidad y protección contra manipulación.
+
+### DNS over HTTPS (DoH)
+
+* Envía consultas DNS a través de HTTPS.
+* Utiliza el puerto 443.
+* Se mezcla con el tráfico web normal, lo que dificulta su bloqueo o inspección.
+* Es ampliamente utilizado por navegadores modernos.
+
+### DNSCrypt
+
+* Protocolo independiente que cifra y autentica el tráfico DNS.
+* Protege contra ataques de tipo "Man-in-the-Middle".
+* No depende directamente de TLS, aunque cumple un propósito similar.
+
+Estas tecnologías mejoran significativamente la privacidad del usuario y reducen la posibilidad de manipulación del tráfico DNS.
+
+---
+
+## 4. DNS Como Fuente de Información Estratégica
+
+DNS no solo traduce nombres de dominio a direcciones IP. También almacena información clave sobre la infraestructura asociada a un dominio.
+
+Una simple consulta DNS puede revelar:
+
+* Qué servidores gestionan el correo electrónico (registros MX).
+* Cuáles son los nameservers responsables (registros NS).
+* Qué subdominios existen (registros A, AAAA, CNAME).
+* Información de validación y políticas de correo (registros TXT como SPF o DMARC).
+
+Desde la perspectiva de pentesting y reconocimiento (recon), DNS es una fuente extremadamente valiosa de información pasiva.
+
+Por ejemplo:
+
+* Identificar el servidor de correo puede revelar proveedores externos.
+* Los nameservers pueden indicar si la infraestructura está alojada en AWS, Azure u otro proveedor.
+* Los registros TXT pueden exponer integraciones con servicios externos.
+
+En consecuencia, DNS no es solo un sistema de resolución de nombres, sino también un mapa indirecto de la arquitectura tecnológica de una organización.
+
+
+
+
 
 ---
 
 # 4. Jerarquía de Dominio
 
-Estructura jerárquica:
+Estructura jerárquica como marca la imagen:
 
 ```
 Root (.)
