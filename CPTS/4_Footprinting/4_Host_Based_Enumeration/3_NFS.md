@@ -21,7 +21,7 @@ A diferencia de SMB (usado principalmente en entornos Windows), NFS se utiliza p
 | **NFSv2**              | Versión antigua, soportada por muchos sistemas. Operaba completamente sobre UDP.                               |
 | **NFSv3**              | Soporta tamaños de archivo variables y mejor reporte de errores. No totalmente compatible con NFSv2.           |
 | **NFSv4**              | Incluye Kerberos, funciona a través de firewalls, usa puerto 2049, soporta ACLs, es stateful, mayor seguridad. |
-| **NFSv4.1 (RFC 8881)** | Soporta despliegues en clúster, acceso paralelo (pNFS), multipathing (session trunking).                       |
+| **NFSv4.1 ([RFC 8881](https://datatracker.ietf.org/doc/html/rfc8881))** | Soporta despliegues en clúster, acceso paralelo (pNFS), multipathing (session trunking).                       |
 
 ### Diferencia crítica entre v3 y v4
 
