@@ -1390,5 +1390,10 @@ pip3 install -r requirements.txt
 
 <img width="901" height="696" alt="image" src="https://github.com/user-attachments/assets/f8ffd404-c0d1-40dd-a101-eeee717d94c3" />
 
+
+---
+
+
 En kali tenemos instalado `enum4linux`:
 
+<img width="1510" height="767" alt="image" src="https://github.com/user-attachments/assets/d18b1d9e-cd12-4b80-a03f-c68ee5d608b1" />
