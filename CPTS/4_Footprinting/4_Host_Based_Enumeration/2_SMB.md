@@ -863,6 +863,23 @@ for i in $(seq 500 1100); do
 done
 ```
 
+
+```
+for i in $(seq 500 1100);do rpcclient -N -U "" 10.129.14.128 -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";done
+
+        User Name   :   sambauser
+        user_rid :      0x1f5
+        group_rid:      0x201
+		
+        User Name   :   mrb3n
+        user_rid :      0x3e8
+        group_rid:      0x201
+		
+        User Name   :   cry0l1t3
+        user_rid :      0x3e9
+        group_rid:      0x201
+```
+
 ---
 
 ## 17) Alternativas: Impacket / SMBMap / CrackMapExec / enum4linux‑ng
