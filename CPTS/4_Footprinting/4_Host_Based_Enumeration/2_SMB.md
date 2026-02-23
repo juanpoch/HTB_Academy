@@ -581,15 +581,15 @@ rpcclient -U "" <IP>
 
 ### Consultas útiles (resumen)
 
-| Query                     | Descripción                       |
-| ------------------------- | --------------------------------- |
-| `srvinfo`                 | Información del servidor          |
-| `enumdomains`             | Enumera dominios disponibles      |
-| `querydominfo`            | Info de dominio/servidor/usuarios |
-| `netshareenumall`         | Enumera todos los shares          |
-| `netsharegetinfo <share>` | Detalle de un share               |
-| `enumdomusers`            | Enumera usuarios                  |
-| `queryuser <RID>`         | Info de un usuario por RID        |
+| Query | Descripción |
+|-------|-------------|
+| srvinfo | Devuelve información general del servidor, como nombre, versión del sistema operativo y tipo de plataforma. |
+| enumdomains | Enumera los dominios o workgroups disponibles en el servidor. |
+| querydominfo | Muestra información detallada del dominio, incluyendo nombre, rol del servidor y estadísticas de usuarios. |
+| netshareenumall | Enumera todos los recursos compartidos (shares) disponibles en el servidor SMB. |
+| netsharegetinfo <share> | Obtiene información específica de un recurso compartido, como ruta local, permisos y configuración. |
+| enumdomusers | Enumera los usuarios registrados en el dominio o sistema. |
+| queryuser <RID> | Devuelve información detallada de un usuario específico a partir de su RID (Relative Identifier). |
 
 ### Qué se puede filtrar a anónimos
 
