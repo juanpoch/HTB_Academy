@@ -487,8 +487,160 @@ Nmap done: 1 IP address (1 host up) scanned in 0.48 seconds
 
 #### Enumere el servicio SMTP y envíe el banner, incluyendo su versión como respuesta.
 
+Enviamos una traza `ICMP` para verificar que el host está activo:
+
+<img width="510" height="146" alt="image" src="https://github.com/user-attachments/assets/35dd205b-2a0c-475f-a081-dc9d720675d2" />
+
+Realizamos un `TCP SYN Scann`:
+```bash
+nmap -Pn -n --reason -sS <ip>
+```
+<img width="883" height="386" alt="image" src="https://github.com/user-attachments/assets/3d0306e9-9af2-4163-bbd2-b8a386c4222b" />
+
+Vemos el puerto 25 abierto correspondiente al servicio `SMTP`.
+
+Realizamos banner grabbing de forma manual con netcat:
+
+```bash
+nc -nv <ip> 25
+```
+<img width="532" height="106" alt="image" src="https://github.com/user-attachments/assets/e6eab30b-d1e2-43e6-a731-ea0ae084035d" />
+
+Obtenemos el banner: `InFreight ESMTP v2.11`
+
+También nos conectamos al servicio con `telnet`:
+
+<img width="367" height="215" alt="image" src="https://github.com/user-attachments/assets/dcd1c176-b937-489a-977f-104c70f48c1a" />
+
 
 #### Enumere el servicio SMTP con más detalle y encuentre el nombre de usuario existente en el sistema. Envíelo como respuesta.
 
 
 `Pista`: En los sistemas, los nombres de usuario suelen tener el mismo nombre que el empleado. Recomendamos usar la lista de palabras de Footprinting que se proporciona como recurso. Recuerde que algunos servidores SMTP tienen tiempos de respuesta más altos
+
+
+Al conectarnos, sabemos que tenemos la extensión `VRFY` que podría servirnos para enumerar usuarios.
+
+<img width="400" height="521" alt="image" src="https://github.com/user-attachments/assets/acc739d0-4d59-4748-8902-5532c6c3f5df" />
+
+
+
+Nos descargamos la wordlist que nos dan en la academia llamada `footprinting-wordlist.txt`:
+```
+michael
+james
+john
+robert
+david
+william
+mary
+christopher
+joseph
+richard
+daniel
+thomas
+matthew
+jennifer
+charles
+anthony
+patricia
+linda
+mark
+elizabeth
+joshua
+steven
+andrew
+kevin
+brian
+barbara
+jessica
+jason
+susan
+timothy
+paul
+kenneth
+lisa
+ryan
+sarah
+karen
+jeffrey
+donald
+ashley
+eric
+jacob
+nicholas
+jonathan
+ronald
+michelle
+kimberly
+nancy
+justin
+sandra
+amanda
+brandon
+stephanie
+emily
+melissa
+gary
+edward
+stephen
+scott
+george
+donna
+jose
+rebecca
+deborah
+laura
+cynthia
+carol
+amy
+margaret
+gregory
+sharon
+larry
+angela
+maria
+alexander
+benjamin
+nicole
+kathleen
+patrick
+samantha
+tyler
+samuel
+betty
+brenda
+pamela
+aaron
+kelly
+robin
+heather
+rachel
+adam
+christine
+zachary
+debra
+katherine
+dennis
+nathan
+christina
+julie
+jordan
+kyle
+anna
+```
+
+Y utilizamos la herramienta `smb-user-enum` para realizar fuerza bruta mediante el método `VRFY` con la wordlist:
+
+```bash
+smtp-user-enum -M VRFY -U /home/juan/Descargas/footprinting-wordlist.txt -t 10.129.6.98 -m 1 -w 20
+```
+
+Cómo dice en la pista, hay que probar con distintos tiempos de respuesta para encontrar el usuario:
+
+- `m`: 1 Worker Processes
+- `w`: Query timeout: 20 s
+
+<img width="1370" height="572" alt="image" src="https://github.com/user-attachments/assets/1b3c95fb-19f8-407f-8feb-73b364d5bf62" />
+
+
