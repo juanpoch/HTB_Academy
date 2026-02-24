@@ -1085,3 +1085,43 @@ dig axfr internal.inlanefreight.htb @10.129.6.9
 
 `Pista`: Recuerde que las diferentes listas de palabras no siempre tienen las mismas entradas.
 
+
+Debido a que algunos subdominios permitían transferencia de zona y otros no. Comenzamos probando fuerza bruta con `dnsenum` sobre los subdominios que no permitían transferencia de zona. Esos subdominios son:
+
+- app
+- dev
+- mail
+- ns
+
+Utilizamos el siguiente comando para hacer fuerza bruta y probar con `app`:
+```bash
+dnsenum --dnsserver 10.129.6.9 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt app.inlanefreight.htb 
+```
+<img width="1682" height="361" alt="image" src="https://github.com/user-attachments/assets/662c737a-ede2-4724-98b5-36f8bf331531" />
+
+Probamos con `dev`:
+```bash
+dnsenum --dnsserver 10.129.6.9 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt dev.inlanefreight.htb 
+```
+Probamos con `mail`:
+
+```bash
+dnsenum --dnsserver 10.129.6.9 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt mail.inlanefreight.htb 
+```
+<img width="1372" height="268" alt="image" src="https://github.com/user-attachments/assets/7a31b8a1-2605-4ee7-900a-e9d0cd511786" />
+
+Probamos con `ns`:
+```bash
+dnsenum --dnsserver 10.129.6.9 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt ns.inlanefreight.htb 
+```
+<img width="1338" height="287" alt="image" src="https://github.com/user-attachments/assets/fbde13c2-5fea-40d0-8715-8eed73cbafda" />
+
+
+
+
+
+```bash
+dnsenum --dnsserver 10.129.6.9 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/seclists/Discovery/DNS/fierce-hostlist.txt dev.inlanefreight.htb
+```
+
+<img width="1580" height="787" alt="image" src="https://github.com/user-attachments/assets/bb21cd1a-e425-4f8f-85a6-d6401e9eb311" />
