@@ -1,4 +1,4 @@
-# IMAP / POP3 – Explicación Detallada Desde Cero
+# IMAP / POP3 
 
 ---
 
