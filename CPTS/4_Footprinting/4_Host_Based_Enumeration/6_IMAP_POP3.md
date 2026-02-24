@@ -1019,10 +1019,50 @@ Esto demuestra cómo una credencial débil puede escalar rápidamente el impacto
 
 #### Descubra el nombre exacto de la organización del servicio IMAP/POP3 y envíelo como respuesta.
 
+Comenzamos el ejercicio enviando una traza `ICMP` al servidor para verificar que está activo:
+
+<img width="560" height="154" alt="image" src="https://github.com/user-attachments/assets/0d716b3d-4539-404f-810b-4ef090bb535d" />
+
+Lanzamos un escaneo de versiones a los puertos 110, 143, 993, 995 correspondientes a los servicios `POP3/IMAP` con un conjunto de scripts predeterminados:
+```bash
+nmap 10.129.8.34 -sV -p110,143,993,995 -sC
+```
+
+<img width="955" height="770" alt="image" src="https://github.com/user-attachments/assets/571ed48f-3ca1-47b5-b09f-bfb696a76dd0" />
+
+En el certificado descubrimos que el nombre de la organización es `InlaneFreight Ltd`
+
+
 #### ¿Cuál es el FQDN al que están asignados los servidores IMAP y POP3?
 
+En el mismo comando de la pregunta anterior:
+<img width="956" height="756" alt="image" src="https://github.com/user-attachments/assets/3d7921e6-6e3e-48f9-9ab1-7584cfb7f6e9" />
+
+
+El `FQDN` para esos servicios es `dev.inlanefreight.htb`
 
 #### Enumere el servicio IMAP y envíe la bandera como respuesta. (Formato: HTB{...})
+
+Realizamos una interacción con IMAP mediante netcat, realizamos un banner grabbing:
+```bash
+nc -nv 10.129.8.34 143
+```
+
+<img width="939" height="161" alt="image" src="https://github.com/user-attachments/assets/a79b40c7-23bf-42b6-bb11-2c9df3f37c48" />
+
+O con `telnet`:
+
+```bash
+telnet <ip> 143
+```
+<img width="948" height="179" alt="image" src="https://github.com/user-attachments/assets/9f8a084f-b69f-4f50-864c-e6cb15225bb8" />
+
+
+Otra opción que me encanta es con nmap:
+```bash
+nmap <ip> --script=banner -p143
+```
+<img width="731" height="246" alt="image" src="https://github.com/user-attachments/assets/d734bb93-d767-4a40-8a6b-e3e659b7d576" />
 
 
 #### ¿Cuál es la versión personalizada del servidor POP3?
