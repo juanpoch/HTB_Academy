@@ -537,9 +537,6 @@ POP3 = Descarga simple de correos.
 
 ---
 
-Fin del documento.
-
-
 
 Cuando un administrador instala Dovecot, puede configurar:
 
