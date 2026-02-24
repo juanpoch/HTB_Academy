@@ -343,7 +343,7 @@ El **header** de un email puede incluir muchísima información útil:
 
 Parte de esa info es obligatoria y otra opcional, pero en general el header se transmite como parte del protocolo y **es accesible** por remitente y destinatario aunque no se muestre “a simple vista”.
 
-La estructura está definida por **RFC 5322**.
+La estructura está definida por [**RFC 5322**](https://datatracker.ietf.org/doc/html/rfc5322).
 
 ---
 
