@@ -210,6 +210,8 @@ EHLO mail1
 * Dependiendo de la configuración, el servidor puede responder **252** (“no puedo verificar, pero acepto”) incluso para usuarios inexistentes.
 * Por eso, nunca hay que confiar ciegamente en herramientas automáticas: ejecutan comandos estándar, pero el admin puede haber configurado respuestas “engañosas”.
 
+[Códigos de respuesta SMTP](https://serversmtp.com/smtp-error/)
+
 ## Output completo: Telnet - VRFY
 
 ```txt
