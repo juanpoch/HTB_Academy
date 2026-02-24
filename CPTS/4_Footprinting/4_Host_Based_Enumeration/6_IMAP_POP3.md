@@ -1067,6 +1067,12 @@ nmap <ip> --script=banner -p143
 
 #### ¿Cuál es la versión personalizada del servidor POP3?
 
+Realizamos banner grabbing de `POP3` con `telnet`:
+```bash
+telnet <ip> 110
+```
+<img width="375" height="128" alt="image" src="https://github.com/user-attachments/assets/998d71d7-af09-4688-b195-0d90f02e3c5c" />
+
 
 #### ¿Cuál es la dirección de correo electrónico del administrador?
 
