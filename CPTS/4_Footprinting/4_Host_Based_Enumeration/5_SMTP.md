@@ -478,3 +478,17 @@ Nmap done: 1 IP address (1 host up) scanned in 0.48 seconds
 * Probar open relay (`smtp-open-relay`).
 * Revisar si permite AUTH sin TLS (mala práctica).
 * Documentar evidencias (transcripts telnet + outputs de nmap).
+
+
+---
+
+
+# Preguntas
+
+#### Enumere el servicio SMTP y envíe el banner, incluyendo su versión como respuesta.
+
+
+#### Enumere el servicio SMTP con más detalle y encuentre el nombre de usuario existente en el sistema. Envíelo como respuesta.
+
+
+`Pista`: En los sistemas, los nombres de usuario suelen tener el mismo nombre que el empleado. Recomendamos usar la lista de palabras de Footprinting que se proporciona como recurso. Recuerde que algunos servidores SMTP tienen tiempos de respuesta más altos
