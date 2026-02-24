@@ -95,7 +95,7 @@ ESMTP agrega capacidades extra (extensiones) y típicamente permite:
 
 * Identificar extensiones tras `EHLO`.
 * Iniciar **TLS** con `STARTTLS` (después de EHLO).
-* Autenticación segura con extensiones como **AUTH PLAIN** (siempre que haya TLS, porque PLAIN en texto plano es un desastre).
+* Autenticación segura con extensiones como [**AUTH PLAIN**](https://www.samlogic.net/articles/smtp-commands-reference-auth.htm) (siempre que haya TLS, porque PLAIN en texto plano es un desastre).
 
 ---
 
