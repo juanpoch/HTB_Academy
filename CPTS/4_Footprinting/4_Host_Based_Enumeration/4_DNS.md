@@ -1119,9 +1119,12 @@ dnsenum --dnsserver 10.129.6.9 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/
 
 
 
+Como el único subdominio que podemos enumerar por fuerza bruta es `dev`, y no encontramos el subdominio de `dev` que nos piden, intentamos realizar fuerza bruta con otra wordlist, en este caso `fierce-hostlist.txt`:
 
 ```bash
 dnsenum --dnsserver 10.129.6.9 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/seclists/Discovery/DNS/fierce-hostlist.txt dev.inlanefreight.htb
 ```
 
 <img width="1580" height="787" alt="image" src="https://github.com/user-attachments/assets/bb21cd1a-e425-4f8f-85a6-d6401e9eb311" />
+
+El `FQDN` es `win2k.dev.inlanefreight.htb`.
