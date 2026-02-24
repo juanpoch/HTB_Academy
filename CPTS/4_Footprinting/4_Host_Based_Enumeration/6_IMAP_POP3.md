@@ -447,7 +447,7 @@ Lo mismo aplica para POP3 con 995.
 
 ---
 
-# 7. Configuraciones Peligrosas en IMAP / POP3 (Explicación Desde Cero)
+# 7. Configuraciones Peligrosas en IMAP / POP3 
 
 ---
 
