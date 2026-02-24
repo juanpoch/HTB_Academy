@@ -812,12 +812,40 @@ Service detection performed.
 Nmap done: 1 IP address (1 host up) scanned in 12.74 seconds
 ```
 
-Información relevante:
+## Información Relevante Obtenida del Escaneo
 
-* Nombre común del certificado: mail1.inlanefreight.htb
-* Organización: Inlanefreight
-* Ubicación: California
-* Servicio: Dovecot
+A partir del resultado del escaneo con Nmap, podemos extraer información valiosa del certificado TLS y del servicio detectado.
+
+Del output observamos:
+
+- **Common Name (CN):** `mail1.inlanefreight.htb`  
+  Esto nos indica el nombre del servidor de correo configurado en el certificado.
+
+- **Organización (O):** `Inlanefreight`  
+  Nos revela a qué entidad pertenece el servidor.
+
+- **Ubicación (ST / L):** `California`  
+  Información geográfica declarada en el certificado.
+
+- **Servicio detectado:** `Dovecot`  
+  Identifica el software que implementa IMAP/POP3 en el servidor.
+
+Además, Nmap muestra las **capabilities** del servicio, es decir, los comandos y mecanismos de autenticación que el servidor soporta (por ejemplo, métodos SASL, STARTTLS, AUTH=PLAIN, etc.).
+
+Esta información es especialmente útil en fase de reconocimiento porque:
+
+- Permite identificar la tecnología utilizada.
+- Revela posibles vectores de ataque según la versión del servicio.
+- Puede ayudar a validar dominios internos o infraestructura asociada.
+
+Si un atacante logra descubrir credenciales válidas de un empleado, podría:
+
+- Autenticarse en el servidor de correo.
+- Leer correos internos.
+- Enviar correos suplantando al usuario.
+- Obtener información sensible que facilite movimientos laterales o escalación de privilegios.
+
+Por eso, incluso información aparentemente “menor” como un certificado o las capabilities expuestas puede tener un alto valor en un pentest.
 
 ---
 
