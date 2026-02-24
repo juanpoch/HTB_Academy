@@ -474,6 +474,11 @@ Por lo tanto, cuando hablamos de "configuraciones peligrosas", en realidad habla
 
 # 7.1 ¿Qué es una configuración del servidor de correo?
 
+Se puede experimentar instalando `dovecot-imapd` y `dovecot-pop3d`.
+
+- [Dovecot: configuraciones individuales](https://doc.dovecot.org/2.4.1/core/summaries/settings.html)
+- [Dovecot: Opciones de configuración del servicio](https://doc.dovecot.org/2.4.1/core/config/service.html)
+
 Cuando un administrador instala Dovecot, puede configurar:
 
 * Cómo se autentican los usuarios
