@@ -406,7 +406,7 @@ Nmap done: 1 IP address (1 host up) scanned in 14.09 seconds
 
 # Detección de Open Relay con Nmap (smtp-open-relay)
 
-Para probar si un SMTP se comporta como open relay, Nmap ofrece el script **`smtp-open-relay`**, que intenta múltiples variantes (16 tests en este ejemplo).
+Para probar si un SMTP se comporta como open relay, Nmap ofrece el script [**`smtp-open-relay`**](https://nmap.org/nsedoc/scripts/smtp-open-relay.html), que intenta múltiples variantes (16 tests en este ejemplo).
 
 ## Output completo: Nmap - Open Relay
 
