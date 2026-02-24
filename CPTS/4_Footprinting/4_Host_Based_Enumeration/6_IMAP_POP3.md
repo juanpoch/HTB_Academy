@@ -744,6 +744,34 @@ Errores de configuración pueden convertir el servidor en un punto crítico de c
 
 # 8. Footprinting con Nmap
 
+
+## Puertos por Defecto de IMAP y POP3
+
+Por defecto, los protocolos de correo utilizan los siguientes puertos:
+
+- **POP3**
+  - 110 → Sin cifrado
+  - 995 → POP3 sobre SSL/TLS (cifrado)
+
+- **IMAP**
+  - 143 → Sin cifrado
+  - 993 → IMAP sobre SSL/TLS (cifrado)
+
+Los puertos más altos (**993 y 995**) utilizan **TLS/SSL**, lo que significa que la comunicación entre el cliente y el servidor viaja cifrada. Esto protege:
+
+- Credenciales (usuario y contraseña)
+- Contenido de los correos
+- Comandos enviados al servidor
+
+Si el servidor utiliza TLS/SSL, herramientas como **Nmap** pueden detectar esta configuración y mostrar información adicional, como:
+
+- Detalles del certificado digital
+- Nombre común (CN)
+- Organización
+- Fechas de validez del certificado
+
+Esta información puede ser útil durante tareas de reconocimiento o análisis de seguridad.
+
 Comando:
 
 ```bash
