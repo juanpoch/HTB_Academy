@@ -1054,6 +1054,10 @@ No obtenemos un registro `TXT` con el formato pedido, pero sí obtenemos una lis
 
 Procedemos a realizar transferencia de zona para cada uno de esos subdominios hasta encontrar el registro `TXT` con el formato solicitado:
 
+```bash
+dig axfr internal.inlanefreight.htb @10.129.6.9
+```
+
 <img width="1919" height="811" alt="image" src="https://github.com/user-attachments/assets/58fc1d26-20a8-42df-90c0-72be720fad48" />
 
 Lo encontramos en el subdominio `internal.inlanefreight.htb`.
@@ -1063,10 +1067,18 @@ Por curiosidad, también probamos el método de subdomain bruteforce:
 ```bash
 for sub in $(cat /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt);do dig $sub.inlanefreight.htb @10.129.6.9 | grep -v ';;\|SOA' | sed -r '/^\s*$/d' | grep $sub | tee -a subdomains.txt;done
 ```
+<img width="1883" height="943" alt="image" src="https://github.com/user-attachments/assets/1386aad0-522d-4273-8d76-7b41e2e89758" />
+
 
 
 #### ¿Cuál es la dirección IPv4 del nombre de host DC1?
 
+En el ejercicio anterior, realizamos transferencia de zona para el subdominio `internal` que contiene el host `DC1`:
+```bash
+dig axfr internal.inlanefreight.htb @10.129.6.9
+```
+
+<img width="1902" height="538" alt="image" src="https://github.com/user-attachments/assets/1c053af4-68b3-473f-b5a5-2002b682c763" />
 
 
 #### ¿Cuál es el FQDN del host donde el último octeto termina con "xxx203"?
