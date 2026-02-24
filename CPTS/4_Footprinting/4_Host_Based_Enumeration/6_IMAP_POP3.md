@@ -1076,4 +1076,30 @@ telnet <ip> 110
 
 #### ¿Cuál es la dirección de correo electrónico del administrador?
 
-#### Intente acceder a los correos electrónicos en el servidor IMAP y envíe la bandera como respuesta. (Formato: HTB{...})
+
+Nos conectamos a `IMAPS` con `TLS`:
+```bash
+openssl s_client -connect 10.129.8.34:imaps
+```
+
+Listamos con `1 LIST "" *`:
+<img width="646" height="132" alt="image" src="https://github.com/user-attachments/assets/938f22ec-6f08-4add-a5f3-f2ba7e421413" />
+
+Seleccionamos INBOX con `1 SELECT INBOX` pero vemos que no tenemos mails:
+<img width="822" height="180" alt="image" src="https://github.com/user-attachments/assets/bf2acebf-9096-4c78-81b6-d390fb1f1522" />
+
+Seleccionamos la carpeta `DEV.DEPARTMENT.INT` CON `1 SELECT DEV.DEPARTMENT.INT` y vemos que tenemos 1 mail:
+<img width="811" height="201" alt="image" src="https://github.com/user-attachments/assets/8e30411d-1c5b-45c0-811f-ef0ea9090c12" />
+
+Lo leemos con `1 FETCH 1 all`:
+
+<img width="949" height="145" alt="image" src="https://github.com/user-attachments/assets/59c1621d-65a3-41da-b67c-475baa0c7fc7" />
+
+En la cabecera del mail nos dice que el usuario es `devadmin` y el dominio es `inlanefreight.htb`, por lo que sabemos que el mail del administrador `CTO` es `devadmin@inlanefreight.htb`.
+
+
+#### Intente acceder a los correos electrónicos en el servidor IMAP y envíe la flag como respuesta. (Formato: HTB{...})
+
+Leemos el `BODY` del mail con el comando `1 FETCH 1 BODY[]` y encontramos la flag:
+<img width="409" height="194" alt="image" src="https://github.com/user-attachments/assets/5afcbd00-8ffb-4f2c-87cb-a3a03e6fc97c" />
+
