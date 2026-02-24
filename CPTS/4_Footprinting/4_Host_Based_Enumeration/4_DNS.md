@@ -1103,6 +1103,10 @@ Probamos con `dev`:
 ```bash
 dnsenum --dnsserver 10.129.6.9 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt dev.inlanefreight.htb 
 ```
+<img width="1753" height="815" alt="image" src="https://github.com/user-attachments/assets/7104ff02-e1ba-4e5e-97ed-fa3e14cde259" />
+
+Enumera pero no encuentra la respuesta requerida.
+
 Probamos con `mail`:
 
 ```bash
