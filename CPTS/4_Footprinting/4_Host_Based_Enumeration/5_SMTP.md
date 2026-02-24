@@ -81,8 +81,8 @@ En SMTP, el remitente puede declararse con `MAIL FROM:` y eso **no prueba identi
 
 Hoy se mitiga con técnicas como:
 
-* **SPF** (Sender Policy Framework)
-* **DKIM** (DomainKeys Identified Mail)
+* [**SPF** (Sender Policy Framework)](https://dmarcian.com/what-is-spf/)
+* [**DKIM** (DomainKeys Identified Mail)](https://dkim.org/)
 * (y normalmente también DMARC, aunque este texto menciona SPF/DKIM)
 
 ---
