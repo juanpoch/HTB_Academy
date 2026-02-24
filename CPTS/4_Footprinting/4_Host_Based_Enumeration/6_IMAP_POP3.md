@@ -230,17 +230,200 @@ El cliente se convierte en el almacenamiento principal.
 
 # 5. Relación con SMTP
 
-SMTP se utiliza para enviar correos.
+## 📧 Cómo Viaja un Correo Electrónico en Internet
 
-Cuando envías un email:
+---
 
-* El cliente usa SMTP.
-* El servidor lo entrega.
-* Luego puede guardarse en una carpeta IMAP llamada "Sent".
+### 1️⃣ Introducción
 
-Gracias a IMAP:
+Cuando enviamos un correo electrónico, no viaja directamente desde nuestra computadora a la del destinatario.
 
-* Todos los dispositivos pueden ver los correos enviados.
+En realidad, intervienen múltiples servidores y varios protocolos diferentes.
+
+Para entenderlo correctamente, debemos separar el proceso en tres partes:
+
+1. Envío del correo
+2. Transferencia entre servidores
+3. Acceso al correo por el destinatario
+
+---
+
+## 2️⃣ Escenario de Ejemplo
+
+Supongamos:
+
+* Remitente: `juan@empresaA.com`
+* Destinatario: `ana@empresaB.com`
+
+Ahora veremos paso a paso qué ocurre.
+
+---
+
+## 3️⃣ Paso 1 – El Cliente Envía el Correo (SMTP)
+
+Juan escribe un correo en su cliente:
+
+* Outlook
+* Thunderbird
+* Gmail App
+* Webmail
+
+Ese programa es el **cliente de correo**.
+
+Cuando Juan presiona "Enviar":
+
+🔹 El cliente usa el protocolo **SMTP (Simple Mail Transfer Protocol)**.
+
+El flujo es:
+
+Cliente de Juan
+→ (SMTP) →
+Servidor SMTP de empresaA
+
+SMTP se utiliza exclusivamente para enviar correos.
+
+Puertos comunes:
+
+* 25 (servidor a servidor)
+* 587 (cliente autenticado)
+* 465 (SMTP sobre SSL/TLS)
+
+---
+
+## 4️⃣ Paso 2 – Búsqueda del Servidor del Destinatario (DNS + MX)
+
+Ahora el servidor de empresaA necesita saber:
+
+👉 ¿Dónde entrego correos para `empresaB.com`?
+
+Para eso consulta el DNS.
+
+Específicamente busca los registros:
+
+📌 **MX (Mail Exchange Records)**
+
+Ejemplo:
+
+```
+empresaB.com   MX   mail.empresaB.com
+```
+
+Esto indica cuál es el servidor que recibe correos para ese dominio.
+
+---
+
+## 5️⃣ Paso 3 – Transferencia Entre Servidores (SMTP nuevamente)
+
+Una vez obtenido el registro MX:
+
+Servidor SMTP de empresaA
+→ (SMTP) →
+Servidor SMTP de empresaB
+
+Aquí se vuelve a usar SMTP.
+
+Importante:
+
+SMTP no solo lo usa el cliente.
+También lo usan los servidores entre sí.
+
+---
+
+## 6️⃣ Paso 4 – Almacenamiento en el Servidor del Destinatario
+
+El servidor de empresaB:
+
+* Recibe el mensaje.
+* Lo almacena en el buzón de Ana.
+
+En este momento el correo ya llegó.
+
+Pero Ana todavía no lo ha leído.
+
+---
+
+## 7️⃣ Paso 5 – El Destinatario Accede al Correo (IMAP o POP3)
+
+Cuando Ana abre su cliente de correo:
+
+Su cliente se conecta al servidor usando:
+
+🔹 IMAP
+o
+🔹 POP3
+
+Aquí es donde estos protocolos entran en juego.
+
+---
+
+### 📌 Si usa IMAP
+
+Cliente de Ana
+→ (IMAP) →
+Servidor de empresaB
+
+Características:
+
+* El correo permanece en el servidor.
+* Se sincroniza entre dispositivos.
+* Permite carpetas jerárquicas.
+* Permite múltiples clientes simultáneamente.
+
+Puertos:
+
+* 143 (sin cifrar)
+* 993 (IMAPS – cifrado TLS)
+
+---
+
+### 📌 Si usa POP3
+
+Cliente de Ana
+→ (POP3) →
+Servidor de empresaB
+
+Características:
+
+* Descarga los correos.
+* Puede eliminarlos del servidor.
+* No sincroniza estados avanzados.
+
+Puertos:
+
+* 110 (sin cifrar)
+* 995 (POP3S – cifrado TLS)
+
+---
+
+## 8️⃣ Diagrama Completo del Flujo
+
+```
+Juan (Cliente)
+   ↓ SMTP
+Servidor SMTP empresaA
+   ↓ DNS (consulta MX)
+   ↓ SMTP
+Servidor SMTP empresaB
+   ↓ Almacenamiento
+Buzón de Ana
+   ↓ IMAP o POP3
+Cliente de Ana
+```
+
+---
+
+## 9️⃣ Resumen de Protocolos Utilizados
+
+| Etapa                          | Protocolo | Función                        |
+| ------------------------------ | --------- | ------------------------------ |
+| Envío desde cliente            | SMTP      | Enviar correo                  |
+| Transferencia entre servidores | SMTP      | Entregar correo                |
+| Acceso del destinatario        | IMAP      | Leer y sincronizar en servidor |
+| Acceso del destinatario        | POP3      | Descargar correo               |
+| Resolución de destino          | DNS (MX)  | Indicar servidor receptor      |
+
+
+
 
 ---
 
