@@ -641,6 +641,7 @@ Cómo dice en la pista, hay que probar con distintos tiempos de respuesta para e
 - `m`: 1 Worker Processes
 - `w`: Query timeout: 20 s
 
-<img width="1370" height="572" alt="image" src="https://github.com/user-attachments/assets/1b3c95fb-19f8-407f-8feb-73b364d5bf62" />
+<img width="1324" height="579" alt="image" src="https://github.com/user-attachments/assets/2d786c0b-2d23-4cd9-9af8-847468a53b2d" />
+
 
 
