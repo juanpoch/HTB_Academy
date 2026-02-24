@@ -24,7 +24,7 @@ IMAP y POP3 son los protocolos que permiten hacer eso.
 
 ---
 
-# 2. IMAP – Entendiendo el Protocolo Desde Cero
+# 2. IMAP 
 
 ## 2.1 ¿Qué es IMAP realmente?
 
@@ -160,7 +160,7 @@ Desventajas:
 
 ---
 
-# 3. POP3 – Entendiendo su Simplicidad
+# 3. POP3 
 
 ## 3.1 ¿Qué es POP3?
 
