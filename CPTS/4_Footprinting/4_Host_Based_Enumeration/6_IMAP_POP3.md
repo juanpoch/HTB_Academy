@@ -479,6 +479,68 @@ Se puede experimentar instalando `dovecot-imapd` y `dovecot-pop3d`.
 - [Dovecot: configuraciones individuales](https://doc.dovecot.org/2.4.1/core/summaries/settings.html)
 - [Dovecot: Opciones de configuración del servicio](https://doc.dovecot.org/2.4.1/core/config/service.html)
 
+## 📘 Comandos IMAP y POP3 
+
+---
+
+### 📌 1️⃣ Comandos IMAP
+
+IMAP es un protocolo más complejo y permite gestionar el buzón directamente en el servidor.
+
+| Comando                         | Explicación Técnica                                                                                  | Qué Significa en la Práctica                            |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| `1 LOGIN username password`     | Autentica al usuario en el servidor IMAP. El número inicial (ej: 1) es un identificador del comando. | Inicia sesión con usuario y contraseña.                 |
+| `1 LIST "" *`                   | Lista todas las carpetas o buzones disponibles en la cuenta.                                         | Muestra INBOX y cualquier carpeta creada.               |
+| `1 CREATE "INBOX"`              | Crea un nuevo buzón o carpeta en el servidor.                                                        | Permite crear una carpeta nueva para organizar correos. |
+| `1 DELETE "INBOX"`              | Elimina un buzón del servidor.                                                                       | Borra una carpeta completa.                             |
+| `1 RENAME "ToRead" "Important"` | Cambia el nombre de un buzón existente.                                                              | Renombra una carpeta de correo.                         |
+| `1 LSUB "" *`                   | Lista únicamente los buzones suscritos por el usuario.                                               | Muestra carpetas activas o marcadas como visibles.      |
+| `1 SELECT INBOX`                | Selecciona una carpeta para trabajar sobre ella.                                                     | Abre la bandeja de entrada para leer correos.           |
+| `1 UNSELECT INBOX`              | Cierra el buzón seleccionado sin cerrar sesión.                                                      | Sale de la carpeta actual.                              |
+| `1 FETCH <ID> all`              | Recupera toda la información de un mensaje específico.                                               | Descarga o muestra un correo concreto.                  |
+| `1 CLOSE`                       | Elimina mensajes marcados con la bandera "Deleted".                                                  | Borra definitivamente correos previamente marcados.     |
+| `1 LOGOUT`                      | Finaliza la sesión IMAP.                                                                             | Cierra la conexión con el servidor.                     |
+
+🔎 Nota importante:
+
+En IMAP cada comando lleva un identificador (por ejemplo `1`, `A001`, etc.). Esto permite que el servidor asocie respuestas a cada solicitud enviada.
+
+---
+
+### 📌 2️⃣ Comandos POP3
+
+POP3 es más simple y está diseñado principalmente para descargar correos.
+
+| Comando         | Explicación Técnica                                               | Qué Significa en la Práctica                        |
+| --------------- | ----------------------------------------------------------------- | --------------------------------------------------- |
+| `USER username` | Envía el nombre de usuario al servidor.                           | Indica qué cuenta quiere autenticarse.              |
+| `PASS password` | Envía la contraseña asociada al usuario.                          | Completa el proceso de login.                       |
+| `STAT`          | Devuelve el número total de mensajes y el tamaño total del buzón. | Muestra cuántos correos hay.                        |
+| `LIST`          | Lista todos los mensajes junto con su tamaño en bytes.            | Permite ver qué correos están disponibles.          |
+| `RETR id`       | Recupera el mensaje especificado por su número.                   | Descarga un correo concreto.                        |
+| `DELE id`       | Marca un mensaje para eliminación.                                | Borra un correo del servidor.                       |
+| `CAPA`          | Muestra las capacidades soportadas por el servidor.               | Indica qué funciones adicionales están disponibles. |
+| `RSET`          | Restablece el estado de la sesión actual.                         | Cancela eliminaciones pendientes.                   |
+| `QUIT`          | Finaliza la sesión POP3.                                          | Cierra la conexión con el servidor.                 |
+
+---
+
+# 📌 Diferencia Conceptual Importante
+
+IMAP permite gestionar y organizar el buzón en el servidor.
+
+POP3 permite principalmente descargar y eliminar correos.
+
+IMAP = Administración remota del buzón.
+
+POP3 = Descarga simple de correos.
+
+---
+
+Fin del documento.
+
+
+
 Cuando un administrador instala Dovecot, puede configurar:
 
 * Cómo se autentican los usuarios
