@@ -866,6 +866,33 @@ Salida:
 
 # 10. Interacción Verbose con TLS
 
+
+Si utilizamos la opción **`-v` (verbose)** al conectarnos con herramientas como `curl`, podremos observar en detalle cómo se establece la conexión con el servidor de correo.
+
+En modo verbose se muestra información como:
+
+- El proceso de establecimiento de la conexión TCP.
+- El **handshake TLS** paso a paso.
+- La **versión de TLS** utilizada (por ejemplo, TLSv1.2 o TLSv1.3).
+- El **cipher suite** seleccionado para el cifrado.
+- Detalles completos del **certificado SSL/TLS**:
+  - Common Name (CN)
+  - Organización (O)
+  - Fechas de validez
+  - Emisor del certificado
+- El **banner del servicio**, que muchas veces incluye:
+  - Nombre del software (por ejemplo, Dovecot)
+  - Versión del servidor de correo
+
+Esta información es muy útil en tareas de reconocimiento porque permite:
+
+- Identificar versiones potencialmente vulnerables.
+- Detectar certificados autofirmados.
+- Obtener información organizacional adicional.
+- Comprender cómo está configurado el cifrado del servicio.
+
+En un contexto de pentesting, el modo verbose ayuda a analizar en profundidad la superficie de exposición del servidor de correo.
+
 ```
 curl -k 'imaps://10.129.14.128' --user cry0l1t3:1234 -v
 ```
@@ -910,6 +937,18 @@ curl -k 'imaps://10.129.14.128' --user cry0l1t3:1234 -v
 
 # 11. Interacción con OpenSSL
 
+## Interacción con IMAP/POP3 sobre SSL usando OpenSSL o Ncat
+
+Cuando los servicios IMAP o POP3 están configurados con cifrado SSL/TLS (puertos 993 para IMAP y 995 para POP3), no podemos conectarnos simplemente con `telnet`, ya que la comunicación está cifrada.
+
+Para interactuar manualmente con estos servicios sobre una conexión segura, podemos utilizar herramientas como:
+
+- `openssl`
+- `ncat`
+
+---
+
+
 POP3S:
 
 ```
@@ -928,25 +967,51 @@ openssl s_client -connect 10.129.14.128:imaps
 
 # 12. Caso Práctico – Credenciales Descubiertas
 
-Si previamente descubrimos:
+## Uso de Credenciales Descubiertas para Interactuar con IMAP/POP3
 
-```
-robin:robin
-```
+Una vez que hemos logrado establecer una conexión con el servidor de correo y autenticarnos correctamente, podemos utilizar los comandos vistos anteriormente para:
 
-Podemos intentar autenticarnos vía:
+- Navegar por los buzones.
+- Listar carpetas.
+- Leer mensajes.
+- Eliminar correos.
+- Analizar el comportamiento del servidor.
 
-* IMAP
-* POP3
+Es importante destacar que comprender la configuración del servidor de correo (por ejemplo, Dovecot), investigar su documentación y realizar pruebas en un entorno controlado (como una máquina virtual propia) nos permite entender mejor:
 
-Y potencialmente:
+- Cómo funciona la comunicación cliente-servidor.
+- Qué opciones de configuración influyen en la autenticación.
+- Qué mecanismos de seguridad están habilitados.
+- Cómo responde el servidor ante distintos comandos.
 
-* Leer emails internos
-* Extraer credenciales
-* Escalar acceso
+Este conocimiento es clave para interpretar correctamente lo que observamos durante un pentest.
 
 ---
 
+### Aplicación Práctica: Uso de Credenciales Descubiertas
+
+En la sección anterior relacionada con SMTP, identificamos al usuario robin.
+
+
+Posteriormente, se descubrió que el usuario utilizaba su propio nombre como contraseña:
+
+`robin:robin`
+
+
+Con estas credenciales válidas, podemos intentar autenticarnos en los servicios:
+
+- IMAP (puertos 143 o 993)
+- POP3 (puertos 110 o 995)
+
+Si la autenticación es exitosa, un atacante podría:
+
+- Acceder al buzón del usuario.
+- Leer correos internos.
+- Extraer información sensible.
+- Buscar nuevas credenciales en mensajes almacenados.
+- Enviar correos suplantando la identidad del usuario.
+
+Esto demuestra cómo una credencial débil puede escalar rápidamente el impacto de una vulnerabilidad, especialmente cuando se trata de servicios críticos como el correo electrónico.
 
 
 # Preguntas
