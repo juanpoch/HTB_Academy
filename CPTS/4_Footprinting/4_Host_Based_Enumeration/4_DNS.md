@@ -1021,11 +1021,48 @@ En muchos casos, la información obtenida vía DNS supera la obtenida con un esc
 
 #### Interactúe con el DNS de destino utilizando su dirección IP y enumere su FQDN para el dominio "inlanefreight.htb".
 
+Enviamos una traza `ICMP` al host destino para verificar si está activo:
+<img width="522" height="149" alt="image" src="https://github.com/user-attachments/assets/0b6ffc22-c0e4-4689-8618-22ae29f69ea1" />
+
+Realizamos un escaneo rápido para confirmar que el host destino es un servidor DNS:
+<img width="733" height="172" alt="image" src="https://github.com/user-attachments/assets/007b266a-dcf8-4b52-82e8-070ef6d86786" />
+
+El ejercicio nos pide que averiguemos el `FQDN` del servidor DNS del dominio `inlanefreight.htb`, interactuando con la IP del servidor DNS.
+
+Entonces procedemos a buscar los servidores `NS` del dominio `inlanefreight.htb`, interactuando con uno de sus servidores DNS a través de su IP:
+
+```bash
+dig ns inlanefreight.htb @10.129.6.9
+```
+
+<img width="794" height="553" alt="image" src="https://github.com/user-attachments/assets/21eb1845-884c-4889-8e22-67cd8d2c8a3b" />
+
+
 
 #### Identifique si es posible realizar una transferencia de zona y envíe el registro TXT como respuesta. (Formato: HTB{...})
 
 `Pista`: Las zonas a menudo tienen el nombre de un subdominio.
 
+
+Realizamos una transferencia de zona para el dominio:
+```bash
+dig axfr inlanefreight.htb @10.129.6.9
+```
+<img width="1907" height="448" alt="image" src="https://github.com/user-attachments/assets/56e1643e-d577-4e3f-9cfc-b5578bf0b6a7" />
+
+No obtenemos un registro `TXT` con el formato pedido, pero sí obtenemos una lista de subdominios.
+
+Procedemos a realizar transferencia de zona para cada uno de esos subdominios hasta encontrar el registro `TXT` con el formato solicitado:
+
+<img width="1919" height="811" alt="image" src="https://github.com/user-attachments/assets/58fc1d26-20a8-42df-90c0-72be720fad48" />
+
+Lo encontramos en el subdominio `internal.inlanefreight.htb`.
+
+
+Por curiosidad, también probamos el método de subdomain bruteforce:
+```bash
+for sub in $(cat /usr/share/seclists/Discovery/DNS/subdomains-top1million-110000.txt);do dig $sub.inlanefreight.htb @10.129.6.9 | grep -v ';;\|SOA' | sed -r '/^\s*$/d' | grep $sub | tee -a subdomains.txt;done
+```
 
 
 #### ¿Cuál es la dirección IPv4 del nombre de host DC1?
