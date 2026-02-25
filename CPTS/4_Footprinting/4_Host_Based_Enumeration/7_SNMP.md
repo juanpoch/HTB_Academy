@@ -386,72 +386,243 @@ Si no entendés OIDs y MIBs, el output parece ruido.
 
 ---
 
-## 6. Versiones de SNMP
-
-### 🔴 SNMPv1
-
-* Primera versión
-* Muy utilizada aún
-* ❌ Sin autenticación real
-* ❌ Sin cifrado
-* Toda la información viaja en **texto plano**
-
-Impacto en pentesting:
-
-* Enumeración completa sin credenciales fuertes
-* Intercepción trivial del tráfico
+# 🔐 SNMP – Versiones y Community Strings Explicado Desde Cero
 
 ---
 
-### 🟠 SNMPv2c
+# 1️⃣ ¿Por qué existen distintas versiones de SNMP?
 
-* Variante más común actualmente
-* *c = community-based*
-* Mismos problemas de seguridad que v1
-* La **community string viaja en texto plano**
+SNMP nació en una época donde:
 
-👉 Desde el punto de vista ofensivo:
+* Las redes eran pequeñas
+* No existía tanta exposición a Internet
+* La seguridad no era una prioridad como hoy
 
-* Equivalente práctico a SNMPv1
+Con el tiempo, se descubrieron muchos problemas de seguridad.
 
----
+En lugar de eliminar el protocolo, se fueron creando nuevas versiones para intentar corregir esos problemas.
 
-### 🟢 SNMPv3
+Por eso hoy existen:
 
-* Autenticación por usuario
-* Cifrado del tráfico
-* Integridad de mensajes
+* SNMPv1
+* SNMPv2c
+* SNMPv3
 
-Problema real:
-
-* Mucha complejidad
-* Migración costosa
-* Poca adopción completa
-
-Resultado:
-
-> Muchas organizaciones **siguen expuestas** por SNMPv2c
+Cada una mejora (en teoría) la anterior.
 
 ---
 
-## 7. Community Strings
+# 2️⃣ 🔴 SNMPv1 – La versión original
 
-Las **community strings** funcionan como contraseñas.
+Es la primera versión del protocolo.
 
-Ejemplos comunes:
+Características principales:
 
-* `public`
-* `private`
-* `public123`
-* Nombre del host
+* Permite consultar información (GET)
+* Permite modificar valores (SET)
+* Permite recibir traps
 
-Problemas frecuentes:
+⚠ Problemas graves de seguridad:
 
-* Texto plano
-* Reutilización
-* Mal filtrado por IP
+❌ No tiene autenticación real
+❌ No tiene cifrado
+❌ Todo viaja en texto plano
 
-👉 Cada vez que se envían, **pueden ser interceptadas**.
+Eso significa que:
+
+Si alguien captura el tráfico de red (por ejemplo con Wireshark), puede leer absolutamente todo.
+
+Incluso puede ver la "contraseña" utilizada.
+
+---
+
+# 3️⃣ ¿Qué significa que viaja en texto plano?
+
+Texto plano significa:
+
+* No está cifrado
+* No está protegido
+* Se puede leer directamente
+
+Es como mandar una contraseña por WhatsApp sin cifrado.
+
+Cualquiera que intercepte el tráfico puede verla.
+
+---
+
+# 4️⃣ 🟠 SNMPv2c – Community-Based
+
+SNMPv2 tuvo varias variantes.
+
+La única que se mantiene en uso hoy es:
+
+👉 SNMPv2c
+
+La "c" significa **community-based**.
+
+Esto significa que introduce el concepto de:
+
+## Community String
+
+Pero atención:
+
+Aunque mejora algunas funciones técnicas del protocolo...
+
+⚠ En términos de seguridad es prácticamente igual a v1.
+
+¿Por qué?
+
+Porque la community string también viaja en texto plano.
+
+---
+
+# 5️⃣ Entonces… ¿SNMPv2c es seguro?
+
+No.
+
+Es más práctico y eficiente que v1.
+
+Pero desde el punto de vista de seguridad:
+
+Es casi lo mismo.
+
+Si alguien intercepta el tráfico:
+
+Puede ver la community string.
+
+Y si tiene la community correcta:
+
+Puede enumerar completamente el dispositivo.
+
+---
+
+# 6️⃣ 🟢 SNMPv3 – La versión segura
+
+SNMPv3 fue creado para solucionar los problemas de seguridad.
+
+Introduce:
+
+✔ Autenticación basada en usuario y contraseña
+✔ Cifrado del tráfico
+✔ Integridad de los mensajes
+
+Esto significa que:
+
+* No cualquiera puede consultar
+* No cualquiera puede modificar
+* El tráfico no puede leerse fácilmente
+
+Ahora sí existe protección real.
+
+---
+
+# 7️⃣ ¿Entonces por qué no todos usan SNMPv3?
+
+Porque:
+
+* Es más complejo de configurar
+* Requiere más parámetros
+* Migrar redes grandes puede ser costoso
+* Muchos dispositivos legacy no lo soportan completamente
+
+Resultado práctico:
+
+Muchas organizaciones siguen usando SNMPv2c.
+
+Y ahí es donde aparece el problema.
+
+---
+
+# 8️⃣ Community Strings – Qué son realmente
+
+Una **community string** es como una contraseña simple.
+
+Funciona como un "token" que el cliente envía al agente.
+
+Ejemplo clásico:
+
+```
+snmpwalk -v2c -c public 10.10.10.10
+```
+
+En ese ejemplo:
+
+"public" es la community string.
+
+Si es correcta:
+
+El dispositivo responde.
+
+Si es incorrecta:
+
+No responde o devuelve error.
+
+---
+
+# 9️⃣ Tipos comunes de community strings
+
+Las más comunes (por mala práctica):
+
+* public
+* private
+* public123
+* nombre_del_host
+
+Muchos dispositivos vienen por defecto con:
+
+* public → solo lectura
+* private → lectura y escritura
+
+Si no se cambian…
+
+Quedan expuestos.
+
+---
+
+# 🔟 ¿Por qué son peligrosas?
+
+Porque:
+
+* Viajan en texto plano
+* Pueden interceptarse
+* Muchas veces no se cambian
+* Se reutilizan en múltiples dispositivos
+
+Si un atacante obtiene una community válida:
+
+Puede:
+
+✔ Enumerar usuarios
+✔ Obtener interfaces
+✔ Ver rutas internas
+✔ Obtener versión del sistema
+✔ Modificar configuraciones (si tiene permisos)
+
+---
+
+# 1️⃣1️⃣ Escenario de Ataque Real
+
+Imaginemos:
+
+Una empresa usa SNMPv2c con community "public".
+
+Un atacante en la misma red ejecuta:
+
+```
+snmpwalk -v2c -c public 192.168.1.1
+```
+
+Si responde:
+
+Acaba de exponer:
+
+* Información del dispositivo
+* Arquitectura interna
+* Información de red
+
+Todo sin credenciales fuertes.
+
+---
 
 ---
 
