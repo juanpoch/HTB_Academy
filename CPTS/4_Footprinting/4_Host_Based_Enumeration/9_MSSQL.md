@@ -101,15 +101,19 @@ CyberWolfSec@htb[/htb]$ locate mssqlclient
 
 # 4️⃣ Bases de Datos del Sistema
 
-MSSQL incluye bases críticas por defecto.
+MSSQL cuenta con bases de datos de sistema predeterminadas que nos ayudan a comprender la estructura de todas las bases de datos que pueden estar alojadas en un servidor de destino:
 
-| Base     | Función                                        |
-| -------- | ---------------------------------------------- |
-| master   | Información del sistema y configuración global |
-| model    | Plantilla para nuevas bases                    |
-| msdb     | Jobs y tareas programadas                      |
-| tempdb   | Objetos temporales                             |
-| resource | Objetos internos del sistema                   |
+| Base del Sistema | Descripción                                                                 | Notas Importantes para Pentesting |
+|------------------|------------------------------------------------------------------------------|------------------------------------|
+| **master**       | Almacena toda la información del sistema para la instancia de SQL Server: configuración global, logins, endpoints y metadatos críticos. | Base más sensible. Permite enumerar usuarios, roles y configuraciones del servidor. |
+| **model**        | Base plantilla utilizada como estructura para cada nueva base de datos creada. Cualquier cambio aquí se hereda en nuevas bases. | Puede usarse para persistencia si un atacante logra modificarla. |
+| **msdb**         | Utilizada por SQL Server Agent para almacenar trabajos programados (jobs), alertas y tareas automatizadas. | Jobs mal configurados pueden permitir ejecución de comandos o escalada. |
+| **tempdb**       | Almacena objetos temporales como tablas temporales, resultados intermedios y datos de sesión. Se recrea al reiniciar el servidor. | No persiste datos tras reinicio, pero puede revelar actividad en curso. |
+| **resource**     | Base de datos de solo lectura que contiene objetos internos del sistema incluidos con SQL Server. | No es modificable, pero es clave para el funcionamiento interno del motor. |
+
+
+[Fuente](https://learn.microsoft.com/en-us/sql/relational-databases/databases/system-databases?view=sql-server-ver15)  
+
 
 ---
 
