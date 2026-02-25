@@ -196,13 +196,243 @@ symbolic-links=0
 !includedir /etc/mysql/conf.d/
 ```
 
-### 8.2 Lectura rápida de parámetros importantes
+---
 
-* **port = 3306**: puerto típico MySQL.
-* **user = mysql**: usuario del sistema con el que corre el servicio.
-* **datadir = /var/lib/mysql**: dónde se guardan los datos.
-* **socket = ...mysqld.sock**: socket local (para conexiones locales sin TCP).
-* **skip-name-resolve**: evita resolver DNS; usa IPs directamente (mejora performance / reduce dependencia de DNS).
+
+# 📦 MySQL – Análisis Detallado del Archivo de Configuración
+
+Este documento explica en profundidad los parámetros observados en un archivo de configuración típico de MySQL (generalmente ubicado en `/etc/mysql/my.cnf` o rutas similares en sistemas Linux).
+
+---
+
+# 🔎 Estructura General del Archivo
+
+El archivo está dividido en **secciones** indicadas por encabezados entre corchetes:
+
+```
+[client]
+[mysqld_safe]
+[mysqld]
+```
+
+Cada sección aplica a un componente distinto del ecosistema MySQL.
+
+---
+
+# 🖥️ 1️⃣ Sección `[client]`
+
+Esta sección define parámetros para los clientes que se conectan al servidor MySQL (por ejemplo: `mysql`, `mysqldump`, scripts, aplicaciones, etc.).
+
+```
+[client]
+port = 3306
+socket = /var/run/mysqld/mysqld.sock
+```
+
+## 🔹 port = 3306
+
+* Es el puerto TCP en el que el cliente intentará conectarse.
+* **3306 es el puerto estándar de MySQL.**
+* Si el servidor escucha en otro puerto, el cliente debe especificarlo.
+
+⚠️ En auditorías de seguridad, encontrar 3306 expuesto a Internet puede indicar una mala configuración.
+
+## 🔹 socket = /var/run/mysqld/mysqld.sock
+
+* Es el archivo de socket Unix.
+* Se usa para conexiones locales (sin usar TCP/IP).
+* Es más rápido y seguro para conexiones dentro del mismo servidor.
+
+Ejemplo:
+
+```
+mysql -u root -p --socket=/var/run/mysqld/mysqld.sock
+```
+
+---
+
+# 🛡️ 2️⃣ Sección `[mysqld_safe]`
+
+`mysqld_safe` es un wrapper que inicia el servidor MySQL y lo reinicia si se cae.
+
+```
+[mysqld_safe]
+pid-file = /var/run/mysqld/mysqld.pid
+socket = /var/run/mysqld/mysqld.sock
+nice = 0
+```
+
+## 🔹 pid-file
+
+* Guarda el ID del proceso (PID) del servidor.
+* Permite al sistema controlar el servicio.
+* Ejemplo: detenerlo con `kill`.
+
+## 🔹 socket
+
+* Debe coincidir con el definido en otras secciones.
+
+## 🔹 nice = 0
+
+* Define la prioridad del proceso en el sistema Linux.
+* 0 = prioridad normal.
+* Valores positivos → menor prioridad.
+* Valores negativos → mayor prioridad.
+
+---
+
+# 🧠 3️⃣ Sección `[mysqld]` (La más importante)
+
+Esta sección define cómo se comporta el servidor MySQL.
+
+```
+[mysqld]
+skip-host-cache
+skip-name-resolve
+user = mysql
+pid-file = /var/run/mysqld/mysqld.pid
+socket = /var/run/mysqld/mysqld.sock
+port = 3306
+basedir = /usr
+datadir = /var/lib/mysql
+tmpdir = /tmp
+lc-messages-dir = /usr/share/mysql
+explicit_defaults_for_timestamp
+symbolic-links = 0
+```
+
+---
+
+## 🔹 skip-host-cache
+
+* Desactiva la caché de resolución de host.
+* Reduce problemas cuando cambian IPs.
+* Mejora estabilidad en ciertos entornos dinámicos.
+
+---
+
+## 🔹 skip-name-resolve
+
+* MySQL no intentará resolver nombres DNS.
+* Solo trabajará con direcciones IP.
+
+### 🎯 Ventajas:
+
+* Mejora rendimiento.
+* Reduce dependencia de DNS.
+* Evita retrasos si el DNS falla.
+
+### 🔐 En seguridad:
+
+Implica que los permisos deben definirse por IP y no por hostname.
+
+Ejemplo válido:
+
+```
+GRANT ALL ON db.* TO 'user'@'192.168.1.%';
+```
+
+---
+
+## 🔹 user = mysql
+
+* Usuario del sistema Linux con el que corre el servicio.
+* Buenas prácticas: nunca correr MySQL como root.
+* Reduce impacto ante una posible explotación.
+
+---
+
+## 🔹 port = 3306
+
+* Puerto en el que escucha el servidor.
+* Puede modificarse por seguridad ("security through obscurity", aunque no reemplaza controles reales).
+
+---
+
+## 🔹 basedir = /usr
+
+* Directorio base donde está instalado MySQL.
+* Contiene binarios y librerías.
+
+---
+
+## 🔹 datadir = /var/lib/mysql
+
+* Carpeta donde se almacenan las bases de datos.
+* Cada base de datos es un subdirectorio.
+* Cada tabla puede ser un archivo físico.
+
+📁 Ejemplo típico:
+
+```
+/var/lib/mysql/
+  ├── mysql/
+  ├── information_schema/
+  ├── mi_base_de_datos/
+```
+
+🔐 Desde perspectiva ofensiva:
+Si un atacante logra escribir archivos aquí, puede comprometer completamente la base de datos.
+
+---
+
+## 🔹 tmpdir = /tmp
+
+* Directorio para archivos temporales.
+* Usado para operaciones como ORDER BY grandes o joins complejos.
+
+⚠️ Si `/tmp` tiene permisos inseguros, podría haber vectores de abuso.
+
+---
+
+## 🔹 lc-messages-dir
+
+* Directorio de mensajes de error.
+* Define localización e idioma.
+
+---
+
+## 🔹 explicit_defaults_for_timestamp
+
+* Obliga a definir explícitamente valores por defecto para columnas TIMESTAMP.
+* Mejora consistencia.
+
+---
+
+## 🔹 symbolic-links = 0
+
+* Desactiva enlaces simbólicos.
+
+🔐 Importante en seguridad:
+Evita ataques donde se usan symlinks para redirigir archivos sensibles.
+
+---
+
+# 📂 Directiva Final
+
+```
+!includedir /etc/mysql/conf.d/
+```
+
+* Incluye configuraciones adicionales.
+* Permite modularizar configuración.
+* Muchas veces aquí se agregan parámetros personalizados.
+
+---
+
+# 🔐 Perspectiva de Pentesting
+
+Cuando auditamos MySQL, estos parámetros nos permiten inferir:
+
+* Si escucha solo local o remotamente.
+* Dónde están almacenados los datos.
+* Si depende de DNS.
+* Qué usuario del sistema ejecuta el servicio.
+* Posibles vectores locales (tmpdir, datadir, permisos).
+
+---
+
+
 
 ---
 
