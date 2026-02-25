@@ -825,6 +825,10 @@ Para consolidar conocimientos:
 
 ---
 
+## Recursos:
+
+- [MySql System Schema manual](https://dev.mysql.com/doc/refman/8.0/en/system-schema.html#:~:text=The%20mysql%20schema%20is%20the,used%20for%20other%20operational%20purposes)
+- [General Security Issues](https://dev.mysql.com/doc/refman/8.0/en/general-security-issues.html)
 
 
 ---
