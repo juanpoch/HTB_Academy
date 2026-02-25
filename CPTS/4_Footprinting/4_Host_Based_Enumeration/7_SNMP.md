@@ -1358,40 +1358,63 @@ Y en pentesting, debe enumerarse siempre.
 
 ### Preguntas
 
-`IP`: `10.129.226.159`
 
 #### Enumere el servicio SNMP y obtenga la dirección de correo electrónico del administrador. Envíela como respuesta.
 
 
-Hacemos un escaneo UDP rápido:
-<img width="769" height="307" alt="image" src="https://github.com/user-attachments/assets/1e761e02-d23d-462e-938e-d463ec5e5ae0" />
+Envíamos una traza `ICMP` al host para verificar si se encuentra activo:
 
-Descubrimos es servicio SNMP en el puerto UDP 161.
-
-Realizamos un escaneo de versiones:
-<img width="1239" height="333" alt="image" src="https://github.com/user-attachments/assets/c11c6e2c-63e8-4870-b401-d4a5d3b047dd" />
+<img width="641" height="167" alt="image" src="https://github.com/user-attachments/assets/13052c81-9dac-4b5c-b6e8-ceec7e854b6a" />
 
 
-Vemos SNMPv1 activo y la comunity string `public`.
-
-SNMPv3 está instalado, pero SNMPv1/v2c sigue abierto, lo cual anula completamente la seguridad.
-
----
-
-Utilizamos todos los scripts de nmap correspondientes a snmp:
-<img width="1245" height="790" alt="image" src="https://github.com/user-attachments/assets/07c8b52c-2114-4a9e-baaf-efa59800a812" />
-<img width="1103" height="841" alt="image" src="https://github.com/user-attachments/assets/4a136e3b-1841-4ab0-bcf5-bd57a74da62a" />
-<img width="963" height="814" alt="image" src="https://github.com/user-attachments/assets/3551597a-1244-4630-b065-81391aefe77d" />
-<img width="929" height="857" alt="image" src="https://github.com/user-attachments/assets/a2a68a3f-8e29-421e-b50f-47f73a6fa7de" />
-<img width="960" height="848" alt="image" src="https://github.com/user-attachments/assets/e42e85fd-1349-416c-96e9-85e24c3d4102" />
-<img width="1143" height="737" alt="image" src="https://github.com/user-attachments/assets/ce5552ba-bdcb-4731-bf0d-9192d6021b0f" />
+Hacemos un escaneo UDP sobre el puerto 161 para verificar que el servicio se encuentra disponible:
+<img width="631" height="156" alt="image" src="https://github.com/user-attachments/assets/918be748-bfa9-413b-93d8-1c524c91d39e" />
 
 
+Descubrimos es servicio SNMP en el puerto UDP 161, realizamos un escaneo de versiones y lanzamos el script=banner:
+
+<img width="886" height="296" alt="image" src="https://github.com/user-attachments/assets/07da4d2c-d2e7-493b-8c07-76c7f8804561" />
+
+
+Vemos `SNMPv1` activo y la comunity string `public`.
+
+`SNMPv3` está instalado, pero `SNMPv1/v2c` sigue abierto, lo cual anula completamente la seguridad.
 
 ---
 
-Enumeramos con `snmpwalk`:
-<img width="1383" height="808" alt="image" src="https://github.com/user-attachments/assets/f8898458-8952-48c7-bcd3-cbd3bc3b67b9" />
+Buscamos todos los scripts NSE disponibles en el sistema:
+```bash
+find / -type f -name snmp* 2>/dev/null |grep scripts
+```
+<img width="661" height="323" alt="image" src="https://github.com/user-attachments/assets/116d69fe-ce24-4adb-b6c0-b92c696a50bd" />
+
+
+
+Realizamos un escaneo de versiones en nmap lanzando un conjunto de scripts predeterminados:
+```bash
+nmap -Pn -n --reason -sU -sVC -p161 <ip>
+```
+Vemos que la enumeración es extensa:
+<img width="906" height="887" alt="image" src="https://github.com/user-attachments/assets/6a6c26f9-dbc4-4daf-ae84-f048095d4c72" />
+
+
+---
+
+Enumeramos con `snmpwalk`, probamos ingresar por el protocolo `snmp v1`:
+```bash
+snmpwalk -v1 -c public <ip>
+```
+<img width="948" height="874" alt="image" src="https://github.com/user-attachments/assets/9604cfd6-06f6-4d92-9547-221008f6991e" />
+
+
+`Nota`: También podríamos conectarnos por el protocolo `v2c`:
+```bash
+snmpwalk -v2c -c public 10.129.8.142
+```
+<img width="938" height="882" alt="image" src="https://github.com/user-attachments/assets/0fd43604-c9f6-4f06-86f1-a9692bafe823" />
+
+
+Obtenemos el mail del administrador: `devadmin@inlanefreight.htb`
 
 ---
 
