@@ -1471,4 +1471,4 @@ snmpwalk -v2c -c public 10.129.8.142
 
 `Script`: `/usr/share/flag.sh`
 
-`Salida del script`: `HTB{5nMp_fl4g_uidhfljnsldiuhbfsdij44738b2u763g}
+`Salida del script`: `HTB{5nMp_fl4g_uidhfljnsldiuhbfsdij44738b2u763g}`
