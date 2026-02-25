@@ -1206,6 +1206,11 @@ Crunch permite generar listas personalizadas basadas en reglas.
 
 Ejemplos básicos:
 
+Sintaxix básica:
+```bash
+crunch <min_length> <max_length>
+```
+
 Generar combinaciones numéricas:
 
 ```bash
@@ -1229,7 +1234,11 @@ Podríamos generar algo como:
 * coreab12
 * corexy45
 
+`Nota`: En este caso, el patrón define realmente 8 caracteres.
+
 También podemos usar diccionarios base y agregar reglas.
+
+
 
 ---
 
@@ -1255,7 +1264,7 @@ En redes grandes, la previsibilidad humana es una debilidad.
 
 # 7️⃣ Enumeración masiva con braa
 
-Una vez que conocemos la community, podemos usar:
+Una vez que conocemos la community, podemos usar [braa](https://github.com/mteg/braa):
 
 ```bash
 sudo apt install braa
