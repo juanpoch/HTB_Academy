@@ -838,5 +838,79 @@ Para consolidar conocimientos:
 
 #### Enumerar el servidor MySQL y determinar la versión en uso. (Formato: MySQL XXXX)
 
+Lanzamos una traza `ICMP` al target para verificar que se encuentra activo:
+<img width="538" height="143" alt="image" src="https://github.com/user-attachments/assets/7b2441ac-0ca5-4f76-a698-5a024c18ae25" />
+
+Hacemos un `TCP SYN Scann` con nmap al puerto 3306 para verificar que el servicio se encuentra open:
+
+```bash
+nmap -Pn -n --reason -sS -p3306 10.129.10.41
+```
+
+<img width="566" height="172" alt="image" src="https://github.com/user-attachments/assets/cb5a4d3f-869c-4c36-99eb-6420b83c4418" />
+
+Hacemos un escaneo de versiones al objetivo, lanzamos el script=banner:
+```bash
+nmap -Pn -n --reason -sV --script=banner -p3306 <ip>
+```
+
+<img width="768" height="231" alt="image" src="https://github.com/user-attachments/assets/21b74aa5-5c72-4710-82c4-7b16e78cfc72" />
+
+Encontramos la versión: `MySQL 8.0.27`
+
+Con banner grabbing manual también la obtenemos utilizando `telnet <ip> 3306`:
+<img width="1021" height="163" alt="image" src="https://github.com/user-attachments/assets/6fce8be9-b65c-433f-ab15-ebfad10cf095" />
+
+También realizandolo con netcat `nc <ip> 3306`:
+<img width="574" height="133" alt="image" src="https://github.com/user-attachments/assets/1457e05e-14f4-4f6c-8f38-41d7b0a29f4d" />
+
+
+
+Adicionalmente vamos a lanzar todos los scripts NSE de nmap para mysql, primero los buscamos:
+```bash
+find / -type f -name mysql* 2>/dev/null |grep scripts
+```
+<img width="632" height="270" alt="image" src="https://github.com/user-attachments/assets/91ae2fba-f7c8-4bca-97b2-eec2a07d9fa6" />
+
+Lanzamos el escaneo de nmap con todos los scripts correspondientes para `MySql`:
+```bash
+nmap -Pn -n --reason -sV --script mysql* -p3306 10.129.10.41
+```
 
 #### Durante nuestra prueba de penetración, encontramos credenciales débiles "robin:robin". Deberíamos probarlas con el servidor MySQL. ¿Cuál es la dirección de correo electrónico del cliente "Otto Lang"?
+
+
+Nos conectamos al servidor MySql con las credenciales obtenidas `robin:robin`:
+
+```bash
+mysql -u robin -probin -h <ip>
+```
+<img width="1171" height="114" alt="image" src="https://github.com/user-attachments/assets/c4d258b9-0a2c-4e1d-ad6b-777477550d1c" />
+
+Nos dice que el servidor tiene un certificado autofirmado y nuestro cliente no confía. Probamos esquivar la autenticación con ssl:
+```bash
+mysql -u robin -probin -h <ip> --skip-ssl
+```
+Ingresamos al servidor, esto significa que el servidor no obliga SSL estrictamente:
+<img width="1169" height="363" alt="image" src="https://github.com/user-attachments/assets/6a8ec067-9215-41d0-91cb-b17f0f1555c4" />
+
+
+
+Enumeramos las bases de datos del servidor con `show databases;`:
+<img width="484" height="353" alt="image" src="https://github.com/user-attachments/assets/a8b6288d-dfc5-44bc-b5c5-e77e4c7d62f5" />
+
+Vemos una base de datos llamada `customers` que llama la atención, ingresamos a ella con el comando `use customers`:
+<img width="946" height="197" alt="image" src="https://github.com/user-attachments/assets/2cfdd969-c1f6-4b64-a991-64c2079fbefa" />
+
+
+Enumeramos las tablas con `show tables;`:
+<img width="528" height="221" alt="image" src="https://github.com/user-attachments/assets/a107b14a-1c9f-4004-ad56-a076f3639110" />
+
+La base de datos tiene una tabla llamada `myTable`. Observamos su contenido con `describe myTable;`:
+<img width="1207" height="424" alt="image" src="https://github.com/user-attachments/assets/9889d507-c8fd-49f2-874e-077e3a567d9a" />
+
+Consultamos el mail de Otto Lang con el comando `SELECT email from myTable WHERE name="Otto Lang";
+`:
+<img width="1056" height="216" alt="image" src="https://github.com/user-attachments/assets/22f9d3ee-23d8-48b2-9fa1-043c69ca4456" />
+
+Encontramos que la dirección de correo de Otto Lang es `ultrices@google.htb`.
