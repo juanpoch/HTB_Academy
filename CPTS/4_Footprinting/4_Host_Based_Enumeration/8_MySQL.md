@@ -475,47 +475,30 @@ Más [opciones](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.
 
 ---
 
-# 10. Footprinting del Servicio MySQL
 
-Normalmente MySQL escucha en:
+Footprinting the Service
+There are many reasons why a MySQL server could be accessed from an external network. Nevertheless, it is far from being one of the best practices, and we can always find databases that we can reach. Often, these settings were only meant to be temporary but were forgotten by the administrators. This server setup could also be used as a workaround due to a technical problem. Usually, the MySQL server runs on TCP port 3306, and we can scan this port with Nmap to get more detailed information.
 
-* **TCP/3306**
+Scanning MySQL Server
+  MySQL
+CyberWolfSec@htb[/htb]$ sudo nmap 10.129.14.128 -sV -sC -p3306 --script mysql*
 
-Exponer MySQL a redes externas **no es buena práctica**.
-
-Aun así, es común encontrarlo expuesto porque:
-
-* Configuración temporal olvidada
-* Workarounds técnicos
-* Errores de firewall
-
----
-
-## 10.1 Escaneo con Nmap (salida completa)
-
-```bash
-sudo nmap 10.129.14.128 -sV -sC -p3306 --script mysql*
-```
-
-Salida:
-
-```text
 Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-21 00:53 CEST
 Nmap scan report for 10.129.14.128
 Host is up (0.00021s latency).
 
 PORT     STATE SERVICE     VERSION
 3306/tcp open  nagios-nsca Nagios NSCA
-| mysql-brute:
-|   Accounts:
+| mysql-brute: 
+|   Accounts: 
 |     root:<empty> - Valid credentials
 |_  Statistics: Performed 45010 guesses in 5 seconds, average tps: 9002.0
 |_mysql-databases: ERROR: Script execution failed (use -d to debug)
 |_mysql-dump-hashes: ERROR: Script execution failed (use -d to debug)
-| mysql-empty-password:
+| mysql-empty-password: 
 |_  root account has empty password
-| mysql-enum:
-|   Valid usernames:
+| mysql-enum: 
+|   Valid usernames: 
 |     root:<empty> - Valid credentials
 |     netadmin:<empty> - Valid credentials
 |     guest:<empty> - Valid credentials
@@ -527,7 +510,7 @@ PORT     STATE SERVICE     VERSION
 |     admin:<empty> - Valid credentials
 |     test:<empty> - Valid credentials
 |_  Statistics: Performed 10 guesses in 1 seconds, average tps: 10.0
-| mysql-info:
+| mysql-info: 
 |   Protocol: 10
 |   Version: 8.0.26-0ubuntu0.20.04.1
 |   Thread ID: 13
@@ -543,49 +526,18 @@ MAC Address: 00:00:00:00:00:00 (VMware)
 
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 11.21 seconds
-```
+As with all our scans, we must be careful with the results and manually confirm the information obtained because some of the information might turn out to be a false-positive. This scan above is an excellent example of this, as we know for a fact that the target MySQL server does not use an empty password for the user root, but a fixed password. We can test this with the following command:
 
-### 10.2 Nota importante sobre falsos positivos
+Interaction with the MySQL Server
+  MySQL
+CyberWolfSec@htb[/htb]$ mysql -u root -h 10.129.14.132
 
-Nmap y sus scripts pueden dar **falsos positivos**.
-
-Este caso es un ejemplo: Nmap sugiere que `root` tiene password vacío, pero sabemos que **no es cierto**.
-
-Por eso siempre hay que validar manualmente.
-
----
-
-# 11. Interacción Manual con MySQL
-
-## 11.1 Prueba sin contraseña (fallo esperado)
-
-```bash
-mysql -u root -h 10.129.14.132
-```
-
-Salida:
-
-```text
 ERROR 1045 (28000): Access denied for user 'root'@'10.129.14.1' (using password: NO)
-```
+For example, if we use a password that we have guessed or found through our research, we will be able to log in to the MySQL server and execute some commands.
 
-Esto confirma:
+  MySQL
+CyberWolfSec@htb[/htb]$ mysql -u root -pP4SSw0rd -h 10.129.14.128
 
-* El servidor existe
-* Requiere autenticación
-* No acepta login sin password para root
-
----
-
-## 11.2 Login con password válido (ejemplo)
-
-```bash
-mysql -u root -pP4SSw0rd -h 10.129.14.128
-```
-
-Salida:
-
-```text
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MySQL connection id is 150165
 Server version: 8.0.27-0ubuntu0.20.04.1 (Ubuntu)                                                         
@@ -638,27 +590,12 @@ MySQL [mysql]> show tables;
 | user                                                 |
 +------------------------------------------------------+
 37 rows in set (0.002 sec)
-```
+If we look at the existing databases, we will see several already exist. The most important databases for the MySQL server are the system schema (sys) and information schema (information_schema). The system schema contains tables, information, and metadata necessary for management. More about this database can be found in the reference manual of MySQL.
 
-### 11.3 Qué significan estas bases
+  MySQL
+mysql> use sys;
+mysql> show tables;  
 
-* `mysql`: base interna con usuarios, permisos y metadata.
-* `sys`: schema con vistas y métricas para administración.
-* `information_schema`: metadata estándar ANSI/ISO.
-* `performance_schema`: métricas de performance.
-
----
-
-# 12. Exploración del schema `sys` (salida completa)
-
-```sql
-use sys;
-show tables;
-```
-
-Salida:
-
-```text
 +-----------------------------------------------+
 | Tables_in_sys                                 |
 +-----------------------------------------------+
@@ -675,56 +612,37 @@ Salida:
 ...SNIP...
 | x$waits_global_by_latency                     |
 +-----------------------------------------------+
-```
 
-Luego:
 
-```sql
-select host, unique_users from host_summary;
-```
+mysql> select host, unique_users from host_summary;
 
-Salida:
-
-```text
 +-------------+--------------+                   
 | host        | unique_users |                   
 +-------------+--------------+                   
 | 10.129.14.1 |            1 |                   
 | localhost   |            2 |                   
 +-------------+--------------+                   
-2 rows in set (0,01 sec)
-```
+2 rows in set (0,01 sec)  
+The information schema is also a database that contains metadata. However, this metadata is mainly retrieved from the system schema database. The reason for the existence of these two is the ANSI/ISO standard that has been established. System schema is a Microsoft system catalog for SQL servers and contains much more information than the information schema.
+
+Some of the commands we should remember and write down for working with MySQL databases are described below in the table.
+
+Command	Description
+mysql -u <user> -p<password> -h <IP address>	Connect to the MySQL server. There should not be a space between the '-p' flag, and the password.
+show databases;	Show all databases.
+use <database>;	Select one of the existing databases.
+show tables;	Show all available tables in the selected database.
+show columns from <table>;	Show all columns in the selected table.
+select * from <table>;	Show everything in the desired table.
+select * from <table> where <column> = "<string>";	Search for needed string in the desired table.
+We must know how to interact with different databases. Therefore, we recommend installing and configuring a MySQL server on one of our VMs for experimentation. There is also a widely covered security issues section in the reference manual that covers best practices for securing MySQL servers. We should use this when setting up our MySQL server to understand better why something might not work.
 
 ---
 
-# 13. Comandos esenciales para trabajar con MySQL
-
-| Comando                                              | Descripción                                                              |
-| ---------------------------------------------------- | ------------------------------------------------------------------------ |
-| `mysql -u <user> -p<password> -h <IP address>`       | Conecta al servidor. **No debe haber espacio** entre `-p` y el password. |
-| `show databases;`                                    | Lista todas las bases.                                                   |
-| `use <database>;`                                    | Selecciona una base específica.                                          |
-| `show tables;`                                       | Lista tablas de la base seleccionada.                                    |
-| `show columns from <table>;`                         | Muestra columnas de una tabla.                                           |
-| `select * from <table>;`                             | Muestra todos los registros.                                             |
-| `select * from <table> where <column> = "<string>";` | Busca un valor específico en una columna.                                |
-
----
-
-## 14. Conclusión
-
-En footprinting de MySQL, lo importante es:
-
-* Detectar exposición en red (3306)
-* Identificar versión y plugin de auth
-* No confiar ciegamente en scripts (validar manualmente)
-* Entender qué bases son críticas (`mysql`, `sys`)
-* Con credenciales, explorar de forma controlada
-
-Para consolidar aprendizaje, conviene montar un lab propio (MySQL/MariaDB) y practicar:
-
-* Usuarios y permisos
-* Hardening
-* Logs y configuraciones
+# Preeguntas
 
 
+#### Enumerar el servidor MySQL y determinar la versión en uso. (Formato: MySQL XXXX)
+
+
+#### Durante nuestra prueba de penetración, encontramos credenciales débiles "robin:robin". Deberíamos probarlas con el servidor MySQL. ¿Cuál es la dirección de correo electrónico del cliente "Otto Lang"?
