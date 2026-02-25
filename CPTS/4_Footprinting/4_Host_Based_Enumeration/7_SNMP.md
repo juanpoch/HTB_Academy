@@ -166,58 +166,223 @@ En la práctica, muchas redes todavía usan v1 o v2c.
 
 ---
 
-## 4. MIB – Management Information Base
-
-La **MIB** es un componente fundamental de SNMP.
-
-📄 ¿Qué es una MIB?
-
-* Un archivo de texto
-* Describe **qué información puede consultarse**
-* Organiza los objetos en una **estructura jerárquica tipo árbol**
-
-Características:
-
-* Escrita en **ASN.1 (Abstract Syntax Notation One)**
-* No contiene datos reales
-* Define:
-
-  * OID
-  * Nombre
-  * Tipo de dato
-  * Permisos (read-only / read-write)
-  * Descripción
-
-👉 La MIB responde a la pregunta:
-
-> *¿Dónde está la información y cómo se ve?*
-
-Repositorio oficial de OIDs:
-
-* [https://oidref.com](https://oidref.com)
-* [https://www.alvestrand.no/objectid/](https://www.alvestrand.no/objectid/)
+# 🌳 SNMP – MIB y OID Explicado en Profundidad (Desde Cero)
 
 ---
 
-## 5. OID – Object Identifier
+# 1️⃣ El Problema que Resuelve la MIB
 
-Un **OID** identifica de forma única un nodo en el árbol SNMP.
+Imaginemos esta situación:
 
-Ejemplo:
+Tenés:
+
+* Un router Cisco
+* Un switch HP
+* Un firewall Fortinet
+
+Todos usan SNMP.
+
+Pero… ¿cómo hace un cliente SNMP para entenderse con todos si cada fabricante diseña sus dispositivos de forma diferente?
+
+👉 Para resolver ese problema se creó la **MIB (Management Information Base)**.
+
+La MIB es el "diccionario universal" que permite que SNMP funcione de manera estándar entre distintos fabricantes.
+
+---
+
+# 2️⃣ ¿Qué es exactamente una MIB?
+
+Una **MIB** es:
+
+* Un archivo de texto
+* Escrito en formato **ASN.1 (Abstract Syntax Notation One)**
+* Con estructura jerárquica tipo árbol
+* Que describe TODOS los objetos que pueden consultarse vía SNMP
+
+⚠ Importante:
+
+La MIB **NO contiene datos reales**.
+
+No guarda métricas.
+No guarda valores.
+
+Solo describe:
+
+* Qué se puede consultar
+* Dónde está
+* Qué tipo de dato devuelve
+* Si puede modificarse o no
+
+---
+
+# 3️⃣ ¿Qué información contiene una MIB?
+
+Cada objeto dentro de la MIB define:
+
+* 📌 Un OID (dirección única)
+* 🏷 Un nombre simbólico
+* 🧾 Tipo de dato (Integer, String, Counter, etc.)
+* 🔐 Permisos (read-only o read-write)
+* 📖 Descripción textual
+
+Es decir, responde a la pregunta:
+
+> "¿Dónde está la información y cómo debo interpretarla?"
+
+---
+
+# 4️⃣ La Estructura en Forma de Árbol
+
+La MIB organiza los objetos en una estructura jerárquica tipo árbol.
+
+Visualmente sería algo así:
+
+```
+1
+└── 3
+    └── 6
+        └── 1
+            └── 2
+                └── 1
+                    └── 1
+```
+
+Cada nivel representa un nodo.
+
+Cada nodo tiene un número.
+
+La combinación completa forma un **OID**.
+
+---
+
+# 5️⃣ ¿Qué es un OID?
+
+Un **OID (Object Identifier)** es la dirección exacta de un objeto dentro del árbol SNMP.
+
+Ejemplo real:
 
 ```
 1.3.6.1.2.1.1.1.0
 ```
 
-Características:
+Ese número representa una ruta dentro del árbol.
 
-* Secuencia de números separados por puntos
-* Cuanto más largo, más específico
-* Muchos nodos solo sirven como referencia
+Es como una ruta de carpetas en un sistema operativo:
 
-Visualización del árbol:
+```
+/home/juan/documentos/archivo.txt
+```
 
+Pero en formato numérico.
+
+---
+
+# 6️⃣ Cómo Leer un OID
+
+Tomemos este ejemplo:
+
+```
+1.3.6.1.2.1.1.1.0
+```
+
+Cada número representa un nivel en la jerarquía.
+
+Cuanto más largo el OID:
+
+👉 Más específico es el objeto.
+
+Muchos nodos intermedios no contienen datos reales.
+Solo sirven como organización.
+
+Los datos reales suelen estar en los nodos finales.
+
+---
+
+# 7️⃣ ¿Por Qué el OID es Tan Importante?
+
+Cuando el cliente SNMP quiere información:
+
+No dice:
+
+"Dame la CPU"
+
+Dice:
+
+"Dame el valor del OID X"
+
+El agente busca ese OID y devuelve el valor correspondiente.
+
+Sin OID:
+
+❌ No hay forma de saber qué dato pedir.
+
+---
+
+# 8️⃣ Relación entre MIB y OID
+
+La relación es simple:
+
+* La MIB define el mapa
+* El OID es la dirección dentro del mapa
+* El agente tiene los datos reales
+
+Ejemplo mental:
+
+MIB → Manual del edificio
+OID → Número de departamento
+Agente → Persona que vive ahí
+Cliente → Quien toca el timbre
+
+---
+
+# 9️⃣ ASN.1 – ¿Por Qué es Relevante?
+
+Las MIB están escritas en **ASN.1**, que es un estándar para definir estructuras de datos.
+
+No necesitás dominar ASN.1 para hacer pentesting.
+
+Pero es importante entender que:
+
+* Es un formato estructurado
+* Es estándar
+* Permite que distintos fabricantes sean compatibles
+
+---
+
+# 🔟 Repositorios Útiles para Consultar OIDs
+
+Podés buscar OIDs y su significado en:
+
+* [https://oidref.com](https://oidref.com)
+* [https://www.alvestrand.no/objectid/](https://www.alvestrand.no/objectid/)
 * [https://oid-info.com](https://oid-info.com)
+
+Estos sitios te permiten traducir un OID numérico en algo entendible.
+
+---
+
+# 1️⃣1️⃣ ¿Por Qué Esto es Clave en Pentesting?
+
+Cuando hacés un:
+
+```
+snmpwalk -v2c -c public 10.10.10.10
+```
+
+El resultado que ves son OIDs con valores.
+
+Si entendés la estructura:
+
+✔ Podés identificar qué información es sensible
+✔ Podés detectar usuarios
+✔ Podés identificar interfaces
+✔ Podés obtener datos del sistema operativo
+✔ Podés descubrir información interna de red
+
+Si no entendés OIDs y MIBs, el output parece ruido.
+
+---
+
 
 ---
 
