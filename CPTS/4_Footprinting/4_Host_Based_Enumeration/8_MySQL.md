@@ -885,32 +885,39 @@ Nos conectamos al servidor MySql con las credenciales obtenidas `robin:robin`:
 ```bash
 mysql -u robin -probin -h <ip>
 ```
-<img width="1171" height="114" alt="image" src="https://github.com/user-attachments/assets/c4d258b9-0a2c-4e1d-ad6b-777477550d1c" />
+<img width="1171" height="114" alt="image" src="https://github.com/user-attachments/assets/c4d258b9-0a2c-4e1d-ad6b-777477550d1c" />  
+
 
 Nos dice que el servidor tiene un certificado autofirmado y nuestro cliente no confía. Probamos esquivar la autenticación con ssl:
 ```bash
 mysql -u robin -probin -h <ip> --skip-ssl
 ```
-Ingresamos al servidor, esto significa que el servidor no obliga SSL estrictamente:
+Ingresamos al servidor, esto significa que el servidor no obliga SSL estrictamente:  
+
 <img width="1169" height="363" alt="image" src="https://github.com/user-attachments/assets/6a8ec067-9215-41d0-91cb-b17f0f1555c4" />
 
 
 
-Enumeramos las bases de datos del servidor con `show databases;`:
+Enumeramos las bases de datos del servidor con `show databases;`:  
+
 <img width="484" height="353" alt="image" src="https://github.com/user-attachments/assets/a8b6288d-dfc5-44bc-b5c5-e77e4c7d62f5" />
 
-Vemos una base de datos llamada `customers` que llama la atención, ingresamos a ella con el comando `use customers`:
+Vemos una base de datos llamada `customers` que llama la atención, ingresamos a ella con el comando `use customers`:  
+
 <img width="946" height="197" alt="image" src="https://github.com/user-attachments/assets/2cfdd969-c1f6-4b64-a991-64c2079fbefa" />
 
 
-Enumeramos las tablas con `show tables;`:
+Enumeramos las tablas con `show tables;`:  
+
 <img width="528" height="221" alt="image" src="https://github.com/user-attachments/assets/a107b14a-1c9f-4004-ad56-a076f3639110" />
 
-La base de datos tiene una tabla llamada `myTable`. Observamos su contenido con `describe myTable;`:
+La base de datos tiene una tabla llamada `myTable`. Observamos su contenido con `describe myTable;`:  
+
 <img width="1207" height="424" alt="image" src="https://github.com/user-attachments/assets/9889d507-c8fd-49f2-874e-077e3a567d9a" />
 
 Consultamos el mail de Otto Lang con el comando `SELECT email from myTable WHERE name="Otto Lang";
-`:
+`:  
+
 <img width="1056" height="216" alt="image" src="https://github.com/user-attachments/assets/22f9d3ee-23d8-48b2-9fa1-043c69ca4456" />
 
 Encontramos que la dirección de correo de Otto Lang es `ultrices@google.htb`.
