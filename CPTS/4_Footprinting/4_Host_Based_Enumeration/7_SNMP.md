@@ -789,6 +789,9 @@ El archivo determina:
 
 Es literalmente la política de seguridad de SNMP.
 
+
+Se recomienda investigar las [páginas del manual](https://www.net-snmp.org/docs/man/snmpd.conf.html) y configurar un servidor nosotros.
+
 ---
 
 # 6️⃣ Configuraciones peligrosas
