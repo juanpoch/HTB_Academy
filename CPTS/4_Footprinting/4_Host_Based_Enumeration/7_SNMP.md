@@ -1,63 +1,170 @@
-# 📡 Footprinting – SNMP (Simple Network Management Protocol)
 
+
+# 📡 SNMP desde Cero – Explicación Simple y Clara
 
 ---
 
-## 1. Introducción a SNMP
+# 1️⃣ ¿Qué es SNMP y para qué sirve?
 
-El **Simple Network Management Protocol (SNMP)** fue creado para **monitorizar y administrar dispositivos de red**. No solo permite obtener métricas, sino también **modificar configuraciones remotamente**, lo que lo convierte en un objetivo extremadamente interesante durante la fase de enumeración.
+**SNMP (Simple Network Management Protocol)** es un protocolo diseñado para **monitorizar y administrar dispositivos de red**.
 
-Dispositivos típicos con SNMP habilitado:
+En palabras simples:
+
+👉 Permite preguntarle cosas a un dispositivo.
+👉 Permite cambiar configuraciones remotamente.
+
+Imaginá que tenés un router en una empresa. Con SNMP podrías:
+
+* Ver cuánta CPU está usando.
+* Ver el tráfico de red.
+* Saber si una interfaz está caída.
+* Cambiar ciertos parámetros de configuración.
+
+Por eso no es solo un protocolo de "consulta" — también puede **modificar valores**.
+
+---
+
+# 2️⃣ ¿Qué dispositivos suelen tener SNMP?
+
+Muchísimos dispositivos de infraestructura lo usan:
 
 * Routers
 * Switches
 * Firewalls
 * Servidores
-* Dispositivos IoT
 * Impresoras
+* Dispositivos IoT
 * Equipamiento industrial
 
-👉 SNMP es, en esencia, un **protocolo de gestión y control**, no solo de lectura.
-
-La versión actual es **SNMPv3**, que introduce seguridad real, pero en la práctica **SNMPv1 y SNMPv2c siguen estando ampliamente desplegados**.
+En entornos corporativos es extremadamente común.
 
 ---
 
-## 2. Funcionamiento general de SNMP
+# 3️⃣ Cómo funciona SNMP (modelo simple)
 
-SNMP funciona mediante un modelo **cliente ↔ agente**:
+SNMP funciona con un modelo:
 
-* El **agente SNMP** corre en el dispositivo gestionado.
-* El **cliente SNMP** consulta o modifica información.
+## 🖥 Agente ↔ Cliente
 
-Puertos utilizados:
+### 🔹 Agente SNMP
 
-* **UDP 161** → consultas SNMP (get / set / walk)
-* **UDP 162** → *SNMP traps*
+Es el servicio que corre dentro del dispositivo (router, switch, etc).
 
-### 🔔 SNMP Traps
+Es quien "tiene la información".
 
-A diferencia del modelo clásico cliente-servidor:
+### 🔹 Cliente SNMP
 
-* El agente **puede enviar información sin ser solicitado**.
-* Esto ocurre cuando sucede un evento específico (error, caída de servicio, umbral superado).
+Es el sistema que consulta o modifica esa información.
 
-Desde el punto de vista ofensivo:
-
-* Revelan arquitectura interna
-* Pueden filtrar información crítica
-* A veces están mal restringidos
+Es quien hace las preguntas.
 
 ---
 
-## 3. Identificación de objetos SNMP
+# 4️⃣ Puertos que usa SNMP
 
-Para que SNMP funcione correctamente:
+SNMP usa UDP.
 
-* Cada valor debe tener una **dirección única**.
-* Esa dirección es conocida como **OID (Object Identifier)**.
+* **UDP 161 → Consultas normales (GET, SET, WALK)**
+* **UDP 162 → Traps (alertas automáticas)**
 
-Sin OIDs, SNMP no puede operar.
+---
+
+# 5️⃣ ¿Qué significa que SNMP puede modificar cosas?
+
+No solo se limita a enviar información.
+
+También puede enviar **comandos de control**.
+
+Ejemplo:
+
+* El cliente puede cambiar el nombre del dispositivo.
+* Puede modificar ciertos parámetros.
+* Puede activar o desactivar funciones.
+
+Esto ocurre mediante comandos enviados al **puerto UDP 161**.
+
+Desde el punto de vista de seguridad:
+
+⚠ Si está mal configurado, puede permitir cambios no autorizados.
+
+---
+
+# 6️⃣ ¿Qué son los SNMP Traps? (UDP 162)
+
+En la comunicación clásica:
+
+Cliente → Pregunta
+Servidor → Responde
+
+Pero SNMP agrega algo más:
+
+## 🔔 Traps
+
+Un **trap** es un mensaje que el dispositivo envía automáticamente cuando ocurre un evento.
+
+Ejemplos:
+
+* Se cae una interfaz de red
+* Se reinicia el dispositivo
+* Se supera un umbral de CPU
+
+El dispositivo envía esa alerta sin que nadie la haya pedido.
+
+Esto viaja por **UDP 162**.
+
+---
+
+# 7️⃣ ¿Cómo sabe SNMP qué información pedir?
+
+Acá aparece algo clave:
+
+## 📌 OID (Object Identifier)
+
+Cada dato que puede consultarse en un dispositivo tiene un identificador único llamado **OID**.
+
+Un OID es como una dirección.
+
+Ejemplo conceptual:
+
+* Un OID para la CPU
+* Un OID para el uptime
+* Un OID para el nombre del sistema
+
+Si el cliente quiere saber el uptime, debe pedir el OID correspondiente.
+
+Sin OIDs, SNMP no puede funcionar.
+
+---
+
+# 8️⃣ ¿Por qué es importante en pentesting?
+
+Porque muchas veces:
+
+* Está habilitado innecesariamente
+* Usa versiones antiguas (v1 o v2c)
+* Usa comunidades por defecto como "public"
+
+Si se puede consultar libremente, puede revelar:
+
+* Información del sistema operativo
+* Interfaces de red
+* Usuarios
+* Información interna de la infraestructura
+
+Por eso es una fase clave en enumeración.
+
+---
+
+# 9️⃣ Versiones de SNMP
+
+* **SNMPv1** → Antigua, sin seguridad real
+* **SNMPv2c** → Similar a v1, usa comunidades
+* **SNMPv3** → Introduce autenticación y cifrado
+
+En la práctica, muchas redes todavía usan v1 o v2c.
+
+---
+
 
 ---
 
