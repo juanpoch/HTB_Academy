@@ -66,6 +66,12 @@ Puede:
 
 > Podríamos encontrar una máquina con SSMS instalado y credenciales guardadas.
 
+[SQL Server Management Studio SSMS](https://learn.microsoft.com/en-us/ssms/install/install?view=sql-server-ver15)
+
+
+<img width="987" height="721" alt="image" src="https://github.com/user-attachments/assets/230e0324-873e-4c22-ada2-ce464a5f1c97" />
+
+
 ---
 
 ## 🧰 Otros clientes
