@@ -20,6 +20,8 @@ En un RDBMS como MySQL, la información se almacena principalmente en **tablas**
 
 MySQL está diseñado para manejar grandes volúmenes de datos de manera eficiente.
 
+
+[Curso brebe MySql](https://www.w3schools.com/sql/sql_intro.asp)
 ---
 
 ## 2. Modelo Cliente–Servidor
