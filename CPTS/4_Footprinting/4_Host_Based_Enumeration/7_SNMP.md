@@ -928,7 +928,7 @@ Responder esas preguntas define el impacto real.
 
 ---
 
-# 🔎 SNMP – Footprinting y Enumeración Práctica (Explicado Paso a Paso)
+# 🔎 SNMP – Footprinting y Enumeración Práctica
 
 ---
 
