@@ -626,7 +626,7 @@ Todo sin credenciales fuertes.
 
 ---
 
-# ⚙️ SNMP – Configuración del Demonio y Configuraciones Peligrosas (Explicado Desde Cero)
+# ⚙️ SNMP – Configuración del Demonio y Configuraciones Peligrosas
 
 ---
 
