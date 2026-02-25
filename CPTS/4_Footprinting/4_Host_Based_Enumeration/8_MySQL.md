@@ -476,166 +476,308 @@ Más [opciones](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.
 ---
 
 
-Footprinting the Service
-There are many reasons why a MySQL server could be accessed from an external network. Nevertheless, it is far from being one of the best practices, and we can always find databases that we can reach. Often, these settings were only meant to be temporary but were forgotten by the administrators. This server setup could also be used as a workaround due to a technical problem. Usually, the MySQL server runs on TCP port 3306, and we can scan this port with Nmap to get more detailed information.
+# 🛠️ Footprinting y Enumeración del Servicio MySQL (Enfoque Avanzado)
 
-Scanning MySQL Server
-  MySQL
-CyberWolfSec@htb[/htb]$ sudo nmap 10.129.14.128 -sV -sC -p3306 --script mysql*
+Este documento amplía el análisis del proceso de **footprinting y enumeración de MySQL** desde una perspectiva técnica y ofensiva, ideal para laboratorios y entornos de pentesting.
 
-Starting Nmap 7.80 ( https://nmap.org ) at 2021-09-21 00:53 CEST
-Nmap scan report for 10.129.14.128
-Host is up (0.00021s latency).
+---
 
-PORT     STATE SERVICE     VERSION
-3306/tcp open  nagios-nsca Nagios NSCA
-| mysql-brute: 
-|   Accounts: 
-|     root:<empty> - Valid credentials
-|_  Statistics: Performed 45010 guesses in 5 seconds, average tps: 9002.0
-|_mysql-databases: ERROR: Script execution failed (use -d to debug)
-|_mysql-dump-hashes: ERROR: Script execution failed (use -d to debug)
-| mysql-empty-password: 
-|_  root account has empty password
-| mysql-enum: 
-|   Valid usernames: 
-|     root:<empty> - Valid credentials
-|     netadmin:<empty> - Valid credentials
-|     guest:<empty> - Valid credentials
-|     user:<empty> - Valid credentials
-|     web:<empty> - Valid credentials
-|     sysadmin:<empty> - Valid credentials
-|     administrator:<empty> - Valid credentials
-|     webadmin:<empty> - Valid credentials
-|     admin:<empty> - Valid credentials
-|     test:<empty> - Valid credentials
-|_  Statistics: Performed 10 guesses in 1 seconds, average tps: 10.0
-| mysql-info: 
-|   Protocol: 10
-|   Version: 8.0.26-0ubuntu0.20.04.1
-|   Thread ID: 13
-|   Capabilities flags: 65535
-|   Some Capabilities: SupportsLoadDataLocal, SupportsTransactions, Speaks41ProtocolOld, LongPassword, DontAllowDatabaseTableColumn, Support41Auth, IgnoreSigpipes, SwitchToSSLAfterHandshake, FoundRows, InteractiveClient, Speaks41ProtocolNew, ConnectWithDatabase, IgnoreSpaceBeforeParenthesis, LongColumnFlag, SupportsCompression, ODBCClient, SupportsMultipleStatments, SupportsAuthPlugins, SupportsMultipleResults
-|   Status: Autocommit
-|   Salt: YTSgMfqvx\x0F\x7F\x16\&\x1EAeK>0
-|_  Auth Plugin Name: caching_sha2_password
-|_mysql-users: ERROR: Script execution failed (use -d to debug)
-|_mysql-variables: ERROR: Script execution failed (use -d to debug)
-|_mysql-vuln-cve2012-2122: ERROR: Script execution failed (use -d to debug)
-MAC Address: 00:00:00:00:00:00 (VMware)
+# 1️⃣ Exposición del Servicio MySQL
 
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 11.21 seconds
-As with all our scans, we must be careful with the results and manually confirm the information obtained because some of the information might turn out to be a false-positive. This scan above is an excellent example of this, as we know for a fact that the target MySQL server does not use an empty password for the user root, but a fixed password. We can test this with the following command:
+MySQL generalmente escucha en:
 
-Interaction with the MySQL Server
-  MySQL
-CyberWolfSec@htb[/htb]$ mysql -u root -h 10.129.14.132
+```
+TCP/3306
+```
 
-ERROR 1045 (28000): Access denied for user 'root'@'10.129.14.1' (using password: NO)
-For example, if we use a password that we have guessed or found through our research, we will be able to log in to the MySQL server and execute some commands.
+## 🔎 ¿Por qué puede estar expuesto?
 
-  MySQL
-CyberWolfSec@htb[/htb]$ mysql -u root -pP4SSw0rd -h 10.129.14.128
+Aunque no es buena práctica exponerlo a Internet, suele ocurrir por:
 
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MySQL connection id is 150165
-Server version: 8.0.27-0ubuntu0.20.04.1 (Ubuntu)                                                         
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.                                     
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.                           
-      
-MySQL [(none)]> show databases;                                                                          
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-4 rows in set (0.006 sec)
+* Configuraciones temporales olvidadas
+* Problemas técnicos que llevaron a "workarounds"
+* Reglas de firewall mal implementadas
+* Arquitecturas legacy
+* Entornos de desarrollo migrados a producción
+
+⚠️ En producción, MySQL debería:
+
+* Escuchar solo en `127.0.0.1`
+* Estar detrás de una VPN
+* Estar protegido por reglas de firewall estrictas
+
+---
+
+# 2️⃣ Enumeración con Nmap y Scripts NSE
+
+```bash
+sudo nmap 10.129.14.128 -sV -sC -p3306 --script mysql*
+```
+
+## 🔍 Qué estamos haciendo exactamente
+
+| Flag            | Función                                              |
+| --------------- | ---------------------------------------------------- |
+| -sV             | Detección de versión                                 |
+| -sC             | Scripts default                                      |
+| -p3306          | Puerto específico                                    |
+| --script mysql* | Ejecuta todos los scripts NSE relacionados con MySQL |
+
+---
+
+# 3️⃣ Análisis Técnico de la Salida
+
+## 🧠 3.1 Detección de Servicio
+
+```
+3306/tcp open nagios-nsca Nagios NSCA
+```
+
+⚠️ Aquí vemos un posible **service misidentification**.
+
+Nmap puede confundir servicios cuando:
+
+* El banner no es claro
+* El servicio responde parcialmente
+* Hay middleboxes
+
+Siempre validar manualmente.
+
+---
+
+## 🔐 3.2 mysql-brute
+
+Indica credenciales válidas con password vacío:
+
+```
+root:<empty> - Valid credentials
+```
+
+⚠️ Esto puede ser un falso positivo.
+
+¿Por qué?
+
+* Algunos servidores responden diferente al handshake.
+* El script interpreta ciertas respuestas como éxito.
+
+Regla de oro en pentesting:
+
+> Nunca confiar ciegamente en herramientas automatizadas.
+
+---
+
+## 🔎 3.3 mysql-info
+
+Información extremadamente valiosa:
+
+* Protocol: 10
+* Version: 8.0.26
+* Auth Plugin: caching_sha2_password
+* Capabilities Flags
+* Salt (usado en el handshake de autenticación)
+
+### 🎯 Importancia del plugin de autenticación
+
+`caching_sha2_password` es el método moderno por defecto en MySQL 8.
+
+Implica:
+
+* No usa el antiguo `mysql_native_password`
+* Dificulta ciertos ataques offline
+* Cambia comportamiento de autenticación en clientes antiguos
+
+---
+
+# 4️⃣ Validación Manual (Paso Crítico)
+
+## 4.1 Intento sin contraseña
+
+```bash
+mysql -u root -h 10.129.14.132
+```
+
+Resultado:
+
+```
+ERROR 1045 (28000): Access denied
+```
+
+Esto confirma:
+
+* El servicio responde correctamente
+* Requiere autenticación
+* No acepta password vacío
+
+---
+
+# 5️⃣ Acceso con Credenciales Válidas
+
+```bash
+mysql -u root -pP4SSw0rd -h 10.129.14.128
+```
+
+Una vez dentro, comienza la fase de **enumeración interna**.
+
+---
+
+# 6️⃣ Bases de Datos Críticas del Sistema
+
+```sql
+show databases;
+```
+
+Resultado:
+
+* information_schema
+* mysql
+* performance_schema
+* sys
+
+---
+
+## 🔹 mysql
+
+Contiene:
+
+* Usuarios
+* Hashes
+* Permisos
+* Roles
+
+Tabla crítica:
+
+```
+mysql.user
+```
+
+⚠️ Desde perspectiva ofensiva:
+Si se logra leer esta tabla → posible extracción de hashes.
+
+---
+
+## 🔹 information_schema
+
+Contiene metadata ANSI/ISO:
+
+* Tablas
+* Columnas
+* Índices
+* Permisos
+
+Es clave para:
+
+* Enumeración silenciosa
+* Reconstrucción de estructura de base
+* Preparación para SQL Injection
+
+---
+
+## 🔹 performance_schema
+
+* Métricas internas
+* Locks
+* Estadísticas
+
+Útil para:
+
+* Análisis forense
+* Detección de actividad
+
+---
+
+## 🔹 sys
+
+Vista simplificada y amigable del performance_schema.
+
+Ejemplo:
+
+```sql
+select host, unique_users from host_summary;
+```
+
+Permite identificar:
+
+* Desde qué hosts se conectan usuarios
+* Número de usuarios únicos
+
+Esto puede revelar:
+
+* Movimiento lateral
+* Clientes activos
+* Accesos remotos
+
+---
+
+# 7️⃣ Enumeración Estratégica Post-Login
+
+Una vez autenticados, pasos recomendados:
+
+1. Identificar versión exacta:
+
+   ```sql
+   select version();
+   ```
+
+2. Identificar privilegios actuales:
+
+   ```sql
+   show grants;
+   ```
+
+3. Listar usuarios:
+
+   ```sql
+   select user, host from mysql.user;
+   ```
+
+4. Buscar bases personalizadas:
+
+   ```sql
+   show databases;
+   ```
+
+5. Enumerar tablas sensibles:
+
+   ```sql
+   show tables;
+   ```
+
+---
+
+# 8️⃣ Consideraciones de Seguridad
+
+Durante footprinting MySQL debemos evaluar:
+
+* ¿Está expuesto públicamente?
+* ¿Permite autenticación remota de root?
+* ¿Qué plugin de auth usa?
+* ¿Se usa SSL?
+* ¿Permite LOAD DATA LOCAL?
+* ¿Existen usuarios con host '%'?
+
+---
+
+# 9️⃣ Errores Comunes en Pentesting MySQL
+
+* Confiar en scripts NSE sin validar
+* No revisar plugin de autenticación
+* Ignorar capacidades flags
+* No revisar privilegios actuales
+* No analizar configuración del servidor
+
+---
+
+Para consolidar conocimientos:
+
+* Instalar MySQL en una VM
+* Configurar usuarios con distintos hosts
+* Cambiar plugins de autenticación
+* Activar y desactivar SSL
+* Practicar hardening
+
+---
 
 
-MySQL [(none)]> select version();
-+-------------------------+
-| version()               |
-+-------------------------+
-| 8.0.27-0ubuntu0.20.04.1 |
-+-------------------------+
-1 row in set (0.001 sec)
-
-
-MySQL [(none)]> use mysql;
-MySQL [mysql]> show tables;
-+------------------------------------------------------+
-| Tables_in_mysql                                      |
-+------------------------------------------------------+
-| columns_priv                                         |
-| component                                            |
-| db                                                   |
-| default_roles                                        |
-| engine_cost                                          |
-| func                                                 |
-| general_log                                          |
-| global_grants                                        |
-| gtid_executed                                        |
-| help_category                                        |
-| help_keyword                                         |
-| help_relation                                        |
-| help_topic                                           |
-| innodb_index_stats                                   |
-| innodb_table_stats                                   |
-| password_history                                     |
-...SNIP...
-| user                                                 |
-+------------------------------------------------------+
-37 rows in set (0.002 sec)
-If we look at the existing databases, we will see several already exist. The most important databases for the MySQL server are the system schema (sys) and information schema (information_schema). The system schema contains tables, information, and metadata necessary for management. More about this database can be found in the reference manual of MySQL.
-
-  MySQL
-mysql> use sys;
-mysql> show tables;  
-
-+-----------------------------------------------+
-| Tables_in_sys                                 |
-+-----------------------------------------------+
-| host_summary                                  |
-| host_summary_by_file_io                       |
-| host_summary_by_file_io_type                  |
-| host_summary_by_stages                        |
-| host_summary_by_statement_latency             |
-| host_summary_by_statement_type                |
-| innodb_buffer_stats_by_schema                 |
-| innodb_buffer_stats_by_table                  |
-| innodb_lock_waits                             |
-| io_by_thread_by_latency                       |
-...SNIP...
-| x$waits_global_by_latency                     |
-+-----------------------------------------------+
-
-
-mysql> select host, unique_users from host_summary;
-
-+-------------+--------------+                   
-| host        | unique_users |                   
-+-------------+--------------+                   
-| 10.129.14.1 |            1 |                   
-| localhost   |            2 |                   
-+-------------+--------------+                   
-2 rows in set (0,01 sec)  
-The information schema is also a database that contains metadata. However, this metadata is mainly retrieved from the system schema database. The reason for the existence of these two is the ANSI/ISO standard that has been established. System schema is a Microsoft system catalog for SQL servers and contains much more information than the information schema.
-
-Some of the commands we should remember and write down for working with MySQL databases are described below in the table.
-
-Command	Description
-mysql -u <user> -p<password> -h <IP address>	Connect to the MySQL server. There should not be a space between the '-p' flag, and the password.
-show databases;	Show all databases.
-use <database>;	Select one of the existing databases.
-show tables;	Show all available tables in the selected database.
-show columns from <table>;	Show all columns in the selected table.
-select * from <table>;	Show everything in the desired table.
-select * from <table> where <column> = "<string>";	Search for needed string in the desired table.
-We must know how to interact with different databases. Therefore, we recommend installing and configuring a MySQL server on one of our VMs for experimentation. There is also a widely covered security issues section in the reference manual that covers best practices for securing MySQL servers. We should use this when setting up our MySQL server to understand better why something might not work.
 
 ---
 
