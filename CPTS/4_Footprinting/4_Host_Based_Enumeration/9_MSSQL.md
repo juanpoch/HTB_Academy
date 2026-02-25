@@ -76,11 +76,11 @@ Puede:
 
 ## 🧰 Otros clientes
 
-* mssql-cli
-* SQL Server PowerShell
-* HeidiSQL
-* SQLPro
-* Impacket mssqlclient.py
+* [mssql-cli](https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility?view=sql-server-ver15&tabs=go%2Cwindows-support&pivots=cs1-bash)
+* [SQL Server PowerShell](https://learn.microsoft.com/en-us/powershell/sql-server/sql-server-powershell?view=sqlserver-ps&viewFallbackFrom=sql-server-ver15)
+* [HeidiSQL](https://www.heidisql.com/)
+* [SQLPro](https://www.macsqlclient.com/)
+* [Impacket mssqlclient.py](https://github.com/fortra/impacket/blob/master/examples/mssqlclient.py)
 
 En pentesting, el más importante suele ser:
 
