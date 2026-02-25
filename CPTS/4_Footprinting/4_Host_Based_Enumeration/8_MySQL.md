@@ -478,7 +478,6 @@ Más [opciones](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.
 
 # 🛠️ Footprinting y Enumeración del Servicio MySQL
 
-Este documento amplía el análisis del proceso de **footprinting y enumeración de MySQL** desde una perspectiva técnica y ofensiva, ideal para laboratorios y entornos de pentesting.
 
 ---
 
