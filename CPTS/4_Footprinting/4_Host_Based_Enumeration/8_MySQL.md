@@ -98,8 +98,8 @@ Ejemplo mencionado:
 
 MySQL es muy usado en sitios web dinámicos y suele verse en stacks como:
 
-* **LAMP**: Linux + Apache + MySQL + PHP
-* **LEMP**: Linux + Nginx + MySQL + PHP
+* [**LAMP**](https://en.wikipedia.org/wiki/LAMP_(software_bundle)): Linux + Apache + MySQL + PHP
+* [**LEMP**](https://lemp.io/): Linux + Nginx + MySQL + PHP
 
 En hosting web, MySQL actúa como el “repositorio central” de datos que consumen scripts PHP.
 
@@ -112,7 +112,7 @@ Ejemplos de datos típicos almacenados:
 * Contenido de formularios
 * Valores internos y configuraciones
 
-Nota: MySQL puede almacenar contraseñas en texto plano, pero lo normal es que la app (PHP) las **hashee** antes (one-way encryption).
+Nota: MySQL puede almacenar contraseñas en texto plano, pero lo normal es que la app (PHP) las **hashee** antes ([one-way encryption](https://en.citizendium.org/wiki/One-way_encryption)).
 
 ---
 
