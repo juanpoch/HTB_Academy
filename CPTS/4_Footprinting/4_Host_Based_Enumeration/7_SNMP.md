@@ -1421,14 +1421,53 @@ Obtenemos el mail del administrador: `devadmin@inlanefreight.htb`
 
 #### ¿Cuál es la versión personalizada del servidor SNMP?
 
-<img width="1343" height="823" alt="image" src="https://github.com/user-attachments/assets/9979598d-cadd-48ae-b7aa-897ddf8de6d7" />
 
-Versión personalizada:  InFreight SNMP v0.91
+
+
+Al realizar la enumeración anterior, pudimos observar la versión personalizada:
+
+<img width="947" height="881" alt="image" src="https://github.com/user-attachments/assets/a7b3efe4-5379-4322-9f2c-33a0949d9a1a" />
+
+
+Versión personalizada:  `InFreight SNMP v0.91`
+
+
+Para experimentar, ya que conocemos su `OID`, lo consultamos con `braa`, su sintaxis es la siguiente:
+```bash
+braa <community>@<IP>:<OID>
+```
+
+La cadena es:
+```
+iso.3.6.1.2.1.1.6.0 = STRING: "InFreight SNMP v0.91"
+```
+`iso` no es una parte "especial". Es simplemente el nombre simbólico del nodo raíz, por lo tanto:
+```
+iso = 1
+```
+
+Por lo que el `OID` es:
+```
+1.3.6.1.2.1.1.6.0
+```
+
+Entonces usamos el siguiente comando:
+```bash
+braa public@10.129.8.142:.1.3.6.1.2.1.1.6.0
+```
+<img width="669" height="93" alt="image" src="https://github.com/user-attachments/assets/6755b792-ae26-4e59-8469-d20f55b04ba7" />
 
 
 #### Enumere el script personalizado que se está ejecutando en el sistema y envíe su salida como respuesta.
 
-<img width="1629" height="828" alt="image" src="https://github.com/user-attachments/assets/513865a6-7554-4959-be8c-20b407c7a3fc" />
+Cuando utilizamos el siguiente comando, pudimos ver el script en la enumeración:
+```bash
+snmpwalk -v2c -c public 10.129.8.142
+```
+
+
+<img width="1865" height="955" alt="image" src="https://github.com/user-attachments/assets/bba67da3-1693-4f9f-bb93-e1bcc4bea640" />
+
 
 `Script`: `/usr/share/flag.sh`
 
