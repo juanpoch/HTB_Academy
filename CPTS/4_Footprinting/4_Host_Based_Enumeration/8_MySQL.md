@@ -861,7 +861,8 @@ Encontramos la versión: `MySQL 8.0.27`
 Con banner grabbing manual también la obtenemos utilizando `telnet <ip> 3306`:
 <img width="1021" height="163" alt="image" src="https://github.com/user-attachments/assets/6fce8be9-b65c-433f-ab15-ebfad10cf095" />
 
-También realizandolo con netcat `nc <ip> 3306`:
+También realizandolo con netcat `nc <ip> 3306`:  
+
 <img width="574" height="133" alt="image" src="https://github.com/user-attachments/assets/1457e05e-14f4-4f6c-8f38-41d7b0a29f4d" />
 
 
