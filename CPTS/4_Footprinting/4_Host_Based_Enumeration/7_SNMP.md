@@ -166,7 +166,7 @@ En la práctica, muchas redes todavía usan v1 o v2c.
 
 ---
 
-# 🌳 SNMP – MIB y OID Explicado en Profundidad (Desde Cero)
+# 🌳 SNMP – MIB y OID
 
 ---
 
