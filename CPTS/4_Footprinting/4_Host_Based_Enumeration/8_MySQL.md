@@ -22,6 +22,7 @@ MySQL está diseñado para manejar grandes volúmenes de datos de manera eficien
 
 
 [Curso brebe MySql](https://www.w3schools.com/sql/sql_intro.asp)
+
 ---
 
 ## 2. Modelo Cliente–Servidor
