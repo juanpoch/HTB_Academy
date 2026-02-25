@@ -199,12 +199,6 @@ symbolic-links=0
 ---
 
 
-# 📦 MySQL – Análisis Detallado del Archivo de Configuración
-
-Este documento explica en profundidad los parámetros observados en un archivo de configuración típico de MySQL (generalmente ubicado en `/etc/mysql/my.cnf` o rutas similares en sistemas Linux).
-
----
-
 # 🔎 Estructura General del Archivo
 
 El archivo está dividido en **secciones** indicadas por encabezados entre corchetes:
