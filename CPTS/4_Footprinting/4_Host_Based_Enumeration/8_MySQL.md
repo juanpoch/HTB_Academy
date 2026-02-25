@@ -471,6 +471,8 @@ Esto puede facilitar:
 * Confirmación de SQLi
 * Escalada a técnicas más avanzadas (SQL Injection)
 
+Más [opciones](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html) de configuración.
+
 ---
 
 # 10. Footprinting del Servicio MySQL
