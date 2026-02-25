@@ -386,7 +386,7 @@ Si no entendés OIDs y MIBs, el output parece ruido.
 
 ---
 
-# 🔐 SNMP – Versiones y Community Strings Explicado Desde Cero
+# 🔐 SNMP – Versiones y Community Strings
 
 ---
 
