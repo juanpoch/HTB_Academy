@@ -1076,17 +1076,180 @@ Repositorio recomendado:
 
 [https://github.com/danielmiessler/SecLists](https://github.com/danielmiessler/SecLists)
 
-Las communities suelen seguir patrones:
+# 🔑 SNMP – Patrones de Community Strings y Creación de Wordlists Personalizadas
+
+---
+
+# 1️⃣ Un error común en redes grandes
+
+Cuando SNMP está implementado en redes pequeñas, muchas veces se deja la community por defecto:
 
 * public
 * private
+
+Pero en redes empresariales grandes (50, 100 o más servidores), la realidad cambia.
+
+Los administradores suelen:
+
+* Cambiar la community por algo "más seguro"
+* Asociarla al hostname
+* Agregar números
+* Agregar símbolos
+
+Ejemplos reales típicos:
+
+* servidor01
+* srv-backup
+* fw-core!
+* db01_snmp
+* router123
+* switch-core$
+
+A primera vista parece más complejo.
+
+Pero aparece un problema importante.
+
+---
+
+# 2️⃣ El problema de la consistencia
+
+En entornos grandes, los administradores necesitan mantener orden.
+
+Si hay 100 servidores, no pueden inventar una community totalmente distinta y aleatoria para cada uno.
+
+Entonces tienden a usar patrones repetitivos:
+
 * hostname
-* hostname123
-* Combinaciones con símbolos
+* hostname + año
+* hostname + número incremental
+* prefijo común + hostname
+* sufijo fijo para todos
 
-En redes grandes, los administradores tienden a repetir patrones.
+Ejemplo en red real:
 
-Y la consistencia juega en contra de la seguridad.
+* snmp_srv01
+* snmp_srv02
+* snmp_srv03
+
+O:
+
+* core-router!
+* access-router!
+* backup-router!
+
+Esto genera una oportunidad ofensiva:
+
+👉 Si descubrimos el patrón en un host, podemos inferir el resto.
+
+---
+
+# 3️⃣ Comunidades vinculadas a IP específicas
+
+A veces la configuración restringe la community a ciertas IPs:
+
+```
+rwcommunity core-router 192.168.1.10
+```
+
+Pero si el servicio está mal filtrado o expuesto:
+
+Podemos intentar descubrir la community igualmente.
+
+Y si sabemos cómo se nombran internamente los hosts:
+
+Podemos generar wordlists inteligentes.
+
+---
+
+# 4️⃣ Ataque basado en patrones
+
+En lugar de usar solo listas genéricas como:
+
+* public
+* private
+* admin
+
+Podemos construir listas basadas en:
+
+* Naming convention de la empresa
+* Dominios internos
+* Hostnames descubiertos por DNS
+* Subdominios
+* Información filtrada en banners
+
+Por ejemplo, si detectamos hostname:
+
+```
+htb-core-01
+```
+
+Podríamos probar:
+
+* htb-core-01
+* htb-core-01!
+* htb-core-01_snmp
+* core-01
+* core01
+* core01!
+
+Este enfoque es mucho más efectivo que brute force ciego.
+
+---
+
+# 5️⃣ Creación de wordlists personalizadas con Crunch
+
+Herramienta útil:
+
+[https://secf00tprint.github.io/blog/passwords/crunch/advanced/en](https://secf00tprint.github.io/blog/passwords/crunch/advanced/en)
+
+Crunch permite generar listas personalizadas basadas en reglas.
+
+Ejemplos básicos:
+
+Generar combinaciones numéricas:
+
+```bash
+crunch 4 4 0123456789 -o numbers.txt
+```
+
+Generar combinaciones basadas en patrón:
+
+```bash
+crunch 8 12 -t core@@%% -o custom.txt
+```
+
+Donde:
+
+* @ → letra minúscula
+* , → letra mayúscula
+* % → número
+
+Podríamos generar algo como:
+
+* coreab12
+* corexy45
+
+También podemos usar diccionarios base y agregar reglas.
+
+---
+
+# 6️⃣ Estrategia inteligente en pentesting
+
+El enfoque profesional no es:
+
+❌ Probar millones de combinaciones aleatorias.
+
+Sino:
+
+✔ Analizar naming conventions
+✔ Identificar patrones
+✔ Generar wordlists dirigidas
+✔ Reducir ruido y tiempo
+
+En redes grandes, la previsibilidad humana es una debilidad.
+
+---
+
 
 ---
 
