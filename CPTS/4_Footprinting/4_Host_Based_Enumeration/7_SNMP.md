@@ -155,7 +155,7 @@ Por eso es una fase clave en enumeración.
 
 # 9️⃣ Versiones de SNMP
 
-* **SNMPv1** → Antigua, sin seguridad real
+* **SNMPv1** → Antigua, sin seguridad real (también usa comunidades)
 * **SNMPv2c** → Similar a v1, usa comunidades
 * **SNMPv3** → Introduce autenticación y cifrado
 
