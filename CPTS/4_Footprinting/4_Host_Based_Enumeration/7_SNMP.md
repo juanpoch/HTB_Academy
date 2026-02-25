@@ -1,6 +1,4 @@
-
-
-# 📡 SNMP desde Cero – Explicación Simple y Clara
+# 📡 SNMP 
 
 ---
 
