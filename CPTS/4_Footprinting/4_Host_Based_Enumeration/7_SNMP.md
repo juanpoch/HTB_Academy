@@ -626,15 +626,52 @@ Todo sin credenciales fuertes.
 
 ---
 
-## 8. Configuración por defecto del demonio SNMP
+# ⚙️ SNMP – Configuración del Demonio y Configuraciones Peligrosas (Explicado Desde Cero)
 
-Archivo típico:
+---
+
+# 1️⃣ ¿Qué es el demonio SNMP?
+
+En sistemas Linux, el servicio SNMP que responde a las consultas se llama:
+
+```
+snmpd
+```
+
+Es un **demonio (daemon)**, es decir:
+
+👉 Un proceso que corre en segundo plano esperando consultas.
+
+Este servicio es el que:
+
+* Escucha en UDP 161
+* Responde consultas SNMP
+* Aplica reglas de acceso
+* Define qué puede verse y qué puede modificarse
+
+---
+
+# 2️⃣ Archivo de configuración principal
+
+El comportamiento del servicio se define en:
 
 ```bash
 /etc/snmp/snmpd.conf
 ```
 
-Ejemplo real:
+Este archivo controla:
+
+* Qué IP escucha
+* Qué OIDs son visibles
+* Qué comunidades existen
+* Qué usuarios pueden autenticarse
+* Qué permisos tiene cada uno
+
+---
+
+# 3️⃣ Ejemplo real de configuración
+
+Comando para ver solo líneas activas:
 
 ```bash
 cat /etc/snmp/snmpd.conf | grep -v "#" | sed -r '/^\s*$/d'
@@ -643,35 +680,249 @@ cat /etc/snmp/snmpd.conf | grep -v "#" | sed -r '/^\s*$/d'
 Salida:
 
 ```
-rocommunity public default -V systemonly
-rwuser authPrivUser authpriv -V systemonly
+sysLocation    Sitting on the Dock of the Bay
+sysContact     Me <me@example.org>
+sysServices    72
+master  agentx
+agentaddress  127.0.0.1,[::1]
+view   systemonly  included   .1.3.6.1.2.1.1
+view   systemonly  included   .1.3.6.1.2.1.25.1
+rocommunity  public default -V systemonly
+rocommunity6 public default -V systemonly
+rouser authPrivUser authpriv -V systemonly
 ```
-
-Esto define:
-
-* Qué OIDs son visibles
-* Quién puede leer
-* Quién puede escribir
-
-Manual oficial:
-
-* [https://www.net-snmp.org/docs/man/snmpd.conf.html](https://www.net-snmp.org/docs/man/snmpd.conf.html)
 
 ---
 
-## 9. Configuraciones peligrosas
+# 4️⃣ Analizando línea por línea
 
-| Configuración               | Riesgo                                    |
-| --------------------------- | ----------------------------------------- |
-| `rwuser noauth`             | Acceso total al OID sin autenticación     |
-| `rwcommunity <string> <IP>` | Proporciona acceso al árbol OID completo independientemente de dónde se enviaron las solicitudes. |
-| `rwcommunity6`              | Igual riesgo en IPv6                      |
+### sysLocation
 
-👉 Esto puede permitir:
+Define la ubicación física del dispositivo.
 
-* Modificar configuraciones
-* Ejecutar acciones administrativas
-* Facilitar RCE indirecto
+⚠ Puede revelar información sensible.
+
+---
+
+### sysContact
+
+Persona responsable del sistema.
+
+⚠ Puede revelar emails internos.
+
+---
+
+### agentaddress
+
+```
+agentaddress 127.0.0.1,[::1]
+```
+
+Define en qué IP escucha el demonio.
+
+En este caso:
+
+Solo localhost.
+
+Si estuviera configurado como:
+
+```
+agentaddress udp:161
+```
+
+Escucharía en todas las interfaces.
+
+---
+
+### view systemonly
+
+```
+view systemonly included .1.3.6.1.2.1.1
+```
+
+Define qué parte del árbol OID puede verse.
+
+Aquí solo permite consultar:
+
+* Información del sistema
+
+Esto limita el alcance.
+
+---
+
+### rocommunity public default -V systemonly
+
+Significa:
+
+* Community: public
+* Permiso: read-only
+* Desde: cualquier IP
+* Vista: systemonly
+
+Traducción práctica:
+
+Cualquiera que conozca la community "public" puede consultar los OIDs definidos en la vista.
+
+---
+
+### rouser authPrivUser authpriv -V systemonly
+
+Define un usuario SNMPv3 con:
+
+* Autenticación
+* Cifrado
+* Acceso limitado a systemonly
+
+Esto ya es una configuración más segura.
+
+---
+
+# 5️⃣ ¿Qué controla realmente snmpd.conf?
+
+El archivo determina:
+
+✔ Qué parte del árbol OID es accesible
+✔ Quién puede leer
+✔ Quién puede escribir
+✔ Desde qué IP se permite acceso
+✔ Si requiere autenticación
+
+Es literalmente la política de seguridad de SNMP.
+
+---
+
+# 6️⃣ Configuraciones peligrosas
+
+Algunas directivas pueden ser extremadamente riesgosas.
+
+---
+
+## 🔴 rwuser noauth
+
+Significa:
+
+* Usuario con permisos de escritura
+* Sin autenticación
+* Acceso al árbol completo
+
+Impacto:
+
+Un atacante podría modificar configuraciones sin autenticarse.
+
+---
+
+## 🔴 rwcommunity <string> <IP>
+
+Ejemplo:
+
+```
+rwcommunity private 0.0.0.0/0
+```
+
+Significa:
+
+* Community con permisos de lectura y escritura
+* Desde cualquier IP
+* Acceso completo al árbol OID
+
+Impacto:
+
+Acceso total si la community es conocida.
+
+---
+
+## 🔴 rwcommunity6
+
+Misma lógica pero para IPv6.
+
+Muchas veces se protege IPv4 pero se olvidan reglas en IPv6.
+
+---
+
+# 7️⃣ ¿Por qué esto es grave?
+
+Con permisos de escritura (rw):
+
+Un atacante podría:
+
+✔ Modificar configuraciones de red
+✔ Cambiar parámetros del sistema
+✔ Activar o desactivar servicios
+✔ Alterar rutas
+
+En ciertos escenarios:
+
+Puede facilitar ejecución remota indirecta.
+
+---
+
+# 8️⃣ Error común en administradores
+
+Muchos piensan:
+
+"SNMP solo es monitoreo"
+
+Pero en realidad:
+
+SNMP puede modificar el sistema si está mal configurado.
+
+Y si además:
+
+* Usa v2c
+* Usa community débil
+* Está expuesto a Internet
+
+Se convierte en una superficie de ataque seria.
+
+---
+
+# 9️⃣ Recomendación práctica
+
+Para entender bien SNMP:
+
+Lo ideal es:
+
+✔ Instalar una VM
+✔ Configurar snmpd manualmente
+✔ Probar distintas comunidades
+✔ Hacer snmpwalk
+✔ Cambiar permisos
+
+Nada reemplaza verlo funcionando.
+
+---
+
+# 🔎 Conclusión
+
+El archivo:
+
+```
+/etc/snmp/snmpd.conf
+```
+
+Es el corazón de la seguridad SNMP.
+
+Si está mal configurado:
+
+Puede permitir:
+
+* Enumeración masiva
+* Exposición de información interna
+* Modificación remota
+* Escalada de impacto
+
+Por eso, en pentesting, cuando vemos SNMP abierto:
+
+Siempre debemos preguntarnos:
+
+👉 ¿Qué configuración está detrás?
+👉 ¿Es solo lectura?
+👉 ¿Tiene escritura?
+👉 ¿Está restringido por IP?
+👉 ¿Es v2c o v3?
+
+Responder esas preguntas define el impacto real.
+
 
 ---
 
