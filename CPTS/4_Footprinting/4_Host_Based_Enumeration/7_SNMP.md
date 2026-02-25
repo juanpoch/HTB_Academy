@@ -789,9 +789,6 @@ El archivo determina:
 
 Es literalmente la política de seguridad de SNMP.
 
-
-Se recomienda investigar las [páginas del manual](https://www.net-snmp.org/docs/man/snmpd.conf.html) y configurar un servidor nosotros.
-
 ---
 
 # 6️⃣ Configuraciones peligrosas
@@ -891,6 +888,8 @@ Lo ideal es:
 ✔ Hacer snmpwalk
 ✔ Cambiar permisos
 
+Se recomienda investigar las [páginas del manual](https://www.net-snmp.org/docs/man/snmpd.conf.html) 
+
 Nada reemplaza verlo funcionando.
 
 ---
@@ -929,49 +928,120 @@ Responder esas preguntas define el impacto real.
 
 ---
 
-## 10. Footprinting del servicio SNMP
-
-### Herramientas principales:
-
-* **snmpwalk** → Enumeración de OIDs
-* **onesixtyone** → Fuerza bruta de community strings
-* **braa** → Enumeración masiva de OIDs
+# 🔎 SNMP – Footprinting y Enumeración Práctica (Explicado Paso a Paso)
 
 ---
 
-## 11. Enumeración con snmpwalk
+# 1️⃣ ¿Qué significa “footprinting” en SNMP?
+
+Footprinting es la fase donde recolectamos información sin explotar directamente el sistema.
+
+En el caso de SNMP, esto es especialmente potente porque:
+
+👉 SNMP está diseñado para exponer información del sistema.
+
+Si está mal configurado, nos permite obtener:
+
+* Sistema operativo
+* Versión del kernel
+* Usuarios
+* Procesos
+* Servicios instalados
+* Paquetes del sistema
+* Información de red
+
+Y todo esto sin explotación activa.
+
+---
+
+# 2️⃣ Herramientas principales para SNMP
+
+Las tres herramientas más utilizadas en pentesting son:
+
+* **snmpwalk** → Enumeración completa del árbol OID
+* **onesixtyone** → Fuerza bruta de community strings
+* **braa** → Enumeración masiva y rápida de OIDs
+
+Cada una cumple un rol distinto en la metodología.
+
+---
+
+# 3️⃣ Enumeración con snmpwalk
+
+Comando básico:
 
 ```bash
 snmpwalk -v2c -c public 10.129.14.128
 ```
 
-Información obtenible:
+Parámetros:
 
-* Sistema operativo
-* Versión del kernel
-* Usuarios
-* Servicios
-* Paquetes instalados
-* Procesos
-* Variables de entorno
+* `-v2c` → Versión del protocolo
+* `-c public` → Community string
+* IP → Objetivo
 
-Ejemplo crítico:
+Si la community es válida y SNMP está abierto, veremos algo como esto:
 
 ```
-Linux htb 5.11.0-34-generic
-BOOT_IMAGE=/boot/vmlinuz...
-python3_3.8.2-0ubuntu2
-proftpd-basic
+iso.3.6.1.2.1.1.1.0 = STRING: "Linux htb 5.11.0-34-generic #36~20.04.1-Ubuntu SMP Fri Aug 27 08:06:32 UTC 2021 x86_64"
+iso.3.6.1.2.1.1.2.0 = OID: iso.3.6.1.4.1.8072.3.2.10
+iso.3.6.1.2.1.1.3.0 = Timeticks: (5134) 0:00:51.34
+iso.3.6.1.2.1.1.4.0 = STRING: "mrb3n@inlanefreight.htb"
+iso.3.6.1.2.1.1.5.0 = STRING: "htb"
+iso.3.6.1.2.1.1.6.0 = STRING: "Sitting on the Dock of the Bay"
+iso.3.6.1.2.1.1.7.0 = INTEGER: 72
+...
+iso.3.6.1.2.1.25.1.4.0 = STRING: "BOOT_IMAGE=/boot/vmlinuz-5.11.0-34-generic root=UUID=9a6a5c52-f92a-42ea-8ddf-940d7e0f4223 ro quiet splash"
+...
+iso.3.6.1.2.1.25.6.3.1.2.1235 = STRING: "proftpd-basic_1.3.6c-2_amd64"
+iso.3.6.1.2.1.25.6.3.1.2.1243 = STRING: "python3_3.8.2-0ubuntu2_amd64"
 ```
-
-👉 Ya tenemos:
-
-* OS fingerprint
-* Software vulnerable potencial
 
 ---
 
-## 12. Descubrimiento de community strings – onesixtyone
+# 4️⃣ ¿Qué información estamos obteniendo realmente?
+
+Del primer bloque ya obtenemos:
+
+✔ Sistema operativo
+✔ Versión exacta del kernel
+✔ Arquitectura
+✔ Nombre del host
+✔ Email interno
+✔ Ubicación física
+
+Luego vemos:
+
+```
+BOOT_IMAGE=/boot/vmlinuz...
+```
+
+Eso nos da información de arranque.
+
+Y más abajo vemos paquetes instalados:
+
+```
+proftpd-basic_1.3.6c-2
+python3_3.8.2
+```
+
+👉 Esto es oro en pentesting.
+
+Ya tenemos:
+
+* OS fingerprint
+* Versiones específicas
+* Software potencialmente vulnerable
+
+Sin explotar nada.
+
+---
+
+# 5️⃣ ¿Qué pasa si no conocemos la community string?
+
+Ahí entra:
+
+## onsixtyone
 
 Instalación:
 
@@ -985,56 +1055,128 @@ Uso:
 onesixtyone -c /opt/useful/seclists/Discovery/SNMP/snmp.txt 10.129.14.128
 ```
 
-Wordlists:
+Salida ejemplo:
 
-* [https://github.com/danielmiessler/SecLists](https://github.com/danielmiessler/SecLists)
+```
+Scanning 1 hosts, 3220 communities
+10.129.14.128 [public] Linux htb 5.11.0-37-generic #41~20.04.2-Ubuntu SMP Fri Sep 24 09:06:38 UTC 2021 x86_64
+```
 
-Observación:
+Aquí descubrimos que la community válida es:
 
-* Las community strings suelen seguir patrones
-* En redes grandes, **la consistencia juega en contra del admin**
+```
+public
+```
 
 ---
 
-A menudo, cuando ciertas cadenas de comunidad se vinculan a direcciones IP específicas, se nombran con el nombre del host, e incluso se les añaden símbolos para dificultar su identificación. Sin embargo, si imaginamos una red extensa con más de 100 servidores diferentes administrados mediante SNMP, las etiquetas, en ese caso, seguirán un patrón. Por lo tanto, podemos usar diferentes reglas para deducirlas. Podemos usar la herramienta [crunch](https://secf00tprint.github.io/blog/passwords/crunch/advanced/en) para crear listas de palabras personalizadas. 
+# 6️⃣ Wordlists útiles
+
+Repositorio recomendado:
+
+[https://github.com/danielmiessler/SecLists](https://github.com/danielmiessler/SecLists)
+
+Las communities suelen seguir patrones:
+
+* public
+* private
+* hostname
+* hostname123
+* Combinaciones con símbolos
+
+En redes grandes, los administradores tienden a repetir patrones.
+
+Y la consistencia juega en contra de la seguridad.
 
 ---
 
-## 13. Enumeración masiva de OIDs – braa
+# 7️⃣ Enumeración masiva con braa
 
-Instalación:
+Una vez que conocemos la community, podemos usar:
 
 ```bash
 sudo apt install braa
 ```
 
-Uso:
+Sintaxis general:
+
+```bash
+braa <community>@<IP>:.1.3.6.*
+```
+
+Ejemplo real:
 
 ```bash
 braa public@10.129.14.128:.1.3.6.*
 ```
 
-Esto permite:
+Salida:
 
-* Enumeración rápida
-* Menos ruido que snmpwalk
-* Identificar información crítica rápidamente
+```
+10.129.14.128:20ms:.1.3.6.1.2.1.1.1.0:Linux htb 5.11.0-34-generic #36~20.04.1-Ubuntu SMP Fri Aug 27 08:06:32 UTC 2021 x86_64
+10.129.14.128:20ms:.1.3.6.1.2.1.1.4.0:mrb3n@inlanefreight.htb
+10.129.14.128:20ms:.1.3.6.1.2.1.1.5.0:htb
+```
 
+Braa es más rápido que snmpwalk y genera menos ruido.
+
+Es ideal cuando queremos consultas específicas.
 
 ---
 
-## 15. Conclusión
+# 8️⃣ Diferencias prácticas entre herramientas
 
-SNMP es uno de los servicios más **subestimados y poderosos** en la enumeración.
+snmpwalk:
+
+* Muy completo
+* Mucho output
+* Más ruido
+
+onesixtyone:
+
+* Descubre communities
+* Paso previo necesario
+
+braa:
+
+* Rápido
+* Selectivo
+* Ideal para automatización
+
+---
+
+# 9️⃣ Escenario completo de ataque
+
+1. Detectamos UDP 161 abierto con Nmap.
+2. Probamos community "public".
+3. Si no funciona, usamos onesixtyone.
+4. Encontramos community válida.
+5. Enumeramos con snmpwalk o braa.
+6. Identificamos software vulnerable.
+
+Todo sin explotación directa.
+
+---
+
+# 🔟 Conclusión
+
+SNMP es uno de los servicios más subestimados en enumeración.
 
 Un SNMP mal configurado puede revelar:
 
-* Arquitectura completa
-* Software instalado
-* Usuarios
-* Dependencias
+✔ Arquitectura completa
+✔ Usuarios internos
+✔ Software instalado
+✔ Información del sistema
+✔ Detalles de red
 
-Y todo esto **sin explotación activa**.
+Y lo más importante:
+
+Todo esto puede obtenerse sin explotación activa.
+
+Por eso, en infraestructura, SNMP debe revisarse siempre.
+
+Y en pentesting, debe enumerarse siempre.
 
 
 
