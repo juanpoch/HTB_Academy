@@ -153,6 +153,10 @@ Es decir:
 
 > MSSQL delega la autenticación al sistema operativo.
 
+
+<img width="486" height="529" alt="image" src="https://github.com/user-attachments/assets/5239775e-50e6-4753-91a0-8be82a74de9a" />
+
+
 ---
 
 ## 🔎 ¿Qué es SAM?
