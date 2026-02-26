@@ -120,7 +120,7 @@ Cuando vemos UDP 623 abierto en un escaneo interno, debemos sospechar inmediatam
 
 # 🔍 Footprinting con Nmap
 
-# IPMI – Footprinting del Servicio (Análisis Profundo para Pentesting)
+# IPMI – Footprinting del Servicio 
 
 ---
 
