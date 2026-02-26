@@ -443,9 +443,10 @@ En un pentest interno, este hallazgo **justifica inmediatamente intentar extracc
 
 ---
 
-Durante los pentest internos, a menudo encontramos BMCs donde los administradores no han cambiado la contraseña predeterminada. Algunas contraseñas predeterminadas que debemos tener en cuenta son:
 
 # 🔑 Credenciales por defecto comunes
+
+Durante los pentest internos, a menudo encontramos BMCs donde los administradores no han cambiado la contraseña predeterminada. Algunas contraseñas predeterminadas que debemos tener en cuenta son:
 
 | Producto   | Usuario       | Password       |
 | ---------- | ------------- | -------------- |
