@@ -379,9 +379,7 @@ Eso convierte a MSSQL en punto de pivot o escalada.
 
 # 🛰️ MSSQL – Footprinting y Enumeración
 
-En esta sección vamos a entender en profundidad cómo se realiza el **footprinting del servicio MSSQL**, qué significa cada dato que obtenemos y por qué es importante desde la perspectiva de un pentester.
 
-La idea es que no solo ejecutes comandos, sino que entiendas exactamente qué está pasando.
 
 ---
 
@@ -420,7 +418,7 @@ Si vemos 1433 abierto → probablemente hay una instancia de SQL Server.
 
 ---
 
-# 3️⃣ Enumeración con Nmap (Explicación Completa)
+# 3️⃣ Enumeración con Nmap
 
 Comando utilizado:
 
