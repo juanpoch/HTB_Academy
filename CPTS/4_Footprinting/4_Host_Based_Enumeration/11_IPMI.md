@@ -373,11 +373,73 @@ Output:
 [+] 10.129.42.195:623 - IPMI - IPMI-2.0 UserAuth(auth_msg, auth_user, non_null_user) PassAuth(password, md5, md2, null) Level(1.5, 2.0)
 ```
 
-Aquí vemos:
 
-* Métodos de autenticación
-* Versiones soportadas
-* Hashes posibles (MD5, MD2)
+---
+
+## 📌 Desglose Línea por Línea
+
+### 🔹 `10.129.42.195:623`
+- Host objetivo.
+- Puerto **UDP 623** → Puerto estándar de IPMI (RMCP).
+
+---
+
+### 🔹 `IPMI-2.0`
+- El sistema utiliza **IPMI versión 2.0**.
+- Esto es relevante porque:
+  - Soporta autenticación RAKP.
+  - Permite potencial extracción de hashes.
+  - Es la versión más común en entornos empresariales.
+
+---
+
+### 🔹 `UserAuth(auth_msg, auth_user, non_null_user)`
+
+Indica los métodos de autenticación de usuario soportados:
+
+- `auth_msg` → Autenticación basada en mensajes.
+- `auth_user` → Autenticación explícita por usuario.
+- `non_null_user` → No permite usuario vacío (requiere username válido).
+
+👉 Esto confirma que el servicio requiere un usuario válido para autenticarse.
+
+---
+
+### 🔹 `PassAuth(password, md5, md2, null)`
+
+Indica los métodos de autenticación de contraseña permitidos:
+
+- `password` → Autenticación basada en password plano (intercambiado en proceso RAKP).
+- `md5` → Hash MD5 soportado.
+- `md2` → Hash MD2 soportado (obsoleto).
+- `null` → Puede aceptar autenticación nula en ciertos contextos.
+
+⚠️ La presencia de MD5 / MD2 indica mecanismos criptográficos débiles.
+
+---
+
+### 🔹 `Level(1.5, 2.0)`
+
+Indica los niveles de compatibilidad IPMI soportados:
+
+- 1.5 → Versión anterior.
+- 2.0 → Versión actual con soporte RAKP.
+
+Esto amplía superficie de ataque si ambos están habilitados.
+
+---
+
+# 🎯 Conclusión Técnica
+
+Este output confirma que:
+
+- El puerto IPMI está expuesto.
+- Corre IPMI 2.0.
+- Soporta autenticación basada en hash.
+- Potencialmente vulnerable a extracción de hashes vía RAKP.
+- Puede permitir ataques offline si se obtienen credenciales.
+
+En un pentest interno, este hallazgo **justifica inmediatamente intentar extracción de hashes o probar credenciales por defecto**.
 
 ---
 
