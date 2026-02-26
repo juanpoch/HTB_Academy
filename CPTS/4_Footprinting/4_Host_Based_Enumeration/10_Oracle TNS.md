@@ -608,68 +608,18 @@ Antes de enumerar/interactuar, el material sugiere instalar dependencias y ODAT.
 Comandos (tal cual):
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y build-essential python3-dev libaio1t64
-cd ~
-wget https://files.pythonhosted.org/packages/source/c/cx_Oracle/cx_Oracle-8.3.0.tar.gz
-tar xzf cx_Oracle-8.3.0.tar.gz
-cd cx_Oracle-8.3.0
-python3 setup.py build
-sudo python3 setup.py install
-cd ~
-git clone https://github.com/quentinhardy/odat.git
-cd odat/
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install --upgrade pip
-
-# dependencias Python SOLO en el venv
-python3 -m pip install python-libnmap
-git submodule init
-git submodule update
-apt-get install python3-scapy -y
-pip3 install colorlog termcolor passlib python-libnmap
-apt-get install build-essential libgmp-dev -y
-pip install pycryptodome
+apt update -y
+apt install odat -y
 ```
-
-Y un ejemplo de output parcial (tal cual):
-
-```txt
-Hit:1 https://deb.parrot.sh/parrot lory InRelease
-Hit:2 https://deb.parrot.sh/direct/parrot lory-security InRelease
-Hit:3 https://deb.parrot.sh/parrot lory-backports InRelease
-Reading package lists... Done
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-build-essential is already the newest version (12.9).
-python3-dev is already the newest version (3.11.2-1+b1).
-python3-dev set to manually installed.
-libaio1 is already the newest version (0.3.113-4).
-libaio1 set to manually installed.
-
-<SNIP>
-```
-
-### 8.1) ¿Qué estás instalando realmente?
-
-* `libaio1`: dependencia común para **Oracle Instant Client** / I/O asíncrono.
-* `cx_Oracle`: librería Python para conectarse a Oracle (ODAT la usa en varios módulos).
-* `odat`: Oracle Database Attacking Tool (enumeración y explotación).
-* `scapy`, `pycryptodome`, etc.: dependencias de módulos específicos.
-
----
 
 ## 9) Verificación: ODAT funciona
 
-Probás la ayuda:
 
 ```bash
-./odat.py -h
+odat -h
 ```
 
-Output (tal cual, abreviado):
+Output:
 
 ```txt
 usage: odat.py [-h] [--version]
