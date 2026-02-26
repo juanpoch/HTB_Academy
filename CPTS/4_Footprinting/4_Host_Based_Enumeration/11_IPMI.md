@@ -120,6 +120,238 @@ Cuando vemos UDP 623 abierto en un escaneo interno, debemos sospechar inmediatam
 
 # 🔍 Footprinting con Nmap
 
+# IPMI – Footprinting del Servicio (Análisis Profundo para Pentesting)
+
+---
+
+## 📌 Introducción
+
+En esta sección vamos a profundizar específicamente en la fase de **Footprinting de IPMI**, es decir:
+
+> Cómo identificar, reconocer y evaluar la exposición de un BMC dentro de una red durante un pentest.
+
+Este paso es crítico en entornos internos porque IPMI puede convertirse en uno de los vectores de compromiso más potentes dentro de una infraestructura.
+
+---
+
+# 🌐 Puerto y Protocolo
+
+IPMI opera principalmente sobre:
+
+```
+UDP 623
+```
+
+Servicio identificado comúnmente como:
+
+```
+asf-rmcp
+```
+
+### 🔎 ¿Qué significa esto?
+
+* **ASF** → Alert Standard Format
+* **RMCP** → Remote Management Control Protocol
+
+RMCP es el protocolo que encapsula los mensajes IPMI cuando se transmiten por red.
+
+Si en un escaneo interno vemos UDP 623 abierto, debemos asumir inmediatamente:
+
+> "Este host probablemente tiene un BMC activo"
+
+---
+
+# 🧠 ¿Qué es un BMC realmente?
+
+## Baseboard Management Controller
+
+El BMC es un microcontrolador dedicado que:
+
+* Está integrado físicamente en la motherboard
+* Corre su propio firmware (generalmente Linux embebido)
+* Tiene su propia pila de red
+* Funciona independientemente del sistema operativo principal
+
+Es literalmente:
+
+> Una computadora dentro de la computadora.
+
+Incluso si el servidor está apagado, el BMC puede seguir funcionando siempre que tenga alimentación eléctrica.
+
+---
+
+# 🏗 Cómo se implementa un BMC
+
+Existen dos formas principales:
+
+### 1️⃣ Integrado en la motherboard
+
+La mayoría de servidores empresariales ya lo incluyen.
+
+### 2️⃣ Como tarjeta PCI adicional
+
+En servidores más antiguos o configuraciones específicas.
+
+En ambos casos, el BMC:
+
+* Está conectado directamente al hardware
+* Tiene acceso a sensores físicos
+* Puede controlar energía, BIOS y almacenamiento
+
+---
+
+# 🏢 BMCs más comunes en entornos reales
+
+Durante pentests internos suelen encontrarse:
+
+* HP iLO
+* Dell DRAC / iDRAC
+* Supermicro IPMI
+
+Cada uno es una implementación propietaria sobre el estándar IPMI.
+
+Aunque el fabricante cambia la interfaz, el protocolo base sigue siendo IPMI.
+
+---
+
+# 🔓 Por qué el acceso a BMC es crítico
+
+Si obtenemos acceso a un BMC podemos:
+
+* Encender o apagar el servidor
+* Reiniciarlo
+* Acceder a consola remota
+* Montar una ISO
+* Reinstalar el sistema operativo
+* Modificar configuraciones BIOS
+
+Desde un punto de vista ofensivo:
+
+Acceso a BMC ≈ acceso físico remoto
+
+Esto supera muchas técnicas tradicionales de explotación porque no depende del sistema operativo.
+
+---
+
+# 🖥 Interfaces expuestas por los BMC
+
+Un BMC típicamente expone:
+
+### 🌐 Consola Web
+
+Panel de administración accesible por HTTP o HTTPS.
+
+### 🖥 Acceso remoto por línea de comandos
+
+Puede ofrecer:
+
+* Telnet
+* SSH
+
+### 📡 UDP 623
+
+Puerto utilizado específicamente para el protocolo IPMI.
+
+Un mismo servidor puede exponer los tres simultáneamente.
+
+---
+
+# 🔍 Footprinting con Nmap
+
+Comando utilizado en HTB:
+
+```bash
+sudo nmap -sU --script ipmi-version -p 623 <target>
+```
+
+### 🔎 Desglose del comando
+
+* `-sU` → Escaneo UDP
+* `-p 623` → Puerto IPMI
+* `--script ipmi-version` → Script NSE que identifica versión
+
+---
+
+## 📤 Output de ejemplo
+
+```
+PORT    STATE SERVICE
+623/udp open  asf-rmcp
+| ipmi-version:
+|   Version:
+|     IPMI-2.0
+|   UserAuth:
+|   PassAuth: auth_user, non_null_user
+|_  Level: 2.0
+MAC Address: 14:03:DC:674:18:6A (Hewlett Packard Enterprise)
+```
+
+---
+
+# 🧩 Análisis detallado del output
+
+### 1️⃣ Puerto abierto
+
+Confirma que el BMC está accesible.
+
+### 2️⃣ Versión IPMI 2.0
+
+Importante porque:
+
+* Soporta RAKP
+* Permite extracción de hashes
+
+### 3️⃣ Métodos de autenticación
+
+Nos indica:
+
+* Qué tipos de autenticación están habilitados
+* Si acepta usuarios no nulos
+
+### 4️⃣ MAC Address
+
+Podemos identificar fabricante por OUI.
+
+Esto nos permite:
+
+* Saber si es HP
+* Dell
+* Supermicro
+
+Y ajustar estrategia.
+
+---
+
+# 🧠 Flujo 
+
+Cuando encontramos UDP 623 abierto:
+
+1. Confirmar versión con Nmap
+2. Identificar fabricante por MAC
+3. Buscar si hay consola web expuesta
+4. Intentar credenciales default
+5. Evaluar extracción de hashes RAKP
+6. Analizar posible reutilización de credenciales
+
+---
+
+# ⚠ Riesgos comunes observados en auditorías reales
+
+* BMC en misma VLAN que usuarios
+* Password default sin cambiar
+* Acceso sin segmentación
+* Firmware desactualizado
+* Consola web expuesta sin MFA
+
+En muchos entornos el BMC queda olvidado porque:
+
+"No es el sistema operativo"
+
+Pero desde seguridad ofensiva es uno de los puntos más críticos.
+
+---
+
+
 HTB muestra el siguiente ejemplo:
 
 ```bash
