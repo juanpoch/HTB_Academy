@@ -690,7 +690,44 @@ Igual, ya tenés 3 datos valiosos:
 
 ---
 
+
+
 ## 11) Enumeración de SID con Nmap (bruteforce)
+
+# 📌 Oracle SID (System Identifier) — Concepto y Enumeración
+
+## 🔎 Puerto abierto y servicio activo
+
+Si durante el escaneo observamos que el puerto **1521/TCP** está abierto y el servicio `oracle-tns` está corriendo, significa que el **listener Oracle** está activo y aceptando conexiones.
+
+Esto nos lleva a un concepto clave en Oracle:
+
+---
+
+# 🧠 ¿Qué es un SID?
+
+**SID (System Identifier)** es el nombre único que identifica una instancia específica de una base de datos Oracle.
+
+Importante:
+
+- Una base Oracle puede tener **múltiples instancias**.
+- Cada instancia tiene su propio **SID**.
+- Una instancia es el conjunto de:
+  - Procesos
+  - Estructuras de memoria
+  - Recursos internos
+
+Que trabajan juntos para gestionar los datos de la base.
+
+---
+
+# 🔌 ¿Cómo se usa el SID en una conexión?
+
+Cuando un cliente se conecta a Oracle, debe indicar:
+
+- IP o hostname
+- Puerto
+- Y el **SID** (o SERVICE_NAME)
 
 Script NSE:
 
