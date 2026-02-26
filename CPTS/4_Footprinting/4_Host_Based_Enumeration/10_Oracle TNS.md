@@ -18,7 +18,7 @@ Pensalo como “el idioma” que hablan los clientes Oracle y los servicios Orac
 * y transportar información (incluyendo consultas SQL) de manera confiable.
 
 
-# Oracle Net Services — Explicación Simple
+# Oracle Net Services
 
 ## 📌 ¿Qué es Oracle Net Services?
 
