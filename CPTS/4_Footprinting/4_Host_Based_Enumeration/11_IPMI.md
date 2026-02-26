@@ -460,7 +460,11 @@ También es fundamental probar las contraseñas predeterminadas conocidas en cua
 
 ---
 
-# 🚨 Vulnerabilidad Crítica – RAKP (IPMI 2.0)
+# Configuraciones peligrosas
+
+Si las credenciales predeterminadas no funcionan para acceder, podemos recurrir a una [vulnerabilidad](http://fish2.com/ipmi/remote-pw-cracking.html) crítica en el protocolo `RAKP` de `IPMI 2.0`. Durante el proceso de autenticación, el servidor envía al cliente un hash `SHA1` o `MD5` con el salt de la contraseña del usuario antes de que se realice la autenticación. Esto puede aprovecharse para obtener el hash de la contraseña de cualquier cuenta de usuario válida en la `BMC`.
+
+## 🚨 Vulnerabilidad Crítica – RAKP (IPMI 2.0)
 
 Aquí viene lo realmente interesante.
 
