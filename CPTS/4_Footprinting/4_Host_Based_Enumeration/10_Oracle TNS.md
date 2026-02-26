@@ -1050,7 +1050,7 @@ echo "Oracle File Upload Test" > testing.txt
 Comando:
 
 ```bash
-./odat utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt ./testing.txt
+odat utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt ./testing.txt
 ```
 
 Output:
