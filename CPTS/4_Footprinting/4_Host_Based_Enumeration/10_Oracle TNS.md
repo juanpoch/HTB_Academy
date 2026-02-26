@@ -260,6 +260,7 @@ Cada base o servicio tiene una entrada única en el archivo:
 ```
 tnsnames.ora
 ```
+[Documentación](https://docs.oracle.com/cd/E11882_01/network.112/e10835/tnsnames.htm#NETRF007)
 
 Este archivo contiene:
 
