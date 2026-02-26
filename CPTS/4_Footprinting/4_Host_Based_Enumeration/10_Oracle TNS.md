@@ -643,6 +643,8 @@ By Quentin Hardy (quentin.hardy@protonmail.com or quentin.hardy@bt.com)
 
 **Qué es ODAT:**
 
+`Oracle Database Attacking Tool`:
+
 * Herramienta open-source en Python para **enumerar y explotar** problemas en Oracle.
 * Puede ayudar a identificar:
 
