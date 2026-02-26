@@ -830,3 +830,15 @@ Observamos que existe la tabla `employee_information`, procedemos a enumerarla c
 
 Obtenemos un montón de información como los nombres de los usuarios, su salario, su dirección, su número de teléfono, su ssn o su posición laboral.
 
+
+Intentamos ejecutar `EXEC xp_cmdshell 'whoami'` y vemos que tenemos éxito:
+<img width="999" height="190" alt="image" src="https://github.com/user-attachments/assets/87756415-5993-45fe-82fe-b2c86d98f7c5" />
+
+Vemos que xp_cmdshell está habilitado, que tenemos permisos suficientes para usarlo, y que estamos ejecutando comandos en el sistema operativo. Ya tenemos `RCE`.
+
+Somos `nt service\mssqlserver` que es el usuario del sistema operativo bajo el cual corre el servicio SQL Server, es la cuenta de servicio.
+
+Estaríamos en la fase de post explitación, si hacemos `EXEC xp_cmdshell 'whoami /priv';`:
+<img width="1293" height="529" alt="image" src="https://github.com/user-attachments/assets/fcf26e8b-51a4-4089-a0ad-15fdd3232f49" />
+
+Podríamos escalar privilegios, pero ya tenemos ya respuesta, la base de datos no predeterminada es `Employees`.
