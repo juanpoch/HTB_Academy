@@ -100,21 +100,7 @@ IPMI puede comunicarse mediante:
 
 ---
 
-# 🌐 Puertos y Protocolo
 
-IPMI utiliza:
-
-```
-UDP 623
-```
-
-Servicio identificado como:
-
-```
-asf-rmcp
-```
-
-Cuando vemos UDP 623 abierto en un escaneo interno, debemos sospechar inmediatamente de un BMC expuesto.
 
 ---
 
@@ -147,6 +133,8 @@ Servicio identificado comúnmente como:
 ```
 asf-rmcp
 ```
+
+Cuando vemos UDP 623 abierto en un escaneo interno, debemos sospechar inmediatamente de un BMC expuesto.
 
 ### 🔎 ¿Qué significa esto?
 
