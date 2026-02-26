@@ -609,7 +609,7 @@ Comandos (tal cual):
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y build-essential python3-dev libaio1
+sudo apt-get install -y build-essential python3-dev libaio1t64
 cd ~
 wget https://files.pythonhosted.org/packages/source/c/cx_Oracle/cx_Oracle-8.3.0.tar.gz
 tar xzf cx_Oracle-8.3.0.tar.gz
