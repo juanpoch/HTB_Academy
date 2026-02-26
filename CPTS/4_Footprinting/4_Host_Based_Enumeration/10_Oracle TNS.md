@@ -572,21 +572,30 @@ Funciona como una **blacklist**: esos componentes no se pueden ejecutar (por eje
 
 A continuación, los campos del contenido y qué significan **en la práctica**:
 
-* **DESCRIPTION**: “bloque” que describe la conexión.
-* **ADDRESS**: a dónde conectar (host/puerto).
-* **PROTOCOL**: TCP/IPC/etc.
-* **PORT**: puerto.
-* **CONNECT_DATA**: qué querés del otro lado (service/SID/instancia).
-* **INSTANCE_NAME**: instancia específica.
-* **SERVICE_NAME**: nombre de servicio.
-* **SERVER**: dedicado o compartido.
-* **USER / PASSWORD**: credenciales.
-* **SECURITY**: settings de seguridad.
-* **VALIDATE_CERT / SSL_VERSION**: TLS.
-* **CONNECT_TIMEOUT / RECEIVE_TIMEOUT / SEND_TIMEOUT**: timeouts.
-* **SQLNET.EXPIRE_TIME**: keepalive/expiración para detectar caídas.
-* **TRACE_LEVEL / TRACE_DIRECTORY / TRACE_FILE_NAME**: trazas (útil para troubleshooting).
-* **LOG_FILE**: logs.
+
+| Parámetro | Qué es técnicamente | Qué significa en la práctica | Qué mirar como pentester |
+|------------|--------------------|-----------------------------|---------------------------|
+| DESCRIPTION | Bloque contenedor de configuración | Es el “sobre” que agrupa todos los parámetros de conexión | No es sensible por sí mismo, pero contiene todo lo importante |
+| ADDRESS | Dirección de red del servicio | Define a qué servidor se conecta el cliente | Puede revelar IPs internas o nombres DNS internos |
+| PROTOCOL | Protocolo de comunicación | TCP, IPC, TCPS (TLS), etc. | Si es TCPS, revisar configuración SSL/TLS |
+| PORT | Puerto de escucha | Normalmente 1521 por defecto | Puerto no estándar puede indicar hardening o intento de ocultación |
+| CONNECT_DATA | Datos que identifican el destino | Indica qué servicio/SID se quiere usar | Punto clave para enumeración de SID y servicios |
+| INSTANCE_NAME | Nombre específico de la instancia | Identifica una instancia concreta dentro del servidor Oracle | Útil para enumeración avanzada y movimiento lateral |
+| SERVICE_NAME | Nombre lógico del servicio | Es el nombre que el cliente solicita al conectarse | Puede revelar arquitectura interna |
+| SERVER | Tipo de manejo de conexión | DEDICATED o SHARED | Da pistas sobre arquitectura y carga del sistema |
+| USER | Usuario de conexión | Usuario de base de datos | Puede estar hardcodeado en configs expuestas |
+| PASSWORD | Contraseña de conexión | Password del usuario | Hallazgo crítico si aparece en texto plano |
+| SECURITY | Configuración de seguridad | Define cifrado/autenticación | Ver si hay cifrado obligatorio o mal configurado |
+| VALIDATE_CERT | Validación del certificado TLS | Indica si se valida el certificado del servidor | Si está deshabilitado → posible MITM |
+| SSL_VERSION | Versión de SSL/TLS | TLS 1.2, 1.3, etc. | Versiones antiguas → downgrade attack |
+| CONNECT_TIMEOUT | Tiempo máximo para conectar | Controla cuánto espera antes de abortar | No es vector directo, pero afecta testing |
+| RECEIVE_TIMEOUT | Tiempo máximo esperando respuesta | Controla latencia aceptable | Puede afectar ataques de timing |
+| SEND_TIMEOUT | Tiempo máximo para enviar datos | Similar a arriba | No suele ser vector directo |
+| SQLNET.EXPIRE_TIME | Keepalive de conexión | Detecta conexiones caídas | Bajo valor puede afectar sesiones largas |
+| TRACE_LEVEL | Nivel de trazas | Nivel de logging detallado | Si está alto, puede dejar rastros de ataque |
+| TRACE_DIRECTORY | Directorio de logs de traza | Donde se guardan archivos de debugging | Puede contener información sensible |
+| TRACE_FILE_NAME | Nombre del archivo de traza | Archivo donde se guarda la traza | Buscar exposición si hay acceso al sistema |
+| LOG_FILE | Archivo de log general | Registro de eventos del listener/conexión | Fuente de evidencia o info sensible |
 
 > Como pentester, cuando veas settings de TLS/validación de cert, pensá: ¿está bien configurado o hay downgrade/malas prácticas?
 
