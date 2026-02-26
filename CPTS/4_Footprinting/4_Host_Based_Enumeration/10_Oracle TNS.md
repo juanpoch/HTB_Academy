@@ -1109,5 +1109,9 @@ En un pentest, esto suele escalar a:
 ---
 
 
+# Preguntas
+
+#### Enumere la base de datos Oracle de destino y envíe el hash de contraseña del usuario DBSNMP como respuesta.
+
 
 
