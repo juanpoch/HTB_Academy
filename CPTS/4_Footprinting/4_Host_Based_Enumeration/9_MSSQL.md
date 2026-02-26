@@ -743,8 +743,90 @@ Entender el footprinting correctamente es el primer paso para evaluar el verdade
 
 #### Enumere el destino utilizando los conceptos enseñados en esta sección. Indique el nombre de host del servidor MSSQL.
 
+Envíamos una traza `ICMP` al target para verificar que se encuentra activo:
+<img width="618" height="183" alt="image" src="https://github.com/user-attachments/assets/d0d15def-8e71-4534-aab5-25a2b17002ec" />
+
+
+Realizamos un escaneo `TCP SYN` con nmap para verificar que el servicio está expuesto:
+```bash
+nmap -Pn -n --reason -sS -p1433 <ip>
+```
+
+<img width="702" height="232" alt="image" src="https://github.com/user-attachments/assets/dc568c29-f9d6-4077-89a6-1c945ff701bd" />
+
+
+Hacemos nuestras técnicas de banner grabbing, utilizamos el script de nmap de banner grabbing y también escaneamos su versión:
+```bash
+nmap -Pn -n --reason -sV --script=banner -p1433 <ip>
+```
+
+<img width="929" height="243" alt="image" src="https://github.com/user-attachments/assets/c122bfbe-08d8-4f8a-89e3-9b2d2aea25e4" />
+
+Sabemos que estamos interactuando con un `Microsoft SQL Server 2019 15.00.2000`.
+
+Hacemos una búsqueda con `find` para encontrar todos los scripts disponibles para MSSQL:
+```bash
+find / -type f -name ms-sql* 2>/dev/null |grep scripts
+```
+<img width="623" height="292" alt="image" src="https://github.com/user-attachments/assets/4d9ba72b-835d-40f6-b164-316a97763e67" />  
+
+
+
+Realizamos un escaneo con nmap con los scripts correspondientes:
+```bash
+nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 10.129.10.94
+```
+
+<img width="949" height="958" alt="image" src="https://github.com/user-attachments/assets/d28dc05b-3cd7-40d5-a6e7-0c60485e2571" />
+
+Para saber el nombre del host del servidor, nos fijamos en la salida del script `ms-sql-ntlm-info` en el campo `Target_Name`, encontramos que el nombre de host del servidor es `ILF-SQL-01`.
+
+
+También probamos con `metasploit` buscamos scanners auxiliares para el servicio:
+
+```bash
+msf > search auxiliary scanner mssql
+```
+
+<img width="956" height="737" alt="image" src="https://github.com/user-attachments/assets/8407e112-35b3-4ed9-92f3-951dc417846c" />
+
+Encontramos el scanner que nos muestra la teoría:
+```bash
+auxiliary/scanner/mssql/mssql_ping
+```
+
+Lo usamos con `use 2` y mostramos las opciones con `show options`:
+<img width="939" height="704" alt="image" src="https://github.com/user-attachments/assets/6703d28e-ca9d-4984-b79e-4f3c8648c40f" />
+
+Observamos que debemos configurar `RHOSTS`. Lo hacemos con `set RHOSTS <ip>` y luego lo corremos con `RUN`:
+<img width="955" height="439" alt="image" src="https://github.com/user-attachments/assets/4627e8b1-91bf-4544-a392-71c1ad236053" />
+
+
 
 
 #### Conéctese a la instancia MSSQL que se ejecuta en el destino usando la cuenta (backdoor:Password1) y luego enumere la base de datos no predeterminada presente en el servidor.
 
 `Hint`: Recuerde que el sistema operativo de destino en el que nos estamos autenticando es Windows.
+
+
+Nos conectamos al servidor con impacket utilizando las credenciales `backdoor`:`Password1`:
+
+```bash
+python3 /usr/share/doc/python3-impacket/examples/mssqlclient.py backdoor@10.129.10.94 -windows-auth
+```
+
+<img width="951" height="523" alt="image" src="https://github.com/user-attachments/assets/6499f28f-4717-4a93-a457-640a44185d6d" />
+
+Procedemos a enumerar las bases de datos:
+
+<img width="958" height="305" alt="image" src="https://github.com/user-attachments/assets/a2e9f4f2-7fdd-44ae-97a7-9185f054f11b" />
+
+Observamos que existe una base de datos no predeterminada llamada `Employees`, procedemos a enumerarla, utilizamos `use Employees;` y luego `select name from sys.tables;`:
+<img width="998" height="254" alt="image" src="https://github.com/user-attachments/assets/eba51bed-0b30-4225-8931-8ac85a6ce64b" />  
+
+Observamos que existe la tabla `employee_information`, procedemos a enumerarla con `select * from employee_information`:
+
+<img width="1911" height="488" alt="image" src="https://github.com/user-attachments/assets/0a1e38c5-d03b-4cce-b655-e9f684b30f7b" />
+
+Obtenemos un montón de información como los nombres de los usuarios, su salario, su dirección, su número de teléfono, su ssn o su posición laboral.
+
