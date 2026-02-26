@@ -308,6 +308,8 @@ Ejemplo:
 * Puede facilitar movimiento lateral
 * Puede ser explotado si hay permisos indebidos
 
+[Named pipes](https://learn.microsoft.com/en-us/sql/tools/configuration-manager/named-pipes-properties?view=sql-server-ver15)
+
 ---
 
 # 7️⃣ Configuraciones Peligrosas
