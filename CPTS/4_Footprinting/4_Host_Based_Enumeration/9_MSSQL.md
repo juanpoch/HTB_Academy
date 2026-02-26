@@ -377,63 +377,170 @@ Eso convierte a MSSQL en punto de pivot o escalada.
 
 ---
 
+# 🛰️ MSSQL – Footprinting y Enumeración
 
+En esta sección vamos a entender en profundidad cómo se realiza el **footprinting del servicio MSSQL**, qué significa cada dato que obtenemos y por qué es importante desde la perspectiva de un pentester.
 
+La idea es que no solo ejecutes comandos, sino que entiendas exactamente qué está pasando.
 
 ---
 
-# 8️⃣ Footprinting con Nmap
+# 1️⃣ ¿Qué significa “Footprinting” en MSSQL?
 
-Escaneo completo con scripts específicos:
+Footprinting es el proceso de:
+
+* Identificar que el servicio existe
+* Detectar versión exacta
+* Descubrir nombre del servidor
+* Detectar instancia
+* Saber si usa cifrado
+* Saber si usa Named Pipes
+* Identificar integración con dominio
+* Detectar posibles configuraciones débiles
+
+En MSSQL esto es especialmente importante porque:
+
+👉 Puede estar integrado con Active Directory
+👉 Puede permitir ejecución de comandos del sistema
+👉 Puede facilitar movimiento lateral
+
+---
+
+# 2️⃣ Puerto por defecto de MSSQL
+
+MSSQL escucha normalmente en:
+
+```
+TCP 1433
+```
+
+Ese es nuestro primer indicador.
+
+Si vemos 1433 abierto → probablemente hay una instancia de SQL Server.
+
+---
+
+# 3️⃣ Enumeración con Nmap (Explicación Completa)
+
+Comando utilizado:
 
 ```bash
-CyberWolfSec@htb[/htb]$ sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 10.129.201.248
+sudo nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 10.129.201.248
 ```
+
+---
+
+## 🧠 ¿Qué estamos haciendo realmente?
+
+### `-p 1433`
+
+Escaneamos únicamente el puerto MSSQL.
+
+### `-sV`
+
+Intentamos detectar versión exacta del servicio.
+
+### `--script ms-sql-*`
+
+Ejecutamos scripts específicos para MSSQL.
+
+Estos scripts intentan:
+
+* Obtener versión
+* Detectar si `sa` tiene password vacío
+* Detectar si xp_cmdshell está habilitado
+* Obtener información NTLM
+* Detectar Named Pipes
+* Intentar listar bases
+
+---
+
+# 4️⃣ Análisis de la Salida (Paso a Paso)
 
 Salida:
 
 ```text
 PORT     STATE SERVICE  VERSION
 1433/tcp open  ms-sql-s Microsoft SQL Server 2019 15.00.2000.00; RTM
-| ms-sql-ntlm-info:
+```
+
+## 🔎 Qué significa esto
+
+* El puerto está abierto
+* Es MSSQL
+* Versión: SQL Server 2019
+* Build: 15.00.2000.00
+* RTM = Release To Manufacturing (sin service pack)
+
+👉 Esto ya nos permite buscar vulnerabilidades específicas por versión.
+
+---
+
+## ms-sql-ntlm-info
+
+```text
 |   Target_Name: SQL-01
 |   NetBIOS_Domain_Name: SQL-01
 |   NetBIOS_Computer_Name: SQL-01
 |   DNS_Domain_Name: SQL-01
 |   DNS_Computer_Name: SQL-01
 |_  Product_Version: 10.0.17763
-
-Host script results:
-| ms-sql-dac:
-|_  Instance: MSSQLSERVER; DAC port: 1434 (connection failed)
-| ms-sql-info:
-|   Windows server name: SQL-01
-|   10.129.201.248\MSSQLSERVER:
-|     Instance name: MSSQLSERVER
-|     Version:
-|       name: Microsoft SQL Server 2019 RTM
-|       number: 15.00.2000.00
-|       Product: Microsoft SQL Server 2019
-|       Service pack level: RTM
-|       Post-SP patches applied: false
-|     TCP port: 1433
-|     Named pipe: \\10.129.201.248\pipe\sql\query
-|_    Clustered: false
 ```
 
-### 🔎 Qué aprendimos
+### 🔍 Qué aprendemos
 
-* Hostname: SQL-01
-* Versión exacta
-* No tiene service pack
-* Named pipes habilitado
-* No es cluster
+* Hostname real: **SQL-01**
+* No parece estar en dominio (NetBIOS_Domain_Name igual al hostname)
+* Product_Version 10.0.17763 → Windows Server 2019
 
-Todo esto es información de superficie de ataque.
+👉 Ahora sabemos:
+
+* Sistema operativo
+* Nombre real del servidor
+
+Esto es información clave para movimiento lateral.
 
 ---
 
-# 9️⃣ Footprinting con Metasploit
+## ms-sql-info
+
+```text
+Instance name: MSSQLSERVER
+Named pipe: \\10.129.201.248\pipe\sql\query
+Clustered: false
+```
+
+### 🔎 Instance name
+
+MSSQL puede tener múltiples instancias.
+
+`MSSQLSERVER` = instancia por defecto.
+
+---
+
+### 🔎 Named Pipe
+
+```
+\\10.129.201.248\pipe\sql\query
+```
+
+Esto indica que el servicio permite comunicación vía Named Pipes.
+
+👉 Esto puede facilitar ataques internos o movimiento lateral.
+
+---
+
+### 🔎 Clustered: false
+
+No está en cluster.
+
+Menos complejidad, menos redundancia.
+
+---
+
+# 5️⃣ Footprinting con Metasploit
+
+Comando:
 
 ```bash
 msf6 auxiliary(scanner/mssql/mssql_ping) > set rhosts 10.129.201.248
@@ -443,7 +550,6 @@ msf6 auxiliary(scanner/mssql/mssql_ping) > run
 Salida:
 
 ```text
-[*] 10.129.201.248:       - SQL Server information for 10.129.201.248:
 [+] 10.129.201.248:       -    ServerName      = SQL-01
 [+] 10.129.201.248:       -    InstanceName    = MSSQLSERVER
 [+] 10.129.201.248:       -    IsClustered     = No
@@ -452,12 +558,25 @@ Salida:
 [+] 10.129.201.248:       -    np              = \\SQL-01\pipe\sql\query
 ```
 
+## 🧠 Qué confirma
+
+Metasploit valida:
+
+* Nombre del servidor
+* Versión
+* Puerto
+* Named pipes
+
+Es una segunda fuente de confirmación.
+
 ---
 
-# 🔟 Conexión con Impacket
+# 6️⃣ Conexión Real con Impacket
+
+Comando:
 
 ```bash
-CyberWolfSec@htb[/htb]$ python3 mssqlclient.py Administrator@10.129.201.248 -windows-auth
+python3 mssqlclient.py Administrator@10.129.201.248 -windows-auth
 ```
 
 Salida:
@@ -470,10 +589,21 @@ Salida:
 [*] INFO(SQL-01): Line 1: Changed database context to 'master'.
 [*] INFO(SQL-01): Line 1: Changed language setting to us_english.
 [*] ACK: Result: 1 - Microsoft SQL Server (150 7208)
-[!] Press help for extra shell commands
 ```
 
-Listar bases:
+## 🔐 ¿Qué significa esto?
+
+* El servidor exige cifrado
+* Se negocia TLS automáticamente
+* Nos autenticamos con Windows Authentication
+
+👉 Esto demuestra integración con el sistema operativo.
+
+---
+
+# 7️⃣ Enumeración Interna
+
+Comando:
 
 ```sql
 SQL> select name from sys.databases
@@ -489,47 +619,97 @@ msdb
 Transactions
 ```
 
+## 🧠 Qué significa
+
+Las primeras cuatro son bases del sistema.
+
+`Transactions` es una base creada por la organización.
+
+👉 Aquí es donde suele haber datos reales.
+
 ---
 
-# 1️⃣1️⃣ T-SQL (Transact-SQL)
+# 8️⃣ Qué es T-SQL
 
-MSSQL usa T-SQL, que es una extensión de SQL estándar.
+T-SQL (Transact-SQL) es una extensión de SQL que incluye:
 
-Permite:
-
-* Procedimientos almacenados
 * Variables
-* Control de flujo
-* Ejecución de comandos del sistema (si está habilitado xp_cmdshell)
+* Bucles
+* Condicionales
+* Procedimientos almacenados
+* Ejecución de comandos del sistema (si xp_cmdshell está habilitado)
+
+Ejemplo:
+
+```sql
+SELECT @@version;
+```
 
 ---
 
-# 1️⃣2️⃣ Riesgos Ofensivos Clásicos
+# 9️⃣ Riesgos Ofensivos Reales
 
-* `xp_cmdshell` habilitado
-* Permisos sysadmin
-* Uso de cuenta de dominio
-* Acceso a archivos
-* Movimiento lateral
+Desde MSSQL podemos:
+
+* Enumerar usuarios
+* Detectar roles
+* Intentar escalar a sysadmin
+* Ejecutar xp_cmdshell
+* Leer archivos
+* Escribir archivos
+* Pivotear dentro del dominio
+
+MSSQL en Windows puede convertirse en un punto crítico de compromiso.
 
 ---
 
-# 1️⃣3️⃣ Conclusión
+# 🔟 Resumen Estratégico
 
-MSSQL no es solo una base de datos.
+Durante el footprinting aprendimos:
 
-En entornos Windows:
+* Versión exacta
+* Nombre del servidor
+* Sistema operativo
+* Puerto activo
+* Named pipes habilitado
+* No clusterizado
+* Cifrado activo
 
-👉 Está integrado con el dominio
-👉 Puede ejecutar comandos del sistema
-👉 Puede convertirse en punto de pivot
+Todo esto reduce incertidumbre.
 
-Como pentesters debemos:
+Footprinting no es solo "ver que está abierto".
 
-* Enumerar versión
-* Detectar autenticación
-* Ver named pipes
-* Analizar permisos
-* Evaluar cifrado
+Es entender:
 
-Entender MSSQL profundamente es clave para comprometer entornos empresariales Windows.
+👉 Cómo está configurado
+👉 Cómo se autentica
+👉 Cómo podría ser abusado
+
+---
+
+# 🎯 Conclusión Final
+
+MSSQL es mucho más que una base de datos.
+
+En entornos Windows empresariales:
+
+* Está ligado a Active Directory
+* Puede ejecutar comandos del sistema
+* Puede permitir movimiento lateral
+* Puede almacenar información crítica
+
+Entender el footprinting correctamente es el primer paso para evaluar el verdadero riesgo del servicio.
+
+
+---
+
+## Preguntas
+
+
+#### Enumere el destino utilizando los conceptos enseñados en esta sección. Indique el nombre de host del servidor MSSQL.
+
+
+
+#### Conéctese a la instancia MSSQL que se ejecuta en el destino usando la cuenta (backdoor:Password1) y luego enumere la base de datos no predeterminada presente en el servidor.
+
+`Hint`: Recuerde que el sistema operativo de destino en el que nos estamos autenticando es Windows.
