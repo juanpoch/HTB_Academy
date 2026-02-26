@@ -117,62 +117,265 @@ MSSQL cuenta con bases de datos de sistema predeterminadas que nos ayudan a comp
 
 ---
 
-# 5️⃣ Autenticación en MSSQL
+# 🔐 MSSQL – Autenticación, Configuración por Defecto y Riesgos (Explicación desde Cero)
 
-Existen dos modos principales:
+En esta sección vamos a entender en profundidad cómo se autentica Microsoft SQL Server, cómo viene configurado por defecto y qué configuraciones pueden representar un riesgo real en un entorno empresarial.
 
-## 🔐 Windows Authentication
-
-* Utiliza credenciales del sistema operativo
-* Puede usar Active Directory
-* Ideal para entornos corporativos
-
-Flujo:
-
-1. Usuario se autentica en Windows
-2. Windows valida contra SAM o Domain Controller
-3. MSSQL confía en esa autenticación
-
-⚠️ Si comprometemos una cuenta de dominio → podríamos acceder a MSSQL.
+Si es la primera vez que ves MSSQL, esta parte es clave porque en entornos Windows la autenticación es el corazón de todo.
 
 ---
 
-## 🔑 SQL Authentication
+# 1️⃣ ¿Cómo funciona la autenticación en MSSQL?
 
-* Usuario y contraseña propios de MSSQL
-* Ejemplo clásico: `sa`
+MSSQL puede operar en dos modos principales de autenticación:
 
-⚠️ Muchas veces:
+* **Windows Authentication**
+* **SQL Server Authentication**
 
-* `sa` tiene password débil
-* `sa` no fue deshabilitado
+También puede funcionar en modo mixto (permitiendo ambos).
 
 ---
 
-# 6️⃣ Configuración por Defecto
+# 2️⃣ 🔐 Windows Authentication (Integración con el Sistema Operativo)
 
-Cuando MSSQL se instala y se expone en red:
+Este es el modo más común en entornos corporativos.
 
-* Servicio corre como:
+## 🧠 ¿Qué significa realmente?
+
+Cuando un usuario intenta conectarse a MSSQL usando Windows Authentication:
+
+1. No envía usuario/contraseña directamente a MSSQL.
+2. El sistema operativo Windows valida la identidad.
+3. La validación se hace contra:
+
+   * La base local SAM (si es cuenta local)
+   * El Domain Controller (si es cuenta de dominio)
+4. MSSQL confía en esa validación.
+
+Es decir:
+
+> MSSQL delega la autenticación al sistema operativo.
+
+---
+
+## 🔎 ¿Qué es SAM?
+
+SAM (Security Account Manager) es la base de datos local de usuarios de Windows.
+
+Contiene:
+
+* Usuarios locales
+* Hashes de contraseñas
+* Información de grupos
+
+Si el servidor pertenece a un dominio, la autenticación normalmente se valida contra:
+
+👉 Active Directory
+
+---
+
+## 🏢 Integración con Active Directory
+
+En entornos empresariales:
+
+* Usuarios inician sesión en el dominio
+* Active Directory gestiona permisos
+* MSSQL puede permitir acceso a grupos del dominio
+
+Ejemplo:
+
+Un grupo de AD llamado:
+
+```
+SQL_Admins
+```
+
+Puede tener privilegios dentro de MSSQL.
+
+⚠️ Implicación ofensiva:
+
+Si comprometemos una cuenta de dominio con privilegios sobre MSSQL:
+
+* Podemos acceder a la base
+* Enumerar datos
+* Ejecutar consultas
+* Potencialmente escalar privilegios
+* Hacer movimiento lateral
+
+---
+
+# 3️⃣ 🔑 SQL Server Authentication
+
+Este modo usa credenciales propias de MSSQL.
+
+Ejemplo clásico:
+
+```
+Usuario: sa
+Password: <contraseña>
+```
+
+`sa` es el usuario administrador interno de MSSQL.
+
+---
+
+## ⚠️ Riesgos comunes
+
+* `sa` con password débil
+* `sa` habilitado cuando no debería
+* Reutilización de credenciales
+* Passwords por defecto
+
+A diferencia de Windows Authentication:
+
+👉 Aquí sí se envía usuario/contraseña al motor SQL.
+
+---
+
+# 4️⃣ Modo Mixto (Mixed Mode)
+
+Muchos servidores están configurados en modo mixto:
+
+* Permiten Windows Authentication
+* Permiten SQL Authentication
+
+Esto amplía superficie de ataque.
+
+---
+
+# 5️⃣ Configuración por Defecto al Instalar MSSQL
+
+Cuando un administrador instala MSSQL y lo hace accesible en red:
+
+## 🔧 Servicio del sistema
+
+El servicio suele ejecutarse como:
 
 ```
 NT SERVICE\MSSQLSERVER
 ```
 
-* Escucha en 1433
-* Por defecto puede no forzar cifrado
+Esto es una cuenta de servicio virtual administrada por Windows.
+
+No es una cuenta humana.
+
+---
+
+## 🌐 Puerto por defecto
+
+MSSQL escucha en:
+
+```
+TCP 1433
+```
+
+Puede configurarse otro puerto, pero 1433 es el estándar.
+
+---
+
+## 🔓 Cifrado por defecto
+
+Por defecto:
+
+* No siempre se fuerza cifrado
+* Puede aceptar conexiones sin TLS
+
+Esto significa que:
+
+* Credenciales pueden viajar en texto claro
+* Puede ser vulnerable a sniffing
+
+---
+
+# 6️⃣ Named Pipes
+
+MSSQL puede comunicarse usando:
+
+* TCP/IP
+* Named Pipes
+
+Named Pipes es un mecanismo de comunicación interna de Windows.
+
+Ejemplo:
+
+```
+\\SQL-01\pipe\sql\query
+```
+
+⚠️ Desde perspectiva ofensiva:
+
+* Puede facilitar movimiento lateral
+* Puede ser explotado si hay permisos indebidos
 
 ---
 
 # 7️⃣ Configuraciones Peligrosas
 
-Como pentesters debemos buscar:
+En un engagement debemos pensar como administradores.
 
-* Conexiones sin cifrado
-* Certificados autofirmados
-* Named Pipes habilitados
-* Cuenta `sa` activa
-* xp_cmdshell habilitado
+Un admin puede cometer errores por:
+
+* Presión laboral
+* Configuraciones rápidas
+* Falta de hardening
+
+Algunas configuraciones peligrosas incluyen:
+
+---
+
+## 🔓 1. Conexiones sin cifrado
+
+Si no se fuerza TLS:
+
+* Credenciales pueden ser interceptadas
+* Tráfico puede ser inspeccionado
+
+---
+
+## 📜 2. Certificados autofirmados
+
+Si se usa TLS con certificado self-signed:
+
+* Puede ser vulnerable a spoofing
+* Facilita ataques MITM
+
+---
+
+## 🧵 3. Named Pipes habilitado
+
+Puede ampliar superficie de ataque interna.
+
+---
+
+## 🔑 4. Cuenta `sa` activa
+
+Especialmente peligrosa si:
+
+* Tiene password débil
+* Es reutilizada en otros sistemas
+
+---
+
+## 💣 5. xp_cmdshell habilitado
+
+`xp_cmdshell` permite ejecutar comandos del sistema operativo desde SQL.
+
+Ejemplo:
+
+```sql
+EXEC xp_cmdshell 'whoami';
+```
+
+Si está habilitado y tenemos privilegios adecuados:
+
+👉 Podemos ejecutar comandos en el servidor Windows.
+
+Eso convierte a MSSQL en punto de pivot o escalada.
+
+---
+
+
+
 
 ---
 
