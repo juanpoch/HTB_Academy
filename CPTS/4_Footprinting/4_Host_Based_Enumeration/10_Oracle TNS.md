@@ -622,7 +622,7 @@ odat -h
 Output:
 
 ```txt
-usage: odat.py [-h] [--version]
+usage: odat [-h] [--version]
                {all,tnscmd,tnspoison,sidguesser,snguesser,passwordguesser,utlhttp,httpuritype,utltcp,ctxsys,externaltable,dbmsxslprocessor,dbmsadvisor,utlfile,dbmsscheduler,java,passwordstealer,oradbg,dbmslob,stealremotepwds,userlikepwd,smb,privesc,cve,search,unwrapper,clean}
                ...
 
@@ -1050,7 +1050,7 @@ echo "Oracle File Upload Test" > testing.txt
 Comando:
 
 ```bash
-./odat.py utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt ./testing.txt
+./odat utlfile -s 10.129.204.235 -d XE -U scott -P tiger --sysdba --putFile C:\\inetpub\\wwwroot testing.txt ./testing.txt
 ```
 
 Output:
