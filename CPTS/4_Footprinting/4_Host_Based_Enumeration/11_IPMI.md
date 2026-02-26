@@ -588,3 +588,8 @@ Checklist:
 ---
 
 
+# Preguntas
+
+#### ¿Qué nombre de usuario está configurado para acceder al host a través de IPMI?
+
+#### ¿Cuál es la contraseña en texto claro de la cuenta?
