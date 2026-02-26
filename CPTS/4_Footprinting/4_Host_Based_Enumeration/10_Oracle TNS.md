@@ -350,6 +350,17 @@ ADR_BASE_LISTENER = C:\oracle
 
   * TCP (HOST/PORT)
   * y también IPC con `EXTPROC1521` (uso local/procesos externos).
+ 
+`IPC`: El listener puede comunicarse con procesos Oracle que corren en la misma máquina, sin usar TCP/IP.
+IPC permite que:
+
+Un proceso hable con otro proceso dentro del mismo sistema operativo sin pasar por la red. Es más rápido y más seguro que usar TCP cuando todo está en el mismo host.
+
+`EXTPROC`: External Procedure.
+
+`EXTPROC1521`: Es un mecanismo de Oracle que permite ejecutar código externo (por ejemplo C) desde `PL/SQL`.
+
+Traducción: Además de escuchar en TCP 1521, también acepto conexiones internas vía IPC usando el canal EXTPROC1521.
 
 ### 4.3) Resumen mental (muy importante)
 
