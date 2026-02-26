@@ -763,10 +763,22 @@ En este caso, te está diciendo: “hay una instancia/servicio que responde al S
 
 ## 12) Enumeración avanzada con ODAT
 
+# 📌 Enumeración con ODAT (Oracle Database Attacking Tool)
+
+`Odat` permite realizar distintos tipos de análisis sobre una base de datos Oracle para obtener información como:
+
+- 📛 Nombres de bases de datos
+- 🔢 Versiones del servidor
+- ⚙ Procesos en ejecución
+- 👤 Cuentas de usuario
+- 🔐 Credenciales débiles
+- 🛠 Vulnerabilidades conocidas
+- ⚠ Configuraciones inseguras
+
 Ejecutar todos los módulos (modo “all”):
 
 ```bash
-./odat.py all -s 10.129.204.235
+odat all -s 10.129.204.235
 ```
 
 Output relevante (tal cual, recortado):
