@@ -359,6 +359,8 @@ Ya con esto sabemos que estamos frente a un BMC.
 
 ## Módulo de descubrimiento de versión
 
+También podemos usar el [módulo](https://www.rapid7.com/db/modules/auxiliary/scanner/ipmi/ipmi_version/) de análisis de Metasploit `auxiliary/scanner/ipmi/ipmi_version`:
+
 ```bash
 use auxiliary/scanner/ipmi/ipmi_version
 set rhosts 10.129.42.195
@@ -388,6 +390,8 @@ Aquí vemos:
 | Supermicro | ADMIN         | ADMIN          |
 
 ⚠️ En pentests internos es MUY común que no hayan cambiado estas credenciales.
+
+También es fundamental probar las contraseñas predeterminadas conocidas en cualquier servicio que encontremos, estas contraseñas predeterminadas de `BMC` pueden permitirnos acceder a la consola web o incluso a la línea de comandos mediante `SSH` o `Telnet`.
 
 ---
 
