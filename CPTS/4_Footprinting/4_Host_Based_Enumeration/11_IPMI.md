@@ -149,22 +149,6 @@ Si en un escaneo interno vemos UDP 623 abierto, debemos asumir inmediatamente:
 
 ---
 
-# 🧠 ¿Qué es un BMC realmente?
-
-## Baseboard Management Controller
-
-El BMC es un microcontrolador dedicado que:
-
-* Está integrado físicamente en la motherboard
-* Corre su propio firmware (generalmente Linux embebido)
-* Tiene su propia pila de red
-* Funciona independientemente del sistema operativo principal
-
-Es literalmente:
-
-> Una computadora dentro de la computadora.
-
-Incluso si el servidor está apagado, el BMC puede seguir funcionando siempre que tenga alimentación eléctrica.
 
 ---
 
