@@ -63,6 +63,7 @@ El BMC es literalmente una "computadora dentro de la computadora".
 
 ## 2️⃣ IPMB – Intelligent Platform Management Bus
 
+Amplía el `BMC`.
 Bus interno que permite comunicación entre:
 
 * Sensores
