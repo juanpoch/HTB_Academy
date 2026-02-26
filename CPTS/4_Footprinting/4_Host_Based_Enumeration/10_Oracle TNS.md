@@ -17,6 +17,64 @@ Pensalo como “el idioma” que hablan los clientes Oracle y los servicios Orac
 * establecer la sesión,
 * y transportar información (incluyendo consultas SQL) de manera confiable.
 
+
+# Oracle Net Services — Explicación Simple
+
+## 📌 ¿Qué es Oracle Net Services?
+
+**Oracle Net Services** es la infraestructura de red de Oracle.
+
+Es el sistema que permite que aplicaciones, herramientas y otros servicios se conecten a una base de datos Oracle a través de la red.
+
+---
+
+## 🧠 En términos simples
+
+Oracle Net Services es:
+
+> La capa que gestiona las conexiones hacia Oracle Database.
+
+Incluye:
+
+- El **listener**
+- El protocolo **TNS**
+- Resolución de nombres (`tnsnames.ora`)
+- Configuración de red (`listener.ora`)
+- Encriptación (SSL/TLS)
+- Autenticación
+- Manejo y control de sesiones
+
+---
+
+## 🔌 ¿Qué papel juega TNS?
+
+TNS (Transparent Network Substrate) es el **protocolo** que usa Oracle Net Services para comunicarse.
+
+Podemos pensarlo así:
+
+- Oracle Net Services = infraestructura
+- TNS = idioma que usa esa infraestructura
+
+---
+
+## 🏗 ¿Quién usa Oracle Net Services?
+
+Muchos componentes pueden usarlo para conectarse a la base:
+
+- Oracle Database (para exponer conexiones)
+- Oracle Enterprise Manager
+- Oracle Application Server
+- Oracle Fusion Middleware
+- Web servers (IIS, Apache)
+- Aplicaciones empresariales
+
+Pero estos **no son Oracle Net Services**.  
+Son clientes que lo utilizan.
+
+---
+
+Sin Oracle Net Services, nadie podría conectarse remotamente a la base.
+
 [Oracle Net Services](https://docs.oracle.com/en/database/oracle/oracle-database/18/netag/introducing-oracle-net-services.html)
 
 ### 1.1) ¿Por qué es importante en entornos enterprise?
