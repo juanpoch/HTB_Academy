@@ -17,6 +17,8 @@ Pensalo como “el idioma” que hablan los clientes Oracle y los servicios Orac
 * establecer la sesión,
 * y transportar información (incluyendo consultas SQL) de manera confiable.
 
+[Oracle Net Services](https://docs.oracle.com/en/database/oracle/oracle-database/18/netag/introducing-oracle-net-services.html)
+
 ### 1.1) ¿Por qué es importante en entornos enterprise?
 
 Oracle se usa muchísimo en industrias con **bases grandes y críticas** (salud, finanzas, retail). Por eso, Oracle Net Services/TNS incorpora (o puede incorporar) características como:
