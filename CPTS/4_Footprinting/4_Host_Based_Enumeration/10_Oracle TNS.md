@@ -94,6 +94,180 @@ Pero en la práctica, en entornos reales aparecen:
 
 ---
 
+# Oracle TNS y su Ecosistema de Servicios
+
+> En esta sección vamos a entender algo MUY importante: **Oracle TNS no vive solo**. Normalmente forma parte de un ecosistema de servicios Oracle que trabajan juntos.
+
+La idea es que entiendas:
+
+* Qué otros servicios suelen estar presentes.
+* Qué contraseñas por defecto existieron históricamente.
+* Por qué esto es relevante en un pentest.
+* Cómo se relaciona todo con el archivo `tnsnames.ora`.
+
+---
+
+# 1️⃣ Oracle TNS junto a otros servicios Oracle
+
+Oracle TNS suele utilizarse junto con varios componentes del ecosistema Oracle. Vamos uno por uno, explicado MUY simple:
+
+---
+
+## 🔹 Oracle Database
+
+Es la base de datos en sí.
+
+* Es donde viven las tablas, usuarios, datos financieros, médicos, etc.
+* TNS permite que clientes se conecten a esta base.
+
+👉 Sin Oracle Database, TNS no tendría nada a qué redirigir las conexiones.
+
+---
+
+## 🔹 Oracle DBSNMP
+
+Es un servicio relacionado con monitoreo vía SNMP.
+
+* Permite supervisar el estado de la base.
+* Se usa para monitoreo automático.
+
+⚠️ Históricamente usaba una contraseña por defecto:
+
+```
+dbsnmp
+```
+
+En pentesting, si vemos este servicio o usuario, es una credencial clásica para probar.
+
+---
+
+## 🔹 Oracle Application Server
+
+Es un servidor de aplicaciones.
+
+* Permite ejecutar aplicaciones web que usan la base Oracle.
+* Muchas aplicaciones empresariales lo utilizan como backend.
+
+Si comprometés esto, podés pivotear hacia la base.
+
+---
+
+## 🔹 Oracle Enterprise Manager
+
+Es la consola de administración.
+
+* Se usa para administrar bases Oracle.
+* Permite ver rendimiento, usuarios, configuración.
+
+Si está expuesto, puede ser un punto crítico de entrada.
+
+---
+
+## 🔹 Oracle Fusion Middleware
+
+Es una plataforma intermedia para integrar aplicaciones.
+
+* Une aplicaciones, servicios web y bases Oracle.
+* Muy común en entornos corporativos grandes.
+
+Si este componente tiene vulnerabilidades, puede dar acceso indirecto a la base.
+
+---
+
+## 🔹 Web Servers
+
+Muchos entornos Oracle tienen servidores web (IIS, Apache, etc.) conectados a la base.
+
+Ejemplo típico:
+
+* Usuario accede a una web
+* La web consulta Oracle
+* Oracle responde
+
+👉 Si comprometés Oracle, podés afectar la aplicación web.
+👉 Si comprometés la web, podés intentar pivotear a Oracle.
+
+---
+
+# 2️⃣ Cambios históricos en contraseñas por defecto
+
+Este punto es CLAVE en pentesting.
+
+## 🔸 Oracle 9
+
+Tenía contraseña por defecto:
+
+```
+CHANGE_ON_INSTALL
+```
+
+Muchos sistemas heredados la dejaron sin cambiar.
+
+---
+
+## 🔸 Oracle 10
+
+Ya no tenía contraseña por defecto configurada automáticamente.
+
+Pero eso no significa que el admin haya puesto una buena contraseña.
+
+---
+
+## 🔸 Oracle DBSNMP
+
+Usuario típico:
+
+```
+dbsnmp
+```
+
+Contraseña por defecto histórica:
+
+```
+dbsnmp
+```
+
+En HTB y en entornos reales viejos, esto puede seguir funcionando.
+
+---
+
+# 3️⃣ Riesgo adicional: Servicio Finger
+
+Algunas organizaciones usan el servicio:
+
+```
+finger
+```
+
+Finger permite consultar información sobre usuarios del sistema.
+
+¿Por qué es peligroso?
+
+Porque si sabés el directorio home de un usuario Oracle, podés:
+
+* inferir rutas
+* buscar archivos sensibles
+* facilitar explotación
+
+👉 Es un ejemplo clásico de cómo un servicio aparentemente “inofensivo” puede aumentar el riesgo.
+
+---
+
+# 4️⃣ Cómo encaja todo esto con tnsnames.ora
+
+Cada base o servicio tiene una entrada única en el archivo:
+
+```
+tnsnames.ora
+```
+
+Este archivo contiene:
+
+* Nombre del servicio (alias)
+* Ubicación en red (host + puerto)
+* Nombre real del servicio o base
+
+
 ## 4) Archivos clave: `tnsnames.ora` y `listener.ora`
 
 Estos archivos suelen vivir en:
