@@ -362,6 +362,17 @@ Un proceso hable con otro proceso dentro del mismo sistema operativo sin pasar p
 
 Traducción: Además de escuchar en TCP 1521, también acepto conexiones internas vía IPC usando el canal EXTPROC1521.
 
+`PL/SQL`: Procedural Language / SQL. Es el lenguaje propio de Oracle que extiende SQL.
+
+PL/SQL permite:
+- Variables
+- IF / ELSE
+- Bucles (LOOP, WHILE)
+- Procedimientos
+- Funciones
+- Manejo de excepciones
+- Paquetes
+
 ### 4.3) Resumen mental (muy importante)
 
 * **Cliente**: usa `tnsnames.ora` para resolver “a dónde conecto y con qué nombre de servicio”.
