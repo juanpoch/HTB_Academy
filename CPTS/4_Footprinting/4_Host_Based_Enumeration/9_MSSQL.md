@@ -117,7 +117,7 @@ MSSQL cuenta con bases de datos de sistema predeterminadas que nos ayudan a comp
 
 ---
 
-# 🔐 MSSQL – Autenticación, Configuración por Defecto y Riesgos (Explicación desde Cero)
+# 🔐 MSSQL – Autenticación, Configuración por Defecto y Riesgos 
 
 En esta sección vamos a entender en profundidad cómo se autentica Microsoft SQL Server, cómo viene configurado por defecto y qué configuraciones pueden representar un riesgo real en un entorno empresarial.
 
