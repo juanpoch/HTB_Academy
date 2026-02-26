@@ -361,6 +361,98 @@ ORCL =
 * `(SERVER = DEDICATED)` → modo de servidor (dedicado vs shared).
 * `(SERVICE_NAME = orcl)` → **nombre del servicio** que el cliente pide al conectarse.
 
+
+# (SERVER = DEDICATED) vs (SERVER = SHARED)
+
+## 📌 ¿Qué significa esta línea?
+
+(SERVER = DEDICATED)
+
+Le dice a Oracle cómo manejar la conexión del cliente a nivel interno.
+
+No es seguridad.
+No es cifrado.
+No es red.
+
+Es cómo Oracle asigna procesos para atender la conexión.
+
+---
+
+## 🧠 Modo DEDICATED (Servidor dedicado)
+
+Cada conexión cliente recibe:
+
+👉 Un proceso exclusivo en el servidor.
+
+Es decir:
+
+Cliente A → Proceso 1  
+Cliente B → Proceso 2  
+Cliente C → Proceso 3  
+
+Cada usuario tiene su propio proceso de servidor.
+
+### Ventajas:
+- Mejor rendimiento por sesión
+- Más simple
+- Más estable
+- Ideal para pocos usuarios o cargas pesadas
+
+### Desventajas:
+- Consume más memoria
+- No escala bien con miles de usuarios
+
+---
+
+## 🧠 Modo SHARED (Servidor compartido)
+
+Las conexiones no tienen un proceso exclusivo.
+
+En su lugar:
+
+👉 Varias conexiones comparten un pool de procesos.
+
+Sería algo así:
+
+Cliente A ┐  
+Cliente B ├→ Pool de procesos compartidos  
+Cliente C ┘  
+
+Oracle usa un dispatcher que distribuye las solicitudes.
+
+### Ventajas:
+- Mucho más eficiente en memoria
+- Escala mejor con muchos usuarios concurrentes
+
+### Desventajas:
+- Puede ser un poco más complejo
+- Leve impacto en rendimiento por multiplexación
+
+---
+
+## 🎯 Diferencia mental clara
+
+| DEDICATED | SHARED |
+|-----------|--------|
+| 1 proceso por usuario | Muchos usuarios comparten procesos |
+| Más consumo de RAM | Más eficiente |
+| Más simple | Más escalable |
+
+---
+
+## 🔥 ¿Esto importa en pentesting?
+
+Normalmente no es un vector directo de ataque.
+
+Pero sí puede darte pistas sobre:
+
+- Arquitectura del sistema
+- Tipo de carga
+- Diseño empresarial
+
+En entornos grandes (bancos, ERPs) es común ver SHARED.
+En entornos simples o labs, casi siempre DEDICATED.
+
 > El archivo puede tener **muchas entradas** (varias DBs/servicios). También puede incluir autenticación, pooling, balanceo, etc.
 
 ### 4.2) `listener.ora` (server-side)
