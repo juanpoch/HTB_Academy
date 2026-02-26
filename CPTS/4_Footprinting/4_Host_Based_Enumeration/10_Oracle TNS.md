@@ -812,6 +812,11 @@ Output relevante (tal cual, recortado):
 
 ## 13) Acceso con `sqlplus` (login real a la DB)
 
+`Instalación`:
+```bash
+apt install oracle-instantclient-sqlplus
+```
+
 Conectás así:
 
 ```bash
