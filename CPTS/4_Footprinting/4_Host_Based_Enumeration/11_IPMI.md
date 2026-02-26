@@ -4,7 +4,7 @@
 
 ## 📌 Introducción
 
-IPMI (Intelligent Platform Management Interface) es un estándar de gestión remota de hardware diseñado para permitir la administración y monitoreo de servidores **independientemente del sistema operativo**.
+IPMI ([Intelligent Platform Management Interface](https://www.thomas-krenn.com/en/wiki/IPMI_Basics)) es un estándar de gestión remota de hardware diseñado para permitir la administración y monitoreo de servidores **independientemente del sistema operativo**.
 
 Esto significa que podemos administrar un servidor incluso si:
 
