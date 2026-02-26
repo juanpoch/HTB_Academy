@@ -9,7 +9,7 @@ IPMI ([Intelligent Platform Management Interface](https://www.thomas-krenn.com/e
 Esto significa que podemos administrar un servidor incluso si:
 
 * Está apagado
-* Está colrompido
+* Está corompido
 * El sistema operativo no arranca
 * El BIOS está mal configurado
 * El sistema está congelado
