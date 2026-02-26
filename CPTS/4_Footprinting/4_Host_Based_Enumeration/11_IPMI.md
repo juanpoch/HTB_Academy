@@ -568,7 +568,7 @@ Buenas prácticas:
 
 ---
 
-# 🧭 Flujo mental para Pentesting Interno
+# 🧭 Flujo para Pentesting Interno
 
 Cuando haces un pentest interno y ves:
 
@@ -576,7 +576,7 @@ Cuando haces un pentest interno y ves:
 UDP 623 abierto
 ```
 
-Checklist mental:
+Checklist:
 
 1. Confirmar versión con Nmap
 2. Intentar credenciales default
@@ -584,32 +584,6 @@ Checklist mental:
 4. Crackear offline
 5. Probar reutilización de credenciales
 6. Intentar acceso web / SSH / Telnet
-
----
-
-# 🎯 Conclusión Técnica
-
-IPMI es extremadamente común en entornos corporativos.
-
-Es frecuente encontrar:
-
-* Passwords default
-* Passwords débiles
-* Reutilización en servidores críticos
-
-En muchos casos, comprometer IPMI es el pivot más potente dentro de una red interna.
-
----
-
-# 🧠 Concepto Clave Final
-
-IPMI no es un servicio más.
-
-Es una puerta directa al hardware.
-
-Si lo comprometés, no estás explotando una aplicación.
-
-Estás tomando control físico remoto del servidor.
 
 ---
 
