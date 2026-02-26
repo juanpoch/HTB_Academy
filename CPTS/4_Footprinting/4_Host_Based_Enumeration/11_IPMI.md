@@ -240,7 +240,7 @@ sudo nmap -sU --script ipmi-version -p 623 <target>
 
 * `-sU` → Escaneo UDP
 * `-p 623` → Puerto IPMI
-* `--script ipmi-version` → Script NSE que identifica versión
+* `--script ipmi-version` → [Script NSE](https://nmap.org/nsedoc/scripts/ipmi-version.html) que identifica versión
 
 ---
 
