@@ -621,11 +621,17 @@ En auditorías, **Public Key Auth** suele ser más seguro que password, pero cua
 
 Archivo principal:
 
+El archivo [sshd_config](https://www.ssh.com/academy/ssh/sshd_config) responsable del servidor OpenSSH, solo incluye algunas de las opciones predeterminadas. Sin embargo incluye el reenvío X11, que contenía una vulnerabilidad de inyección de comandos en la versión 7.2p1 de OpenSSH de 2016.
+
 ```
 /etc/ssh/sshd_config
 ```
 
 Ejemplo típico de configuración activa:
+
+```bash
+cat /etc/ssh/sshd_config  | grep -v "#" | sed -r '/^\s*$/d'
+```
 
 ```
 Include /etc/ssh/sshd_config.d/*.conf
@@ -645,21 +651,68 @@ La mayoría de opciones suelen estar comentadas y requieren configuración manua
 
 Algunas opciones inseguras incluyen:
 
-| Setting                    | Riesgo                          |
-| -------------------------- | ------------------------------- |
-| PasswordAuthentication yes | Permite ataques de fuerza bruta |
-| PermitEmptyPasswords yes   | Permite contraseñas vacías      |
-| PermitRootLogin yes        | Acceso directo como root        |
-| Protocol 1                 | Uso de cifrado obsoleto         |
-| X11Forwarding yes          | Posibles vectores adicionales   |
-| AllowTcpForwarding yes     | Permite pivoting                |
 
-En pentesting, estas configuraciones pueden facilitar:
+# SSH – Configuraciones Peligrosas en sshd_config (Tabla Detallada)
 
-* Fuerza bruta
-* Password spraying
-* Pivoting interno
-* Escalada lateral
+A continuación se presenta una tabla ampliada con las configuraciones más sensibles de SSH, su descripción técnica y el impacto desde la perspectiva de seguridad ofensiva.
+
+---
+
+| Setting                        | Qué Hace Técnicamente                                                | Riesgo de Seguridad                                               | Impacto en Pentesting                                                           | Nivel de Riesgo |
+| ------------------------------ | -------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------- | --------------- |
+| **PasswordAuthentication yes** | Permite autenticación mediante contraseña en lugar de clave pública. | Habilita ataques de fuerza bruta y password spraying.             | Ataques con Hydra, Medusa, Ncrack, spraying con credenciales filtradas.         | 🔴 Alto         |
+| **PermitEmptyPasswords yes**   | Permite autenticarse con cuentas que tengan contraseña vacía.        | Acceso inmediato si existe un usuario mal configurado.            | Enumeración de usuarios + login directo sin credenciales.                       | 🔴 Crítico      |
+| **PermitRootLogin yes**        | Permite login directo como root vía SSH.                             | Si se compromete root, se obtiene control total del sistema.      | Fuerza bruta directa contra root, uso de credenciales reutilizadas.             | 🔴 Crítico      |
+| **Protocol 1**                 | Permite el uso del protocolo SSH versión 1.                          | Vulnerable a ataques MITM y debilidades criptográficas conocidas. | Downgrade attacks, explotación de debilidades antiguas.                         | 🔴 Crítico      |
+| **X11Forwarding yes**          | Permite redirección de aplicaciones gráficas vía SSH.                | Puede introducir vectores de inyección o abuso del canal X11.     | Posible ejecución remota de aplicaciones gráficas, abuso de display forwarding. | 🟠 Medio        |
+| **AllowTcpForwarding yes**     | Permite redirección de puertos TCP a través del túnel SSH.           | Facilita pivoting y evasión de segmentación de red.               | Creación de túneles para acceder a servicios internos (pivoting).               | 🔴 Alto         |
+| **PermitTunnel yes**           | Permite creación de interfaces de red tun/tap sobre SSH.             | Puede crear túneles de red completos entre hosts.                 | Pivoting avanzado, bypass de firewalls internos.                                | 🔴 Alto         |
+| **DebianBanner yes**           | Muestra información específica del sistema en el banner.             | Divulga información del sistema operativo y versión.              | Fingerprinting más preciso del sistema objetivo.                                | 🟡 Bajo         |
+
+
+# SSH – Riesgos de Permitir Autenticación por Contraseña
+
+Cuando `PasswordAuthentication` está habilitado, el servidor SSH permite el ingreso mediante usuario y contraseña.  
+
+Esto abre la puerta a ataques como:
+
+- 🔴 Fuerza bruta
+- 🔴 Password spraying
+- 🔴 Reutilización de credenciales filtradas
+
+---
+
+## 🧠 ¿Por qué funciona tan bien para un atacante?
+
+Porque los humanos tendemos a:
+
+- Usar contraseñas simples.
+- Reutilizar contraseñas.
+- Agregar solo números o símbolos al final (ej: `Password1!`).
+- Hacer pequeñas variaciones de contraseñas comunes.
+
+Los atacantes explotan esto usando:
+
+- Diccionarios de contraseñas comunes.
+- Reglas de mutación (ej: agregar `123`, `!`, año actual).
+- Listas filtradas de breaches anteriores.
+
+El objetivo no es probar todas las combinaciones posibles, sino aprovechar patrones humanos predecibles.
+
+---
+
+## 🛡️ Mitigación Recomendada
+
+- Deshabilitar `PasswordAuthentication`.
+- Usar autenticación por clave pública.
+- Implementar rate limiting (Fail2Ban).
+- Aplicar MFA cuando sea posible.
+
+---
+
+> La autenticación por contraseña no es inherentemente insegura, pero combinada con exposición a Internet y contraseñas débiles, se convierte en uno de los vectores más explotados en infraestructuras Linux.
+
+[Guía de hardening](https://www.ssh-audit.com/hardening_guides.html)
 
 ---
 
