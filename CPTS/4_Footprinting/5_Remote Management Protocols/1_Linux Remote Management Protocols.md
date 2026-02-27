@@ -80,7 +80,6 @@ Los más comunes en entornos reales son:
 
 # SSH – Autenticación por Clave Pública (Public Key Authentication)
 
-> Objetivo de este lienzo: entender **desde cero** cómo funciona la autenticación por **clave pública/privada** en SSH, qué se verifica en cada paso y por qué es más segura (y más cómoda) que usar contraseña.
 
 ---
 
