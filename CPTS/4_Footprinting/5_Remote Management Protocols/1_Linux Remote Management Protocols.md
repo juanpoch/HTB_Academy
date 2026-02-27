@@ -721,6 +721,9 @@ Herramienta útil:
 ssh-audit
 ```
 
+[ssh-audit](https://github.com/jtesta/ssh-audit)  
+
+
 Permite identificar:
 
 * Versión del servidor
