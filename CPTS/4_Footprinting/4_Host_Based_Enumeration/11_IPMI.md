@@ -592,4 +592,49 @@ Checklist:
 
 #### ¿Qué nombre de usuario está configurado para acceder al host a través de IPMI?
 
+Enviamos una traza `ICMP` para verificar que el host se encuentre activo:
+<img width="521" height="147" alt="image" src="https://github.com/user-attachments/assets/1193fb8f-aa2a-4398-a880-34a2940b34b9" />
+
+Realizamos un escaneo `UDP` con nmap sobre el puerto `623` para verificar que se encuentre abierto:
+```bash
+nmap -Pn -n --reason -sU -p623 <ip>
+```
+
+Vemos que se encuentra abierto:
+<img width="606" height="169" alt="image" src="https://github.com/user-attachments/assets/53feed1d-58eb-49c3-8227-f5f3e1316e69" />  
+
+
+Realizamos una búsqueda de scripts NSE con:
+```bash
+find / -type f -name ipmi* 2>/dev/null |grep scripts
+```
+
+<img width="633" height="112" alt="image" src="https://github.com/user-attachments/assets/476d0a16-37fd-4ce5-ad34-6343da1a7a19" />
+
+
+Realizamos un escaneo de versiones con nmap utilizando el script=banner para ver si encontramos su versión:
+```bash
+nmap -Pn -n --reason -sU -sV -p623 --script=banner <ip>
+```
+
+<img width="1745" height="252" alt="image" src="https://github.com/user-attachments/assets/f95ebd9d-1bb1-47f0-b854-098c71b10cba" />
+
+Realizamos un escaneo con el script `ipmi-version`:
+
+```bash
+nmap -sU --script ipmi-version -p 623 <ip>
+```
+
+<img width="863" height="335" alt="image" src="https://github.com/user-attachments/assets/90f5bbea-eb09-4d2f-82e2-f2d400f23b3b" />
+
+Confirmamos que el BMC está accesible.
+Esta versión IPMI 2.0:
+- Soporta RAKP
+- Permite extracción de hashes
+
+Paralelamente podemos utilizar el scanner de `Metasploit` `auxiliary/scanner/ipmi/ipmi_version`:
+<img width="1635" height="488" alt="image" src="https://github.com/user-attachments/assets/9374c395-1df9-4abe-87ee-1d78d293d9f8" />
+
+
+
 #### ¿Cuál es la contraseña en texto claro de la cuenta?
