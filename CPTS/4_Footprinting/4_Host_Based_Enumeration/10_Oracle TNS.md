@@ -1194,3 +1194,20 @@ Luego conectarnos a la base de datos nuevamente con `sqlplus scott/tiger@<ip>/XE
 <img width="665" height="300" alt="image" src="https://github.com/user-attachments/assets/b0de7e85-80cf-48a5-bc6c-b1510f8ebb39" />
 
 
+Comenzamos la enumeración, listamos las tablas:
+
+```sql
+select table_name from all_tables
+```
+
+Vemos los roles asignados al usuario actual:
+```sql
+select * from user_role_privs;
+```
+<img width="643" height="121" alt="image" src="https://github.com/user-attachments/assets/156e8e3b-05c2-4a9d-8364-f9d0d2bc7f7e" />
+
+<img width="420" height="909" alt="image" src="https://github.com/user-attachments/assets/067af73d-9478-4898-a49b-dd69963512f6" />
+
+
+SCOTT tiene roles típicos para trabajar (CONNECT/RESOURCE).
+No parece admin.
