@@ -101,8 +101,6 @@ En SSH pasan **dos cosas distintas**:
 1. **El cliente verifica al servidor** (para evitar caer en un impostor).
 2. **El servidor verifica al cliente** (para darte acceso).
 
-Esto es importante porque el texto que me pasaste mezcla ambos conceptos en la explicación.
-
 ---
 
 # 3) Verificación del servidor (Server Authentication)
