@@ -1167,6 +1167,7 @@ Ahora enumeramos el servidor con `ODAT`:
 odat all -s <ip>
 ```
 
+<img width="1902" height="905" alt="image" src="https://github.com/user-attachments/assets/ecd340f0-e9db-4db5-805f-401da3b0522f" />
 
 Encontramos credenciales válidas para `scott/tiger`.
 
@@ -1187,4 +1188,9 @@ Ahora si podemos realizar el siguiente comando:
 ```bash
 sh -c "echo /usr/lib/oracle/19.6/client64/lib > /etc/ld.so.conf.d/oracle-instantclient.conf";ldconfig
 ```
-Luego conectarnos a la base de datos nuevamente con `sqlplus scott/tiger@10.129.205.19/XE`:
+Luego conectarnos a la base de datos nuevamente con `sqlplus scott/tiger@<ip>/XE`:
+
+
+<img width="665" height="300" alt="image" src="https://github.com/user-attachments/assets/b0de7e85-80cf-48a5-bc6c-b1510f8ebb39" />
+
+
