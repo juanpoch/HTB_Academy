@@ -691,3 +691,10 @@ Realizamos el siguiente comando para listar los usuarios configurados:
 ipmitool -I lanplus -H 10.129.13.18 -U admin -P trinity user list 1
 ```
 <img width="996" height="760" alt="image" src="https://github.com/user-attachments/assets/130f98bf-48fb-4b41-88a9-512b9c48ff25" />
+
+
+Con:
+```bash
+ipmitool -I lanplus -H 10.129.13.18 -U admin -P trinity sol activate
+```
+Podríamos intentar obtener una consola serial.
