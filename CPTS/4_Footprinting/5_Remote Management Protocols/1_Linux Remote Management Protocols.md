@@ -22,7 +22,7 @@ En este documento analizaremos los principales protocolos de administración rem
 
 ## ¿Qué es SSH?
 
-SSH (Secure Shell) es el protocolo estándar para administración remota segura en sistemas Linux.
+SSH ([Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)) es el protocolo estándar para administración remota segura en sistemas Linux.
 
 * Puerto por defecto: **TCP 22**
 * Protocolo cifrado
@@ -31,6 +31,8 @@ SSH (Secure Shell) es el protocolo estándar para administración remota segura 
 * Port forwarding y túneles
 
 SSH reemplazó a protocolos inseguros como Telnet y R-Services.
+
+[OpenSSH](https://www.openssh.org/)
 
 ---
 
