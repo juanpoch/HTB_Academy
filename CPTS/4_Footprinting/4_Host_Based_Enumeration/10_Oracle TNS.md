@@ -1114,4 +1114,77 @@ En un pentest, esto suele escalar a:
 #### Enumere la base de datos Oracle de destino y envíe el hash de contraseña del usuario DBSNMP como respuesta.
 
 
+Lanzamos una traza `ICMP` para verificar que el host se encuentra activo:
+<img width="924" height="259" alt="image" src="https://github.com/user-attachments/assets/ec47a37a-b25e-4f92-9a06-253ecc16dfa1" />
 
+Realizamos un escaneo `TCP SYN` con nmap para verificar que el puerto `1521` está abierto:
+
+```bash
+nmap -Pn -n --reason -sS -p1521 <ip>
+```
+<img width="981" height="307" alt="image" src="https://github.com/user-attachments/assets/1d06fc32-b839-4e61-ab31-921d03750859" />
+
+
+Ya sabemos que el listener está expuesto, ahora realizamos un escaneo de versiones con nmap:
+```bash
+nmap -Pn -n --reason -sV -p1521 <ip> --open
+```
+
+<img width="1338" height="224" alt="image" src="https://github.com/user-attachments/assets/6a6c0664-f11a-4581-9859-552bac9442f7" />  
+
+Antes de utilizar el script NSE nmap del material, procedemos a listar todos los scripts NSE que posee nmap con el siguiente comando:
+```bash
+find / -type f -name oracle* 2>/dev/null |grep scripts
+```
+<img width="1028" height="277" alt="image" src="https://github.com/user-attachments/assets/baead7c0-737b-43c8-8d55-6fc8b8ca00ed" />  
+
+`Nota`: Este comando es útil porque también encontró scripts de metasploit.
+
+Ahora procedemos a realizar el script NSE de nmap `oracle-sid-brute`:
+```bash
+nmap -p1521 -sV 10.129.205.19 --open --script oracle-sid-brute
+```
+<img width="1105" height="597" alt="image" src="https://github.com/user-attachments/assets/d95e9e79-2ad9-40e2-8385-3f1bbad170bb" />
+
+
+Paralelamente podríamos haber utilizado los scripts de `Metasploit` o buscar scanners:
+
+<img width="1914" height="906" alt="image" src="https://github.com/user-attachments/assets/e9c02b33-9918-4c81-9873-15764bd71f95" />
+
+Intentamos utilizar el scanner `auxiliary/scanner/oracle/sid_enum` pero obtenemos como respuesta que el host está protegido:
+<img width="1829" height="512" alt="image" src="https://github.com/user-attachments/assets/e802cf82-26d7-4a5b-9afe-16218855fb66" />  
+
+
+Utilizamos el scanner `auxiliary/scanner/oracle/sid_brute`:
+<img width="1876" height="911" alt="image" src="https://github.com/user-attachments/assets/2ede9797-7516-49d8-8efd-f3600e3709cc" />
+
+Con este scanner también obtenemos que el `SID` es `XE`.
+
+
+Ahora enumeramos el servidor con `ODAT`:
+
+```bash
+odat all -s <ip>
+```
+
+
+Encontramos credenciales válidas para `scott/tiger`.
+
+El siguiente paso es interactuar con la base de datos, nos conectamos con `sqlplus`:
+```bash
+sqlplus scott/tiger@10.129.205.19/XE
+```
+
+<img width="1500" height="99" alt="image" src="https://github.com/user-attachments/assets/0c2b462b-fc1a-40c4-8003-1d20a904e6d2" />
+
+Nos devuelve el error de la librería, por lo que buscamos la ubicación de la misma con:
+```bash
+find /usr -name libsqlplus.so 2>/dev/null
+```
+<img width="643" height="92" alt="image" src="https://github.com/user-attachments/assets/07b35fcc-7b69-4e45-b042-a86fc27e39e8" />
+
+Ahora si podemos realizar el siguiente comando:
+```bash
+sh -c "echo /usr/lib/oracle/19.6/client64/lib > /etc/ld.so.conf.d/oracle-instantclient.conf";ldconfig
+```
+Luego conectarnos a la base de datos nuevamente con `sqlplus scott/tiger@10.129.205.19/XE`:
