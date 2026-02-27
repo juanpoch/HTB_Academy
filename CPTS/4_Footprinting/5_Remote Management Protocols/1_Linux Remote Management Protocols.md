@@ -731,6 +731,58 @@ Permite identificar:
 * Algoritmos débiles
 * Métodos de autenticación disponibles
 
+
+```bash
+git clone https://github.com/jtesta/ssh-audit.git && cd ssh-audit
+./ssh-audit.py 10.129.14.132
+
+# general
+(gen) banner: SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3
+(gen) software: OpenSSH 8.2p1
+(gen) compatibility: OpenSSH 7.4+, Dropbear SSH 2018.76+
+(gen) compression: enabled (zlib@openssh.com)                                   
+
+# key exchange algorithms
+(kex) curve25519-sha256                     -- [info] available since OpenSSH 7.4, Dropbear SSH 2018.76                            
+(kex) curve25519-sha256@libssh.org          -- [info] available since OpenSSH 6.5, Dropbear SSH 2013.62
+(kex) ecdh-sha2-nistp256                    -- [fail] using weak elliptic curves
+                                            `- [info] available since OpenSSH 5.7, Dropbear SSH 2013.62
+(kex) ecdh-sha2-nistp384                    -- [fail] using weak elliptic curves
+                                            `- [info] available since OpenSSH 5.7, Dropbear SSH 2013.62
+(kex) ecdh-sha2-nistp521                    -- [fail] using weak elliptic curves
+                                            `- [info] available since OpenSSH 5.7, Dropbear SSH 2013.62
+(kex) diffie-hellman-group-exchange-sha256 (2048-bit) -- [info] available since OpenSSH 4.4
+(kex) diffie-hellman-group16-sha512         -- [info] available since OpenSSH 7.3, Dropbear SSH 2016.73
+(kex) diffie-hellman-group18-sha512         -- [info] available since OpenSSH 7.3
+(kex) diffie-hellman-group14-sha256         -- [info] available since OpenSSH 7.3, Dropbear SSH 2016.73
+
+# host-key algorithms
+(key) rsa-sha2-512 (3072-bit)               -- [info] available since OpenSSH 7.2
+(key) rsa-sha2-256 (3072-bit)               -- [info] available since OpenSSH 7.2
+(key) ssh-rsa (3072-bit)                    -- [fail] using weak hashing algorithm
+                                            `- [info] available since OpenSSH 2.5.0, Dropbear SSH 0.28
+                                            `- [info] a future deprecation notice has been issued in OpenSSH 8.2: https://www.openssh.com/txt/release-8.2
+(key) ecdsa-sha2-nistp256                   -- [fail] using weak elliptic curves
+                                            `- [warn] using weak random number generator could reveal the key
+                                            `- [info] available since OpenSSH 5.7, Dropbear SSH 2013.62
+(key) ssh-ed25519                           -- [info] available since OpenSSH 6.5
+...SNIP...
+```
+
+Lo primero que vemos en las primeras líneas del resultado es el banner que revela la versión del servidor `Open SSH`. Las versiones anteriores presentaban vulnerabilidades, como [CVE-2020-14145](https://www.cvedetails.com/cve/CVE-2020-14145/) que permitían al atacante realizar un ataque de intermediario (Man in the middle) durante el primer intento de conexión.
+
+También podemos pedir el resultado detallado de la configuración de la conexión con el servidor que suele proporcionar información importante, como los métodos de autenticación:
+
+```bash
+ssh -v user@ip
+
+
+OpenSSH_8.2p1 Ubuntu-4ubuntu0.3, OpenSSL 1.1.1f  31 Mar 2020
+debug1: Reading configuration data /etc/ssh/ssh_config 
+...SNIP...
+debug1: Authentications that can continue: publickey,password,keyboard-interactive
+```
+
 Ejemplo de autenticaciones permitidas:
 
 ```
@@ -741,7 +793,70 @@ Podemos forzar método específico:
 
 ```
 ssh -o PreferredAuthentications=password usuario@host
+
+
+
+OpenSSH_8.2p1 Ubuntu-4ubuntu0.3, OpenSSL 1.1.1f  31 Mar 2020
+debug1: Reading configuration data /etc/ssh/ssh_config
+...SNIP...
+debug1: Authentications that can continue: publickey,password,keyboard-interactive
+debug1: Next authentication method: password
+
+cry0l1t3@10.129.14.132's password:
 ```
+
+Se recomienda configurar un servidor para practicar con las distintas configuraciones en nuestra VM. 
+
+Durante un test de penetración es común encontrarse con el **banner del servicio SSH** al conectarnos al puerto 22.
+
+Por defecto, el banner revela:
+
+1. 📌 La versión del protocolo SSH soportado.
+2. 📌 La versión del servidor SSH en ejecución.
+
+---
+
+## 🔎 Estructura del Banner
+
+Formato típico:
+```
+SSH-<versión_protocolo>-<software>_<versión>
+```
+
+---
+
+## 🧠 Ejemplos
+
+### 🔹 `SSH-1.99-OpenSSH_3.9p1`
+
+- `1.99` → Indica compatibilidad con **SSH-1 y SSH-2**.
+- `OpenSSH_3.9p1` → Servidor OpenSSH versión 3.9p1.
+
+⚠️ SSH-1 es obsoleto y vulnerable, por lo que su compatibilidad representa un riesgo potencial.
+
+---
+
+### 🔹 `SSH-2.0-OpenSSH_8.2p1`
+
+- `2.0` → Solo acepta **SSH-2**.
+- `OpenSSH_8.2p1` → Versión moderna del servidor.
+
+✅ Indica uso exclusivo del protocolo seguro SSH-2.
+
+---
+
+## 🎯 Relevancia en Pentesting
+
+El banner permite:
+
+- Identificar versiones vulnerables.
+- Detectar soporte de protocolos obsoletos.
+- Buscar exploits específicos para la versión detectada.
+- Evaluar exposición innecesaria de información.
+
+---
+
+> El banner de SSH es una fuente temprana de fingerprinting que puede orientar la fase inicial de reconocimiento.
 
 ---
 
