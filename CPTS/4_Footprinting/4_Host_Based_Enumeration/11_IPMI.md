@@ -600,8 +600,9 @@ Realizamos un escaneo `UDP` con nmap sobre el puerto `623` para verificar que se
 nmap -Pn -n --reason -sU -p623 <ip>
 ```
 
-Vemos que se encuentra abierto:
-<img width="606" height="169" alt="image" src="https://github.com/user-attachments/assets/53feed1d-58eb-49c3-8227-f5f3e1316e69" />  
+Vemos que se encuentra abierto:  
+
+<img width="606" height="169" alt="image" src="https://github.com/user-attachments/assets/53feed1d-58eb-49c3-8227-f5f3e1316e69" />    
 
 
 Realizamos una búsqueda de scripts NSE con:
