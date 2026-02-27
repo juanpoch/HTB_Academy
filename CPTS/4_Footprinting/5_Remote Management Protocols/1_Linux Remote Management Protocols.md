@@ -255,6 +255,119 @@ Si el servidor puede verificar esa respuesta con tu **clave pública**, entonces
 
 ---
 
+## 5.4 Challenge
+
+## ¿Cómo es realmente el “desafío” (challenge) que envía el servidor?
+
+En la sección anterior vimos que el servidor envía un *challenge* para que el cliente demuestre que posee la clave privada.
+
+Ahora vamos a explicar **qué es ese desafío realmente y qué contiene**, a grandes rasgos y sin entrar en matemática pesada.
+
+---
+
+# 1) Primero: ya existe un canal cifrado
+
+Antes de llegar al challenge, cliente y servidor ya realizaron el:
+
+* Intercambio de claves (Key Exchange – KEX)
+* Generación de una clave de sesión
+
+Esto significa que:
+
+* La comunicación ya está cifrada.
+* Nadie puede ver el contenido del challenge desde afuera.
+
+---
+
+# 2) El challenge NO es un número aleatorio simple
+
+Mucha gente imagina que el servidor manda algo como:
+
+> “Decime cuánto es 12345 cifrado”
+
+Pero en realidad el challenge es más complejo.
+
+El servidor construye un bloque de datos que incluye:
+
+* 🔐 El hash del intercambio inicial (handshake)
+* 🧩 Información de la sesión actual
+* 👤 El nombre del usuario que intenta autenticarse
+* 🔑 El tipo de clave que se está usando (ej: ed25519, rsa)
+
+Es decir:
+
+El challenge está ligado **a esa sesión específica**.
+
+---
+
+# 3) ¿Qué hace el cliente con ese challenge?
+
+Cuando el servidor envía ese bloque de datos:
+
+1. El cliente lo recibe.
+2. Lo procesa internamente.
+3. Lo firma digitalmente con su **clave privada**.
+
+El resultado es una **firma criptográfica**.
+
+⚠️ Muy importante:
+
+* No se envía la clave privada.
+* No se envía ningún secreto reutilizable.
+* Solo se envía la firma.
+
+---
+
+# 4) ¿Qué hace el servidor con la respuesta?
+
+El servidor toma:
+
+* La firma enviada por el cliente
+* La clave pública guardada en `authorized_keys`
+
+Y verifica matemáticamente si:
+
+> Esa firma solo pudo haber sido generada con la clave privada correspondiente.
+
+Si la verificación es correcta:
+
+✅ El cliente posee la clave privada.
+
+Si no es válida:
+
+❌ Se rechaza la autenticación.
+
+---
+
+# 5) ¿Por qué esto evita ataques de repetición (Replay)?
+
+Porque el challenge:
+
+* Está ligado a esa sesión.
+* Incluye datos únicos del handshake.
+* Cambia en cada conexión.
+
+Entonces, aunque alguien capturara la firma (lo cual ya es difícil porque está cifrado), no podría reutilizarla en otra sesión.
+
+---
+
+# 6) Resumen
+
+El challenge es:
+
+👉 Un conjunto de datos únicos de la sesión.
+👉 Que el cliente debe firmar con su clave privada.
+👉 Para demostrar matemáticamente que la posee.
+
+No se comparte ningún secreto reutilizable.
+No se transmite la clave privada.
+La autenticación se basa en criptografía asimétrica fuerte.
+
+---
+
+---
+
+
 # 6) ¿Por qué entonces “solo ingreso la passphrase una vez”?
 
 Acá hay un detalle muy importante y común:
