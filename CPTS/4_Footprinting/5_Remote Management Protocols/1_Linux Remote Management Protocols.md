@@ -647,12 +647,9 @@ La mayoría de opciones suelen estar comentadas y requieren configuración manua
 
 ---
 
-# Configuraciones Peligrosas en SSH
-
-Algunas opciones inseguras incluyen:
 
 
-# SSH – Configuraciones Peligrosas en sshd_config (Tabla Detallada)
+# SSH – Configuraciones Peligrosas en sshd_config 
 
 A continuación se presenta una tabla ampliada con las configuraciones más sensibles de SSH, su descripción técnica y el impacto desde la perspectiva de seguridad ofensiva.
 
