@@ -177,7 +177,7 @@ Además, es incómodo: te pide contraseña cada vez.
 
 # 5) Public Key Authentication: cómo funciona paso a paso
 
-Vamos con el flujo completo, explicado como si fuera la primera vez.
+Vamos con el flujo completo.
 
 ## 5.1 Generación del par de claves (en tu equipo)
 
