@@ -279,6 +279,182 @@ Esto significa que:
 
 ---
 
+
+## SSH – ¿Cómo se crea el canal cifrado antes del challenge?
+
+---
+
+### 1) Punto de partida: todavía NO hay cifrado
+
+Cuando ejecutás:
+
+```bash
+ssh usuario@servidor
+```
+
+En ese instante inicial:
+
+* Cliente y servidor todavía no comparten ninguna clave.
+* No existe aún un canal cifrado.
+* Están en la fase de negociación.
+
+El primer objetivo es:
+
+👉 Crear una **clave secreta compartida** sin enviarla directamente por la red.
+
+---
+
+### 2) Negociación de algoritmos
+
+Primero, cliente y servidor intercambian listas de algoritmos soportados:
+
+* Algoritmos de Key Exchange (ej: curve25519-sha256)
+* Algoritmos de cifrado simétrico (ej: aes256-ctr, chacha20-poly1305)
+* Algoritmos de integridad (MAC)
+* Algoritmos de host key
+
+Ambos eligen la opción más fuerte que tengan en común.
+
+Todavía no hay autenticación del usuario.
+
+---
+
+### 3) Key Exchange (KEX) – El corazón del proceso
+
+Aquí ocurre la parte crítica.
+
+SSH usa normalmente:
+
+* Diffie-Hellman (DH)
+* ECDH (Elliptic Curve Diffie-Hellman)
+* Curve25519
+
+Todos cumplen el mismo objetivo:
+
+👉 Permitir que ambos lados calculen la misma clave secreta sin transmitirla.
+
+---
+
+### 4) Explicación simplificada de Diffie-Hellman
+
+Imaginemos:
+
+* Cliente elige un número secreto A
+* Servidor elige un número secreto B
+
+Ambos intercambian versiones públicas derivadas matemáticamente de esos secretos.
+
+Luego, mediante una operación matemática:
+
+* Cliente usa su secreto A + dato público del servidor
+* Servidor usa su secreto B + dato público del cliente
+
+Ambos llegan al mismo resultado final:
+
+👉 Una clave secreta compartida
+
+Un atacante que observe el tráfico:
+
+❌ No puede reconstruir esa clave secreta
+(si el algoritmo es fuerte y no está roto)
+
+---
+
+### 5) Derivación de la clave de sesión
+
+El resultado del KEX no se usa directamente.
+
+Se pasa por funciones hash para derivar:
+
+* Clave de cifrado cliente → servidor
+* Clave de cifrado servidor → cliente
+* Claves de integridad (MAC)
+* Claves adicionales si son necesarias
+
+Ahora sí:
+
+👉 Existe una clave simétrica compartida.
+
+---
+
+### 6) Activación del canal cifrado
+
+A partir de este momento:
+
+* Todo el tráfico se cifra con un algoritmo simétrico.
+* Ejemplos: AES, ChaCha20.
+
+¿Por qué simétrico?
+
+Porque es:
+
+* Mucho más rápido.
+* Mucho más eficiente.
+* Ideal para cifrar grandes volúmenes de datos.
+
+---
+
+### 7) Autenticación del servidor (Host Key Verification)
+
+Durante el proceso de KEX, el servidor firma parte del intercambio con su **host private key**.
+
+El cliente verifica esa firma usando la host public key.
+
+Si la clave no coincide con la almacenada en `known_hosts`, se genera advertencia.
+
+Esto protege contra ataques Man-in-the-Middle.
+
+---
+
+### 8) Perfect Forward Secrecy (PFS)
+
+Los KEX modernos tienen una propiedad clave:
+
+✅ Perfect Forward Secrecy
+
+Esto significa que:
+
+* Cada sesión genera claves nuevas.
+* Si en el futuro roban la clave privada del servidor,
+  no podrán descifrar sesiones anteriores capturadas.
+
+---
+
+### 9) En qué momento estamos respecto al challenge
+
+Recién ahora:
+
+✔ Ya existe una clave simétrica compartida.
+✔ Ya hay un canal cifrado.
+✔ El servidor ya fue autenticado.
+
+Recién en este punto comienza la autenticación del usuario:
+
+* Password
+* Public Key
+* Keyboard-interactive
+
+Y por eso el challenge de autenticación viaja ya dentro de un canal cifrado.
+
+---
+
+### 10) Resumen
+
+El proceso:
+
+1️⃣ Negociación de algoritmos
+2️⃣ Key Exchange asimétrico
+3️⃣ Derivación de clave simétrica
+4️⃣ Activación del canal cifrado
+5️⃣ Autenticación del servidor
+6️⃣ Autenticación del usuario
+
+
+
+
+
+---
+
 # 2) El challenge NO es un número aleatorio simple
 
 Mucha gente imagina que el servidor manda algo como:
