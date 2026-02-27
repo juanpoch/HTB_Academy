@@ -72,6 +72,10 @@ Los más comunes en entornos reales son:
 * Password
 * Public Key
 
+
+- Más [info](https://www.golinuxcloud.com/openssh-authentication-methods-sshd-config/) sobre métodos de autenticación.
+
+
 ---
 
 # Autenticación por Clave Pública
