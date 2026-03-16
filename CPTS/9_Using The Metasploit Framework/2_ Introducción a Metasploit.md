@@ -74,11 +74,18 @@ METASPLOIT PROJECT
 
 ### ¿Qué son los Módulos?
 
-Los **módulos** mencionados son **pruebas de concepto reales** que:
+Los **módulos** mencionados son **pruebas de concepto reales** (o piezas de código reutilizables) que:
 
 - ✅ Ya han sido desarrollados por la comunidad de seguridad
 - ✅ Han sido probados en entornos reales
 - ✅ Están integrados en el framework para facilitar el acceso
+
+Un módulo en Metasploit es un componente reutilizable del framework que implementa una funcionalidad específica de seguridad, como explotación, escaneo, post-explotación o generación de payloads.
+
+```
+Metasploit = framework
+Módulos = herramientas dentro del framework
+```
 
 ### Propósito de los Módulos
 
