@@ -1189,4 +1189,10 @@ Vemos que tenemos un problema con el timeout.
 <img width="1913" height="512" alt="image" src="https://github.com/user-attachments/assets/e088fac7-fe7a-4d3d-ade1-01e2ce80bc72" />
 
 
+Ejecutamos `shell` y leemos la flag:
+```bash
+type C:\Users\Administrator\Desktop\fñag.txt
+```
+
+<img width="836" height="407" alt="image" src="https://github.com/user-attachments/assets/2d80acc3-be82-4a31-b602-70d0e364cfe6" />
 
