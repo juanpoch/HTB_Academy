@@ -1100,3 +1100,16 @@ nmap -p445 -sV --script=smb-os-discovery,smb-vuln-ms17-010 <ip>
 ```
 
 <img width="1159" height="696" alt="image" src="https://github.com/user-attachments/assets/06c64353-0f2c-4711-8de3-3c287456b638" />
+
+Descubrió que es un Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
+
+Descubrió otros datos de dominio muy interesantes.
+
+A su vez, chequeamos que es altamente probable que sea vulnerable a eternal romance.
+
+
+Pasamos a metasploit ejecutando `msfconsole -q`.
+
+
+
+
