@@ -1178,8 +1178,6 @@ Vemos que está todo configurado, pero tenemos que cambiar nuestra ip por la de 
 Si hacemos `check` vemos que utiliza el scanner que utilizamos recién:
 <img width="1221" height="136" alt="image" src="https://github.com/user-attachments/assets/5c08a399-5d33-4bcf-a75f-56ea6d9d171a" />
 
-Parece ser que no se puede.
-
 
 Explotamos:
 <img width="1475" height="578" alt="image" src="https://github.com/user-attachments/assets/f43e8b58-3659-45c9-9b42-c341dc8d6209" />
