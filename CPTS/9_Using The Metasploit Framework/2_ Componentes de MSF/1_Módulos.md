@@ -1096,20 +1096,46 @@ smb-vuln-ms17-010
 Hacemos un escaneo con nmap utilizando esos scripts, para ver si es vulnerable a eternal romance:  
 
 ```bash
-nmap -p445 -sV --script=smb-os-discovery,smb-vuln-ms17-010 <ip>
+nmap -p445 -sV --script=smb-os-discovery,smb-vuln-ms17-010,smb-protocols <ip>
 ```
 
-<img width="1159" height="696" alt="image" src="https://github.com/user-attachments/assets/06c64353-0f2c-4711-8de3-3c287456b638" />
+<img width="1165" height="832" alt="image" src="https://github.com/user-attachments/assets/f0853fae-3bee-41f6-a1fd-0447d1ee51e4" />
+
 
 Descubrió que es un Windows Server 2016 Standard 14393 (Windows Server 2016 Standard 6.3)
 
 Descubrió otros datos de dominio muy interesantes.
 
-A su vez, chequeamos que es altamente probable que sea vulnerable a eternal romance.
+A su vez, chequeamos que es altamente probable que sea vulnerable a eternal romance. Ademas vemos que utiliza la versión SMB v1 que es vulnerable.
 
 
 Pasamos a metasploit ejecutando `msfconsole -q`.
 
+Buscamos para la fase de reconocimiento de la siguiente manera:
+```bash
+search type:auxiliary discovery
+```
+<img width="1765" height="808" alt="image" src="https://github.com/user-attachments/assets/7137079a-fa5f-4be7-b20a-c8dba8aef986" />
 
 
+Pordríamos usar este módulo auxiliar para reconocer los hosts activos en la red local mediante arp discovery.
+
+
+Ahora buscamos portscan:
+```bash
+search type:auxiliary portscan
+```
+<img width="1343" height="401" alt="image" src="https://github.com/user-attachments/assets/d43f8ce0-f581-4692-aefd-a1ecd529dcb9" />
+
+
+Usamos `auxiliary/scanner/portscan/syn`.
+
+Configuramos el RHOSTS con la ip víctima, utilizando el comando setg.
+<img width="705" height="104" alt="image" src="https://github.com/user-attachments/assets/1211cf1d-c1f2-4e52-b479-373951ce9b3a" />
+
+Configuramos PORTS para que escanee sólo los primeros 600 puertos:
+```bash
+set PORTS 1-600
+```
+Ejecutamos:
 
