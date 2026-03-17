@@ -1,4 +1,4 @@
-<img width="1910" height="476" alt="image" src="https://github.com/user-attachments/assets/b98c165a-8445-4777-b5c5-780427f55987" /><img width="1895" height="467" alt="image" src="https://github.com/user-attachments/assets/fc5a129d-6ba8-4306-9092-47a40f666310" /># Sección 3: Módulos de Metasploit
+# Sección 3: Módulos de Metasploit
 
 ## 📚 ¿Qué son los Módulos de Metasploit?
 
