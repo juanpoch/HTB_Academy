@@ -1,4 +1,4 @@
-# Sección 3: Módulos de Metasploit
+<img width="1910" height="476" alt="image" src="https://github.com/user-attachments/assets/b98c165a-8445-4777-b5c5-780427f55987" /><img width="1895" height="467" alt="image" src="https://github.com/user-attachments/assets/fc5a129d-6ba8-4306-9092-47a40f666310" /># Sección 3: Módulos de Metasploit
 
 ## 📚 ¿Qué son los Módulos de Metasploit?
 
@@ -1128,14 +1128,29 @@ search type:auxiliary portscan
 <img width="1343" height="401" alt="image" src="https://github.com/user-attachments/assets/d43f8ce0-f581-4692-aefd-a1ecd529dcb9" />
 
 
-Usamos `auxiliary/scanner/portscan/syn`.
+Usamos `auxiliary/scanner/portscan/tcp`.
 
 Configuramos el RHOSTS con la ip víctima, utilizando el comando setg.
-<img width="705" height="104" alt="image" src="https://github.com/user-attachments/assets/1211cf1d-c1f2-4e52-b479-373951ce9b3a" />
+
 
 Configuramos PORTS para que escanee sólo los primeros 600 puertos:
 ```bash
-set PORTS 1-600
+set PORTS 445
 ```
 Ejecutamos:
+<img width="1547" height="579" alt="image" src="https://github.com/user-attachments/assets/ee465d37-85df-472a-80a0-a34c328410b4" />
 
+Buscamos todos los scanners smb:
+```
+search type:auxiliary path:scanner/smb
+```
+<img width="1685" height="629" alt="image" src="https://github.com/user-attachments/assets/9b14a95b-a2df-4bf1-8eb6-02ed3487fcba" />
+
+Usamos `auxiliary/scanner/smb/smb_version`
+
+Corremos:
+
+<img width="1895" height="467" alt="image" src="https://github.com/user-attachments/assets/9fa12fdd-ebfe-4054-9679-599f06a27547" />
+
+
+Obtenemos una información similar a los escaneos con nmap.
