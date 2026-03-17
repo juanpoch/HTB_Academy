@@ -470,7 +470,7 @@ auxiliary/scanner/smb/smb_version  # Detecta versión de SMB
 
 ```bash
 # Ejemplo
-encoders/x86/shikata_ga_nai  # Codificador polimórfico popular
+encoder/x86/shikata_ga_nai  # Codificador polimórfico popular
 ```
 
 #### 3️⃣ **Evasion** (Evasión)
