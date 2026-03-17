@@ -1154,3 +1154,29 @@ Corremos:
 
 
 Obtenemos una información similar a los escaneos con nmap.
+
+
+Usamos `auxiliary/scanner/smb/smb_ms17_010` para chequear si es vulnerable a eternal romance o eternal blue:
+
+<img width="1918" height="597" alt="image" src="https://github.com/user-attachments/assets/5ad96a23-8470-40d6-8170-8ac3ec6225cd" />
+
+Observamos que la herramienta nos dice `Host is likely VULNERABLE to MS17_010`.
+
+Por lo que procedemos a buscar un exploit:
+
+```bash
+search type:exploit eternalromance plarform:windows
+```
+<img width="1782" height="471" alt="image" src="https://github.com/user-attachments/assets/ad2c0a28-126c-4dcc-9e16-e37f40f4f7a2" />
+
+Usamos `exploit/windows/smb/smb17_010_psexec`
+
+Vemos que está todo configurado:
+<img width="1907" height="829" alt="image" src="https://github.com/user-attachments/assets/351302d4-4a16-4b45-bb96-82042c2d07af" />
+
+Si hacemos `check` vemos que utiliza el scanner que utilizamos recién:
+<img width="1221" height="136" alt="image" src="https://github.com/user-attachments/assets/5c08a399-5d33-4bcf-a75f-56ea6d9d171a" />
+
+
+Explotamos:
+
