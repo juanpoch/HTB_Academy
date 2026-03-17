@@ -1171,12 +1171,24 @@ search type:exploit eternalromance plarform:windows
 
 Usamos `exploit/windows/smb/smb17_010_psexec`
 
-Vemos que está todo configurado:
+Vemos que está todo configurado, pero tenemos que cambiar nuestra ip por la de tun0:
 <img width="1907" height="829" alt="image" src="https://github.com/user-attachments/assets/351302d4-4a16-4b45-bb96-82042c2d07af" />
+
 
 Si hacemos `check` vemos que utiliza el scanner que utilizamos recién:
 <img width="1221" height="136" alt="image" src="https://github.com/user-attachments/assets/5c08a399-5d33-4bcf-a75f-56ea6d9d171a" />
 
+Parece ser que no se puede.
+
 
 Explotamos:
+<img width="1475" height="578" alt="image" src="https://github.com/user-attachments/assets/f43e8b58-3659-45c9-9b42-c341dc8d6209" />
+
+Vemos que tenemos un problema con el timeout.
+
+`Nota`: El problema se soluciona cuando nuestro kali deja de estar en NAT y lo configuramos como adaptador puente. Esto puede pasar a veces.
+
+<img width="1913" height="512" alt="image" src="https://github.com/user-attachments/assets/e088fac7-fe7a-4d3d-ade1-01e2ce80bc72" />
+
+
 
