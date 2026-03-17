@@ -1050,16 +1050,53 @@ Este ha sido un ejemplo **rápido y directo** de cómo `msfconsole` puede ayudar
 
 ---
 
-## 📚 Próximos Pasos
 
-En las siguientes secciones exploraremos:
-- Payloads en profundidad
-- Codificadores y evasión
-- Módulos Post-explotación
-- Gestión de sesiones
-- Meterpreter avanzado
-- Pivoting y movimiento lateral
+# Preguntas
 
----
 
-**¡La práctica constante con diferentes módulos es clave para dominar Metasploit!** 💪
+#### Utilice Metasploit Framework para explotar el objetivo con EternalRomance. Busque el archivo flag.txt en el escritorio del administrador y envíe su contenido como respuesta.
+
+
+Enviamos una traza `icmp` para verificar que el host está activo:
+
+```bash
+ping -c 1 <ip>
+```
+
+<img width="762" height="222" alt="image" src="https://github.com/user-attachments/assets/8947a284-db04-4efb-8eb6-048bad3055b3" />
+
+Enviamos un escaneo con nmap para conocer versión de smb y sistema operativo:
+
+```bash
+nmap -p445 -sV -O -Pn --reason <ip>
+```
+
+Obtenemos como resultado que el puerto 445 está abierto y corre microsoft-ds `Microsoft Windows Server 2008 R2 - 2012 microsoft-ds`
+
+Por lo que el banner ya nos está dando una idea de la versión del sistema operativo: `Microsoft Windows Server 2008 R2 - 2012`
+
+
+<img width="1361" height="453" alt="image" src="https://github.com/user-attachments/assets/56a4993d-cfbb-4e60-abd6-0fa1ba21ed48" />
+
+
+
+Buscamos todos los scripts de nmap correspondientes a smb:
+```bash
+find / -type f -name smb* 2>/dev/null |grep scripts
+```
+<img width="728" height="812" alt="image" src="https://github.com/user-attachments/assets/d91e1cfd-d5f3-4495-9a15-d7554beee65e" />
+
+Obtenemos un montón de scripts disponibles, los que más nos interesan son:
+
+```
+smb-os-discovery
+smb-vuln-ms17-010
+```
+
+Hacemos un escaneo con nmap utilizando esos scripts, para ver si es vulnerable a eternal romance:  
+
+```bash
+nmap -p445 -sV --script=smb-os-discovery,smb-vuln-ms17-010 <ip>
+```
+
+<img width="1159" height="696" alt="image" src="https://github.com/user-attachments/assets/06c64353-0f2c-4711-8de3-3c287456b638" />
