@@ -1423,18 +1423,6 @@ Antes de comenzar a trabajar con MSFconsole:
 
 ---
 
-## 🚀 Próximos Pasos
-
-En las siguientes secciones, profundizaremos en:
-- Comandos específicos de MSFconsole
-- Búsqueda y selección de módulos
-- Configuración de exploits
-- Ejecución de ataques
-- Gestión de sesiones de Meterpreter
-- Técnicas de post-explotación
-
----
-
 ## 🎯 Ejercicio Práctico Sugerido
 
 ### Familiarización con MSFconsole
