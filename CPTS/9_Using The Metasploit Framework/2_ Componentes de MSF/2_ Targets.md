@@ -765,40 +765,7 @@ Algunos exploits modernos usan **ROP chains** en lugar de simple return address.
 
 ---
 
-## 🎯 Próximos Pasos en el Módulo
 
-> Más adelante en el módulo, profundizaremos en:
-> - **Desarrollo de exploits**
-> - **Generación de payloads**
-> - **Identificación de targets**
-
-### Temas Avanzados a Cubrir
-
-1. **Exploit Development**:
-   - Fuzzing para encontrar vulnerabilidades
-   - Crear módulos de exploit personalizados
-   - Calcular offsets y return addresses
-
-2. **Payload Generation**:
-   - msfvenom y generación de payloads
-   - Encoders y evasión de AV
-   - Payloads staged vs inline
-
-3. **Target Identification**:
-   - Fingerprinting avanzado
-   - Análisis de binarios con msfpescan
-   - Crear targets personalizados
-
----
-
-## 📊 Tabla de Referencia Rápida: Comandos de Targets
-
-| Comando | Descripción | Ejemplo |
-|---------|-------------|---------|
-| `show targets` | Ver targets disponibles | `msf6 exploit(...) > show targets` |
-| `set target <id>` | Seleccionar target específico | `set target 6` |
-| `info` | Ver información completa del módulo | `msf6 exploit(...) > info` |
-| `show options` | Ver target actual seleccionado | `msf6 exploit(...) > show options` |
 
 ---
 
@@ -870,4 +837,4 @@ La **correcta selección de targets** es fundamental para el éxito de la explot
 
 ---
 
-**¡Continuaremos profundizando en desarrollo de exploits y payloads en las próximas secciones!** 🚀
+
