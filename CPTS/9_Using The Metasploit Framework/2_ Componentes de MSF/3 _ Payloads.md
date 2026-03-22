@@ -1212,7 +1212,8 @@ set LHOST <mi_ip>
 Buscamos la flag:
 <img width="933" height="201" alt="image" src="https://github.com/user-attachments/assets/3a177f4b-f24a-4121-9a60-8e85993299b6" />
 
-Leemos el archivo:
-<img width="536" height="65" alt="image" src="https://github.com/user-attachments/assets/cec727f7-b74d-44b4-9bec-6702e59d9a0c" />
+Leemos el archivo:  
+
+<img width="536" height="65" alt="image" src="https://github.com/user-attachments/assets/cec727f7-b74d-44b4-9bec-6702e59d9a0c" />  
 
 
