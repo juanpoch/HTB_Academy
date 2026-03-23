@@ -1563,6 +1563,9 @@ Social engineering básico:
 ╚═══════════════════════════════════════════════════════╝
 ```
 
+<img width="1488" height="720" alt="image" src="https://github.com/user-attachments/assets/74122298-1f26-444c-9eb1-579199d015e1" />
+
+
 **Detecciones Principales**:
 
 | Antivirus | Resultado | Comentario |
