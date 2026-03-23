@@ -1655,76 +1655,9 @@ Es como una **muñeca rusa** (matryoshka) - cada iteración agrega una capa que 
 
 **Realidad**:
 
-```
-╔═══════════════════════════════════════════════════════╗
-║       RESULTADO VIRUSTOTAL - 10 ITERACIONES           ║
-╠═══════════════════════════════════════════════════════╣
-║  Detectado por: 52 de 65 motores                      ║
-║  Tasa de detección: 80%                               ║
-║  Veredicto: AÚN MÁS DETECTADO (porcentualmente)       ║
-╚═══════════════════════════════════════════════════════╝
-```
+<img width="1416" height="687" alt="image" src="https://github.com/user-attachments/assets/8f4baffc-29ff-4a36-9f4c-8f6e72741081" />
 
-**Comparación**:
-
-| Métrica | 1 Iteración | 10 Iteraciones | Diferencia |
-|---------|-------------|----------------|------------|
-| Detectados | 54 / 69 | 52 / 65 | -2 detectores |
-| Tasa % | 78.26% | 80% | +1.74% PEOR |
-| Tamaño | 368 bytes | 611 bytes | +66% más grande |
-
-**¡EMPEORAMOS!**
-
-**¿Por qué 10 iteraciones NO ayudan?**
-
-1. **Los AV detectan el patrón de decoders anidados**:
-   ```
-   "Este archivo tiene 10 capas de decoders SGN"
-   → Extremadamente sospechoso
-   → BLOQUEAR
-   ```
-
-2. **Mayor entropía = más sospechoso**:
-   ```
-   Archivo normal: Entropía ~3.5
-   Archivo comprimido: Entropía ~5.0
-   10x SGN: Entropía ~7.8  ← Parece COMPLETAMENTE random
-   ```
-
-3. **Los AV simplemente ESPERAN a que se desempaque**:
-   ```
-   Sandbox ejecuta el payload
-   → Capa 1 se desempaca
-   → Capa 2 se desempaca
-   → ...
-   → Capa 10 se desempaca
-   → Payload original revelado
-   → "Ah, es Meterpreter"
-   → BLOQUEADO
-   ```
-
-**Analogía Perfecta**:
-
-Imagina que intentas esconder una pistola en un aeropuerto:
-
-```
-INTENTO 1: Pistola en tu bolsillo
-Scanner: "Veo una pistola" → DETENIDO
-
-INTENTO 2: Pistola envuelta en 10 capas de papel aluminio
-Scanner: "Veo algo MUY sospechoso envuelto en 10 capas"
-         "Parece que estás TRATANDO de esconder algo"
-         "Déjame desenvolverlo..."
-         *quita capa 1, 2, 3...*
-         "Ah, una pistola"
-         → AÚN MÁS DETENIDO (ahora por intento de ocultamiento)
-```
-
-Las capas extra **no ayudan** - hacen las cosas **más obvias**.
-
-> **Cita del Material**: "As we can see, it is still not enough for AV evasion. There is a high number of products that still detect the payload."
-
-**Conclusión Brutal**: 10 iteraciones de SGN **siguen siendo inútiles** contra AV modernos.
+Estamos igual..
 
 ---
 
