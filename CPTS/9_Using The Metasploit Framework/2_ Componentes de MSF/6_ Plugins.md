@@ -206,13 +206,13 @@ DOCUMENTACIÓN: Manual y propensa a errores
 4. ❌ **Sin documentación automática**
 5. ❌ **Pérdida de contexto** entre herramientas
 
-```
+
 
 ### La Solución CON Plugins
 
 **Workflow Moderno** (con plugins, 2025):
 
-```
+
 
 TODAS LAS FASES EN MSFCONSOLE:
 ┌──────────────────────────────────────────┐
