@@ -314,7 +314,7 @@ Para profundizar en Mixins, se puede consultar documentación adicional sobre Ru
 ## Referencias
 
 - [Metasploit-Plugins de DarkOperator](https://github.com/darkoperator/Metasploit-Plugins)
-
+- [Using Mixins](https://en.wikibooks.org/wiki/Metasploit/UsingMixins)
 ---
 
 **Nota**: La familiarización con los plugins disponibles y sus capacidades es esencial para maximizar la eficiencia durante evaluaciones de seguridad. Se recomienda explorar la documentación específica de cada plugin antes de su implementación en entornos de producción.
