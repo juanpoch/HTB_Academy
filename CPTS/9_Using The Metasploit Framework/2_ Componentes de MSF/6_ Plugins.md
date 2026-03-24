@@ -213,6 +213,7 @@ DOCUMENTACIÓN: Manual y propensa a errores
 **Workflow Moderno** (con plugins, 2025):
 
 ```
+
 TODAS LAS FASES EN MSFCONSOLE:
 ┌──────────────────────────────────────────┐
 │  msfconsole (TODO AQUÍ ADENTRO)          │
