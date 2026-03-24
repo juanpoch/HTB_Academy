@@ -206,22 +206,6 @@ DOCUMENTACIÓN: Manual y propensa a errores
 4. ❌ **Sin documentación automática**
 5. ❌ **Pérdida de contexto** entre herramientas
 
-**Analogía del Chef Desorganizado**:
-
-```
-CHEF SIN MISE EN PLACE:
-  
-  1. Empieza a cocinar
-  2. "¡Oh! Necesito sal"
-     → Va al almacén
-  3. Vuelve, continúa
-  4. "¡Oh! Necesito pimienta"
-     → Va al almacén otra vez
-  5. Vuelve, continúa
-  6. "¡Oh! Necesito aceite"
-     → Va al almacén OTRA VEZ
-  
-  Resultado: 3 horas para una receta de 30 minutos
 ```
 
 ### La Solución CON Plugins
