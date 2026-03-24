@@ -249,7 +249,7 @@ TIEMPO TOTAL: 2 horas
 CAMBIOS DE CONTEXTO: 0 (todo en msfconsole)
 ERRORES: Minimizados (automatización)
 DOCUMENTACIÓN: Automática en base de datos
-```
+
 
 **Ventajas**:
 
@@ -259,49 +259,8 @@ DOCUMENTACIÓN: Automática en base de datos
 ✅ **Hosts, servicios y vulnerabilidades** at-a-glance  
 ✅ **Menos errores** (automatización vs. manual)  
 
-**Analogía del Chef Profesional**:
 
-```
-CHEF CON MISE EN PLACE (TODO PREPARADO):
 
-  Antes de cocinar:
-  - Todos los ingredientes medidos ✅
-  - Todas las herramientas a mano ✅
-  - Todo organizado ✅
-  
-  Al cocinar:
-  - Agarra → Usa → Sigue
-  - Sin interrupciones
-  - Sin buscar nada
-  
-  Resultado: 30 minutos para la misma receta
-```
-
-### Beneficios Específicos Mencionados en el Material
-
-> "El uso de plugins hace la vida del pentester aún más fácil, trayendo la funcionalidad de software bien conocido a los entornos de msfconsole o Metasploit Pro."
-
-**Desglosado**:
-
-#### 1. Integración Directa con Software Conocido
-
-```
-ANTES:
-  Nessus (herramienta separada)
-  Nmap (herramienta separada)
-  OpenVAS (herramienta separada)
-  
-AHORA:
-  load nessus  → Nessus DENTRO de msfconsole
-  db_nmap      → Nmap DENTRO de msfconsole
-  load openvas → OpenVAS DENTRO de msfconsole
-```
-
-**No necesitas salir de Metasploit** - todo está integrado.
-
-#### 2. Importación/Exportación Automática
-
-```
 WORKFLOW AUTOMÁTICO:
 
 db_nmap -sV target.com
