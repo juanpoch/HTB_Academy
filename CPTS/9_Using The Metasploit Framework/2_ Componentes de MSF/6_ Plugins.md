@@ -129,7 +129,7 @@ Los plugins populares se incluyen automáticamente en las actualizaciones de dis
 
 ### Proceso de Instalación Manual
 
-**Ejemplo práctico**: Instalando los plugins de DarkOperator
+**Ejemplo práctico**: Instalando los plugins de [DarkOperator](https://github.com/darkoperator/Metasploit-Plugins)
 
 1. **Clonar el repositorio del plugin:**
 
