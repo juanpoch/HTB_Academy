@@ -252,15 +252,15 @@ La comunidad de Metasploit ha desarrollado numerosos plugins especializados. Alg
 
 | Plugin | Estado | Descripción |
 |--------|--------|-------------|
-| **nMap** | Pre-instalado | Integración con el escáner de puertos Nmap |
-| **NexPose** | Pre-instalado | Conexión con el escáner de vulnerabilidades Nexpose |
-| **Nessus** | Pre-instalado | Integración con Nessus para escaneo de vulnerabilidades |
-| **Mimikatz** | Pre-instalado V.1 | Extracción de credenciales en memoria (Windows) |
-| **Stdapi** | Pre-instalado | API estándar de Meterpreter |
-| **Railgun** | Disponible | Permite llamadas directas a la API de Windows |
-| **Priv** | Disponible | Escalación de privilegios |
-| **Incognito** | Pre-instalado | Manipulación de tokens de Windows |
-| **Darkoperator's** | Requiere instalación | Suite de automatización para pentesting |
+| [**nMap**](https://nmap.org/) | Pre-instalado | Integración con el escáner de puertos Nmap |
+| [**NexPose**](https://sectools.org/tool/nexpose/) | Pre-instalado | Conexión con el escáner de vulnerabilidades Nexpose |
+| [**Nessus**](https://www.tenable.com/products/nessus) | Pre-instalado | Integración con Nessus para escaneo de vulnerabilidades |
+| [**Mimikatz**](http://blog.gentilkiwi.com/mimikatz) | Pre-instalado V.1 | Extracción de credenciales en memoria (Windows) |
+| [**Stdapi**](https://www.rubydoc.info/github/rapid7/metasploit-framework/Rex/Post/Meterpreter/Extensions/Stdapi/Stdapi) | Pre-instalado | API estándar de Meterpreter |
+| [**Railgun**](https://github.com/rapid7/metasploit-framework/wiki/How-to-use-Railgun-for-Windows-post-exploitation) | Disponible | Permite llamadas directas a la API de Windows |
+| [**Priv**](https://github.com/rapid7/metasploit-framework/blob/master/lib/rex/post/meterpreter/extensions/priv/priv.rb) | Disponible | Escalación de privilegios |
+| [**Incognito**](https://www.offsec.com/metasploit-unleashed/fun-incognito/) | Pre-instalado | Manipulación de tokens de Windows |
+| [**Darkoperator's**](https://github.com/darkoperator/Metasploit-Plugins) | Requiere instalación | Suite de automatización para pentesting |
 
 Cada plugin debe estudiarse individualmente para maximizar su utilidad durante las evaluaciones de seguridad.
 
