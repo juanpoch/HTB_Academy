@@ -215,6 +215,8 @@ DOCUMENTACIÓN: Manual y propensa a errores
 
 
 TODAS LAS FASES EN MSFCONSOLE:
+
+```text
 ┌──────────────────────────────────────────┐
 │  msfconsole (TODO AQUÍ ADENTRO)          │
 ├──────────────────────────────────────────┤
@@ -244,6 +246,8 @@ TODAS LAS FASES EN MSFCONSOLE:
 │  [HOSTS, SERVICES, VULNS EN LA BD]       │
 │  [LISTO PARA GENERAR REPORTE]            │
 └──────────────────────────────────────────┘
+
+```
 
 TIEMPO TOTAL: 2 horas
 CAMBIOS DE CONTEXTO: 0 (todo en msfconsole)
