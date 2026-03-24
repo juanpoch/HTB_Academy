@@ -247,12 +247,14 @@ TODAS LAS FASES EN MSFCONSOLE:
 │  [LISTO PARA GENERAR REPORTE]            │
 └──────────────────────────────────────────┘
 
-```
 
 TIEMPO TOTAL: 2 horas
 CAMBIOS DE CONTEXTO: 0 (todo en msfconsole)
 ERRORES: Minimizados (automatización)
 DOCUMENTACIÓN: Automática en base de datos
+```
+
+
 
 
 **Ventajas**:
