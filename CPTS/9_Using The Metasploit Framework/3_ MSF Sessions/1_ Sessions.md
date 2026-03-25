@@ -403,3 +403,27 @@ exploit
 
 <img width="1574" height="426" alt="image" src="https://github.com/user-attachments/assets/6d6d82e5-1ff3-43be-b9a0-4c45c6eb25a0" />
 
+Usamos el comando `search` para buscar `flag.txt`:
+```bash
+search -f flag.txt
+```
+
+<img width="868" height="204" alt="image" src="https://github.com/user-attachments/assets/3f15502a-a1dc-4758-97df-55dc98df435b" />
+
+<img width="575" height="116" alt="image" src="https://github.com/user-attachments/assets/e327d335-a6eb-412a-9a85-0a7c29dd6dbd" />
+
+
+
+---
+
+`Nota`: Para saber la versión de sudo, cuando obtuvimos la meterpreter con `www-data` podríamos haber realizado el comando `sudo -V`:
+```bash
+shell
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+sudo -V
+ctrl + z
+bg
+```
+
+<img width="991" height="313" alt="image" src="https://github.com/user-attachments/assets/8ee980cb-757e-4f71-bf10-d44a3b8fa1eb" />
+
