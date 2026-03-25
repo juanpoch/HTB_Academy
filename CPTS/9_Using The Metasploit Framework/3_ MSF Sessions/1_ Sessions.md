@@ -273,3 +273,27 @@ Usar `jobs -K` es particularmente útil cuando necesitamos limpiar completamente
 
 
 Lanzamos una traza `ICMP` para verificar que el host se encuentra activo:
+<img width="921" height="211" alt="image" src="https://github.com/user-attachments/assets/5a9d4901-d731-4f43-b54e-39d05a18df92" />
+
+Nos conecamos a msfconsole:
+<img width="1227" height="820" alt="image" src="https://github.com/user-attachments/assets/a8fca1b7-971c-4a1c-b4ee-b2e18a5361c4" />
+
+Creamos un workspace para el lab:
+<img width="528" height="125" alt="image" src="https://github.com/user-attachments/assets/eca847ca-eb68-4b59-874d-f1cbe9a7a0d4" />
+
+También podríamos haber realizado `db_nmap -sn <ip>` para agregar el host a la base de datos:
+<img width="1186" height="384" alt="image" src="https://github.com/user-attachments/assets/757fdbcb-d331-40ca-832a-fa5c787d8343" />
+
+Realizamos un `TCP SYN SCAN` de los top 1000 ports:
+```bash
+db_nmap -Pn -n --disable-arp-ping --reason -sS <ip>
+```
+<img width="1330" height="753" alt="image" src="https://github.com/user-attachments/assets/dcd7b0cf-fb8b-4e58-a13e-8398a89d5fee" />
+
+Profundizamos el escaneo, para obtener más información, puntualmente escaneamos los puertos 22 y 80 para reconocer su versión. Además realizamos un escaneo con un conjunto de scripts NSE predefinidos para cada servicio y la categoría VULN de NSE. Además hacemos un reconocimiento de sistema operativo:
+```bash
+db_nmap -Pn -n --disable-arp-ping --reason -p22,80 -sV -sC --script=vuln -O <ip>
+```
+ 
+
+
