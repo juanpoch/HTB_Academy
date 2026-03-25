@@ -723,3 +723,41 @@ Con las credenciales obtenidas, si este sistema estuviera conectado a una red co
 ## Conclusión
 
 Meterpreter representa la culminación de años de desarrollo enfocado en crear la herramienta de post-explotación definitiva. Su combinación de sigilo, poder y extensibilidad lo convierte en el payload preferido para operaciones de pentesting profesional. El caso práctico demuestra el flujo completo desde reconocimiento inicial hasta compromiso total del sistema, ilustrando por qué Meterpreter merece su reputación como la "navaja suiza del pentesting".
+
+
+---
+
+# Preguntas
+
+#### Encuentra el exploit existente en MSF y úsalo para obtener acceso al sistema objetivo. ¿Cuál es el nombre de usuario del usuario con el que obtuviste acceso?
+
+Enviamos una traza `ICMP` para verificar que el objetivo se encuentra activo:
+<img width="860" height="210" alt="image" src="https://github.com/user-attachments/assets/01b600f0-7601-4c9c-b559-135ffc490845" />
+
+Iniciamos la base de datos de metasploit y corremos msfconsole con `msfdb run`. Luego limpiamos nuestro workspace `lab`:
+
+```bash
+workspace -d lab
+workspace -a lab
+```
+
+Luego hacemos un escaneo sn con nmap:
+<img width="1054" height="135" alt="image" src="https://github.com/user-attachments/assets/f5cc6220-468e-40c3-b433-6e779b3008fa" />
+
+Hacemos un escaneo `TCP SYN`:
+```bash
+db_nmap -Pn -n --disable-arp-ping --reason -sS <ip>
+```
+
+<img width="1084" height="335" alt="image" src="https://github.com/user-attachments/assets/3b4b911f-5849-4238-b18c-2e040fa1775b" />
+
+Hacemos un escaneo de versiones con un conjunto de scripts NSE predefinidos, a su vez la categoría de scripts `vuln` y un reconocimiento de sitema operativo:
+```bash
+db_nmap --reason -p135,445,3389,5000,5985 -sV -sC --script=vuln -O <ip>
+```
+<img width="1261" height="784" alt="image" src="https://github.com/user-attachments/assets/f14f8880-d0cf-4e07-92fe-159ec394532e" />
+
+ <img width="1496" height="429" alt="image" src="https://github.com/user-attachments/assets/6a2845cb-c02e-4c78-86d9-cd346091b74d" />
+
+
+#### Obtenga el hash de la contraseña NTLM del usuario "htb-student". Envíe el hash como respuesta.
