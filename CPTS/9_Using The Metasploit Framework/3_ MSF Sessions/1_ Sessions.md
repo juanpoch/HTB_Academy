@@ -382,3 +382,6 @@ exploit
 
 <img width="1918" height="278" alt="image" src="https://github.com/user-attachments/assets/64e8c81d-bc5b-4657-b5bb-13b0f48c4ba5" />
 
+Nos dice que necesita un archivo para editar.. lo cual no parece ser la correcta..
+
+
