@@ -384,4 +384,22 @@ exploit
 
 Nos dice que necesita un archivo para editar.. lo cual no parece ser la correcta..
 
+Probamos otro exploit y tampoco se puede:
+<img width="1037" height="234" alt="image" src="https://github.com/user-attachments/assets/5db01b5c-b3d4-4980-9c78-b36688e975ea" />
+
+Buscamos exploits para la versión específica de Sudo que habíamos encontrado:
+```bash
+search "sudo 1.8.31" type:exploit
+```
+
+<img width="1916" height="785" alt="image" src="https://github.com/user-attachments/assets/165dbb72-c9f3-4a2e-87f3-1f5522ef5dad" />
+
+```bash
+use 0
+oprions
+set session <id>
+exploit
+```
+
+<img width="1574" height="426" alt="image" src="https://github.com/user-attachments/assets/6d6d82e5-1ff3-43be-b9a0-4c45c6eb25a0" />
 
