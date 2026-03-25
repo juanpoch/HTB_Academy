@@ -265,3 +265,11 @@ Usar `jobs -K` es particularmente útil cuando necesitamos limpiar completamente
 
 ---
 
+
+# Preguntas
+
+
+#### El objetivo tiene una aplicación web específica en ejecución que podemos encontrar examinando el código fuente HTML. ¿Cuál es el nombre de esa aplicación web?
+
+
+Lanzamos una traza `ICMP` para verificar que el host se encuentra activo:
