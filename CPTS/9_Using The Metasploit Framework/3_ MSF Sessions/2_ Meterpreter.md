@@ -42,7 +42,8 @@ Meterpreter ha ganado esta reputación debido a su versatilidad y amplitud de fu
 Para profundizar en aspectos avanzados de Meterpreter:
 
 - [Meterpreter Stageless Payloads](https://www.rapid7.com/blog/post/2015/03/25/stageless-meterpreter-payloads/) - Análisis de payloads sin staging
-- [Modifying Metasploit Templates for Evasion](https://www.rapid7.com/blog/post/2018/05/03/hiding-metasploit-shellcode-to-evade-windows-defender/) - [Técnicas de modificación de templates para evasión](https://www.blackhillsinfosec.com/modifying-metasploit-x64-template-for-av-evasion/)
+- [Modifying Metasploit Templates for Evasion](https://www.rapid7.com/blog/post/2018/05/03/hiding-metasploit-shellcode-to-evade-windows-defender/)
+- [Técnicas de modificación de templates para evasión](https://www.blackhillsinfosec.com/modifying-metasploit-x64-template-for-av-evasion/)
 
 *Nota: Estos temas están fuera del alcance de este módulo pero representan posibilidades importantes para operaciones avanzadas.*
 
