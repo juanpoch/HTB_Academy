@@ -619,7 +619,7 @@ Estos recursos proporcionan tutoriales detallados y ejemplos prácticos para des
 - [ExploitDB - Tag Metasploit Framework](https://www.exploit-db.com/?tag=3)
 - [Metasploit Documentation](https://docs.metasploit.com/)
 - [Bludit Brute Force Mitigation Bypass](https://rastating.github.io/bludit-brute-force-mitigation-bypass/)
-- [Writing Metasploit Modules - Rapid7 Blog](https://www.rapid7.com/blog/post/2012/01/12/writing-metasploit-modules/)
+- [Writing Metasploit Modules - Rapid7 Blog](https://www.rapid7.com/blog/post/2012/07/05/part-1-metasploit-module-development-the-series/)
 - [Metasploit: A Penetration Tester's Guide - No Starch Press](https://nostarch.com/metasploit)
 
 ---
