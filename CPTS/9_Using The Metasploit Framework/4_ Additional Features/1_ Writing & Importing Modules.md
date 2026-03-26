@@ -265,7 +265,7 @@ Para adaptar un script personalizado de Python, PHP o cualquier otro lenguaje a 
 **Conocimientos necesarios:**
 - Programación en Ruby
 - Familiaridad con la arquitectura de módulos de Metasploit
-- Comprensión de la [documentación de Metasploit](https://docs.metasploit.com/)
+- Comprensión de la [documentación de Metasploit](https://docs.metasploit.com/api)
 
 **Regla de formato**: Los módulos Ruby para Metasploit **siempre se escriben usando hard tabs** (tabulaciones reales, no espacios).
 
