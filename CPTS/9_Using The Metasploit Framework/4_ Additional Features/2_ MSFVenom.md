@@ -579,10 +579,3 @@ El módulo `multi/handler` es un **listener genérico** que:
 5. **Considerar evasión de AV** en targets modernos
 6. **Documentar payloads** utilizados para reportes de pentesting
 
-## Referencias
-
-Este módulo demuestra el flujo completo desde generación de payload hasta escalación de privilegios, ilustrando la potencia de MSFVenom como herramienta unificada para creación de payloads personalizados en Metasploit Framework.
-
----
-
-MSFVenom representa la evolución natural de las herramientas de generación de payloads, combinando la funcionalidad de sus predecesores en una interfaz coherente y poderosa que facilita la creación rápida de shellcode personalizado para diversos escenarios de explotación.
