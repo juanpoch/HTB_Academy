@@ -58,6 +58,8 @@ El módulo `statuswml.cgi` no aparece en los resultados, lo que indica:
 - El framework no está actualizado con ese módulo específico, O
 - El módulo no está en la versión oficial de Metasploit Framework
 
+Sin embargo podemos encontrarlo en [exploit-db](https://www.exploit-db.com/exploits/9861)
+
 ## Uso de SearchSploit para Búsqueda Local
 
 ### SearchSploit: Versión CLI de ExploitDB
