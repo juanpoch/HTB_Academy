@@ -326,6 +326,9 @@ class MetasploitModule < Msf::Exploit::Remote
   include Msf::Auxiliary::Report
 ```
 
+<img width="1648" height="810" alt="image" src="https://github.com/user-attachments/assets/c8d45165-1dc7-40ab-8338-aaef78c0e150" />
+
+
 #### Documentación de Mixins
 
 Para encontrar los mixins, clases y métodos apropiados, consultamos la [Documentación de Metasploit](https://docs.metasploit.com/api/).
