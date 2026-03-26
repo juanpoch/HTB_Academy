@@ -597,7 +597,7 @@ Toda la información necesaria sobre programación Ruby para Metasploit Framewor
 - [Metasploit: A Penetration Tester's Guide](https://nostarch.com/metasploit) - No Starch Press
 
 **Blog posts de Rapid7:**
-- [Writing Metasploit Modules](https://www.rapid7.com/blog/post/2012/01/12/writing-metasploit-modules/)
+- [Writing Metasploit Modules](https://www.rapid7.com/blog/post/2012/07/05/part-1-metasploit-module-development-the-series/)
 
 Estos recursos proporcionan tutoriales detallados y ejemplos prácticos para desarrollo de módulos.
 
