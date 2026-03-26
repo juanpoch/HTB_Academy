@@ -822,5 +822,18 @@ lsa_dump_sam
 
 <img width="873" height="208" alt="image" src="https://github.com/user-attachments/assets/5eb42c02-f4cf-4821-bb5d-fc46f97b52c7" />
 
+---
 
+`Nota`: Si queremos hacer `hashdump` no podemos porque nos dice `priv_passwd_get_sam_hashes`:
+<img width="994" height="115" alt="image" src="https://github.com/user-attachments/assets/50d975f1-9db0-40ea-901b-0e7c024b72a1" />
+
+Si observamos los procesos con `ps`, podemos encontrar el proceso mediante el cual corre meterpreter:
+<img width="1828" height="824" alt="image" src="https://github.com/user-attachments/assets/a5727872-4ab4-4b3e-a65d-29682a81ccf8" />
+
+
+Probablemente tengamos que migrar a un proceso con permisos sobre la SAM, podríamos utilizar `lsass`:
+<img width="1653" height="834" alt="image" src="https://github.com/user-attachments/assets/c9076da6-50db-4ce5-9d7d-d9c6493d32f8" />
+
+Migramos a `lsass` con el comando `migrate 640` y luego realizamos el comando `hashdump`:
+<img width="1159" height="275" alt="image" src="https://github.com/user-attachments/assets/23040909-05f2-4d69-b690-7d1eac07efaf" />
 
