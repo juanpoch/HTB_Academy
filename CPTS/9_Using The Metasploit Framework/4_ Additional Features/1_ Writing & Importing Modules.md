@@ -265,7 +265,7 @@ Para adaptar un script personalizado de Python, PHP o cualquier otro lenguaje a 
 **Conocimientos necesarios:**
 - Programación en Ruby
 - Familiaridad con la arquitectura de módulos de Metasploit
-- Comprensión de la [documentación de Metasploit](https://docs.metasploit.com/api)
+- Comprensión de la [documentación de Metasploit](https://docs.metasploit.com/)
 
 **Regla de formato**: Los módulos Ruby para Metasploit **siempre se escriben usando hard tabs** (tabulaciones reales, no espacios).
 
@@ -328,7 +328,7 @@ class MetasploitModule < Msf::Exploit::Remote
 
 #### Documentación de Mixins
 
-Para encontrar los mixins, clases y métodos apropiados, consultamos la [Documentación de Metasploit](https://docs.metasploit.com/).
+Para encontrar los mixins, clases y métodos apropiados, consultamos la [Documentación de Metasploit](https://docs.metasploit.com/api/).
 
 **Mixins comunes y sus funciones:**
 
