@@ -170,6 +170,27 @@ Como se demostró en la sección de Encoders, **simplemente codificar payloads**
 
 **Escenario problemático**: En casos raros, podemos encontrar rulesets de tráfico muy estrictos que marcan nuestra conexión basándose en la **dirección IP del remitente**.
 
+```
+Rulesets = Conjuntos de reglas de firewall/IPS que controlan qué tráfico puede entrar/salir de una red.
+"Strict" (estrictos) = Configuraciones muy restrictivas, típicamente en ambientes de alta seguridad (bancos, gobierno, infraestructura crítica).
+El Escenario Problemático Explicado
+Situación Normal
+Normalmente, un firewall permite o bloquea tráfico basándose en:
+
+Puerto (ej: bloquear puerto 4444 comúnmente usado por Metasploit)
+Protocolo (ej: bloquear todo menos HTTP/HTTPS)
+Tipo de contenido
+
+Situación con Rulesets Estrictos
+En casos extremos, el firewall tiene reglas como:
+DENY: Todo tráfico desde IPs fuera de países permitidos
+DENY: Todo tráfico desde rangos IP de VPS/Cloud conocidos
+DENY: Todo tráfico desde IPs en listas negras de atacantes conocidos
+Ejemplo concreto:
+Atacante: IP 45.33.32.156 (Linode VPS, comúnmente usado por pentesters)
+Firewall del objetivo: "Esta IP es de un proveedor cloud conocido por hostear herramientas de ataque → BLOQUEAR"
+```
+
 **Solución**: Encontrar servicios que estén siendo permitidos a través de los filtros.
 
 #### Caso de Estudio: Equifax Hack 2017
