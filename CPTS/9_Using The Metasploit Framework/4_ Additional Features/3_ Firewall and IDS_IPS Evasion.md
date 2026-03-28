@@ -210,7 +210,7 @@ DNS es comúnmente permitido a través de firewalls ya que es esencial para oper
 
 **Recursos para profundizar:**
 
-- [US Government Post-Mortem Report on the Equifax Hack]([https://www.oig.doc.gov/OIGPublications/OIG-18-002-A.pdf](https://www.zdnet.com/article/us-government-releases-post-mortem-report-on-equifax-hack/)
+- [US Government Post-Mortem Report on the Equifax Hack](https://www.zdnet.com/article/us-government-releases-post-mortem-report-on-equifax-hack/)
 - [Protecting from DNS Exfiltration](darkreading.com/risk/tips-to-protect-the-dns-from-data-exfiltration/a/d-id/1330411)
 - [Stopping Data Exfil and Malware Spread through DNS](https://channelpostmea.com/wp-content/uploads/2017/08/infoblox-whitepaper-data-exfiltration-and-dns-closing-the-back-door.pdf)
 
